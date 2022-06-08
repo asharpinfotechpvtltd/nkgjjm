@@ -1,0 +1,43 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.District.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Add District
+        </h2>
+
+    </div>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">Name</label>
+                    <input id="horizontal-form-1" type="text" asp-for="Districts.District" class="form-control" placeholder="District Name">
+                </div>
+
+
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <button class="btn btn-primary">Add District</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

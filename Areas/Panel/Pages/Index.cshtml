@@ -1,0 +1,39 @@
+﻿@page
+@model Nkgjjm.Areas.Admin.Pages.IndexModel
+@{
+
+}
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Horizontal Form
+        </h2>
+        <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
+            <label class="form-check-label ml-0" for="show-example-7">Show example code</label>
+            <input id="show-example-7" data-target="#horizontal-form" class="show-code form-check-input mr-0 ml-3" type="checkbox">
+        </div>
+    </div>
+    <div id="horizontal-form" class="p-5">
+        <div class="preview">
+            <div class="form-inline">
+                <label for="horizontal-form-1" class="form-label sm:w-20">Email</label>
+                <input id="horizontal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
+            </div>
+            <div class="form-inline mt-5">
+                <label for="horizontal-form-2" class="form-label sm:w-20">Password</label>
+                <input id="horizontal-form-2" type="password" class="form-control" placeholder="secret">
+            </div>
+           
+            <div class="sm:ml-20 sm:pl-5 mt-5">
+                <button class="btn btn-primary">Login</button>
+            </div>
+        </div>
+        <div class="source-code hidden">
+            <button data-target="#copy-horizontal-form" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
+            <div class="overflow-y-auto mt-3 rounded-md">
+                <pre id="copy-horizontal-form" class="source-preview"> <code class="html"> HTMLOpenTagdiv class=&quot;form-inline&quot;HTMLCloseTag HTMLOpenTaglabel for=&quot;horizontal-form-1&quot; class=&quot;form-label sm:w-20&quot;HTMLCloseTagEmailHTMLOpenTag/labelHTMLCloseTag HTMLOpenTaginput id=&quot;horizontal-form-1&quot; type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;example@gmail.com&quot;HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;form-inline mt-5&quot;HTMLCloseTag HTMLOpenTaglabel for=&quot;horizontal-form-2&quot; class=&quot;form-label sm:w-20&quot;HTMLCloseTagPasswordHTMLOpenTag/labelHTMLCloseTag HTMLOpenTaginput id=&quot;horizontal-form-2&quot; type=&quot;password&quot; class=&quot;form-control&quot; placeholder=&quot;secret&quot;HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;form-check sm:ml-20 sm:pl-5 mt-5&quot;HTMLCloseTag HTMLOpenTaginput id=&quot;horizontal-form-3&quot; class=&quot;form-check-input&quot; type=&quot;checkbox&quot; value=&quot;&quot;HTMLCloseTag HTMLOpenTaglabel class=&quot;form-check-label&quot; for=&quot;horizontal-form-3&quot;HTMLCloseTagRemember meHTMLOpenTag/labelHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;sm:ml-20 sm:pl-5 mt-5&quot;HTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-primary&quot;HTMLCloseTagLoginHTMLOpenTag/buttonHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
+            </div>
+        </div>
+    </div>
+</div>

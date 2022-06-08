@@ -1,0 +1,60 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Village.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Villages[0].Block)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Villages[0].District)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Villages[0].GramPanchayat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Villages[0].Village)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Villages[0].VillageCode)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Villages) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Block)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.District)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GramPanchayat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Village)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VillageCode)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
