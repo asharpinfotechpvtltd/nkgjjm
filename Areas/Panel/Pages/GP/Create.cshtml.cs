@@ -20,10 +20,13 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         }
 
         public List<SelectListItem> BlockName { get; set; }
+        public List<SelectListItem> District { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
-            BlockName =await _context.TblBlock.Select(a => new SelectListItem { Text = a.Block, Value = a.Id.ToString() }).ToListAsync();
+            
+            District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+            
             return Page();
         }
 

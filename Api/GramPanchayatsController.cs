@@ -20,33 +20,14 @@ namespace Nkgjjm.Api
             _context = context;
         }
 
-        // GET: api/GramPanchayats
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GramPanchayats>>> GetTblGramPanchayat()
-        {
-          if (_context.TblGramPanchayat == null)
-          {
-              return NotFound();
-          }
-            return await _context.TblGramPanchayat.ToListAsync();
-        }
+        public List<GramPanchayats> Grampanchayat { get; set; }
 
-        // GET: api/GramPanchayats/5
-        [HttpGet("{id}")]
+       
         public async Task<ActionResult<GramPanchayats>> GetGramPanchayats(int id)
         {
-          if (_context.TblGramPanchayat == null)
-          {
-              return NotFound();
-          }
-            var gramPanchayats = await _context.TblGramPanchayat.FindAsync(id);
 
-            if (gramPanchayats == null)
-            {
-                return NotFound();
-            }
-
-            return gramPanchayats;
+            Grampanchayat = await _context.TblGramPanchayat.Where(Bid=>Bid.Block==id).ToListAsync();
+            return Ok(Grampanchayat);
         }
 
         // PUT: api/GramPanchayats/5

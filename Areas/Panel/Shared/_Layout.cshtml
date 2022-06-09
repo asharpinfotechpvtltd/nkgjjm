@@ -20,25 +20,24 @@
     <div class="mobile-menu md:hidden">
         <div class="mobile-menu-bar">
             <a href="" class="flex mr-auto">
-                <img alt="" class="w-6" src="~/dist/images/logo.svg">
-                
+                <img alt="" class="w-6" src="~/dist/images/logo.svg" />
+
             </a>
             <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
         </div>
         <div class="scrollable">
             <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
             <ul class="scrollable__content py-2">
-               
                 <li>
-                    <a href="side-menu-light-inbox.html" class="menu">
-                        <div class="menu__icon"> <i data-lucide="inbox"></i> </div>
-                        <div class="menu__title"> Inbox </div>
+                    <a asp-page="/panel/District" class="menu">
+                        <div class="menu__icon"> <i data-lucide="District"></i> </div>
+                        <div class="menu__title"> District </div>
                     </a>
                 </li>
                 <li>
-                    <a href="side-menu-light-file-manager.html" class="menu">
+                    <a asp-page="/panel/Blocks" class="menu">
                         <div class="menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                        <div class="menu__title"> File Manager </div>
+                        <div class="menu__title"> Blocks </div>
                     </a>
                 </li>
                 <li>
@@ -621,10 +620,8 @@
             </div>
             <!-- END: Search -->
             <!-- BEGIN: Notifications -->
-            
             <!-- END: Notifications -->
             <!-- BEGIN: Account Menu -->
-            
             <!-- END: Account Menu -->
         </div>
     </div>
@@ -639,41 +636,42 @@
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div class="side-menu__title">
                                 Dashboard
-                                
+
                             </div>
                         </a>
-                        
+
                     </li>
+
                     <li>
-                        <a href="javascript:;" class="side-menu">
+                        <a asp-page="/District/index" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                             <div class="side-menu__title">
-                                Menu Layout
-                                
+                                District
+
                             </div>
                         </a>
-                        
+
                     </li>
                     <li>
-                        <a href="javascript:;" class="side-menu">
+                        <a asp-page="/Blocks/index" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
                             <div class="side-menu__title">
-                                E-Commerce
-                                
+                                Blocks
+
                             </div>
                         </a>
-                        
+
                     </li>
                     <li>
-                        <a href="side-menu-light-inbox.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
-                            <div class="side-menu__title"> Inbox </div>
+                        <a asp-page="/GP/index" class="side-menu">
+                            <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                            <div class="side-menu__title"> Gram Panchaayat </div>
                         </a>
                     </li>
                     <li>
-                        <a href="side-menu-light-file-manager.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                            <div class="side-menu__title"> File Manager </div>
+                        <a asp-page="/Village/index" class="side-menu">
+                            <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                            <div class="side-menu__title"> Village</div>
                         </a>
                     </li>
                     <li>
@@ -1202,10 +1200,11 @@
             <!-- END: Content -->
         </div>
     </div>
-
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-
+    
+    
+    <script src="~/lib/jquery/dist/jquery.js" />
     <script src="~/dist/js/app.js"></script>
+
     <!-- END: JS Assets-->
     @RenderSection("Scripts",required:false);
 </body>

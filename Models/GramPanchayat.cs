@@ -6,7 +6,9 @@ namespace Nkgjjm.Models
     {
         [Key]
         public int Id { get; set; }
-        public string GramPanchayat { get; set; }
-        public string Block { get; set; }
+        public int? District { get; set; }
+        public int? Block { get; set; }
+        public string? GramPanchayat { get; set; }
+       
     }
 }

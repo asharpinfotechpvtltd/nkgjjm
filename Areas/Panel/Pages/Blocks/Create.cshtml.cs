@@ -35,10 +35,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblBlock == null || DistBlock == null)
-            {
-                return Page();
-            }
+          
 
             _context.TblBlock.Add(DistBlock);
             await _context.SaveChangesAsync();

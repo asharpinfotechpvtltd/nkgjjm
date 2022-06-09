@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
+using Nkgjjm.StoredProcedure;
 
 namespace Nkgjjm.Areas.Panel.Pages.Village
 {
@@ -18,13 +19,13 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
             _context = context;
         }
 
-        public IList<Villages> Villages { get;set; } = default!;
+        public IList<SPVillageList> VillageList { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
             if (_context.TblVillageCode != null)
             {
-                Villages = await _context.TblVillageCode.ToListAsync();
+                VillageList = await _context.SPVillageList.FromSqlRaw("SPVillageList").ToListAsync();
             }
         }
     }

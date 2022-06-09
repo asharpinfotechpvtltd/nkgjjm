@@ -31,26 +31,9 @@ namespace Nkgjjm.Models
 
             modelBuilder.Entity<SPBlockByDistrict>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPGramPanchyatByBlock>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPVillageList>().HasNoKey().ToView(null);
 
-            /*
-             modelBuilder.Entity<SpCategoryList>().HasNoKey().ToView(null);
-             modelBuilder.Entity<ProductBySkuCode>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpFilterProduct>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpBestSeller>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpProductByConcern>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpProductSize>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpSubcategoryProduct>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpRangeProduct>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpConcernProduct>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpSearch>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SPRegisters>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpOrderProductDetail>().HasNoKey().ToView(null);
-             modelBuilder.Entity<ProductBySkuCode>().HasNoKey().ToView(null);
-             modelBuilder.Entity<UserNumber>().HasNoKey().ToView(null);
-             modelBuilder.Entity<USERBYMENU>().HasNoKey().ToView(null);
-             modelBuilder.Entity<SpTotalOrder>().HasNoKey().ToView(null);
-             modelBuilder.Entity<BlogCount>().HasNoKey().ToView(null);
-             modelBuilder.Entity<TotalSales>().HasNoKey().ToView(null);*/
+            
 
 
         }
@@ -73,6 +56,7 @@ namespace Nkgjjm.Models
 
         public virtual DbSet<SPBlockByDistrict> SPBlockByDistrict { get; set; }
         public virtual DbSet<SPGramPanchyatByBlock> SPGramPanchyatByBlock { get; set; }
+        public virtual DbSet<SPVillageList> SPVillageList { get; set; }
         #endregion
 
 
