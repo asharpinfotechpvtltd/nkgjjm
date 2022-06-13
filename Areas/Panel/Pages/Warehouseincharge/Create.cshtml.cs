@@ -8,37 +8,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.Warehouses
+namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 {
     public class CreateModel : PageModel
     {
         private readonly Nkgjjm.Models.ApplicationDbContext _context;
-
+        public List<SelectListItem> WarehouseList { get; set; }
         public CreateModel(Nkgjjm.Models.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public List<SelectListItem> District { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+            WarehouseList = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
             return Page();
         }
 
         [BindProperty]
-        public Warehouse Warehouse { get; set; } = default!;
+        public WarehouseIncharges WarehouseIncharges { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblWarehouse == null || Warehouse == null)
+          if (!ModelState.IsValid || _context.TblWarehouseIncharge == null || WarehouseIncharges == null)
             {
                 return Page();
             }
 
-            _context.TblWarehouse.Add(Warehouse);
+            _context.TblWarehouseIncharge.Add(WarehouseIncharges);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

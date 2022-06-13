@@ -6,9 +6,8 @@ namespace Nkgjjm.Models
     {
         [Key]
         public int Id { get; set; }
-        public string WarehouseName { get; set; }
-        public string Location { get; set; }
-        public int State { get; set; }
-        public int City { get; set; }
+        public string WarehouseName { get; set; }      
+        public int District { get; set; }
+       
     }
 }

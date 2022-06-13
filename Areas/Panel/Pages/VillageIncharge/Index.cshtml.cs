@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
 
-namespace Nkgjjm.Areas.Panel.Pages.Warehouses
+namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,13 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
             _context = context;
         }
 
-        public IList<SPWarehouseList> WarehouseList { get;set; } = default!;
+        public IList<SPVillageIncharge> VillageIncharge { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.TblWarehouse != null)
+            if (_context.TblVillageCode != null)
             {
-                WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList").ToListAsync();
+                VillageIncharge = await _context.SPVillageIncharge.FromSqlRaw("SPVillageIncharge").ToListAsync();
             }
         }
     }

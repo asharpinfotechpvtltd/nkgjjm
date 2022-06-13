@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.Warehouses
+namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
 {
     public class EditModel : PageModel
     {
@@ -20,21 +20,21 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
         }
 
         [BindProperty]
-        public Warehouse Warehouse { get; set; } = default!;
+        public VillageIncharges VillageIncharges { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblWarehouse == null)
+            if (id == null || _context.TblVillageIncharge == null)
             {
                 return NotFound();
             }
 
-            var warehouse =  await _context.TblWarehouse.FirstOrDefaultAsync(m => m.Id == id);
-            if (warehouse == null)
+            var villageincharges =  await _context.TblVillageIncharge.FirstOrDefaultAsync(m => m.Id == id);
+            if (villageincharges == null)
             {
                 return NotFound();
             }
-            Warehouse = warehouse;
+            VillageIncharges = villageincharges;
             return Page();
         }
 
@@ -47,7 +47,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
                 return Page();
             }
 
-            _context.Attach(Warehouse).State = EntityState.Modified;
+            _context.Attach(VillageIncharges).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WarehouseExists(Warehouse.Id))
+                if (!VillageInchargesExists(VillageIncharges.Id))
                 {
                     return NotFound();
                 }
@@ -68,9 +68,9 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
             return RedirectToPage("./Index");
         }
 
-        private bool WarehouseExists(int id)
+        private bool VillageInchargesExists(int id)
         {
-          return (_context.TblWarehouse?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.TblVillageIncharge?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

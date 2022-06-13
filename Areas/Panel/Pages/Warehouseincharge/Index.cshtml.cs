@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
-using Nkgjjm.StoredProcedure;
 
-namespace Nkgjjm.Areas.Panel.Pages.Warehouses
+namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +18,13 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
             _context = context;
         }
 
-        public IList<SPWarehouseList> WarehouseList { get;set; } = default!;
+        public IList<WarehouseIncharges> WarehouseIncharges { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.TblWarehouse != null)
+            if (_context.TblWarehouseIncharge != null)
             {
-                WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList").ToListAsync();
+                WarehouseIncharges = await _context.TblWarehouseIncharge.ToListAsync();
             }
         }
     }

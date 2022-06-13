@@ -1,0 +1,40 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Warehouseincharge.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>WarehouseIncharges</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="WarehouseIncharges.id" />
+            <div class="form-group">
+                <label asp-for="WarehouseIncharges.Employeeid" class="control-label"></label>
+                <input asp-for="WarehouseIncharges.Employeeid" class="form-control" />
+                <span asp-validation-for="WarehouseIncharges.Employeeid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WarehouseIncharges.WareHouseid" class="control-label"></label>
+                <input asp-for="WarehouseIncharges.WareHouseid" class="form-control" />
+                <span asp-validation-for="WarehouseIncharges.WareHouseid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

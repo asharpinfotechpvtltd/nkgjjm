@@ -1,0 +1,65 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.VillageIncharge.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>VillageIncharges</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VillageIncharges.Id" />
+            <div class="form-group">
+                <label asp-for="VillageIncharges.District" class="control-label"></label>
+                <input asp-for="VillageIncharges.District" class="form-control" />
+                <span asp-validation-for="VillageIncharges.District" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageIncharges.Block" class="control-label"></label>
+                <input asp-for="VillageIncharges.Block" class="form-control" />
+                <span asp-validation-for="VillageIncharges.Block" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageIncharges.Grampanchaayat" class="control-label"></label>
+                <input asp-for="VillageIncharges.Grampanchaayat" class="form-control" />
+                <span asp-validation-for="VillageIncharges.Grampanchaayat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageIncharges.WarehouseId" class="control-label"></label>
+                <input asp-for="VillageIncharges.WarehouseId" class="form-control" />
+                <span asp-validation-for="VillageIncharges.WarehouseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageIncharges.Name" class="control-label"></label>
+                <input asp-for="VillageIncharges.Name" class="form-control" />
+                <span asp-validation-for="VillageIncharges.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageIncharges.ContactNo" class="control-label"></label>
+                <input asp-for="VillageIncharges.ContactNo" class="form-control" />
+                <span asp-validation-for="VillageIncharges.ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageIncharges.Email" class="control-label"></label>
+                <input asp-for="VillageIncharges.Email" class="form-control" />
+                <span asp-validation-for="VillageIncharges.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

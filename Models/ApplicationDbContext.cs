@@ -32,6 +32,8 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPBlockByDistrict>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPGramPanchyatByBlock>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPVillageList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPVillageIncharge>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPWarehouseList>().HasNoKey().ToView(null);
 
             
 
@@ -48,6 +50,8 @@ namespace Nkgjjm.Models
         public virtual DbSet<GramPanchayats> TblGramPanchayat { get; set; }
         public virtual DbSet<Villages> TblVillageCode { get; set; }
         public virtual DbSet<Districts> TblDistrict { get; set; }
+        public virtual DbSet<VillageIncharges> TblVillageIncharge { get; set; }
+        public virtual DbSet<WarehouseIncharges> TblWarehouseIncharge { get; set; }
 
 
 
@@ -57,6 +61,8 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPBlockByDistrict> SPBlockByDistrict { get; set; }
         public virtual DbSet<SPGramPanchyatByBlock> SPGramPanchyatByBlock { get; set; }
         public virtual DbSet<SPVillageList> SPVillageList { get; set; }
+        public virtual DbSet<SPVillageIncharge> SPVillageIncharge { get; set; }
+        public virtual DbSet<SPWarehouseList> SPWarehouseList { get; set; }
         #endregion
 
 

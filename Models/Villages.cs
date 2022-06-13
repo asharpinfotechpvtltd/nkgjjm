@@ -10,7 +10,7 @@ namespace Nkgjjm.Models
         public int District { get; set; }
         public int? GramPanchayat { get; set; }
         public string? Village { get; set; }
-        public string? VillageCode { get; set; }
+        public Int64? VillageCode { get; set; }
 
 
     }

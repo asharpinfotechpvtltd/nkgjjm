@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.Warehouses
+namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
 {
     public class DetailsModel : PageModel
     {
@@ -18,23 +18,23 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
             _context = context;
         }
 
-      public Warehouse Warehouse { get; set; } = default!; 
+      public VillageIncharges VillageIncharges { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblWarehouse == null)
+            if (id == null || _context.TblVillageIncharge == null)
             {
                 return NotFound();
             }
 
-            var warehouse = await _context.TblWarehouse.FirstOrDefaultAsync(m => m.Id == id);
-            if (warehouse == null)
+            var villageincharges = await _context.TblVillageIncharge.FirstOrDefaultAsync(m => m.Id == id);
+            if (villageincharges == null)
             {
                 return NotFound();
             }
             else 
             {
-                Warehouse = warehouse;
+                VillageIncharges = villageincharges;
             }
             return Page();
         }
