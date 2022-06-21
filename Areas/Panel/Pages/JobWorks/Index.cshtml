@@ -5,15 +5,23 @@
     ViewData["Title"] = "Index";
     int i = 1;
 }
-
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Job Work List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
 <h2 class="intro-y text-lg font-medium mt-10">
-    Job Works List
+    Job Work List
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add Job Work</a>
-
-        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 5 of 5 entries</div>
+        <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Job Work</a>
+        
+        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
@@ -36,7 +44,7 @@
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.JobWork[0].GramPanchayat)
                     </th>
-                    
+
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.JobWork[0].ContractorName)
                     </th>
@@ -47,7 +55,7 @@
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.JobWork[0].Date)
                     </th>
-                    <th class="text-center whitespace-nowrap">ACTION</th>
+                    <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,7 +73,7 @@
                         <td class="text-center">
                                 @Html.DisplayFor(modelItem => item.GramPanchayat)
                         </td>
-                        
+
                         <td class="text-center">
                                 @Html.DisplayFor(modelItem => item.ContractorName)
                         </td>
@@ -74,7 +82,7 @@
                         </td>
 
                         <td class="text-center">
-                                 @item.Date.ToString().Remove(10,9)
+                                @item.Date.ToString().Remove(10,9)
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
@@ -99,7 +107,7 @@
                     <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
                     <div class="text-3xl mt-5">Are you sure?</div>
                     <div class="text-slate-500 mt-2">
-                        Do you really want to delete these records?
+                        Do you really want to delete these record?
                         <br>
                         This process cannot be undone.
                     </div>

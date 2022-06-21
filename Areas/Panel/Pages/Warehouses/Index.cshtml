@@ -5,31 +5,22 @@
     ViewData["Title"] = "Index";
     int i = 1;
 }
-
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Warehouse List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
 <h2 class="intro-y text-lg font-medium mt-10">
     Warehouse List
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Warehouse</a>
-        <div class="dropdown">
-            <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
-            </button>
-            <div class="dropdown-menu w-40">
-                <ul class="dropdown-content">
-                    <li>
-                        <a href="" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print </a>
-                    </li>
-                    <li>
-                        <a href="" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to Excel </a>
-                    </li>
-                    <li>
-                        <a href="" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to PDF </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+       
         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 3 of 3 entries</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
@@ -43,10 +34,10 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <th class="text-center whitespace-nowrap">ID</th>
-                    <th class="text-center whitespace-nowrap">WAREHOUSE NAME</th>
-                    <th class="text-center whitespace-nowrap">DISTRICT</th>                   
-                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                    <th class="text-center whitespace-nowrap">S.no.</th>
+                    <th class="text-center whitespace-nowrap">Warehouse Name</th>
+                    <th class="text-center whitespace-nowrap">District</th>
+                    <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,7 +53,7 @@
 
                         </td>
                         <td class="text-center">@item.District</td>
-                        
+
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
@@ -100,12 +91,7 @@
                 </li>
             </ul>
         </nav>
-        <select class="w-20 form-select box mt-3 sm:mt-0">
-            <option>10</option>
-            <option>25</option>
-            <option>35</option>
-            <option>50</option>
-        </select>
+        
     </div>
     <!-- END: Pagination -->
 </div>
@@ -132,51 +118,3 @@
     </div>
 </div>
 <!-- END: Delete Confirmation Modal -->
-@*<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Warehouse[0].WarehouseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Warehouse[0].Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Warehouse[0].State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Warehouse[0].City)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Warehouse) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WarehouseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@

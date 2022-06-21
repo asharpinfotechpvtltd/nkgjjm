@@ -5,13 +5,21 @@
     ViewData["Title"] = "Index";
     int i = 1;
 }
-
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Grampanchayat List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
 <h2 class="intro-y text-lg font-medium mt-10">
     Block List
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Grampanchyaat</a>
+        <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Grampanchayat</a>
        
         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 3 of 3 entries</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
@@ -26,13 +34,11 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-
-
                     <th class="text-center whitespace-nowrap">ID</th>
-                     <th class="text-center whitespace-nowrap">DISTRICT</th>
-                    <th class="text-center whitespace-nowrap">BLOCK</th>                   
-                    <th class="text-center whitespace-nowrap">GRAM PANCHYAAT</th>                  
-                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                     <th class="text-center whitespace-nowrap">District</th>
+                    <th class="text-center whitespace-nowrap">Block</th>                   
+                    <th class="text-center whitespace-nowrap">Gram Panchayat</th>                  
+                    <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,30 +74,7 @@
     </div>
     <!-- END: Data List -->
     <!-- BEGIN: Pagination -->
-   @* <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-        <nav class="w-full sm:w-auto sm:mr-auto">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-left"></i> </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-left"></i> </a>
-                </li>
-                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-right"></i> </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-right"></i> </a>
-                </li>
-            </ul>
-        </nav>
-       
-    </div>*@
+   
     <!-- END: Pagination -->
 </div>
 <!-- BEGIN: Delete Confirmation Modal -->
@@ -119,39 +102,3 @@
 <!-- END: Delete Confirmation Modal -->
 
 
-@*<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.GramPanchayats[0].GramPanchayat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GramPanchayats[0].Block)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.GramPanchayats) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GramPanchayat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Block)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@
