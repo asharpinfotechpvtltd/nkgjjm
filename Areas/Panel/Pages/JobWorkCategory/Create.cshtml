@@ -1,0 +1,33 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.JobWorkCategory.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Add JobWork Category
+        </h2>
+    </div>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline mt-5">
+                    <label class="form-label sm:w-20">JobWork category</label>
+                    <input asp-for="JobWorkcategories.JobWorkcategory" class="form-control" />
+                    <span asp-validation-for="JobWorkcategories.JobWorkcategory" class="text-danger"></span>
+                </div>
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

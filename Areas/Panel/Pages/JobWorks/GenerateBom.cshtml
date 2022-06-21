@@ -1,0 +1,104 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.JobWorks.GenerateBomModel
+@{
+    int i = 1;
+}
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Add Bom
+        </h2>
+    </div>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Job Work Id</label>
+                    <input type="text" id="txtvillagecode" asp-for="@Model.Bom.JobWorkId" value="@Model.JobWorkid" readonly class="form-control" />
+                </div>
+
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Raw Material Name</label>
+                    <select id="ddlmaterial" asp-for="@Model.Bom.RawMaterialId" asp-items="@Model.ItemMasters" class="form-control">
+                        <option>Select Material</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Qty</label>
+                    <select id="ddlqty" asp-for="@Model.Bom.Qty" class="form-control">
+                        <option>Select Qty</option>
+                        @for (int i1 = 1; i1 < 50; i1++)
+                        {
+                            <option>@i1</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Toleranace</label>
+                    <input type="text" id="txttolerence" asp-for="@Model.Bom.Tolerance" class="form-control" />
+                </div>
+
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Final Qty</label>
+                    <input type="text" id="txtfinalqty" asp-for="@Model.Bom.Finalqty" class="form-control" />
+                </div>
+
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <button class="btn btn-primary">Add </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report -mt-2">
+            <thead>
+                <tr>
+                    <th class="text-center whitespace-nowrap">S.NO.</th>
+                    <th class="text-center whitespace-nowrap">
+                        Raw Material Name
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Qty
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Toleranace
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Final Qty
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Date
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListBom)
+                {
+                    <tr class="intro-x">
+                        <td class="text-center">
+                            @i
+                        </td>
+                        <td class="text-center">
+                            @item.ItemName
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Qty)
+                        </td>
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Tolerance)
+                        </td>
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Finalqty)
+                        </td>
+                        <td class="text-center">
+                                @item.AssignedDate.ToString().Remove(10,9)
+                        </td>
+
+                       
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

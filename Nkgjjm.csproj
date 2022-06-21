@@ -7,12 +7,41 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\dist\.DS_Store" />
+    <None Include="wwwroot\dist\css\.DS_Store" />
+    <None Include="wwwroot\dist\fonts\.DS_Store" />
+    <None Include="wwwroot\dist\images\.DS_Store" />
+    <None Include="wwwroot\dist\images\bg-main-dark.svg" />
+    <None Include="wwwroot\dist\images\bg-main.svg" />
+    <None Include="wwwroot\dist\images\error-illustration.svg" />
+    <None Include="wwwroot\dist\images\illustration.svg" />
+    <None Include="wwwroot\dist\images\logo.svg" />
+    <None Include="wwwroot\dist\images\map-marker-dark.svg" />
+    <None Include="wwwroot\dist\images\map-marker-region-dark.svg" />
+    <None Include="wwwroot\dist\images\map-marker-region.svg" />
+    <None Include="wwwroot\dist\images\map-marker.svg" />
+    <None Include="wwwroot\dist\images\phone-illustration.svg" />
+    <None Include="wwwroot\dist\images\placeholders\.DS_Store" />
+    <None Include="wwwroot\dist\images\woman-illustration.svg" />
+    <None Include="wwwroot\dist\js\.DS_Store" />
+    <None Include="wwwroot\dist\js\app.js" />
+    <None Include="wwwroot\dist\js\ckeditor-balloon-block.js" />
+    <None Include="wwwroot\dist\js\ckeditor-balloon.js" />
+    <None Include="wwwroot\dist\js\ckeditor-classic.js" />
+    <None Include="wwwroot\dist\js\ckeditor-document.js" />
+    <None Include="wwwroot\dist\js\ckeditor-inline.js" />
   </ItemGroup>
 
 </Project>

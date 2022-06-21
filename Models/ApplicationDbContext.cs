@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
+using IdentityModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Nkgjjm.Models
 {
@@ -34,6 +36,10 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPVillageList>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPVillageIncharge>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPWarehouseList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPJobWorkList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPItemInWareHouse>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPBomList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPMaterialIssuance>().HasNoKey().ToView(null);
 
             
 
@@ -52,6 +58,10 @@ namespace Nkgjjm.Models
         public virtual DbSet<Districts> TblDistrict { get; set; }
         public virtual DbSet<VillageIncharges> TblVillageIncharge { get; set; }
         public virtual DbSet<WarehouseIncharges> TblWarehouseIncharge { get; set; }
+        public virtual DbSet<JobWorkcategories> TblJobWorkCategory { get; set; }
+        public virtual DbSet<JobWork> TblJobWork { get; set; }
+        public virtual DbSet<ItemToWarehouse> TblItemToWarehouse { get; set; }
+        public virtual DbSet<Bom> TblBom { get; set; }
 
 
 
@@ -63,6 +73,11 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPVillageList> SPVillageList { get; set; }
         public virtual DbSet<SPVillageIncharge> SPVillageIncharge { get; set; }
         public virtual DbSet<SPWarehouseList> SPWarehouseList { get; set; }
+        public virtual DbSet<SPJobWorkList> SPJobWorkList { get; set; }
+        public virtual DbSet<SPItemInWareHouse> SPItemInWareHouse { get; set; }
+        public virtual DbSet<SPBomList> SPBomList { get; set; }
+        public virtual DbSet<SPMaterialIssuance> SPMaterialIssuance { get; set; }
+        public DbSet<Nkgjjm.Models.MaterialIssuance>? MaterialIssuance { get; set; }
         #endregion
 
 

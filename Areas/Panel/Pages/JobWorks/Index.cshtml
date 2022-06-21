@@ -1,0 +1,117 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.JobWorks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    int i = 1;
+}
+
+<h2 class="intro-y text-lg font-medium mt-10">
+    Job Works List
+</h2>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+        <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add Job Work</a>
+
+        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 5 of 5 entries</div>
+        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+            <div class="w-56 relative text-slate-500">
+                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN: Data List -->
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report -mt-2">
+            <thead>
+                <tr>
+                    <th class="text-center whitespace-nowrap">Work Order Id</th>
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.JobWork[0].District)
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.JobWork[0].Block)
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.JobWork[0].GramPanchayat)
+                    </th>
+                    
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.JobWork[0].ContractorName)
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.JobWork[0].CompanyName)
+                    </th>
+
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.JobWork[0].Date)
+                    </th>
+                    <th class="text-center whitespace-nowrap">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.JobWork)
+                {
+                    <tr class="intro-x">
+                        <td class="text-center">
+                            @Html.DisplayFor(modelitem=>item.WorkorderId)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.District)
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Block)
+                        </td>
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.GramPanchayat)
+                        </td>
+                        
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ContractorName)
+                        </td>
+                        <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+
+                        <td class="text-center">
+                                 @item.Date.ToString().Remove(10,9)
+                        </td>
+                        <td class="table-report__action w-56">
+                            <div class="flex justify-center items-center">
+                                <a class="flex items-center mr-3" asp-page="GenerateBom" asp-route-id="@item.WorkorderId"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="plus" data-lucide="plus" class="lucide lucide-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Bom</a>
+                                <a class="flex items-center mr-3" href="javascript:;"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="check-square" data-lucide="check-square" class="lucide lucide-check-square w-4 h-4 mr-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg> Edit </a>
+                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trash-2" data-lucide="trash-2" class="lucide lucide-trash-2 w-4 h-4 mr-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Delete </a>
+                            </div>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- BEGIN: Delete Confirmation Modal -->
+<div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Are you sure?</div>
+                    <div class="text-slate-500 mt-2">
+                        Do you really want to delete these records?
+                        <br>
+                        This process cannot be undone.
+                    </div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                    <button type="button" class="btn btn-danger w-24">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
