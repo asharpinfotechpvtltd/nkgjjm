@@ -23,7 +23,7 @@
                 <div class="form-inline mt-5">
                     <label for="horizontal-form-1" class="form-label sm:w-20">Block Name</label>
                     <select id="ddlblock" type="text" asp-for="GramPanchayats.Block" asp-items="Model.BlockName" class="form-control">
-                        <option>Block Name</option>
+                        <option>Select Block</option>
                     </select>
                 </div>
                 <div class="form-inline mt-5">
@@ -50,8 +50,9 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/CustomJs/Block.js"></script>
-    
+
 
 
 

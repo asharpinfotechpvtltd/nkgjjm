@@ -5,31 +5,33 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Districts</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Districts.id" />
-            <div class="form-group">
-                <label asp-for="Districts.District" class="control-label"></label>
-                <input asp-for="Districts.District" class="form-control" />
-                <span asp-validation-for="Districts.District" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Edit District
+        </h2>
     </div>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <input type="hidden" asp-for="Districts.id" />
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
+                    <input asp-for="Districts.District" class="form-control" />
+                    <span asp-validation-for="Districts.District" class="text-danger"></span>
+                </div>
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

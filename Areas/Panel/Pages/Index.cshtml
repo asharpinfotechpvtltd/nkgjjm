@@ -4,35 +4,192 @@
 
 }
 
-<div class="intro-y box mt-5">
-    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-        <h2 class="font-medium text-base mr-auto">
-            Horizontal Form
-        </h2>
-        <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
-            <label class="form-check-label ml-0" for="show-example-7">Show example code</label>
-            <input id="show-example-7" data-target="#horizontal-form" class="show-code form-check-input mr-0 ml-3" type="checkbox">
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12 2xl:col-span-9">
+        <div class="grid grid-cols-12 gap-6">
+            <!-- BEGIN: General Report -->
+            <div class="col-span-12 mt-8">
+                <div class="intro-y flex items-center h-10">
+                    <h2 class="text-lg font-medium truncate mr-5">
+                        General Report
+                    </h2>
+                    
+                </div>
+                <div class="grid grid-cols-12 gap-6 mt-5">
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="edit" class="report-box__icon text-primary"></i>
+                                    
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">471</div>
+                                <div class="text-base text-slate-300 mt-1">Active Po's</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="credit-card" class="report-box__icon text-pending"></i>
+                                   
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">3.721</div>
+                                <div class="text-base text-slate-500 mt-1">Job Orders</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="file-minus" class="report-box__icon text-warning"></i>
+                                  
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">2.149</div>
+                                <div class="text-base text-slate-500 mt-1">Pending Indents</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="box" class="report-box__icon text-success"></i>
+                                    
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.Totalwarehouse</div>
+                                <div class="text-base text-slate-500 mt-1">Total Warehouses</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="users" class="report-box__icon text-success"></i>
+                                    
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
+                                <div class="text-base text-slate-500 mt-1">Active Users</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="activity" class="report-box__icon text-success"></i>
+                                   
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
+                                <div class="text-base text-slate-500 mt-1">Active Sites</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="box-select" class="report-box__icon text-success"></i>
+                                    
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
+                                <div class="text-base text-slate-500 mt-1">Under Process</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <i data-lucide="thumbs-up" class="report-box__icon text-success"></i>
+                                   
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
+                                <div class="text-base text-slate-500 mt-1">Completed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
-    <div id="horizontal-form" class="p-5">
-        <div class="preview">
-            <div class="form-inline">
-                <label for="horizontal-form-1" class="form-label sm:w-20">Email</label>
-                <input id="horizontal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
-            </div>
-            <div class="form-inline mt-5">
-                <label for="horizontal-form-2" class="form-label sm:w-20">Password</label>
-                <input id="horizontal-form-2" type="password" class="form-control" placeholder="secret">
-            </div>
-           
-            <div class="sm:ml-20 sm:pl-5 mt-5">
-                <button class="btn btn-primary">Login</button>
-            </div>
-        </div>
-        <div class="source-code hidden">
-            <button data-target="#copy-horizontal-form" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
-            <div class="overflow-y-auto mt-3 rounded-md">
-                <pre id="copy-horizontal-form" class="source-preview"> <code class="html"> HTMLOpenTagdiv class=&quot;form-inline&quot;HTMLCloseTag HTMLOpenTaglabel for=&quot;horizontal-form-1&quot; class=&quot;form-label sm:w-20&quot;HTMLCloseTagEmailHTMLOpenTag/labelHTMLCloseTag HTMLOpenTaginput id=&quot;horizontal-form-1&quot; type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;example@gmail.com&quot;HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;form-inline mt-5&quot;HTMLCloseTag HTMLOpenTaglabel for=&quot;horizontal-form-2&quot; class=&quot;form-label sm:w-20&quot;HTMLCloseTagPasswordHTMLOpenTag/labelHTMLCloseTag HTMLOpenTaginput id=&quot;horizontal-form-2&quot; type=&quot;password&quot; class=&quot;form-control&quot; placeholder=&quot;secret&quot;HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;form-check sm:ml-20 sm:pl-5 mt-5&quot;HTMLCloseTag HTMLOpenTaginput id=&quot;horizontal-form-3&quot; class=&quot;form-check-input&quot; type=&quot;checkbox&quot; value=&quot;&quot;HTMLCloseTag HTMLOpenTaglabel class=&quot;form-check-label&quot; for=&quot;horizontal-form-3&quot;HTMLCloseTagRemember meHTMLOpenTag/labelHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;sm:ml-20 sm:pl-5 mt-5&quot;HTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-primary&quot;HTMLCloseTagLoginHTMLOpenTag/buttonHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
+    <div class="col-span-12 2xl:col-span-3">
+        <div class="2xl:border-l -mb-10 pb-10">
+            <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
+                <!-- BEGIN: Transactions -->
+                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
+                    <div class="intro-x flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Transactions
+                        </h2>
+                    </div>
+                    <div class="mt-5">
+                        <div class="intro-x">
+                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    
+                                </div>
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">District</div>
+                                   
+                                </div>
+                                <div class="text-success">@Model.TotalDistrict</div>
+                            </div>
+                        </div>
+                        <div class="intro-x">
+                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    
+                                </div>
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">Block</div>
+                                  
+                                </div>
+                                <div class="text-success">@Model.TotalBlock</div>
+                            </div>
+                        </div>
+                        <div class="intro-x">
+                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    
+                                </div>
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">Grampanchayat</div>
+                                    
+                                </div>
+                                <div class="text-success">@Model.TotalGp</div>
+                            </div>
+                        </div>
+                        <div class="intro-x">
+                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    
+                                </div>
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">Village</div>
+                                    
+                                </div>
+                                <div class="text-success">@Model.TotalVillage</div>
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

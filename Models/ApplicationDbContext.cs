@@ -62,6 +62,7 @@ namespace Nkgjjm.Models
         public virtual DbSet<JobWork> TblJobWork { get; set; }
         public virtual DbSet<ItemToWarehouse> TblItemToWarehouse { get; set; }
         public virtual DbSet<Bom> TblBom { get; set; }
+        public virtual DbSet<Suppliers> TblSupplier { get; set; }
 
 
 

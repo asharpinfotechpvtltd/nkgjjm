@@ -13,7 +13,7 @@ namespace Nkgjjm.Areas.Admin.Pages
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public int DriverRegister { get; set; }
+        public int Totalwarehouse { get; set; }
         public int TblCustomerOrderDetail { get; set; }
         public double TotalSales { get; set; }
 
@@ -22,13 +22,11 @@ namespace Nkgjjm.Areas.Admin.Pages
         public int ProductSold { get; set; }
         
 
-        public int TotalRegisteredUser { get; set; }
-        public int TotalBusinessUser { get; set; }
-        public int TotalIndividualUser { get; set; }
-        public int TotalDriverApplication { get; set; }
-        public int TotalShipNow { get; set; }
-        public int TotalInTransit { get; set; }
-        public int TotalDelivery { get; set; }
+        public int TotalDistrict { get; set; }
+        public int TotalBlock { get; set; }
+        public int TotalGp { get; set; }
+        public int TotalVillage { get; set; }
+        
 
         public IndexModel(ApplicationDbContext context)
         {
@@ -36,6 +34,11 @@ namespace Nkgjjm.Areas.Admin.Pages
         }
         public async Task<IActionResult> OnGet()
         {
+            Totalwarehouse = _context.TblWarehouse.Count();
+            TotalDistrict = _context.TblDistrict.Count();
+            TotalBlock = _context.TblBlock.Count();
+            TotalGp = _context.TblGramPanchayat.Count();
+            TotalVillage = _context.TblVillageCode.Count();
             //if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             //{
             //    DateTime timeUtc = System.DateTime.UtcNow;

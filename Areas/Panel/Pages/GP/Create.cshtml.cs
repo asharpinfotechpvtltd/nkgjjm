@@ -37,10 +37,7 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblGramPanchayat == null || GramPanchayats == null)
-            {
-                return Page();
-            }
+         
 
             _context.TblGramPanchayat.Add(GramPanchayats);
             await _context.SaveChangesAsync();

@@ -21,6 +21,8 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
 
         [BindProperty]
         public DistBlock DistBlock { get; set; } = default!;
+        [BindProperty]
+        public List<SelectListItem> District { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,7 +30,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
             {
                 return NotFound();
             }
-
+            District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
             var distblock =  await _context.TblBlock.FirstOrDefaultAsync(m => m.Id == id);
             if (distblock == null)
             {

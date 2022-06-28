@@ -20,6 +20,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
         }
 
         public IList<DistBlock> DistBlock { get;set; } = default!;
+        public int BlockCount { get; set; }
 
         public List<SPBlockByDistrict> BlockList { get; set; }
 
@@ -28,7 +29,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
             if (_context.TblBlock != null)
             {
                 BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict").ToListAsync();
+                BlockCount = await _context.TblBlock.CountAsync();
             }
+        }
+        public async Task<IActionResult> OnPost(string BlockName)
+        {
+            DistBlock = await _context.TblBlock.Where(d => d.Block == BlockName).ToListAsync();
+            BlockCount = DistBlock.Count;
+            return Page();
         }
     }
 }

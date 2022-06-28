@@ -19,13 +19,22 @@ namespace Nkgjjm.Areas.Panel.Pages.District
         }
 
         public IList<Districts> Districts { get;set; } = default!;
+        [BindProperty]
+        public int TotalCount { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblDistrict != null)
             {
                 Districts = await _context.TblDistrict.ToListAsync();
+                TotalCount= Districts.Count;
             }
+        }
+        public async Task<IActionResult> OnPost(string districtname)
+        {
+            Districts = await _context.TblDistrict.Where(d=>d.District== districtname).ToListAsync();
+            TotalCount = Districts.Count;
+            return Page();
         }
     }
 }
