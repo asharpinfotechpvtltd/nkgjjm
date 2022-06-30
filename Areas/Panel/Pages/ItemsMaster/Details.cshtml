@@ -1,0 +1,67 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.ItemsMaster.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ItemMaster</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.ItemName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.ItemName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.UnitType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.UnitType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.HsnCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.HsnCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.AddedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.AddedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.Gst)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.Gst)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.CGst)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.CGst)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.SGst)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.SGst)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemMaster.IGst)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemMaster.IGst)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ItemMaster?.ItemId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

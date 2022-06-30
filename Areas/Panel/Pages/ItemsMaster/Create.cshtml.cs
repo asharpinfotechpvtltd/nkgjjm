@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Nkgjjm.Classes;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
+namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 {
     public class CreateModel : PageModel
     {
@@ -18,24 +20,23 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            Units =await _context.TblUnits.Select(u=>new SelectListItem { Value=u.UnitId.ToString(),Text=u.UnitName}).ToListAsync();
             return Page();
         }
-
+        GetUserDate date = new GetUserDate();
         [BindProperty]
-        public MaterialIssuance MaterialIssuance { get; set; } = default!;
+        public ItemMaster ItemMaster { get; set; } = default!;
+        public List<SelectListItem> Units { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.MaterialIssuance == null || MaterialIssuance == null)
-            {
-                return Page();
-            }
 
-            _context.MaterialIssuance.Add(MaterialIssuance);
+            ItemMaster.AddedDate = date.ReturnDate();
+            _context.TblItemMaster.Add(ItemMaster);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

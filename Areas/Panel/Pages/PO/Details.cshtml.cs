@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
+namespace Nkgjjm.Areas.Panel.Pages.PO
 {
     public class DetailsModel : PageModel
     {
@@ -18,23 +18,23 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
             _context = context;
         }
 
-      public MaterialIssuance MaterialIssuance { get; set; } = default!; 
+      public Pochild Pochild { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.MaterialIssuance == null)
+            if (id == null || _context.TblPoChild == null)
             {
                 return NotFound();
             }
 
-            var materialissuance = await _context.MaterialIssuance.FirstOrDefaultAsync(m => m.id == id);
-            if (materialissuance == null)
+            var pochild = await _context.TblPoChild.FirstOrDefaultAsync(m => m.Id == id);
+            if (pochild == null)
             {
                 return NotFound();
             }
             else 
             {
-                MaterialIssuance = materialissuance;
+                Pochild = pochild;
             }
             return Page();
         }

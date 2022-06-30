@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
+namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 {
     public class EditModel : PageModel
     {
@@ -20,21 +20,21 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
         }
 
         [BindProperty]
-        public MaterialIssuance MaterialIssuance { get; set; } = default!;
+        public ItemMaster ItemMaster { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.MaterialIssuance == null)
+            if (id == null || _context.TblItemMaster == null)
             {
                 return NotFound();
             }
 
-            var materialissuance =  await _context.MaterialIssuance.FirstOrDefaultAsync(m => m.id == id);
-            if (materialissuance == null)
+            var itemmaster =  await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemId == id);
+            if (itemmaster == null)
             {
                 return NotFound();
             }
-            MaterialIssuance = materialissuance;
+            ItemMaster = itemmaster;
             return Page();
         }
 
@@ -47,7 +47,7 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
                 return Page();
             }
 
-            _context.Attach(MaterialIssuance).State = EntityState.Modified;
+            _context.Attach(ItemMaster).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MaterialIssuanceExists(MaterialIssuance.id))
+                if (!ItemMasterExists(ItemMaster.ItemId))
                 {
                     return NotFound();
                 }
@@ -68,9 +68,9 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
             return RedirectToPage("./Index");
         }
 
-        private bool MaterialIssuanceExists(int id)
+        private bool ItemMasterExists(int id)
         {
-          return (_context.MaterialIssuance?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.TblItemMaster?.Any(e => e.ItemId == id)).GetValueOrDefault();
         }
     }
 }

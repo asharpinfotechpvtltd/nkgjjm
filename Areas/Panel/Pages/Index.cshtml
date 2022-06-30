@@ -17,12 +17,12 @@
     <div class="col-span-12 2xl:col-span-9">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: General Report -->
-            <div class="col-span-12 mt-8">
+            <div class="col-span-12 mt-0">
                 <div class="intro-y flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">
                         General Report
                     </h2>
-                    
+
                 </div>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
@@ -30,7 +30,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="edit" class="report-box__icon text-primary"></i>
-                                    
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">471</div>
                                 <div class="text-base text-slate-300 mt-1">Active Po's</div>
@@ -42,7 +42,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="credit-card" class="report-box__icon text-pending"></i>
-                                   
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">3.721</div>
                                 <div class="text-base text-slate-500 mt-1">Job Orders</div>
@@ -54,7 +54,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="file-minus" class="report-box__icon text-warning"></i>
-                                  
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">2.149</div>
                                 <div class="text-base text-slate-500 mt-1">Pending Indents</div>
@@ -66,7 +66,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="box" class="report-box__icon text-success"></i>
-                                    
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">@Model.Totalwarehouse</div>
                                 <div class="text-base text-slate-500 mt-1">Total Warehouses</div>
@@ -78,7 +78,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="users" class="report-box__icon text-success"></i>
-                                    
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
                                 <div class="text-base text-slate-500 mt-1">Active Users</div>
@@ -90,7 +90,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="activity" class="report-box__icon text-success"></i>
-                                   
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
                                 <div class="text-base text-slate-500 mt-1">Active Sites</div>
@@ -102,7 +102,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="box-select" class="report-box__icon text-success"></i>
-                                    
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
                                 <div class="text-base text-slate-500 mt-1">Under Process</div>
@@ -114,7 +114,7 @@
                             <div class="box p-5">
                                 <div class="flex">
                                     <i data-lucide="thumbs-up" class="report-box__icon text-success"></i>
-                                   
+
                                 </div>
                                 <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
                                 <div class="text-base text-slate-500 mt-1">Completed</div>
@@ -123,74 +123,114 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <div class="col-span-12 2xl:col-span-3">
         <div class="2xl:border-l -mb-10 pb-10">
             <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
                 <!-- BEGIN: Transactions -->
-                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
+                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-0 2xl:mt-8">
                     <div class="intro-x flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Transactions
+                            Total Count
                         </h2>
                     </div>
                     <div class="mt-5">
                         <div class="intro-x">
-                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    
+                            <a href="/panel/District">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">District</div>
+
+                                    </div>
+                                    <div class="text-success">@Model.TotalDistrict</div>
                                 </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">District</div>
-                                   
-                                </div>
-                                <div class="text-success">@Model.TotalDistrict</div>
-                            </div>
+                            </a>
                         </div>
                         <div class="intro-x">
-                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    
+                            <a href="/panel/Blocks">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">Block</div>
+
+                                    </div>
+                                    <div class="text-success">@Model.TotalBlock</div>
                                 </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Block</div>
-                                  
-                                </div>
-                                <div class="text-success">@Model.TotalBlock</div>
-                            </div>
+                            </a>
                         </div>
                         <div class="intro-x">
-                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    
+                            <a href="/panel/gp">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">Grampanchayat</div>
+
+                                    </div>
+                                    <div class="text-success">@Model.TotalGp</div>
                                 </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Grampanchayat</div>
-                                    
-                                </div>
-                                <div class="text-success">@Model.TotalGp</div>
-                            </div>
+                            </a>
                         </div>
                         <div class="intro-x">
-                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    
+                            <a href="/panel/Village">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">Village</div>
+
+                                    </div>
+                                    <div class="text-success">@Model.TotalVillage</div>
                                 </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Village</div>
-                                    
-                                </div>
-                                <div class="text-success">@Model.TotalVillage</div>
-                            </div>
+                            </a>
                         </div>
-                       
-                        
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
+</div>
+<div class="col-span-12 mt-6">
+
+    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+        <table class="table table-report sm:mt-2">
+            <thead>
+                <tr>
+
+                    <th class="text-center whitespace-nowrap">Id</th>
+                    <th class="text-center whitespace-nowrap">District</th>
+                    <th class="text-center whitespace-nowrap">Block</th>
+                    <th class="text-center whitespace-nowrap">GramPanchayat</th>
+                    <th class="text-center whitespace-nowrap">Village</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TotalCount)
+                {
+                    <tr class="intro-x">
+                        <td class="text-center">@item.id</td>
+                        <td class="text-center">
+                            <a href="#" class="font-medium whitespace-nowrap">@item.District</a>
+
+                        </td>
+                        <td class="text-center">@item.TotalBlock</td>
+                        <td class="text-center">
+                            @item.TotalGp
+                        </td>
+                        <td class="text-center">
+                            @item.TotalVillage
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
 </div>

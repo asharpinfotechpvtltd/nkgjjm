@@ -21,7 +21,7 @@
     <div class="mobile-menu md:hidden">
         <div class="mobile-menu-bar">
             <a href="" class="flex mr-auto">
-                <img alt="NKG-PRIMUS" class="w-40" src="~/dist/images/logo.png" style="background-color:white;">
+                <img alt="NKG-PRIMUS" class="w-40" src="~/dist/images/NKGPrimus.png" style="background-color:white;">
             </a>
             <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
         </div>
@@ -662,7 +662,7 @@
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Midone - HTML Admin Template" class="w-40" src="~/dist/images/logo.png" style="background-color:white;">
+                <img alt="NKG Primus" class="w-40" src="~/dist/images/NKGPrimus.png" />
                 <span class="hidden xl:block text-white text-lg ml-3">  </span>
             </a>
             <div class="side-nav__devider my-6"></div>
@@ -672,43 +672,127 @@
                         <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                         <div class="side-menu__title">
                             Dashboard
-                            
+
                         </div>
                     </a>
 
                 </li>
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title">
+                            Location
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/District/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> District </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Blocks/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Block </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/GP/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> GramPanchayat </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Village/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Village </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title">
+                            Items
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                        </div>
+                    </a>
+                    <ul class="">
+                         <li>
+                            <a asp-page="/Unit/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Unit Master </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Itemsmaster/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Item Master </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/AssignItemToWarehouse/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Assign Item To Warehouse </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/AssignMaterial/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Assign Material </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Village/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Village </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
                  <li>
-                    <a asp-page="/District/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                         <div class="side-menu__title">
-                            Districts
-
+                            Jobwork
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/District/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Generate PO </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/JobWorkCategory/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> JobWork Category </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/JobWorks/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> JobWorks </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Warehouses/index" class="side-menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Warehouse </div>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
 
-                </li>
-                <li>
-                    <a asp-page="/Blocks/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
-                        <div class="side-menu__title">
-                            Blocks
-
-                        </div>
-                    </a>
-
-                </li>
-                <li>
-                    <a asp-page="/GP/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
-                        <div class="side-menu__title"> Gram Panchaayat </div>
-                    </a>
-                </li>
-                <li>
-                    <a asp-page="/Village/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
-                        <div class="side-menu__title"> Village</div>
-                    </a>
-                </li>
                 <li>
                     <a asp-page="/VillageIncharge/index" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
@@ -727,38 +811,9 @@
                         <div class="side-menu__title"> Contractor </div>
                     </a>
                 </li>
-                <li>
-                    <a asp-page="/AssignItemToWarehouse/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
-                        <div class="side-menu__title"> Assign Item To Warehouse </div>
-                    </a>
-                </li>
-                <li>
-                    <a asp-page="/AssignMaterial/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                        <div class="side-menu__title"> Assign Material </div>
-                    </a>
-                </li>
-                <li>
-                    <a asp-page="/JobWorkCategory/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                        <div class="side-menu__title"> Job Work Category </div>
-                    </a>
-                </li>
-                <li>
-                    <a asp-page="/JobWorks/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                        <div class="side-menu__title">Job Works </div>
-                    </a>
-                </li>
-                <li>
-                    <a asp-page="/Warehouses/index" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                        <div class="side-menu__title">Warehouses </div>
-                    </a>
-                </li>
+               
             </ul>
-            
+
         </nav>
         <!-- END: Side Menu -->
         <!-- BEGIN: Content -->

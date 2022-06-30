@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
+namespace Nkgjjm.Areas.Panel.Pages.Unit
 {
     public class DeleteModel : PageModel
     {
@@ -19,40 +19,40 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignMaterial
         }
 
         [BindProperty]
-      public MaterialIssuance MaterialIssuance { get; set; } = default!;
+      public Units Units { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.MaterialIssuance == null)
+            if (id == null || _context.TblUnits == null)
             {
                 return NotFound();
             }
 
-            var materialissuance = await _context.MaterialIssuance.FirstOrDefaultAsync(m => m.id == id);
+            var units = await _context.TblUnits.FirstOrDefaultAsync(m => m.UnitId == id);
 
-            if (materialissuance == null)
+            if (units == null)
             {
                 return NotFound();
             }
             else 
             {
-                MaterialIssuance = materialissuance;
+                Units = units;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.MaterialIssuance == null)
+            if (id == null || _context.TblUnits == null)
             {
                 return NotFound();
             }
-            var materialissuance = await _context.MaterialIssuance.FindAsync(id);
+            var units = await _context.TblUnits.FindAsync(id);
 
-            if (materialissuance != null)
+            if (units != null)
             {
-                MaterialIssuance = materialissuance;
-                _context.MaterialIssuance.Remove(MaterialIssuance);
+                Units = units;
+                _context.TblUnits.Remove(Units);
                 await _context.SaveChangesAsync();
             }
 

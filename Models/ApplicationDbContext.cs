@@ -40,6 +40,8 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPItemInWareHouse>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPBomList>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPMaterialIssuance>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPItemList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPTotalCount>().HasNoKey().ToView(null);
 
             
 
@@ -63,6 +65,9 @@ namespace Nkgjjm.Models
         public virtual DbSet<ItemToWarehouse> TblItemToWarehouse { get; set; }
         public virtual DbSet<Bom> TblBom { get; set; }
         public virtual DbSet<Suppliers> TblSupplier { get; set; }
+        public virtual DbSet<MaterialIssuance> TblMaterialIssuance { get; set; }
+        public virtual DbSet<Pochild> TblPoChild { get; set; }
+        public virtual DbSet<PoMaster> TblPoMaster { get; set; }
 
 
 
@@ -78,7 +83,9 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPItemInWareHouse> SPItemInWareHouse { get; set; }
         public virtual DbSet<SPBomList> SPBomList { get; set; }
         public virtual DbSet<SPMaterialIssuance> SPMaterialIssuance { get; set; }
-        public DbSet<Nkgjjm.Models.MaterialIssuance>? MaterialIssuance { get; set; }
+        public virtual DbSet<SPItemList> SPItemList { get; set; }
+        public virtual DbSet<SPTotalCount> SPTotalCount { get; set; }
+        
         #endregion
 
 

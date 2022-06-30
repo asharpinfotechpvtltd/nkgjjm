@@ -1,0 +1,70 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.ItemsMaster.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ItemMaster</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ItemMaster.ItemId" />
+            <div class="form-group">
+                <label asp-for="ItemMaster.ItemName" class="control-label"></label>
+                <input asp-for="ItemMaster.ItemName" class="form-control" />
+                <span asp-validation-for="ItemMaster.ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.UnitType" class="control-label"></label>
+                <input asp-for="ItemMaster.UnitType" class="form-control" />
+                <span asp-validation-for="ItemMaster.UnitType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.HsnCode" class="control-label"></label>
+                <input asp-for="ItemMaster.HsnCode" class="form-control" />
+                <span asp-validation-for="ItemMaster.HsnCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.AddedDate" class="control-label"></label>
+                <input asp-for="ItemMaster.AddedDate" class="form-control" />
+                <span asp-validation-for="ItemMaster.AddedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.Gst" class="control-label"></label>
+                <input asp-for="ItemMaster.Gst" class="form-control" />
+                <span asp-validation-for="ItemMaster.Gst" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.CGst" class="control-label"></label>
+                <input asp-for="ItemMaster.CGst" class="form-control" />
+                <span asp-validation-for="ItemMaster.CGst" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.SGst" class="control-label"></label>
+                <input asp-for="ItemMaster.SGst" class="form-control" />
+                <span asp-validation-for="ItemMaster.SGst" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemMaster.IGst" class="control-label"></label>
+                <input asp-for="ItemMaster.IGst" class="form-control" />
+                <span asp-validation-for="ItemMaster.IGst" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

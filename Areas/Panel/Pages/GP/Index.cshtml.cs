@@ -20,12 +20,14 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         }
 
         public IList<SPGramPanchyatByBlock> GramPanchayats { get;set; } = default!;
+        public int GpCount { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblGramPanchayat != null)
             {
                 GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock").ToListAsync();
+                GpCount = await _context.TblGramPanchayat.CountAsync();
             }
         }
     }

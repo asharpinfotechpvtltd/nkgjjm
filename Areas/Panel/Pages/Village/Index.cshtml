@@ -14,14 +14,13 @@
     </nav>
     <!-- END: Account Menu -->
 </div>
-<h2 class="intro-y text-lg font-medium mt-10">
-    Village List
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Project-JJM-Village List
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Village</a>
-
-        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 5 of 5 entries</div>
+        <div class="hidden md:block mx-auto text-slate-500">Showing @Model.TotalVillageCount Village(s)</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
@@ -34,8 +33,6 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-
-
                     <th class="text-center whitespace-nowrap">S.no.</th>
                     <th class="text-center whitespace-nowrap">District</th>
                     <th class="text-center whitespace-nowrap">Block</th>
@@ -43,7 +40,6 @@
                     <th class="text-center whitespace-nowrap">Village</th>
                     <th class="text-center whitespace-nowrap">Village Code</th>
                     <th class="text-center whitespace-nowrap">Action</th>
-
                 </tr>
             </thead>
             <tbody>

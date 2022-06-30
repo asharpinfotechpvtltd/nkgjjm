@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Nkgjjm.StoredProcedure;
 
 namespace Nkgjjm.Areas.Admin.Pages
 {
@@ -26,6 +27,7 @@ namespace Nkgjjm.Areas.Admin.Pages
         public int TotalBlock { get; set; }
         public int TotalGp { get; set; }
         public int TotalVillage { get; set; }
+        public List<SPTotalCount> TotalCount { get; set; }
         
 
         public IndexModel(ApplicationDbContext context)
@@ -39,6 +41,8 @@ namespace Nkgjjm.Areas.Admin.Pages
             TotalBlock = _context.TblBlock.Count();
             TotalGp = _context.TblGramPanchayat.Count();
             TotalVillage = _context.TblVillageCode.Count();
+            TotalCount = await _context.SPTotalCount.FromSqlRaw("SPTotalCount").ToListAsync();
+
             //if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             //{
             //    DateTime timeUtc = System.DateTime.UtcNow;

@@ -20,12 +20,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
         }
 
         public IList<SPVillageList> VillageList { get;set; } = default!;
+        public int TotalVillageCount { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblVillageCode != null)
             {
                 VillageList = await _context.SPVillageList.FromSqlRaw("SPVillageList").ToListAsync();
+                TotalVillageCount = await _context.TblVillageCode.CountAsync();
             }
         }
     }
