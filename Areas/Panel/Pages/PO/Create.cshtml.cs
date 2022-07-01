@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
 namespace Nkgjjm.Areas.Panel.Pages.PO
@@ -18,13 +19,15 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            Product = await _context.TblItemMaster.Select(p => new SelectListItem { Text = p.ItemName, Value = p.ItemId.ToString() }).ToListAsync();
             return Page();
         }
 
         [BindProperty]
         public Pochild Pochild { get; set; } = default!;
+        public List<SelectListItem> Product { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

@@ -1,104 +1,94 @@
 ﻿@page
 @model Nkgjjm.Areas.Panel.Pages.JobWorks.GenerateBomModel
+@inject IJsonHelper Json;
 @{
     int i = 1;
 }
-<div class="intro-y box mt-5">
-    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-        <h2 class="font-medium text-base mr-auto">
-            Add Bom
-        </h2>
-    </div>
-    <form method="post">
-        <div id="horizontal-form" class="p-5">
-            <div class="preview">
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Job Work Id</label>
-                    <input type="text" id="txtvillagecode" asp-for="@Model.Bom.JobWorkId" value="@Model.JobWorkid" readonly class="form-control" />
-                </div>
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">District List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Genearate BOM
+</h2>
+<div class="grid grid-cols-12 gap-6 mt-1">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+            <div class="w-56 relative text-slate-500">
+                <form method="post">
+                    <div id="horizontal-form" class="p-5">
+                        <div class="preview">
 
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Raw Material Name</label>
-                    <select id="ddlmaterial" asp-for="@Model.Bom.RawMaterialId" asp-items="@Model.ItemMasters" class="form-control">
-                        <option>Select Material</option>
-                    </select>
-                </div>
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Qty</label>
-                    <select id="ddlqty" asp-for="@Model.Bom.Qty" class="form-control">
-                        <option>Select Qty</option>
-                        @for (int i1 = 1; i1 < 50; i1++)
-                        {
-                            <option>@i1</option>
-                        }
-                    </select>
-                </div>
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Toleranace</label>
-                    <input type="text" id="txttolerence" asp-for="@Model.Bom.Tolerance" class="form-control" />
-                </div>
-
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Final Qty</label>
-                    <input type="text" id="txtfinalqty" asp-for="@Model.Bom.Finalqty" class="form-control" />
-                </div>
-
-                <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <button class="btn btn-primary">Add </button>
-                </div>
+                            <div class="form-inline mt-5">
+                                <input type="text" class="form-control w-56 box pr-10" name="districtname" placeholder="Search...">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
+    <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <table class="table table-report -mt-2">
-            <thead>
-                <tr>
-                    <th class="text-center whitespace-nowrap">S.NO.</th>
-                    <th class="text-center whitespace-nowrap">
-                        Raw Material Name
-                    </th>
-                    <th class="text-center whitespace-nowrap">
-                        Qty
-                    </th>
-                    <th class="text-center whitespace-nowrap">
-                        Toleranace
-                    </th>
-                    <th class="text-center whitespace-nowrap">
-                        Final Qty
-                    </th>
-                    <th class="text-center whitespace-nowrap">
-                        Date
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.ListBom)
-                {
-                    <tr class="intro-x">
-                        <td class="text-center">
-                            @i
-                        </td>
-                        <td class="text-center">
-                            @item.ItemName
-                        <td class="text-center">
-                                @Html.DisplayFor(modelItem => item.Qty)
-                        </td>
-                        <td class="text-center">
-                                @Html.DisplayFor(modelItem => item.Tolerance)
-                        </td>
-                        <td class="text-center">
-                                @Html.DisplayFor(modelItem => item.Finalqty)
-                        </td>
-                        <td class="text-center">
-                                @item.AssignedDate.ToString().Remove(10,9)
-                        </td>
+        <table class="table table-report" id="orders">
 
-                       
-                    </tr>
-                    i++;
-                }
-            </tbody>
+            <tr>
+                <th class="text-center whitespace-nowrap">
+                    Item Name
+                </th>
+                <th class="text-center whitespace-nowrap">
+                    Qty
+                </th>
+                <th class="text-center whitespace-nowrap">
+                    Tolerence
+                </th>
+                <th class="text-center whitespace-nowrap">
+                    Final Qty
+                </th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control"></select></td>
+                <td><input class="form-control product_qty" type="text" id="product_qty_" name="product_qty[]" /></td>
+                <td><input class="form-control" type="hidden" id="product_id_" name="product_id[]" /><input class="form-control tolerance" type="text" id="tolerence_" name="tolerence[]" /> </td>
+                <td><input class="form-control Finalqty" type="text" name="Finalqty[]" /> </td>
+                <td><button type="button" name="remove" class="btn btn-danger btn_remove cicle">-</button></td>
+            </tr>
         </table>
     </div>
-
+    <input type="button" value="Add" id="add" class="btn btn-primary" />
+    <!-- END: Data List -->
 </div>
+<!-- BEGIN: Delete Confirmation Modal -->
+@section Scripts {
+
+    <script>
+        var rowCount = 1;
+        $('#add').click(function() {
+            var tags = @Html.Raw(Json.Serialize(Model.ItemList));
+            for (var i = 0; i < tags.length; i++) {
+                var data = '<option value='+tags[i].itemId+'>' + tags[i].itemName + '</option>';
+                $("#product_itemname").append(data);
+                console.log(tags[i]);
+            }
+            rowCount++;
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_qty" type="text" id="product_qty_' + rowCount + '" name="product_qty[]" /></td><td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" /><input class="form-control tolerance" type="text" class="tolerence" id="tolerence_' + rowCount + '" name="tolerence[]" /> </td><td><input class="form-control Finalqty" type="text" id="Finalqty_' + rowCount + '" name="Finalqty[]"   /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+        });
+
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr('id');
+            $('#row' + button_id + '').remove();
+        });
+
+
+
+
+
+    </script>
+}

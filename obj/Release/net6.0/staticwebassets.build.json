@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2D95Uo0QLmUj1nmzfzHxW3vAN2XiUSd5usswWNQtMTA=",
+  "Hash": "2Y6cDcWI95WYqVJ2c+QpDqVbPdsudiRhmhCXnV77j7Y=",
   "Source": "Nkgjjm",
   "BasePath": "_content/Nkgjjm",
   "Mode": "Default",
@@ -576,6 +576,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\dist\\images\\map-marker-region-dark.svg"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\dist\\images\\NKGPrimus.png",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "dist/images/NKGPrimus.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\images\\NKGPrimus.png"
     },
     {
       "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\dist\\images\\phone-illustration.svg",

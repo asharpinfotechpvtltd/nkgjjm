@@ -5,45 +5,46 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Pochild</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Pochild.Pono" class="control-label"></label>
-                <input asp-for="Pochild.Pono" class="form-control" />
-                <span asp-validation-for="Pochild.Pono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pochild.Itemid" class="control-label"></label>
-                <input asp-for="Pochild.Itemid" class="form-control" />
-                <span asp-validation-for="Pochild.Itemid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pochild.Qty" class="control-label"></label>
-                <input asp-for="Pochild.Qty" class="form-control" />
-                <span asp-validation-for="Pochild.Qty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pochild.Price" class="control-label"></label>
-                <input asp-for="Pochild.Price" class="form-control" />
-                <span asp-validation-for="Pochild.Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Add PO
+        </h2>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                
+                <div class="form-inline mt-5">
+                    <label asp-for="Pochild.Itemid" class="form-label sm:w-20"></label>
+                    <select asp-for="Pochild.Itemid" asp-items="Model.Product" class="form-control">
+                        <option>Select Item</option>
+                    </select>
+                    <span asp-validation-for="Pochild.Itemid" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="Pochild.Qty" class="form-label sm:w-20"></label>
+                    <input asp-for="Pochild.Qty" class="form-control" />
+                    <span asp-validation-for="Pochild.Qty" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="Pochild.Price" class="form-label sm:w-20"></label>
+                    <input asp-for="Pochild.Price" class="form-control" />
+                    <span asp-validation-for="Pochild.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="sm:ml-20 sm:pl-5 mt-5">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
