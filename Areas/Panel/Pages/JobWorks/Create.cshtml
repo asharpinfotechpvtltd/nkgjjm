@@ -15,6 +15,10 @@
         <div id="horizontal-form" class="p-5">
             <div class="preview">
                 <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">Workorder Id</label>
+                    <input type="text" asp-for="JobWork.WorkorderId" class="form-control" required />
+                </div>
+                <div class="form-inline mt-5">
                     <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
                     <select id="ddldistname" type="text" asp-for="JobWork.District" asp-items="@Model.District" class="form-control">
                         <option>Select District Name</option>
@@ -45,34 +49,49 @@
                     <span asp-validation-for="JobWork.ContractorId" class="text-danger"></span>
                 </div>
                 <div class="form-inline mt-5">
-                    <label class="form-label sm:w-20">JobWork Description</label>
-                    <input asp-for="JobWork.JobWorkDesc" class="form-control" />
-                    <span asp-validation-for="JobWork.JobWorkDesc" class="text-danger"></span>
-                </div>
-                <div class="form-inline mt-5">
                     <label class="form-label sm:w-20">JobWork Category</label>
                     <select asp-for="JobWork.JobWorkCategory" class="form-control" asp-items="@Model.JobWorkCategory">
                         <option>Select Job Work Category</option>
                     </select>
                     <span asp-validation-for="JobWork.JobWorkCategory" class="text-danger"></span>
                 </div>
-                <div class="form-inline mt-5">
-                    <label class="form-label sm:w-20">JobWork Unit</label>
-                    <input type="text" asp-for="JobWork.Unit" class="form-control" />
-                        
-                    <span asp-validation-for="JobWork.Unit" class="text-danger"></span>
-                </div>
-                <div class="form-inline mt-5">
-                    <label class="form-label sm:w-20">JobWork Rate</label>
-                    <input type="text" asp-for="JobWork.Rate" class="form-control" />
-                    <span asp-validation-for="JobWork.Rate" class="text-danger"></span>
+                <div class="grid grid-cols-12 gap-6 mt-3">
+                    <!-- BEGIN: Data List -->
+                    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                        <table class="table table-report" id="orders">
+
+                            <tr>
+                                <th class="text-center whitespace-nowrap">
+                                    Particulars
+                                </th>
+                                <th class="text-center whitespace-nowrap">
+                                    Unit
+                                </th>
+                                <th class="text-center whitespace-nowrap">
+                                    Rate
+                                </th>
+
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                            <tr>
+
+                                <td><input class="form-control product_price" type='text' data-type="product_price" id='product_price_1' name='product_price[]' for="1" /></td> <!-- purchase_cost -->
+                                <td><input class="form-control quantity" type='text' id='quantity_1' name='quantity[]' for="1" /></td>
+                                <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' /></td>
+                                <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
+                            </tr>
+
+                        </table>
+                    </div>
                 </div>
 
                 <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Create" id="Save" class="btn btn-primary" />
                 </div>
             </div>
         </div>
+        <input type="hidden" name="jobworkdesc" />
     </form>
 </div>
 
@@ -84,6 +103,7 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script src="~/CustomJs/Block.js"></script>
+
     <script>
         $("#ddlblock").change(function() {
             $("#ddlGramPanchyaat").empty();
@@ -95,7 +115,7 @@
                 dataType: "json",
                 async: true,
                 success: function(response) {
-                    console.log(response);
+
                     $("#ddlGramPanchyaat").prepend("<option value='' selected='selected'>Select Gram Panchaayat</option>");
                     $.each(response, function(i, item) {
                         var html = '';
@@ -139,6 +159,32 @@
                     console.log(response.responseText);
                 }
             });
+        });
+        var rowCount = 1;
+        $('#add').click(function() {
+            rowCount++;
+            $('#orders').append('<tr id="row' + rowCount + '"><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="text" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+
+        });
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr('id');
+            $('#row' + button_id + '').remove();
+        });
+        $("#Save").click(function() {
+            var jobworkdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+
+                var Particular = $(this).closest('tr').find("td:eq(0) input").val();
+                var Unit = $(this).closest('tr').find("td:eq(1) input").val();
+                var rate = $(this).closest('tr').find("td:eq(2) input").val();
+                var Delivery = {};
+                Delivery.Particular = Particular;
+                Delivery.Unit = Unit;
+                Delivery.rate = rate;
+                jobworkdesc.push(Delivery);
+
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
         });
 
 

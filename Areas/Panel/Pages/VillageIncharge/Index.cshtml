@@ -36,13 +36,10 @@
                 <tr>
 
                     <th class="text-center whitespace-nowrap">S.No.</th>
-                    <th class="text-center whitespace-nowrap">District</th>
-                    <th class="text-center whitespace-nowrap">Block</th>
-                    <th class="text-center whitespace-nowrap">Grampanchayat</th>
-                    <th class="text-center whitespace-nowrap">Village</th>
-                    <th class="text-center whitespace-nowrap">Village Code</th>
-                    <th class="text-center whitespace-nowrap">Name</th>                   
                     
+                    <th class="text-center whitespace-nowrap">Name</th>                   
+                    <th class="text-center whitespace-nowrap">Contact No</th>                   
+                    <th class="text-center whitespace-nowrap">Email</th>   
                     <th class="text-center whitespace-nowrap">WareHouse Name</th>
                     <th class="text-center whitespace-nowrap">WareHouse Incharge </th>
                     <th class="text-center whitespace-nowrap">Action</th>
@@ -57,30 +54,20 @@
                         <td class="text-center">
                             @i
                         </td>
-                        <td class="text-center">
-                            @item.District
-
-                        </td>
-                        <td class="text-center">
-                            @item.Block
-
-                        </td>
-                        <td class="text-center">
-                            @item.GramPanchayat
-
-                        </td>
-                        <td class="text-center">
-                            @item.Village
-
-                        </td>
-                        <td class="text-center">
-                            @item.VillageCode
-
-                        </td>
+                        
                         <td class="text-center">
                             @item.Name
 
                         </td>
+                         <td class="text-center">
+                            @item.ContactNo
+
+                        </td>
+                        <td class="text-center">
+                            @item.Email
+
+                        </td>
+                         
                        
                         
                          <td class="text-center">
@@ -94,6 +81,7 @@
 
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
+                                <a class="flex items-center mr-3" asp-page="AssignVillageToVI" asp-route-id="@item.Id"> <i data-lucide="check" class="w-4 h-4 mr-1"></i> Assign Village </a>
                                 <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                 <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                             </div>

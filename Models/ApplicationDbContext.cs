@@ -42,6 +42,7 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPMaterialIssuance>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPItemList>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPTotalCount>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPAssignedVillageToVI>().HasNoKey().ToView(null);
 
             
 
@@ -68,6 +69,10 @@ namespace Nkgjjm.Models
         public virtual DbSet<MaterialIssuance> TblMaterialIssuance { get; set; }
         public virtual DbSet<Pochild> TblPoChild { get; set; }
         public virtual DbSet<PoMaster> TblPoMaster { get; set; }
+        public virtual DbSet<JobDescription> TblJobDescription { get; set; }
+        public virtual DbSet<User> TblUser { get; set; }
+        public virtual DbSet<VillageWithVillageIncharge> TblVillageWithVillageIncharge { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
 
 
@@ -85,6 +90,9 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPMaterialIssuance> SPMaterialIssuance { get; set; }
         public virtual DbSet<SPItemList> SPItemList { get; set; }
         public virtual DbSet<SPTotalCount> SPTotalCount { get; set; }
+        public virtual DbSet<SPAssignedVillageToVI> SPAssignedVillageToVI { get; set; }
+        
+
         
         #endregion
 

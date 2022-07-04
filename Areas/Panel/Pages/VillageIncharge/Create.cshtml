@@ -14,30 +14,7 @@
     <form method="post">
         <div id="horizontal-form" class="p-5">
             <div class="preview">
-                <div class="form-inline">
-                    <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
-                    <select id="ddldistname" type="text" asp-for="VillagesIncharge.District" asp-items="Model.Districts" class="form-control">
-                        <option>Select District Name</option>
-                    </select>
-                </div>
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Block Name</label>
-                    <select id="ddlblock" asp-for="VillagesIncharge.Block" class="form-control">
-                        <option>Select Block</option>
-                    </select>
-                </div>
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Gram Panchaayat</label>
-                    <select id="ddlGramPanchyaat" asp-for="VillagesIncharge.Grampanchaayat" class="form-control">
-                        <option>Select GramPanchayat</option>
-                    </select>
-                </div>
-                <div class="form-inline mt-5">
-                    <label for="horizontal-form-2" class="form-label sm:w-20">Village Name</label>
-                    <select id="ddlvillage" asp-for="VillagesIncharge.VillageCode" class="form-control">
-                         <option>Select Village</option>
-                    </select>
-                </div>
+              
                 <div class="form-inline mt-5">
                     <label for="horizontal-form-2" class="form-label sm:w-20">Warehouse Name</label>
                     <select id="ddlwarehouseName" asp-for="VillagesIncharge.WarehouseId" asp-items="Model.Warehouse" class="form-control">

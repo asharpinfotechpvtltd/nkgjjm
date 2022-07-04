@@ -9,6 +9,8 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Classes;
 using Nkgjjm.Models;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace Nkgjjm.Areas.Panel.Pages.JobWorks
 {
@@ -39,7 +41,7 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            
+
 
             var param = new SqlParameter[] {
                         new SqlParameter() {
@@ -87,7 +89,7 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
                             Size=100,
                             Direction = System.Data.ParameterDirection.Input,
                              Scale = 100,
-                            Value = JobWork.JobWorkDesc
+                            Value = "JobWork.JobWorkDesc"
                         },
                         new SqlParameter() {
                             ParameterName = "@JobWorkCategory",
@@ -111,7 +113,7 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
                             Size=100,
                             Direction = System.Data.ParameterDirection.Input,
                              Scale = 100,
-                            Value = JobWork.Unit
+                            Value = "JobWork.Unit"
                         },
                           new SqlParameter() {
                             ParameterName = "@Rate",
@@ -119,15 +121,44 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
                             Size=100,
                             Direction = System.Data.ParameterDirection.Input,
                              Scale = 100,
-                            Value = JobWork.Rate
+                            Value = 100
+                        },
+                          new SqlParameter() {
+                            ParameterName = "@OutJobid",
+                            SqlDbType =  System.Data.SqlDbType.NVarChar,
+                            Size=100,
+                            Direction = System.Data.ParameterDirection.Input,
+                            Scale=100,
+                            Value=JobWork.WorkorderId
+
                         }
             };
 
 
             _context.Database.ExecuteSqlRaw("SPJobWork @District,@Block ,@GramPanchaayat,@VillageCode,@ContractorId,@JobWorkDesc," +
-                "@JobWorkCategory,@Date,@Unit,@Rate", param);
+                "@JobWorkCategory,@Date,@Unit,@Rate,@OutJobid", param);
+            string JobWorkid = Convert.ToString(param[10].Value);
 
+            string jobworkJSON = Request.Form["jobworkdesc"];
+            DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
 
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(dt.Rows[i][2].ToString()))
+                {
+                    string Particular = dt.Rows[i][0].ToString();
+                    string Unit = Convert.ToString(dt.Rows[i][1]);
+                    double Rate =Convert.ToDouble(dt.Rows[i][2].ToString());
+                    JobDescription desc = new JobDescription();
+                    desc.Unit = Unit;
+                    desc.Particular = Particular;
+                    desc.Rate = Rate;
+                    desc.JobWorkid = JobWork.WorkorderId;
+                    await _context.TblJobDescription.AddAsync(desc);
+                    await _context.SaveChangesAsync();
+
+                }
+            }
             return RedirectToPage("./Index");
         }
     }
