@@ -47,7 +47,13 @@
                         @Html.DisplayNameFor(model => model.Contractors[0].AddedDate)
                     </th>
                     <th class="text-center whitespace-nowrap">
-                        @Html.DisplayNameFor(model => model.Contractors[0].Status)
+                        @Html.DisplayNameFor(model => model.Contractors[0].Address)
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.Contractors[0].Gst)
+                    </th>
+                     <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.Contractors[0].Email)
                     </th>
                     <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
@@ -69,7 +75,13 @@
                             @Html.DisplayFor(modelItem => item.AddedDate)
                         </td>
                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Status)
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                         <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Gst)
+                        </td>
+                         <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Email)
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">

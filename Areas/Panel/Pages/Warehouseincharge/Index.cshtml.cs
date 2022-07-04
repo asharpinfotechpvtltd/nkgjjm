@@ -19,12 +19,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         }
 
         public IList<WarehouseIncharges> WarehouseIncharges { get;set; } = default!;
+        public int TotalWarehouseIncharge { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblWarehouseIncharge != null)
             {
                 WarehouseIncharges = await _context.TblWarehouseIncharge.ToListAsync();
+                TotalWarehouseIncharge = await _context.TblWarehouseIncharge.CountAsync();
             }
         }
     }

@@ -21,11 +21,14 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
 
         public IList<SPJobWorkList> JobWork { get; set; } = default!;
 
+        [BindProperty]
+        public int TotalJobWork { get; set; }
         public async Task OnGetAsync()
         {
             if (_context.TblJobWork != null)
             {
                 JobWork = await _context.SPJobWorkList.FromSqlRaw("SPJobWorkList").ToListAsync();
+                TotalJobWork = await _context.TblJobWork.CountAsync();
             }
         }
     }

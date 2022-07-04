@@ -31,12 +31,20 @@
                 </div>
 
                 <div class="form-inline mt-5">
-                    <label asp-for="Contractors.Status" class="form-label sm:w-20"></label>
-                    <select asp-for="Contractors.Status" class="form-control">
-                        <option>Active</option>
-                        <option>Pending</option>
-                    </select>
-                    <span asp-validation-for="Contractors.Status" class="text-danger"></span>
+                    <label asp-for="Contractors.Address" class="form-label sm:w-20"></label>
+                    <input type="text" asp-for="Contractors.Address" class="form-control"/>
+                    <span asp-validation-for="Contractors.Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-inline mt-5">
+                    <label asp-for="Contractors.Gst" class="form-label sm:w-20"></label>
+                    <input type="text" asp-for="Contractors.Gst" class="form-control"/>
+                    
+                </div>
+                 <div class="form-inline mt-5">
+                    <label asp-for="Contractors.Email" class="form-label sm:w-20"></label>
+                    <input type="text" asp-for="Contractors.Email" class="form-control"/>
+                    
                 </div>
                 <div class="sm:ml-20 sm:pl-5 mt-5">
                     <input type="submit" value="Create" class="btn btn-primary" />

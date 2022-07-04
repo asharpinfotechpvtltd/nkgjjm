@@ -13,7 +13,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
     public class CreateModel : PageModel
     {
         private readonly Nkgjjm.Models.ApplicationDbContext _context;
-        public List<SelectListItem> WarehouseList { get; set; }
+
         public CreateModel(Nkgjjm.Models.ApplicationDbContext context)
         {
             _context = context;
@@ -21,12 +21,13 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 
         public async Task<IActionResult> OnGet()
         {
-            WarehouseList = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
+            WareHouseNames = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
             return Page();
         }
 
         [BindProperty]
         public WarehouseIncharges WarehouseIncharges { get; set; } = default!;
+        public List<SelectListItem> WareHouseNames { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

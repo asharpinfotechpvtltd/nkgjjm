@@ -15,22 +15,31 @@
         <div id="horizontal-form" class="p-5">
             <div class="preview">
                 <div class="form-inline">
-                    <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
-                    <select id="ddldistname" type="text" asp-for="WarehouseIncharges.WareHouseid" asp-items="Model.WarehouseList" class="form-control">
-                        <option>Select Warehouse List</option>
+                    <label for="horizontal-form-1" class="form-label sm:w-20">WareHouse Name</label>
+                    <select asp-for="WarehouseIncharges.WareHouseid" asp-items="Model.WareHouseNames" class="form-control">
+                        <option>Select WareHouse Name</option>
                     </select>
+                    <span asp-validation-for="WarehouseIncharges.WareHouseid" class="text-danger"></span>
                 </div>
-                <div class="form-inline">
-                    <label for="horizontal-form-1" class="form-label sm:w-20">Incharge Name</label>
-                    <select id="ddldistname" type="text" asp-for="WarehouseIncharges.Employeeid" asp-items="Model.WarehouseList" class="form-control">
-                        <option>Select Warehouse List</option>
-                    </select>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Name</label>
+                    <input asp-for="WarehouseIncharges.PersonName" class="form-control" />
+                    <span asp-validation-for="WarehouseIncharges.PersonName" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="WarehouseIncharges.MobileNo" class="form-label sm:w-20"></label>
+                    <input asp-for="WarehouseIncharges.MobileNo" class="form-control" />
+                    <span asp-validation-for="WarehouseIncharges.MobileNo" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="WarehouseIncharges.Emailid" class="form-label sm:w-20"></label>
+                    <input asp-for="WarehouseIncharges.Emailid" class="form-control" />
+                    <span asp-validation-for="WarehouseIncharges.Emailid" class="text-danger"></span>
                 </div>
                 <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <button class="btn btn-primary" type="submit">Add Village Incharge</button>
+                    <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </div>
-
         </div>
     </form>
 </div>

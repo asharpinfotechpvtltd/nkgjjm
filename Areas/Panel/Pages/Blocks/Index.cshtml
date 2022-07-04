@@ -36,12 +36,9 @@
         <table class="table table-report">
             <thead>
                 <tr>
-
-
-                    <th class="text-center whitespace-nowrap">ID</th>
+                    <th class="text-center whitespace-nowrap">S.No.</th>
                     <th class="text-center whitespace-nowrap">Block</th>
                     <th class="text-center whitespace-nowrap">District</th>
-
                     <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
@@ -113,10 +110,10 @@
 
         $("#mdlDelete").on('click', function(e) {
             var id = $("#dataid").val();
-            
+
             $.ajax({
                 type: "DELETE",
-                url: "/api/DistBlocks?id="+id,               
+                url: "/api/DistBlocks?id=" + id,
                 dataType: "text",
                 async: true,
                 success: function(response) {

@@ -15,14 +15,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="WarehouseIncharges.id" />
             <div class="form-group">
-                <label asp-for="WarehouseIncharges.Employeeid" class="control-label"></label>
-                <input asp-for="WarehouseIncharges.Employeeid" class="form-control" />
-                <span asp-validation-for="WarehouseIncharges.Employeeid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="WarehouseIncharges.WareHouseid" class="control-label"></label>
                 <input asp-for="WarehouseIncharges.WareHouseid" class="form-control" />
                 <span asp-validation-for="WarehouseIncharges.WareHouseid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WarehouseIncharges.PersonName" class="control-label"></label>
+                <input asp-for="WarehouseIncharges.PersonName" class="form-control" />
+                <span asp-validation-for="WarehouseIncharges.PersonName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WarehouseIncharges.MobileNo" class="control-label"></label>
+                <input asp-for="WarehouseIncharges.MobileNo" class="form-control" />
+                <span asp-validation-for="WarehouseIncharges.MobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WarehouseIncharges.Emailid" class="control-label"></label>
+                <input asp-for="WarehouseIncharges.Emailid" class="form-control" />
+                <span asp-validation-for="WarehouseIncharges.Emailid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -8,7 +8,7 @@
     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Application</a></li>
-            <li class="breadcrumb-item active" aria-current="page">District List</li>
+            <li class="breadcrumb-item active" aria-current="page">Create BOM</li>
         </ol>
     </nav>
     <!-- END: Account Menu -->
@@ -16,69 +16,80 @@
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
     Genearate BOM
 </h2>
-<div class="grid grid-cols-12 gap-6 mt-1">
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-            <div class="w-56 relative text-slate-500">
-                <form method="post">
-                    <div id="horizontal-form" class="p-5">
-                        <div class="preview">
-
-                            <div class="form-inline mt-5">
-                                <input type="text" class="form-control w-56 box pr-10" name="districtname" placeholder="Search...">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </form>
+<form method="post">
+    <div id="horizontal-form" class="p-5">
+        <div class="preview">
+            <div class="form-inline">
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong> JobWork ID</strong></label>
+                <input type="text" value="@Model.JobWorkid" readonly style="background-color:wheat;" />
             </div>
         </div>
     </div>
-    <!-- BEGIN: Data List -->
-    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <table class="table table-report" id="orders">
+    <div class="grid grid-cols-12 gap-6 mt-0">
+        <!-- BEGIN: Data List -->
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+            <table class="table table-report" id="orders">
 
-            <tr>
-                <th class="text-center whitespace-nowrap">
-                    Item Name
-                </th>
-                <th class="text-center whitespace-nowrap">
-                    Qty
-                </th>
-                <th class="text-center whitespace-nowrap">
-                    Tolerence
-                </th>
-                <th class="text-center whitespace-nowrap">
-                    Final Qty
-                </th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control"></select></td>
-                <td><input class="form-control product_qty" type="text" id="product_qty_" name="product_qty[]" /></td>
-                <td><input class="form-control" type="hidden" id="product_id_" name="product_id[]" /><input class="form-control tolerance" type="text" id="tolerence_" name="tolerence[]" /> </td>
-                <td><input class="form-control Finalqty" type="text" name="Finalqty[]" /> </td>
-                <td><button type="button" name="remove" class="btn btn-danger btn_remove cicle">-</button></td>
-            </tr>
-        </table>
+                <tr>
+                    <th class="text-center whitespace-nowrap">
+                        Item Name
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Qty
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Tolerence (%)
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Final Qty
+                    </th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                <tr>
+                    <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control product_itemname" id="product_itemname"></select></td>
+                    <td><input class="form-control product_price" type='text' data-type="product_price" id='product_price_1' name='product_price[]' for="1" /></td> <!-- purchase_cost -->
+                    <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
+                    <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' readonly /></td>
+                    <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
+                </tr>
+
+            </table>
+        </div>
     </div>
-    <input type="button" value="Add" id="add" class="btn btn-primary" />
-    <!-- END: Data List -->
-</div>
+    <h2 class="intro-y text-lg font-medium mt-5" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+        Term and Conditions
+    </h2>
+    <div id="horizontal-form" class="p-5">
+        <div class="preview">
+
+            <input type="text" id="terms" class="form-control" />
+
+
+        </div>
+    </div>
+    <div class="sm:pl-5 mt-1 mb-5">
+        <input type="button" value="Submit" id="add" class="btn btn-primary" />
+        <!-- END: Data List -->
+    </div>
+</form>
 <!-- BEGIN: Delete Confirmation Modal -->
 @section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
 
     <script>
         var rowCount = 1;
         $('#add').click(function() {
-            var tags = @Html.Raw(Json.Serialize(Model.ItemList));
-            for (var i = 0; i < tags.length; i++) {
-                var data = '<option value='+tags[i].itemId+'>' + tags[i].itemName + '</option>';
-                $("#product_itemname").append(data);
-                console.log(tags[i]);
-            }
             rowCount++;
-            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_qty" type="text" id="product_qty_' + rowCount + '" name="product_qty[]" /></td><td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" /><input class="form-control tolerance" type="text" class="tolerence" id="tolerence_' + rowCount + '" name="tolerence[]" /> </td><td><input class="form-control Finalqty" type="text" id="Finalqty_' + rowCount + '" name="Finalqty[]"   /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+            //$('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_price" type="text" id="product_price_' + rowCount + '" name="product_qty[]" /></td><td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" /><input class="form-control quantity" type="text" class="quantity" id="quantity_' + rowCount + '" name="tolerence[]" /> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="Finalqty[]"   /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" readonly/> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+            
+            var tags = @Html.Raw(Json.Serialize(Model.ItemList));
+            var items = '';
+            $.each(tags, function(i, ingredient) {
+                items += '<option value=' + tags[i].itemId + '>' + tags[i].itemName + '</option>';
+            });
+            $("#orders tr:last").find('.product_itemname').html(items);
         });
 
         $(document).on('click', '.btn_remove', function() {
@@ -87,8 +98,31 @@
         });
 
 
+        function getTotalCost(ind) {
+            var qty = $('#quantity_' + ind).val();
+            var price = $('#product_price_' + ind).val();
+            var tolerance = (qty * price) / 100;            
+            var qunty = parseFloat(price);           
+            var finaltolerance = parseFloat(tolerance);
+            var tot = qunty + finaltolerance;
+            $('#total_cost_' + ind).val(tot);
+        }
+        // Add a generic event listener for any change on quantity or price classed inputs
+        $("#orders").on('input', 'input.quantity,input.product_price', function() {
+            getTotalCost($(this).attr("for"));
+        });
 
 
 
+    </script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#terms'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 }

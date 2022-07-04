@@ -59,14 +59,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29udHJhY3RvclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Contractor/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29udHJhY3RvclxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Contractor/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29udHJhY3RvclxEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Contractor/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29udHJhY3RvclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

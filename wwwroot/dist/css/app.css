@@ -4965,7 +4965,7 @@ select {
 .text-slate-500 {
     --tw-text-opacity: 1;   
     color: Black;
-    font-weight: bolder;
+    
 }
 
 .text-success {
@@ -13504,6 +13504,7 @@ html {
 .side-nav > ul > li:nth-child(1) > a:not(.side-menu--active) {
     opacity: 0;
     transform: translateX(50px);
+    background-color: #fff;
     -webkit-animation: 0.4s intro-menu-animation ease-in-out 0.33333s;
     animation: 0.4s intro-menu-animation ease-in-out 0.33333s;
     -webkit-animation-fill-mode: forwards;
@@ -19843,3 +19844,31 @@ html {
         color: rgb(var(--color-success) / var(--tw-text-opacity));
     }
 }
+
+
+.zoom-innn {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    cursor: pointer;
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    /* background-color: #fff; */
+}
+
+    .zoom-innn:hover {
+        --tw-scale-x: 1.05;
+        --tw-scale-y: 1.05;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+        --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+
+
+
+a.side-menu.zoom-innn:hover {
+    background-color: #fff;
+}
+
