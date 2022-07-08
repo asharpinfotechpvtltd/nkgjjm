@@ -4,24 +4,31 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/District/Index">District</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit District</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Edit District
+</h2>
 <div class="intro-y box mt-5">
-    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-        <h2 class="font-medium text-base mr-auto">
-            Edit District
-        </h2>
-    </div>
+
     <form method="post">
         <div id="horizontal-form" class="p-5">
             <input type="hidden" asp-for="Districts.id" />
             <div class="preview">
                 <div class="form-inline">
                     <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
-                    <input asp-for="Districts.District" class="form-control" />
+                    <input asp-for="Districts.District" id="txtdist" class="form-control" />
                     <span asp-validation-for="Districts.District" class="text-danger"></span>
                 </div>
                 <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <input type="submit" value="Update" id="Add" class="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -33,5 +40,6 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/CustomJs/CheckDistrict.js"></script>
     }
     }

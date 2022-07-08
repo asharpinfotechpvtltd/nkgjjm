@@ -1,0 +1,93 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.VillageIncharge.CreateIndentModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create Indent</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Create Indent
+</h2>
+
+<div id="horizontal-form" class="p-5">
+    <div class="preview">
+        <div class="form-inline">
+            <form method="post" asp-page-handler="Search">
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job id </strong></label>
+                <input type="text" name="searchtext" id="searchtext" value="@Model.searching" style="background-color:wheat;" />
+            </form>
+        </div>
+    </div>
+</div>
+@if (Model.SPMaterialIssuance != null && Model.SPMaterialIssuance.Count > 0)
+{
+    <form method="post" asp-page-handler="CreateIndent">
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Id
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Qty
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Picked Qty
+                        </th>
+                        <th>Allot</th>
+                    </tr>
+                    @foreach (var item in Model.SPMaterialIssuance)
+                    {
+                        <tr>
+                            <td class="text-center">@item.ItemId</td>
+                            <td class="text-center">@item.ItemName</td>
+                            <td class="text-center">@item.Finalqty</td>
+                            <td class="text-center">@item.Pickedqty</td>
+                            <td class="text-center"><input type="text" id="asssigned" class="form-control asssigned" /></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
+            <div class="sm:pl-5 mt-1 mb-5">
+                <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+                <!-- END: Data List -->
+            </div>
+        </div>
+        <input type="hidden" name="jobworkdesc">
+    </form>
+}
+<!-- BEGIN: Delete Confirmation Modal -->
+@section Scripts {
+    <script>
+      $("#add").click(function() {
+            var indentdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+                var ItemId = $(this).closest('tr').find("td").eq(0).html();
+                var searchtext = $("#searchtext").val();
+                var asssigned = $(this).closest('tr').find("td:eq(4) input").val();
+                var indent = {};
+                indent.Particular = ItemId;
+                indent.Unit = searchtext;
+                indent.asssigned = asssigned;
+                indentdesc.push(indent);
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
+        });
+        </script>
+
+}

@@ -36,6 +36,10 @@
         <table class="table table-report">
             <thead>
                 <tr>
+
+                    <th class="text-center whitespace-nowrap">
+                        S.No.
+                        </th>
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.PoMaster[0].Pono)
                     </th>
@@ -55,6 +59,7 @@
                 @foreach (var item in Model.PoMaster)
                 {
                     <tr>
+                        <td>@i</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Pono)
                         </td>

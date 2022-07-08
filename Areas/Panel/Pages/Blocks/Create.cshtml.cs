@@ -37,7 +37,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
         {
           
 
-            _context.TblBlock.Add(DistBlock);
+          await  _context.TblBlock.AddAsync(DistBlock);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
@@ -19,7 +20,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
             _context = context;
         }
 
-        public IList<DistBlock> DistBlock { get;set; } = default!;
+        
         public int BlockCount { get; set; }
 
         public List<SPBlockByDistrict> BlockList { get; set; }
@@ -28,14 +29,16 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
         {
             if (_context.TblBlock != null)
             {
-                BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict").ToListAsync();
+                var block = new SqlParameter("@Block", DBNull.Value);
+                BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block",block).ToListAsync();
                 BlockCount = await _context.TblBlock.CountAsync();
             }
         }
         public async Task<IActionResult> OnPost(string BlockName)
         {
-            DistBlock = await _context.TblBlock.Where(d => d.Block == BlockName).ToListAsync();
-            BlockCount = DistBlock.Count;
+            var block = new SqlParameter("@Block", BlockName);
+            BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
+            BlockCount = BlockList.Count;
             return Page();
         }
     }

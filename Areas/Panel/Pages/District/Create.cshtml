@@ -4,30 +4,37 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a asp-page="/District/Index">District</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add District</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Add District
+</h2>
 <div class="intro-y box mt-5">
-    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-        <h2 class="font-medium text-base mr-auto">
-            Add District
-        </h2>
 
-    </div>
     <form method="post">
         <div id="horizontal-form" class="p-5">
             <div class="preview">
                 <div class="form-inline">
                     <label for="horizontal-form-1" class="form-label sm:w-20">Name</label>
-                    <input id="horizontal-form-1" type="text" asp-for="Districts.District" class="form-control" placeholder="District Name">
+                    <input id="txtdist" type="text" asp-for="Districts.District" class="form-control" placeholder="District Name">
                 </div>
 
 
                 <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <button class="btn btn-primary">Add District</button>
+                    <button class="btn btn-primary" id="Add">Add District</button>
                 </div>
             </div>
 
         </div>
     </form>
-    
+
 </div>
 
 
@@ -39,5 +46,6 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/CustomJs/CheckDistrict.js"></script>
     }
-    }
+}

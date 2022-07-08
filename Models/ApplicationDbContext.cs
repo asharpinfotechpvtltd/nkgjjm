@@ -43,6 +43,7 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPItemList>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPTotalCount>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPAssignedVillageToVI>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpGetIndent>().HasNoKey().ToView(null);
 
             
 
@@ -91,6 +92,7 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPItemList> SPItemList { get; set; }
         public virtual DbSet<SPTotalCount> SPTotalCount { get; set; }
         public virtual DbSet<SPAssignedVillageToVI> SPAssignedVillageToVI { get; set; }
+        public virtual DbSet<SpGetIndent> SpGetIndent { get; set; }
         
 
         

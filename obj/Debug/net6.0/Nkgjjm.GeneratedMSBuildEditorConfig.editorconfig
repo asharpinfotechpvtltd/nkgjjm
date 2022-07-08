@@ -207,6 +207,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcUE9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/SiteEngineer/ViewIndent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU2l0ZUVuZ2luZWVyXFZpZXdJbmRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Unit/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVW5pdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -253,6 +257,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/VillageIncharge/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVmlsbGFnZUluY2hhcmdlXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/VillageIncharge/CreateIndent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVmlsbGFnZUluY2hhcmdlXENyZWF0ZUluZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/VillageIncharge/Delete.cshtml]
@@ -309,6 +317,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Warehouseincharge/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcV2FyZWhvdXNlaW5jaGFyZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Warehouseincharge/ViewIndent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcV2FyZWhvdXNlaW5jaGFyZ2VcVmlld0luZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Warehouses/Create.cshtml]

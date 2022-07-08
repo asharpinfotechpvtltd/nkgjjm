@@ -9,6 +9,7 @@ namespace Nkgjjm.Models
         public string JobWorkId { get; set; }
         public double MaterialPickedqty { get; set; }
         public int ItemId { get; set; }
+        public string VillageIncharge { get; set; }
 
     }
 }
