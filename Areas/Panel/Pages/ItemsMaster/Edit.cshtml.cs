@@ -22,6 +22,9 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
         [BindProperty]
         public ItemMaster ItemMaster { get; set; } = default!;
 
+        [BindProperty]
+        public List<SelectListItem> UnitList { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.TblItemMaster == null)
@@ -30,6 +33,7 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
             }
 
             var itemmaster =  await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemId == id);
+            UnitList = await _context.TblUnits.Select(u => new SelectListItem { Text = u.UnitName, Value = u.UnitId.ToString() }).ToListAsync();
             if (itemmaster == null)
             {
                 return NotFound();

@@ -1,7 +1,7 @@
 ﻿$("#txtBlock").blur(function () {
     $.ajax({
         type: "GET",
-        url: "/api/DistBlocks",
+        url: "/api/Block",
         data: { Districtid: $("#ddldistname").val(), BlockName: $("#txtBlock").val() },
         contentType: "application/json",
         dataType: "text",

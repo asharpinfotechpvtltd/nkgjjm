@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
@@ -20,12 +21,24 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
         }
 
         public IList<SPWarehouseList> WarehouseList { get;set; } = default!;
+        public int WarehouseCount { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblWarehouse != null)
             {
-                WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList").ToListAsync();
+                var warehouse = new SqlParameter("@warehouse", DBNull.Value);
+                WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList @warehouse", warehouse).ToListAsync();
+                WarehouseCount = await _context.TblWarehouse.CountAsync();
+            }
+        }
+        public async Task OnPostAsync(string warehouse)
+        {
+            if (_context.TblWarehouse != null)
+            {
+                var warehousename = new SqlParameter("@warehouse", warehouse);
+                WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList @warehouse", warehousename).ToListAsync();
+                WarehouseCount = WarehouseList.Count;
             }
         }
     }

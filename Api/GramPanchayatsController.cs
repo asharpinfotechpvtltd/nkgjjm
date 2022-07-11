@@ -22,6 +22,20 @@ namespace Nkgjjm.Api
 
         public List<GramPanchayats> Grampanchayat { get; set; }
 
+        [HttpGet]
+        public async Task<string> GetGrampanchayat(int Districtid,int Blockid,string GramPanchayatName)
+        {
+            var Gp = await _context.TblGramPanchayat.SingleOrDefaultAsync(e => e.District == Districtid && e.Block==Blockid && e.GramPanchayat==GramPanchayatName);
+            if (Gp != null)
+            {
+                return "NA";
+            }
+            else
+            {
+                return "ok";
+            }
+        }
+
        
         public async Task<ActionResult<GramPanchayats>> GetGramPanchayats(int id)
         {

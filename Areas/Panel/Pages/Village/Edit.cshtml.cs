@@ -21,15 +21,21 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
 
         [BindProperty]
         public Villages Villages { get; set; } = default!;
+        public List<SelectListItem> District { get; set; }
+        public List<SelectListItem> Block { get; set; }
+        public List<SelectListItem> Grampanchayat { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Int64? id)
         {
             if (id == null || _context.TblVillageCode == null)
             {
                 return NotFound();
             }
 
-            var villages =  await _context.TblVillageCode.FirstOrDefaultAsync(m => m.Id == id);
+            var villages =  await _context.TblVillageCode.FirstOrDefaultAsync(m => m.VillageCode == id);
+            District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+            Block = await _context.TblBlock.Select(d => new SelectListItem { Text = d.Block, Value = d.Id.ToString() }).ToListAsync();
+            Grampanchayat = await _context.TblGramPanchayat.Select(d => new SelectListItem { Text = d.GramPanchayat, Value = d.Id.ToString() }).ToListAsync();
             if (villages == null)
             {
                 return NotFound();

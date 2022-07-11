@@ -24,20 +24,10 @@ namespace Nkgjjm.Api
         // GET: api/DistBlocks
         
         public List<DistBlock> BlockList { get; set; }
-        [HttpGet]
-        public async Task<string> GetBlockbyDistrict(int Districtid, string BlockName)
-        {
-            var Dist = await _context.TblBlock.SingleOrDefaultAsync(Did => Did.District == Districtid && Did.Block == BlockName);
-            if(Dist == null)
-            {
-                return "Ok";
-            }
-            else
-            {
-                return "NA";
-            }
-            
-        }
+
+        
+
+        
         public async Task<ActionResult<DistBlock>> GetDistBlock(int id)
         {          
             BlockList = await _context.TblBlock.Where(Did=>Did.District==id).ToListAsync();

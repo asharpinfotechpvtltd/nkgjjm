@@ -45,14 +45,16 @@
 
                     </th>
                     <th class="text-center whitespace-nowrap">
+                        Description
+
+                    </th>
+                    <th class="text-center whitespace-nowrap">
                         Unit
                     </th>
                     <th class="text-center whitespace-nowrap">
                         HSN CODE
                     </th>
-                    <th class="text-center whitespace-nowrap">
-                        Added Date
-                    </th>
+                   
                     <th class="text-center whitespace-nowrap">
                         Gst
                     </th>
@@ -78,15 +80,16 @@
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.ItemName)
                         </td>
+                        <td class="text-center text-wrap">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Unitname)
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.HsnCode)
                         </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.AddedDate)
-                        </td>
+                       
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Gst)
                         </td>

@@ -15,17 +15,19 @@
     <!-- END: Account Menu -->
 </div>
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
-    Block List
+    Grampanchayat List
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-1">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Grampanchayat</a>
-       
+
         <div class="hidden md:block mx-auto text-slate-500">Showing @Model.GpCount Grampanchayat(s)</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                <form method="post">
+                    <input type="text" name="Gp" class="form-control w-56 box pr-10" placeholder="Search...">
+                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                </form>
             </div>
         </div>
     </div>
@@ -34,10 +36,10 @@
         <table class="table table-report">
             <thead>
                 <tr>
-                   <th class="text-center whitespace-nowrap">S.No.</th>
-                     <th class="text-center whitespace-nowrap">District</th>
-                    <th class="text-center whitespace-nowrap">Block</th>                   
-                    <th class="text-center whitespace-nowrap">Gram Panchayat</th>                  
+                    <th class="text-center whitespace-nowrap">S.No.</th>
+                    <th class="text-center whitespace-nowrap">District</th>
+                    <th class="text-center whitespace-nowrap">Block</th>
+                    <th class="text-center whitespace-nowrap">Gram Panchayat</th>
                     <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
@@ -55,7 +57,7 @@
                         <td class="text-center">
                             @item.Block
                         </td>
-                        
+
                         <td class="text-center">
                             @item.GramPanchayat
                         </td>
@@ -74,7 +76,6 @@
     </div>
     <!-- END: Data List -->
     <!-- BEGIN: Pagination -->
-   
     <!-- END: Pagination -->
 </div>
 <!-- BEGIN: Delete Confirmation Modal -->
@@ -100,5 +101,3 @@
     </div>
 </div>
 <!-- END: Delete Confirmation Modal -->
-
-

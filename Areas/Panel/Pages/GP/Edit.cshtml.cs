@@ -22,6 +22,12 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         [BindProperty]
         public GramPanchayats GramPanchayats { get; set; } = default!;
 
+        [BindProperty]
+        public List<SelectListItem> BlockList { get; set; }
+
+        [BindProperty]
+        public List<SelectListItem> DistrictList { get; set; }
+        public int BlockId { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.TblGramPanchayat == null)
@@ -29,12 +35,15 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
                 return NotFound();
             }
 
+            DistrictList = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
             var grampanchayats =  await _context.TblGramPanchayat.FirstOrDefaultAsync(m => m.Id == id);
             if (grampanchayats == null)
             {
                 return NotFound();
             }
             GramPanchayats = grampanchayats;
+            BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
+            
             return Page();
         }
 

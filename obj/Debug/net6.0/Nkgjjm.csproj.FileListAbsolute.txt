@@ -274,3 +274,4 @@ D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\System.Web.WebPages.Deployment.d
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\System.Web.WebPages.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
+D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\libman.json
