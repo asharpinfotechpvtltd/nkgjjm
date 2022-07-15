@@ -22,9 +22,9 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
 
         public async Task OnGetAsync()
         {
-            if (_context.User != null)
+            if (_context.TblUser != null)
             {
-                User = await _context.User.ToListAsync();
+                User = await _context.TblUser.ToListAsync();
             }
         }
     }

@@ -109,13 +109,12 @@
             $("#ddlGramPanchyaat").empty();
             $.ajax({
                 type: "GET",
-                url: "/api/GramPanchayats",
+                url: "/api/GpByBlock",
                 data: { id: $("#ddlblock").val() },
                 contentType: "application/json",
                 dataType: "json",
                 async: true,
                 success: function(response) {
-
                     $("#ddlGramPanchyaat").prepend("<option value='' selected='selected'>Select Gram Panchaayat</option>");
                     $.each(response, function(i, item) {
                         var html = '';

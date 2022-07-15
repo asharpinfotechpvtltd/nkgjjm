@@ -21,6 +21,11 @@
         <div id="horizontal-form" class="p-5">
             <div class="preview">
                 <div class="form-inline">
+                    <label asp-for="ItemMaster.ItemCode" class="form-label sm:w-20"></label>
+                    <input asp-for="ItemMaster.ItemCode" class="form-control" />
+                    <span asp-validation-for="ItemMaster.ItemCode" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
                     <label asp-for="ItemMaster.ItemName" class="form-label sm:w-20"></label>
                     <input asp-for="ItemMaster.ItemName" class="form-control" />
                     <span asp-validation-for="ItemMaster.ItemName" class="text-danger"></span>
@@ -35,7 +40,7 @@
                 <div class="form-inline mt-5">
                     <label asp-for="ItemMaster.HsnCode" class="form-label sm:w-20"></label>
                     <input asp-for="ItemMaster.HsnCode" class="form-control" />
-                    <span asp-validation-for="ItemMaster.HsnCode" class="text-danger"></span>
+                    
                 </div>
                 
                 <div class="form-inline mt-5">

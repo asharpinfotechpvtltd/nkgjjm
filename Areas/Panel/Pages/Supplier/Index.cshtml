@@ -1,0 +1,84 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Supplier.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].ContactPersonName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].ContactNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].StateCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].GstNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].Panno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suppliers[0].AddedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Suppliers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPersonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GstNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Panno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

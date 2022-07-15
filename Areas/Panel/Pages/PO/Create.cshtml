@@ -6,45 +6,179 @@
 }
 
 
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Village/Index">PO</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create PO</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Create PO
+</h2>
 <div class="intro-y box mt-5">
-    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-        <h2 class="font-medium text-base mr-auto">
-            Add PO
-        </h2>
-    </div>
     <form method="post">
         <div id="horizontal-form" class="p-5">
             <div class="preview">
-                
-                <div class="form-inline mt-5">
-                    <label asp-for="Pochild.Itemid" class="form-label sm:w-20"></label>
-                    <select asp-for="Pochild.Itemid" asp-items="Model.Product" class="form-control">
-                        <option>Select Item</option>
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">Supplier Name</label>
+                    <select id="ddldistname" name="suppliername" asp-items="Model.Supplier" type="text" class="form-control">
+                        <option>Select Supplier</option>
                     </select>
-                    <span asp-validation-for="Pochild.Itemid" class="text-danger"></span>
                 </div>
+
                 <div class="form-inline mt-5">
-                    <label asp-for="Pochild.Qty" class="form-label sm:w-20"></label>
-                    <input asp-for="Pochild.Qty" class="form-control" />
-                    <span asp-validation-for="Pochild.Qty" class="text-danger"></span>
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Purchase Order No</label>
+                    <input type="text" id="purchaseorderno" name="PoNumber" class="form-control" />
                 </div>
-                <div class="form-inline mt-5">
-                    <label asp-for="Pochild.Price" class="form-label sm:w-20"></label>
-                    <input asp-for="Pochild.Price" class="form-control" />
-                    <span asp-validation-for="Pochild.Price" class="text-danger"></span>
-                </div>
+
+
             </div>
-            <div class="sm:ml-20 sm:pl-5 mt-5">
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+
+        </div>
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report orders" id="orders">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Id
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Particular
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            HSN Code
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Qty
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Unit
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Rate
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Amount
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <select asp-items="@Model.ItemMasters" class="form-control product_itemcode" id="product_itemcode_1">
+                                <option>Select</option>
+                            </select>
+                        </td>
+                        <td id="itmname"></td>
+                        <td><input type="text" class="form-control product_Hsncode" id="product_HSNCode_1" name='product_hsncode[]' for="1" /></td>
+                        <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
+                        <td><input type="text" class="form-control product_unit" id="product_unit_1" name='product_unit[]' for="1" /></td>
+                        <td><input class="form-control product_price" type='text' data-type="product_price" id='product_price_1' name='product_price[]' for="1" /></td>
+                        <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' readonly /></td>
+                        <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
+                    </tr>
+                </table>
             </div>
         </div>
+
+        <div class="sm:pl-5 mt-1 mb-5">
+            <input type="submit" value="Submit" id="Createpo" class="btn btn-primary" />
+            <!-- END: Data List -->
+        </div>
+        <input type="hidden" name="jobworkdesc" />
     </form>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+
+
+    <script>
+        var rowCount = 1;
+        $('#add').click(function() {
+            rowCount++;
+
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemcode" id="product_itemcode" name="product_itemcode[]"><option>Select</option></select></td><td><input type="text" class="form-control product_itemname" id="product_itemname" name="product_itemname[]" /></td><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control product_unit" id="product_unit_1" name="product_unit[]" for="1"/></td><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_1" name="product_price[]" for="1" /></td> <td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" readonly/> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+
+            var tags = @Html.Raw(Json.Serialize(Model.ItemList));
+            var items = '';
+            $.each(tags, function(i, ingredient) {
+                items += '<option value=' + tags[i].itemCode + '>' + tags[i].itemCode + '</option>';
+
+            });
+            $("#orders tr:last").find('.product_itemcode').html(items);
+        });
+
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr('id');
+            $('#row' + button_id + '').remove();
+        });
+
+
+        function getTotalCost(ind) {
+            var qty = $('#quantity_' + ind).val();
+            var price = $('#product_price_' + ind).val();
+            var Totalprice = (qty * price);
+            $('#total_cost_' + ind).val(Totalprice);
+        }
+        // Add a generic event listener for any change on quantity or price classed inputs
+        $("#orders").on('input', 'input.quantity,input.product_price', function() {
+            getTotalCost($(this).attr("for"));
+        });
+
+
+
+        $("#Createpo").click(function(e) {
+            var jobworkdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+                var Productid = $(this).closest('tr').find("td:eq(0) select").val();
+                var Qty = $(this).closest('tr').find("td:eq(3) input").val();
+                var Price = $(this).closest('tr').find("td:eq(5) input").val();
+                var Delivery = {};
+                Delivery.Productid = Productid;
+                Delivery.Qty = Qty;    
+                Delivery.price = Price;
+                jobworkdesc.push(Delivery);
+
+
+
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
+        });
+
+        $(document).on('change', '#orders .product_itemcode', function() {
+            var Productid = $(this).closest('tr').find("td:eq(0) select").val();
+            $.ajax({
+                type: "GET",
+                url: "/api/ItemMasters",
+                data: { Productid: Productid },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                success: function(response) {
+                    $(this).closest('tr').find("#itmname").innerHTML = response["itemName"];
+                    console.log(response["itemName"]);
+                    console.log(response);
+
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+
+        
+
+
+
+    </script>
+
+
+}
+

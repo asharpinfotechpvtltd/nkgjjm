@@ -47,6 +47,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQmxvY2tzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Components/Menu/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29tcG9uZW50c1xNZW51XEFjY2Vzc0RlbmllZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Components/Menu/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29tcG9uZW50c1xNZW51XE1lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Contractor/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcQ29udHJhY3RvclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -101,6 +109,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/GP/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcR1BcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Ho/ViewIndent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcSG9cVmlld0luZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Index.cshtml]
@@ -187,6 +199,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU2l0ZUVuZ2luZWVyXFZpZXdJbmRlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Supplier/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU3VwcGxpZXJcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Supplier/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU3VwcGxpZXJcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Supplier/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU3VwcGxpZXJcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Supplier/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU3VwcGxpZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Supplier/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcU3VwcGxpZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Unit/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVW5pdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -255,6 +287,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVmlsbGFnZUluY2hhcmdlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/VillageIncharge/UploadGrn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVmlsbGFnZUluY2hhcmdlXFVwbG9hZEdybi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Village/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcVmlsbGFnZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -281,6 +317,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Warehouseincharge/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcV2FyZWhvdXNlaW5jaGFyZ2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Warehouseincharge/IndentMaster.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcUGFnZXNcV2FyZWhvdXNlaW5jaGFyZ2VcSW5kZW50TWFzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Websites/JJM/Website/Nkgjjm/Areas/Panel/Pages/Warehouseincharge/Index.cshtml]
@@ -315,16 +355,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGFuZWxcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Websites/JJM/Website/Nkgjjm/Pages/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXNzRGVuaWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Websites/JJM/Website/Nkgjjm/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Websites/JJM/Website/Nkgjjm/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Websites/JJM/Website/Nkgjjm/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Websites/JJM/Website/Nkgjjm/Pages/Shared/_ValidationScriptsPartial.cshtml]

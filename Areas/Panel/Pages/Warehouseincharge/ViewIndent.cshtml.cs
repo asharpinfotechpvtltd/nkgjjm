@@ -15,10 +15,11 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         {
             _context = context;
         }
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(string jobworkid)
         {
-            var search = new SqlParameter("@JobWorkId", DBNull.Value.ToString());
+            var search = new SqlParameter("@JobWorkId", jobworkid);
             SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId", search).ToListAsync();
+            searching = jobworkid;
             return Page();
         }
 

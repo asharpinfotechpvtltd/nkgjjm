@@ -665,6 +665,9 @@
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
+                @* @await Component.InvokeAsync("Menu")*@
+            </ul>
+            <ul>
                 <li>
                     <a href="/panel/index" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
@@ -775,12 +778,12 @@
                         </div>
                     </a>
                     <ul class="">
-                        @*<li>
-                        <a asp-page="/PO/index" class="side-menu zoom-innn">
-                        <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="menu__title"> Generate PO </div>
-                        </a>
-                        </li>*@
+                        <li>
+                            <a asp-page="/PO/index" class="side-menu zoom-innn">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Generate PO </div>
+                            </a>
+                        </li>
                         <li>
                             <a asp-page="/JobWorkCategory/index" class="side-menu zoom-innn">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
@@ -815,16 +818,29 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-page="/Designations/index" class="side-menu zoom-innn">
-                        <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                        <div class="side-menu__title"> User Panel </div>
+                    <a href="javascript:;" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title">
+                            Users
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                        </div>
                     </a>
-                </li>
-                <li>
-                    <a asp-page="/Designations/index" class="side-menu zoom-innn">
-                        <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                        <div class="side-menu__title">Add User</div>
-                    </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/Designations/index" class="side-menu zoom-innn">
+                                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
+                                <div class="side-menu__title"> User Type </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Users/index" class="side-menu zoom-innn">
+                                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
+                                <div class="side-menu__title">Add User</div>
+                            </a>
+                        </li>
+
+
+                    </ul>
                 </li>
                 <li>
                     <a asp-page="/Contractor/index" class="side-menu zoom-innn">
@@ -832,8 +848,12 @@
                         <div class="side-menu__title"> Contractor </div>
                     </a>
                 </li>
-
-            </ul>
+                 <li>
+                    <a asp-page="/Contractor/index" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="message-square"></i> </div>
+                        <div class="side-menu__title"> Signout </div>
+                    </a>
+                </li>
 
         </nav>
         <!-- END: Side Menu -->
@@ -850,8 +870,8 @@
     @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
     <script src="~/dist/js/app.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <!-- END: JS Assets-->
     @RenderSection("Scripts",required:false);
 </body>

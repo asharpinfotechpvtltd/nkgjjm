@@ -1,0 +1,74 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Supplier.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Suppliers</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Suppliers.CompanyName" class="control-label"></label>
+                <input asp-for="Suppliers.CompanyName" class="form-control" />
+                <span asp-validation-for="Suppliers.CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.ContactPersonName" class="control-label"></label>
+                <input asp-for="Suppliers.ContactPersonName" class="form-control" />
+                <span asp-validation-for="Suppliers.ContactPersonName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.ContactNo" class="control-label"></label>
+                <input asp-for="Suppliers.ContactNo" class="form-control" />
+                <span asp-validation-for="Suppliers.ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.Email" class="control-label"></label>
+                <input asp-for="Suppliers.Email" class="form-control" />
+                <span asp-validation-for="Suppliers.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.StateCode" class="control-label"></label>
+                <input asp-for="Suppliers.StateCode" class="form-control" />
+                <span asp-validation-for="Suppliers.StateCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.GstNo" class="control-label"></label>
+                <input asp-for="Suppliers.GstNo" class="form-control" />
+                <span asp-validation-for="Suppliers.GstNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.Address" class="control-label"></label>
+                <input asp-for="Suppliers.Address" class="form-control" />
+                <span asp-validation-for="Suppliers.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.Panno" class="control-label"></label>
+                <input asp-for="Suppliers.Panno" class="form-control" />
+                <span asp-validation-for="Suppliers.Panno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suppliers.AddedDate" class="control-label"></label>
+                <input asp-for="Suppliers.AddedDate" class="form-control" />
+                <span asp-validation-for="Suppliers.AddedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

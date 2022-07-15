@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "n/bPmcy4ILL243dMiKVDmk76DA87DCDMAHA6xzpFTfk=",
+  "Hash": "StKS8QGS2uDbgbTu5d8l67WWE5+xauwd1zRrLYNL2cM=",
   "Source": "Nkgjjm",
   "BasePath": "_content/Nkgjjm",
   "Mode": "Default",
@@ -457,6 +457,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\dist\\images\\.DS_Store"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\dist\\images\\Ad.png",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "dist/images/Ad.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\images\\Ad.png"
     },
     {
       "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\dist\\images\\bg-main.svg",

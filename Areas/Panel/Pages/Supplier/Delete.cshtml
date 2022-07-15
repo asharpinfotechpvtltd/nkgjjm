@@ -1,0 +1,76 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Supplier.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Suppliers</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.CompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.CompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.ContactPersonName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.ContactPersonName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.ContactNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.ContactNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.StateCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.StateCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.GstNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.GstNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.Panno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.Panno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.AddedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.AddedDate)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Suppliers.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

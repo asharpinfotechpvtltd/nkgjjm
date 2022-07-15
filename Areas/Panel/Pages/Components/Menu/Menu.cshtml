@@ -1,0 +1,37 @@
+﻿@model Nkgjjm.Models.ChildViewModel
+@{
+    int i = 0;
+
+}
+
+
+@foreach (var cat in Model.Menu)
+{
+    <li>
+        <a href="javascript:;" class="side-menu zoom-innn">
+            <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+            <div class="side-menu__title">
+                @cat.M_NAME
+                <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+            </div>
+        </a>
+        <ul class="">
+            @foreach (var item in Model.ChildMenu.Where(c => c.M_P_ID == cat.M_ID))
+            {
+
+                <li>
+                    <a asp-page="/District/index" class="side-menu zoom-innn">
+                        <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="menu__title"> @item.M_NAME </div>
+                    </a>
+                </li>
+
+            }
+        </ul>
+    </li>
+}
+
+
+
+
+

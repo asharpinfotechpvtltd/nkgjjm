@@ -9,10 +9,8 @@ namespace Nkgjjm.Models
         [Key]
         public int Id { get; set; }
         public string JobWorkId { get; set; }
-        public int RawMaterialId { get; set; }
-        public double Qty { get; set; }
-        public double Tolerance  { get; set; }
-        public double Finalqty { get; set; }
+        public Int64 RawMaterialId { get; set; }
+        public double Qty { get; set; }       
         public DateTime? AssignedDate { get; set; } 
     }
 }

@@ -1,0 +1,73 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Supplier.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Suppliers</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.CompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.CompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.ContactPersonName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.ContactPersonName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.ContactNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.ContactNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.StateCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.StateCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.GstNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.GstNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.Panno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.Panno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suppliers.AddedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suppliers.AddedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Suppliers?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

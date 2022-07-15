@@ -21,7 +21,7 @@
         <div class="preview">
             <div class="form-inline">
                 <label for="horizontal-form-1" class="form-label sm:w-20"><strong> JobWork ID</strong></label>
-                <input type="text" value="@Model.JobWorkid" readonly style="background-color:wheat;" />
+                <input type="text" value="@Model.JobWorkid" name="JobWorkId" readonly style="background-color:wheat;" />
             </div>
         </div>
     </div>
@@ -37,57 +37,42 @@
                     <th class="text-center whitespace-nowrap">
                         Qty
                     </th>
-                    <th class="text-center whitespace-nowrap">
-                        Tolerence (%)
-                    </th>
-                    <th class="text-center whitespace-nowrap">
-                        Final Qty
-                    </th>
+                   
+                    
                     <th>Action</th>
                 </tr>
                 <tr>
                 <tr>
-                    <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control product_itemname" id="product_itemname"></select></td>
-                    <td><input class="form-control product_price" type='text' data-type="product_price" id='product_price_1' name='product_price[]' for="1" /></td> <!-- purchase_cost -->
-                    <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
-                    <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' readonly /></td>
+                    <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control product_itemname" id="product_itemname"></select></td>                    
+                    <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>                    
                     <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
                 </tr>
 
             </table>
         </div>
     </div>
-    <h2 class="intro-y text-lg font-medium mt-5" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
-        Term and Conditions
-    </h2>
-    <div id="horizontal-form" class="p-5">
-        <div class="preview">
-
-            <input type="text" id="terms" class="form-control" />
-
-
-        </div>
-    </div>
+    
     <div class="sm:pl-5 mt-1 mb-5">
-        <input type="button" value="Submit" id="add" class="btn btn-primary" />
+        <input type="submit" value="Submit" id="Save" class="btn btn-primary" />
         <!-- END: Data List -->
     </div>
+    <input type="hidden" name="jobworkdesc" />
 </form>
 <!-- BEGIN: Delete Confirmation Modal -->
 @section Scripts {
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+    
 
     <script>
         var rowCount = 1;
         $('#add').click(function() {
             rowCount++;
             //$('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_price" type="text" id="product_price_' + rowCount + '" name="product_qty[]" /></td><td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" /><input class="form-control quantity" type="text" class="quantity" id="quantity_' + rowCount + '" name="tolerence[]" /> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="Finalqty[]"   /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
-            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" readonly/> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
             
             var tags = @Html.Raw(Json.Serialize(Model.ItemList));
             var items = '';
             $.each(tags, function(i, ingredient) {
-                items += '<option value=' + tags[i].itemId + '>' + tags[i].itemName + '</option>';
+                items += '<option value=' + tags[i].itemCode + '>' + tags[i].itemName + '</option>';
             });
             $("#orders tr:last").find('.product_itemname').html(items);
         });
@@ -112,17 +97,24 @@
             getTotalCost($(this).attr("for"));
         });
 
+        $("#Save").click(function() {
+            var jobworkdesc = new Array();
+            $('#orders tr').each(function(i, row) {
 
+                var Productid = $(this).closest('tr').find("td:eq(0) select").val();
+                var Qty = $(this).closest('tr').find("td:eq(1) input").val();
+                var Delivery = {};
+                Delivery.Productid = Productid;
+                Delivery.Qty = Qty;                
+                jobworkdesc.push(Delivery);
+                
 
-    </script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#terms'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
             });
-    </script>
-}
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
+        });
+
+
+        </script>
+        }
+  
+

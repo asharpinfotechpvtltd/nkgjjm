@@ -22,12 +22,12 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.User == null)
+            if (id == null || _context.TblUser == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.User.FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _context.TblUser.FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();

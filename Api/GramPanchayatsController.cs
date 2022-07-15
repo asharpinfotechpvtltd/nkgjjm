@@ -37,13 +37,7 @@ namespace Nkgjjm.Api
         }
 
        
-        public async Task<ActionResult<GramPanchayats>> GetGramPanchayats(int id)
-        {
-
-            Grampanchayat = await _context.TblGramPanchayat.Where(Bid=>Bid.Block==id).ToListAsync();
-            return Ok(Grampanchayat);
-        }
-
+        
         // PUT: api/GramPanchayats/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -44,10 +44,9 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPTotalCount>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPAssignedVillageToVI>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpGetIndent>().HasNoKey().ToView(null);
-
-            
-
-
+            modelBuilder.Entity<SpUserMenu>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpUserChildMenu>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPIndentMaster>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -72,8 +71,10 @@ namespace Nkgjjm.Models
         public virtual DbSet<PoMaster> TblPoMaster { get; set; }
         public virtual DbSet<JobDescription> TblJobDescription { get; set; }
         public virtual DbSet<User> TblUser { get; set; }
-        public virtual DbSet<VillageWithVillageIncharge> TblVillageWithVillageIncharge { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<VillageWithVillageIncharge> TblVillageWithVillageIncharge { get; set; }        
+        public virtual DbSet<Menu> TblMenuList { get; set; }
+        public virtual DbSet<UserMenu> TblUserMenu { get; set; }
+        public virtual DbSet<IndentMaster> TblIndentMaster { get; set; }
 
 
 
@@ -93,6 +94,9 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPTotalCount> SPTotalCount { get; set; }
         public virtual DbSet<SPAssignedVillageToVI> SPAssignedVillageToVI { get; set; }
         public virtual DbSet<SpGetIndent> SpGetIndent { get; set; }
+        public virtual DbSet<SpUserMenu> SpUserMenu { get; set; }
+        public virtual DbSet<SpUserChildMenu> SpUserChildMenu { get; set; }
+        public virtual DbSet<SPIndentMaster> SPIndentMaster { get; set; }
         
 
         
