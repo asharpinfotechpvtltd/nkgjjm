@@ -16,5 +16,6 @@ namespace Nkgjjm.Models
         public double SGst { get; set; }
         public double IGst { get; set; }
         public Int64 ItemCode { get; set; }
+        public double? OpeningStock { get; set; }
     }
 }

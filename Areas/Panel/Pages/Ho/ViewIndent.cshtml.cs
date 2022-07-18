@@ -15,19 +15,24 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         {
             _context = context;
         }
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(string jobworkid)
         {
-            var search = new SqlParameter("@JobWorkId", DBNull.Value.ToString());
+            var search = new SqlParameter("@JobWorkId", jobworkid);
             SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId", search).ToListAsync();
+            searching = jobworkid;
             return Page();
         }
 
         public List<SPMaterialIssuance> SPMaterialIssuance { get; set; }
-        public async Task<IActionResult> OnPostSearch(string searchtext)
+        public async Task<IActionResult> OnPostSearch(string searchtext, bool status)
         {
-            var search = new SqlParameter("@JobWorkId", searchtext);
-            SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId", search).ToListAsync();
-            searching = searchtext;
+            IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
+            if (warehousestatus != null)
+            {
+                warehousestatus.Hostatus = status;
+                await _context.SaveChangesAsync();
+
+            }
             return Page();
         }
     }

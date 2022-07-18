@@ -41,7 +41,7 @@
                             Item Name
                         </th>
                         <th class="text-center whitespace-nowrap">
-                            Qty
+                           Bom Qty
                         </th>
 
                         <th class="text-center whitespace-nowrap">
@@ -58,7 +58,7 @@
                         double Pickedqty = item.Pickedqty;
                         double BalanceQty = TotalQty - Pickedqty;
                         <tr>
-                            <td class="text-center">@item.ItemId</td>
+                            <td class="text-center">@item.RawMaterialId</td>
                             <td class="text-center">@item.ItemName</td>
                             <td class="text-center">@item.Qty</td>
                             <td class="text-center">@item.Pickedqty</td>
@@ -78,19 +78,19 @@
         <input type="hidden" name="jobworkdesc">
     </form>
 }
-<!-- BEGIN: Delete Confirmation Modal -->
+
 @section Scripts {
     <script>
       $("#add").click(function() {
             var indentdesc = new Array();
             $('#orders tr').each(function(i, row) {
                 var ItemId = $(this).closest('tr').find("td").eq(0).html();
-                var searchtext = $("#searchtext").val();
-                var asssigned = $(this).closest('tr').find("td:eq(4) input").val();
+                var Jobworkid = $("#searchtext").val();                
+                var Demand = $(this).closest('tr').find("td:eq(5) input").val();
                 var indent = {};
-                indent.Particular = ItemId;
-                indent.Unit = searchtext;
-                indent.asssigned = asssigned;
+                indent.ItemCode = ItemId;
+                indent.Jobworkid = Jobworkid;                
+                indent.Demand = Demand;
                 indentdesc.push(indent);
             });
             document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);

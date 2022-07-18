@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
+  <ItemGroup>
+    <Content Remove="Areas\Panel\Pages\JobWorks\ViewJobWork.cshtml" />
+    <Content Remove="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
@@ -19,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
     <None Include="wwwroot\dist\.DS_Store" />
     <None Include="wwwroot\dist\css\.DS_Store" />
     <None Include="wwwroot\dist\fonts\.DS_Store" />
@@ -42,6 +44,41 @@
     <None Include="wwwroot\dist\js\ckeditor-classic.js" />
     <None Include="wwwroot\dist\js\ckeditor-document.js" />
     <None Include="wwwroot\dist\js\ckeditor-inline.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Grn\" />
+    <Folder Include="wwwroot\InwardDocument\" />
+    <Folder Include="wwwroot\Challan\" />
+    <Folder Include="wwwroot\SiteImage\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Panel\Pages\JobWorks\ViewJobWork.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Panel\Pages\JobWorks\ViewJobWork.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Panel\Pages\Ho\ViewIndent.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Panel\Pages\Warehouseincharge\Details.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Panel\Pages\Warehouseincharge\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
   </ItemGroup>
 
 </Project>

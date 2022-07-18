@@ -1,0 +1,103 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Ho.GrnMasterModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Item Received</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Item Received
+</h2>
+<form method="post" asp-page-handler="Receiveditem" enctype="multipart/form-data">
+
+    @if (Model.Pomaster != null && Model.Pomaster.Count > 0)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Po No
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Date
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Buyer
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Supplier
+                        </th>
+                         <th class="text-center whitespace-nowrap">
+                            Action
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Pomaster)
+                    {
+
+                        <tr>
+                            <td class="text-center">@item.Pono</td>
+                            <td class="text-center">@item.date</td>
+                            <td class="text-center">@item.Buyer</td>
+                            <td class="text-center">@item.Supplier</td>
+                            <td class="text-center"><a asp-page="GrnDetail" asp-route-challanno="@item.Challan_Invoicenumber">@item.Challan_Invoicenumber</a></td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+       
+        
+        <div class="sm:pl-5 mt-1 mb-5">
+            <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+            <!-- END: Data List -->
+        </div>
+        <input type="hidden" name="jobworkdesc">
+
+    }
+</form>
+<!-- BEGIN: Delete Confirmation Modal -->
+@section Scripts {
+    <script>
+        $("#add").click(function() {
+            var indentdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+                var ItemId = $(this).closest('tr').find("td").eq(0).html();
+                var Receivedqty = $(this).closest('tr').find("td:eq(4) input").val();
+                var po = {};
+                po.Particular = ItemId;
+                po.Receivedqty = Receivedqty;
+                indentdesc.push(po);
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
+        });
+
+
+        $(document).ready(function() {
+
+            $(document).on('input', '#orders .Physicalqty', function() {
+                var currentRow = $(this).closest("tr");
+                var ActualQty = currentRow.find("td:eq(2) input").val();
+                var Rcvdqty = currentRow.find("td:eq(5) input").val();
+                var invoiceqty = currentRow.find("td:eq(4) input").val();
+                var Balanceqty = parseFloat(ActualQty - Rcvdqty);
+                var shorter = parseFloat(invoiceqty - Rcvdqty);
+                currentRow.find("td:eq(6)").html(shorter);
+                currentRow.find("td:eq(7)").html(Balanceqty);
+
+            });
+        });
+    </script>
+
+}

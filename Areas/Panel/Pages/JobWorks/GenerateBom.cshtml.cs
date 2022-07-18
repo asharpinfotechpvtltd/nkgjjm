@@ -20,7 +20,7 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
         }
         [BindProperty]
         public Bom Bom { get; set; }
-        public List<SPBomList> ListBom { get; set; }
+        public List<SPBomDetail> ListBom { get; set; }
         public List<SelectListItem> ItemMasters { get; set; }
         public List<ItemMaster> ItemList { get; set; }
         public string JobWorkid { get; set; }

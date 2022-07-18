@@ -42,13 +42,13 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
             GetUserDate date = new GetUserDate();
             PoMaster pomaster = new PoMaster()
             {
-                Buyer = 1,
+                Buyer = "Nkg Infrastructure",
                 date = date.ReturnDate(),
                 Pono = PoNumber,
                 Supplier = suppliername
 
             };
-            _context.TblPoMaster.AddAsync(pomaster);
+            await _context.TblPoMaster.AddAsync(pomaster);
             await _context.SaveChangesAsync();
 
             string Po = Request.Form["jobworkdesc"];

@@ -37,21 +37,29 @@
                     <th class="text-center whitespace-nowrap">
                         Qty
                     </th>
-                   
-                    
+                    <th class="text-center whitespace-nowrap">
+                        Deviation
+                    </th>
+                     <th class="text-center whitespace-nowrap">
+                        Final Qty
+                    </th>
+
                     <th>Action</th>
                 </tr>
                 <tr>
                 <tr>
-                    <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control product_itemname" id="product_itemname"></select></td>                    
-                    <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>                    
+                    <td><select asp-items="Model.ItemMasters" asp-for="Bom.RawMaterialId" class="form-control product_itemname" id="product_itemname"></select></td>
+                    <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
+                    <td><input class="form-control Deviation" type='number' id='Deviation_1' name='Deviation[]' for="1" style="Background-color:lemonchiffon" /></td>
+                    <td><input type="text" class="form-control finalqty" id='finalqty_1' name='finalqty[]' for="1" readonly style="Background-color:chartreuse" /></td>
                     <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
+
                 </tr>
 
             </table>
         </div>
     </div>
-    
+
     <div class="sm:pl-5 mt-1 mb-5">
         <input type="submit" value="Submit" id="Save" class="btn btn-primary" />
         <!-- END: Data List -->
@@ -60,15 +68,15 @@
 </form>
 <!-- BEGIN: Delete Confirmation Modal -->
 @section Scripts {
-    
+
 
     <script>
         var rowCount = 1;
         $('#add').click(function() {
             rowCount++;
             //$('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control product_price" type="text" id="product_price_' + rowCount + '" name="product_qty[]" /></td><td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" /><input class="form-control quantity" type="text" class="quantity" id="quantity_' + rowCount + '" name="tolerence[]" /> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="Finalqty[]"   /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
-            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
-            
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input class="form-control Deviation" type="number" id="Deviation_' + rowCount + '" name="Deviation[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control finalqty" id="finalqty_' + rowCount + '"  name="finalqty[]" for="' + rowCount + '" /><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+
             var tags = @Html.Raw(Json.Serialize(Model.ItemList));
             var items = '';
             $.each(tags, function(i, ingredient) {
@@ -86,8 +94,8 @@
         function getTotalCost(ind) {
             var qty = $('#quantity_' + ind).val();
             var price = $('#product_price_' + ind).val();
-            var tolerance = (qty * price) / 100;            
-            var qunty = parseFloat(price);           
+            var tolerance = (qty * price) / 100;
+            var qunty = parseFloat(price);
             var finaltolerance = parseFloat(tolerance);
             var tot = qunty + finaltolerance;
             $('#total_cost_' + ind).val(tot);
@@ -105,16 +113,29 @@
                 var Qty = $(this).closest('tr').find("td:eq(1) input").val();
                 var Delivery = {};
                 Delivery.Productid = Productid;
-                Delivery.Qty = Qty;                
+                Delivery.Qty = Qty;
                 jobworkdesc.push(Delivery);
-                
+
 
             });
             document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
         });
 
+        $(document).ready(function() {
+            // code to read selected table row cell data (values).
+            $(document).on('input', '#orders .Deviation', function() {
+                var currentRow = $(this).closest("tr");
+                var Qty = parseInt(currentRow.find("td:eq(1) input").val());
+                var Rate = parseInt(currentRow.find("td:eq(2) input").val());
+                var total = parseInt(Qty + Rate);
+                currentRow.find("td:eq(3) input").val(total);
+                
 
-        </script>
+            })
+        });
+
+
+    </script>
         }
-  
+
 

@@ -44,10 +44,7 @@
                         Item Name
 
                     </th>
-                    <th class="text-center whitespace-nowrap">
-                        Description
-
-                    </th>
+                  
                     <th class="text-center whitespace-nowrap">
                         Unit
                     </th>
@@ -67,6 +64,9 @@
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.ItemMaster[0].IGst)
                     </th>
+                    <th class="text-center whitespace-nowrap">
+                        @Html.DisplayNameFor(model => model.ItemMaster[0].OpeningStock)
+                    </th>
                     <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
@@ -80,9 +80,7 @@
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.ItemName)
                         </td>
-                        <td class="text-center text-wrap">
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
+                       
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Unitname)
                         </td>
@@ -101,10 +99,13 @@
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.IGst)
+                        </td> 
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.OpeningStock)
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a class="flex items-center mr-3" asp-page="Edit" asp-route-id="@item.ItemId"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                <a class="flex items-center mr-3" asp-page="Edit" asp-route-id="@item.ItemCode"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                 <a class="flex items-center text-danger" id="Delete" href="javascript:void(0)" data-id="@item.ItemId" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                             </div>
                         </td>

@@ -15,10 +15,10 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 
         }
         [BindProperty]
-        public List<SPIndentMaster> IndentMaster { get; set; }
+        public List<SPIndentMasterForWarehouseIncharge> IndentMaster { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            IndentMaster =await _context.SPIndentMaster.FromSqlRaw("SPIndentMaster").ToListAsync();
+            IndentMaster =await _context.SPIndentMasterForWarehouseIncharge.FromSqlRaw("SPIndentMasterForWarehouseIncharge").ToListAsync();
             return Page();
         }
     }

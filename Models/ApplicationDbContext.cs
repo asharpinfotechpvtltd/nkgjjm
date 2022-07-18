@@ -37,8 +37,7 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPVillageIncharge>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPWarehouseList>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPJobWorkList>().HasNoKey().ToView(null);
-            modelBuilder.Entity<SPItemInWareHouse>().HasNoKey().ToView(null);
-            modelBuilder.Entity<SPBomList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPItemInWareHouse>().HasNoKey().ToView(null);            
             modelBuilder.Entity<SPMaterialIssuance>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPItemList>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPTotalCount>().HasNoKey().ToView(null);
@@ -47,6 +46,12 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SpUserMenu>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpUserChildMenu>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPIndentMaster>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPPoList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpPoByPoId>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPMaterialReceivedCorrespondenceToPo>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPItemMaster>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPBomDetail>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPIndentMasterForWarehouseIncharge>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -75,6 +80,10 @@ namespace Nkgjjm.Models
         public virtual DbSet<Menu> TblMenuList { get; set; }
         public virtual DbSet<UserMenu> TblUserMenu { get; set; }
         public virtual DbSet<IndentMaster> TblIndentMaster { get; set; }
+        public virtual DbSet<InwardDocuments> TblInwardDocuments { get; set; }
+        public virtual DbSet<MaterialReceivedbyPo> TblMaterialReceivedbyPo { get; set; }
+        public virtual DbSet<Indent> TblIndent { get; set; }
+        public virtual DbSet<Challan> TblChallan { get; set; }
 
 
 
@@ -88,7 +97,7 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPWarehouseList> SPWarehouseList { get; set; }
         public virtual DbSet<SPJobWorkList> SPJobWorkList { get; set; }
         public virtual DbSet<SPItemInWareHouse> SPItemInWareHouse { get; set; }
-        public virtual DbSet<SPBomList> SPBomList { get; set; }
+        
         public virtual DbSet<SPMaterialIssuance> SPMaterialIssuance { get; set; }
         public virtual DbSet<SPItemList> SPItemList { get; set; }
         public virtual DbSet<SPTotalCount> SPTotalCount { get; set; }
@@ -97,6 +106,12 @@ namespace Nkgjjm.Models
         public virtual DbSet<SpUserMenu> SpUserMenu { get; set; }
         public virtual DbSet<SpUserChildMenu> SpUserChildMenu { get; set; }
         public virtual DbSet<SPIndentMaster> SPIndentMaster { get; set; }
+        public virtual DbSet<SPPoList> SPPoList { get; set; }
+        public virtual DbSet<SpPoByPoId> SpPoByPoId { get; set; }
+        public virtual DbSet<SPMaterialReceivedCorrespondenceToPo> SPMaterialReceivedCorrespondenceToPo { get; set; }
+        public virtual DbSet<SPItemMaster> SPItemMaster { get; set; }
+        public virtual DbSet<SPBomDetail> SPBomDetail { get; set; }
+        public virtual DbSet<SPIndentMasterForWarehouseIncharge> SPIndentMasterForWarehouseIncharge { get; set; }
         
 
         

@@ -45,6 +45,7 @@
                 <div class="form-inline mt-5">
                     <label class="form-label sm:w-20"> Contractor Name</label>
                     <select asp-for="JobWork.ContractorId" class="form-control" asp-items="@Model.Contractor">
+                        <option>Select Contractor</option>
                     </select>
                     <span asp-validation-for="JobWork.ContractorId" class="text-danger"></span>
                 </div>

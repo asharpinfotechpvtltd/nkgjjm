@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
+using Nkgjjm.StoredProcedure;
 
 namespace Nkgjjm.Areas.Panel.Pages.PO
 {
@@ -18,14 +19,14 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
             _context = context;
         }
 
-        public IList<PoMaster> PoMaster { get;set; } = default!;
+        public IList<SPPoList> PoMaster { get;set; } = default!;
         public int TotalPo { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblPoChild != null)
             {
-                PoMaster = await _context.TblPoMaster.ToListAsync();
+                PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
                 TotalPo = await _context.TblPoMaster.CountAsync();
             }
         }

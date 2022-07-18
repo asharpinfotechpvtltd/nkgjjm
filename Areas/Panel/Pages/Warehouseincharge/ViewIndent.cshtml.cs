@@ -24,11 +24,15 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         }
 
         public List<SPMaterialIssuance> SPMaterialIssuance { get; set; }
-        public async Task<IActionResult> OnPostSearch(string searchtext)
+        public async Task<IActionResult> OnPostSearch(string searchtext,bool status)
         {
-            var search = new SqlParameter("@JobWorkId", searchtext);
-            SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId", search).ToListAsync();
-            searching = searchtext;
+            IndentMaster warehousestatus =await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
+            if(warehousestatus!=null)
+            {
+                warehousestatus.WarehouseInchargeStatus = status;
+                await _context.SaveChangesAsync();
+               
+            }
             return Page();
         }
     }

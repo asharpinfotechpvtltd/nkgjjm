@@ -12,5 +12,6 @@ namespace Nkgjjm.Models
         public Int64 RawMaterialId { get; set; }
         public double Qty { get; set; }       
         public DateTime? AssignedDate { get; set; } 
+        public double Deviation { get; set; }
     }
 }

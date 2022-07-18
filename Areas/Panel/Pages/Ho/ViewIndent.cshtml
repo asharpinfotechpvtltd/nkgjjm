@@ -16,14 +16,42 @@
 </h2>
 
 <div id="horizontal-form" class="p-5">
-    <div class="preview">
-        <div class="form-inline">
-            <form method="post" asp-page-handler="Search">
+    <form method="post" asp-page-handler="Search">
+        <div class="preview">
+            <div class="form-inline">
+
                 <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job id </strong></label>
-                <input type="text" name="searchtext" id="searchtext" value="@Model.searching" style="background-color:wheat;" />
-            </form>
+                <input type="text" name="searchtext" class="form-control" readonly id="searchtext" value="@Model.searching" style="background-color:wheat;" />
+
+            </div>
         </div>
-    </div>
+        <div class="preview">
+            <div class="form-inline mt-5">
+
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Status </strong></label>
+                <select name="status" class="form-control" id="searchtext">
+                    <option>
+                        Select
+                    </option>
+                    <option value="true">
+                        Approve
+                    </option>
+                    <option value="false">
+                        Reject
+                    </option>
+                </select>
+
+            </div>
+        </div>
+        <div class="preview">
+            <div class="form-inline mt-5">
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                
+
+            </div>
+        </div>
+    </form>
 </div>
 @if (Model.SPMaterialIssuance != null && Model.SPMaterialIssuance.Count > 0)
 {
@@ -47,27 +75,35 @@
                         <th class="text-center whitespace-nowrap">
                             Picked Qty
                         </th>
-                        <th class="text-center whitespace-nowrap">Allot</th>
+                        <th class="text-center whitespace-nowrap">
+                            Balance
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Demand
+                        </th>
+
                     </tr>
                     @foreach (var item in Model.SPMaterialIssuance)
                     {
+                        double TotalQty = item.Qty;
+                        double Pickedqty = item.Pickedqty;
+                        double BalanceQty = TotalQty - Pickedqty;
                         <tr>
-                            <td class="text-center">@item.ItemId</td>
+                            <td class="text-center">@item.RawMaterialId</td>
                             <td class="text-center">@item.ItemName</td>
                             <td class="text-center">@item.Qty</td>
                             <td class="text-center">@item.Pickedqty</td>
-                            <td class="text-center"><input type="submit" id="status"value="Approve" class="form-control status" /></td>
+                            <td class="text-center">@BalanceQty</td>
+                            <td class="text-center">@item.Demand</td>
+
                         </tr>
                     }
                 </table>
             </div>
 
 
-            <div class="sm:pl-5 mt-1 mb-5">
-                <input type="submit" value="Submit" id="add" class="btn btn-primary" />
-                <!-- END: Data List -->
-            </div>
+
         </div>
-        
+
     </form>
 }

@@ -20,21 +20,15 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         }
 
         [BindProperty]
-        public Pochild Pochild { get; set; } = default!;
+        public List<Pochild> Pochild { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null || _context.TblPoChild == null)
-            {
-                return NotFound();
-            }
+            
 
-            var pochild =  await _context.TblPoChild.FirstOrDefaultAsync(m => m.Id == id);
-            if (pochild == null)
-            {
-                return NotFound();
-            }
-            Pochild = pochild;
+            var pochild =  await _context.TblPoChild.Where(m => m.Pono == id).ToListAsync();
+            
+           
             return Page();
         }
 
@@ -55,14 +49,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PochildExists(Pochild.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+               
             }
 
             return RedirectToPage("./Index");

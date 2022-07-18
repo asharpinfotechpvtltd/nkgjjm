@@ -1,3 +1,11 @@
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.csproj.AssemblyReference.cache
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.GeneratedMSBuildEditorConfig.editorconfig
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.AssemblyInfoInputs.cache
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.AssemblyInfo.cs
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.csproj.CoreCompileInputs.cache
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.MvcApplicationPartsAssemblyInfo.cache
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.RazorAssemblyInfo.cache
+D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.RazorAssemblyInfo.cs
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\appsettings.Development.json
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\appsettings.json
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\libman.json
@@ -254,14 +262,6 @@ D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.D
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.csproj.AssemblyReference.cache
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.GeneratedMSBuildEditorConfig.editorconfig
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.AssemblyInfoInputs.cache
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.AssemblyInfo.cs
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.csproj.CoreCompileInputs.cache
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.MvcApplicationPartsAssemblyInfo.cache
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.RazorAssemblyInfo.cache
-D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\Nkgjjm.RazorAssemblyInfo.cs
 D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\staticwebassets.build.json
 D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\staticwebassets.development.json
 D:\Websites\JJM\Website\Nkgjjm\obj\Debug\net6.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css

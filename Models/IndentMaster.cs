@@ -10,6 +10,7 @@ namespace Nkgjjm.Models
         public DateTime Date { get; set; }
         public bool WarehouseInchargeStatus { get; set; }
         public bool SiteInchargeStatus { get; set; }
+        public bool Hostatus { get; set; }
         public string VillageInchargeEmail { get; set; }
     }
 }

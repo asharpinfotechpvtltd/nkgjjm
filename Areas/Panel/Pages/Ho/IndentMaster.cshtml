@@ -1,0 +1,70 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Ho.IndentMasterModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Indent List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+     Indent List
+</h2>
+
+@*<div id="horizontal-form" class="p-5">
+    <div class="preview">
+        <div class="form-inline">
+            <form method="post" asp-page-handler="Search">
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job id </strong></label>
+                <input type="text" name="searchtext" id="searchtext" style="background-color:wheat;" />
+            </form>
+        </div>
+    </div>
+</div>*@
+@if (Model.IndentMaster != null && Model.IndentMaster.Count > 0)
+{
+    <form method="post" asp-page-handler="CreateIndent">
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Village Incharge Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Mobile
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Jobworkid
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Date
+                        </th>
+                        <th class="text-center whitespace-nowrap">Detail</th>
+                    </tr>
+                    @foreach (var item in Model.IndentMaster)
+                    {
+                        <tr>
+                            <td class="text-center">@item.Username</td>
+                            <td class="text-center">@item.Mobile</td>
+                            <td class="text-center">@item.Jobworkid</td>
+                            <td class="text-center">@item.Date.ToShortDateString()</td>                           
+                            <td><a asp-page="ViewIndent" asp-route-jobworkid="@item.Jobworkid"> Detail</a></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
+            
+        </div>
+
+    </form>
+}

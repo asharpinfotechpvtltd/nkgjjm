@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
+using Nkgjjm.StoredProcedure;
 
 namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 {
@@ -18,15 +19,15 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
             _context = context;
         }
 
-        public IList<WarehouseIncharges> WarehouseIncharges { get;set; } = default!;
-        public int TotalWarehouseIncharge { get; set; }
+        public IList<SPPoList> PoMaster { get;set; } = default!;
+        public int TotalPo { get; set; }
 
         public async Task OnGetAsync()
         {
-            if (_context.TblWarehouseIncharge != null)
+            if (_context.TblPoChild != null)
             {
-                WarehouseIncharges = await _context.TblWarehouseIncharge.ToListAsync();
-                TotalWarehouseIncharge = await _context.TblWarehouseIncharge.CountAsync();
+                PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
+                TotalPo = await _context.TblPoMaster.CountAsync();
             }
         }
     }

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
+using Nkgjjm.StoredProcedure;
 
 namespace Nkgjjm.Api
 {
@@ -22,19 +24,10 @@ namespace Nkgjjm.Api
 
     
         [HttpGet]
-        public async Task<ActionResult<ItemMaster>> GetItemMaster(Int64 Productid)
+        public async Task<List<SPItemMaster>> GetItemMaster(Int64 Productid)
         {
-          if (_context.TblItemMaster == null)
-          {
-              return NotFound();
-          }
-            var itemMaster = await _context.TblItemMaster.SingleOrDefaultAsync(Pid=>Pid.ItemCode==Productid);
-
-            if (itemMaster == null)
-            {
-                return NotFound();
-            }
-
+            var itemcode = new SqlParameter("@ItemCode", Productid);
+            var itemMaster =await  _context.SPItemMaster.FromSqlRaw("SPItemMaster @ItemCode",itemcode).ToListAsync();
             return itemMaster;
         }
 
