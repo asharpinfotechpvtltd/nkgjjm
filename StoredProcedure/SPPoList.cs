@@ -6,6 +6,6 @@
         public string Buyer { get; set; }
         public DateTime Date { get; set; }
         public string CompanyName { get; set; }
-        public string? Grn { get; set; }
+       
     }
 }

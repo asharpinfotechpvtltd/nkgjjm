@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Nkgjjm.Classes;
 using Nkgjjm.Models;
 
-namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
+namespace Nkgjjm.Areas.Panel.Pages.SiteEngineer
 {
     public class ClosureModel : PageModel
     {
@@ -25,16 +25,29 @@ namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
             po = PoNo;
             return Page();
         }
-        public async Task<IActionResult> OnPost(string PoNo)
+        public async Task<IActionResult> OnPost(string Jobworkid, List<IFormFile> siteimage)
         {
+            GetUserDate date = new GetUserDate();
             Upload u = new Upload(Environmet);
-            challanName = u.UploadImage(challan, "SiteImage");
-            Challan c = new Challan()
+            foreach (var formFile in siteimage)
             {
-                ChallanName = challanName,
-                Pono = PoNo
-            };
-            await Context.TblChallan.AddAsync(c);
+                challanName = u.UploadImage(formFile, "SiteImage");
+                Closure c = new Closure()
+                {
+                    Image = challanName,
+                    Jobworkid = Jobworkid,
+                    Date=date.ReturnDate(),
+                    Submittedby="Site Engineer"
+                    
+                };
+                await Context.TblClosure.AddAsync(c);
+                
+            }
+            var workid = Context.TblJobWork.SingleOrDefault(e => e.WorkorderId == Jobworkid);
+            if(workid != null)
+            {
+                workid.Iscompleted = true;
+            }
             await Context.SaveChangesAsync();
             return Page();
         }

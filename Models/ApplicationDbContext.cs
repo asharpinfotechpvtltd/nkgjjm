@@ -52,6 +52,8 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPItemMaster>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPBomDetail>().HasNoKey().ToView(null);
             modelBuilder.Entity<SPIndentMasterForWarehouseIncharge>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpGrnMaster>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpHoClosure>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -84,6 +86,8 @@ namespace Nkgjjm.Models
         public virtual DbSet<MaterialReceivedbyPo> TblMaterialReceivedbyPo { get; set; }
         public virtual DbSet<Indent> TblIndent { get; set; }
         public virtual DbSet<Challan> TblChallan { get; set; }
+        public virtual DbSet<PoVehicleDetail> TblPoVehicleDetail { get; set; }
+        public virtual DbSet<Closure> TblClosure { get; set; }
 
 
 
@@ -112,6 +116,8 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPItemMaster> SPItemMaster { get; set; }
         public virtual DbSet<SPBomDetail> SPBomDetail { get; set; }
         public virtual DbSet<SPIndentMasterForWarehouseIncharge> SPIndentMasterForWarehouseIncharge { get; set; }
+        public virtual DbSet<SpGrnMaster> SpGrnMaster { get; set; }
+        public virtual DbSet<SpHoClosure> SpHoClosure { get; set; }
         
 
         

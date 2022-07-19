@@ -32,7 +32,7 @@
                                     <i data-lucide="edit" class="report-box__icon text-primary"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">4</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalPo</div>
                                 <div class="text-base text-slate-300 mt-1">Active Po's</div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     <i data-lucide="credit-card" class="report-box__icon text-pending"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">3</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalJobOrders</div>
                                 <div class="text-base text-slate-500 mt-1">Job Orders</div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                     <i data-lucide="file-minus" class="report-box__icon text-warning"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">5</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.Totalindent</div>
                                 <div class="text-base text-slate-500 mt-1">Pending Indents</div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                     <i data-lucide="users" class="report-box__icon text-success"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">132</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalActiveUser</div>
                                 <div class="text-base text-slate-500 mt-1">Active Users</div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                     <i data-lucide="activity" class="report-box__icon text-success"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">152</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalActiveSite</div>
                                 <div class="text-base text-slate-500 mt-1">Active Sites</div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                     <i data-lucide="box-select" class="report-box__icon text-success"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">102</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalUnderProcess</div>
                                 <div class="text-base text-slate-500 mt-1">Under Process</div>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                                     <i data-lucide="thumbs-up" class="report-box__icon text-success"></i>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">15</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalCompletedSite</div>
                                 <div class="text-base text-slate-500 mt-1">Completed</div>
                             </div>
                         </div>
@@ -205,6 +205,7 @@
             <!-- BEGIN: General Report -->
             <div class="col-span-12 mt-0">
                 <div class="intro-y flex items-center h-10">
+                    <br />
                     <h2 class="text-lg font-medium truncate mr-5">Users</h2>
 
                 </div>
@@ -217,7 +218,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="users" data-lucide="users" class="lucide lucide-users report-box__icon text-success"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">152</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalUser</div>
                                 <div class="text-base text-slate-500 mt-1">Total Users</div>
                             </div>
                         </div>
@@ -231,7 +232,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="user-check" data-lucide="user-check" class="lucide lucide-users report-box__icon text-success"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">132</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalActiveUser</div>
                                 <div class="text-base text-slate-500 mt-1">Active Users</div>
                             </div>
                         </div>
@@ -242,7 +243,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="user-x" data-lucide="user-x" class="lucide lucide-users report-box__icon text-success"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
 
                                 </div>
-                                <div class="text-3xl font-medium leading-8 mt-6">20</div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalInactiveUser</div>
                                 <div class="text-base text-slate-500 mt-1">Non Active Users</div>
                             </div>
                         </div>

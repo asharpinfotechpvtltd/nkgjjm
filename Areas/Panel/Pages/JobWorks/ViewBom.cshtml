@@ -29,7 +29,7 @@
                                     Quantity
                                 </th>
 
-                                <th>Action</th>
+                                
                             </tr>
 
 
@@ -40,15 +40,7 @@
                                     <td><select class="form-control product_price" data-type="product_price" id='product_price_1' name='product_price[]' for="1" asp-items="@Model.ItemMaster" asp-for="@item.ItemCode"></select></td> <!-- purchase_cost -->
                                     <td><input class="form-control quantity" type='text' id='quantity_1' name='quantity[]' for="1" value="@item.UnitName" /></td>
                                     <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' value="@item.Qty" /></td>
-                                    @if(i==1)
-                                    {
-                                        <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
-                                        i++;
-                                    }
-                                    else
-                                    {
-                                        <td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td>
-                                    }
+                                    
 
                                 </tr>
                             }

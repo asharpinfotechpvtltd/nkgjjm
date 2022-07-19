@@ -6,7 +6,7 @@
         public string UnitName { get; set; }
         public Int64 ItemCode { get; set; }        
         public double Qty { get; set; }
-        public double Deviation { get; set; }
+        public double? Deviation { get; set; }
        
     }
 }

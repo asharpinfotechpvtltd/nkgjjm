@@ -1,24 +1,24 @@
 ﻿@page
-@model Nkgjjm.Areas.Panel.Pages.VillageIncharge.ClosureModel
+@model Nkgjjm.Areas.Panel.Pages.VillageIncharge.WorkProgressModel
 @{
 }
 <div class="intro-y box mt-5">
     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
         <h2 class="font-medium text-base mr-auto">
-            Add Site Image
+          Site Work Completion Report
         </h2>
     </div>
     <form method="post" enctype="multipart/form-data">
         <div id="horizontal-form" class="p-5">
             <div class="preview">
                 <div class="form-inline">
-                    <label for="horizontal-form-1" class="form-label sm:w-20">PoNo</label>
-                    <input type="text" name="Pono" class="form-control" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20">Job Work id</label>
+                    <input type="text" name="Jobworkid" required class="form-control" />
 
                 </div>
                 <div class="form-inline mt-5">
                     <label for="horizontal-form-2" class="form-label sm:w-20">Upload Images</label>
-                    <input type="file" name="siteimage" multiple class="form-control" />
+                    <input type="file" name="siteimage" required multiple class="form-control" />
 
                 </div>
 

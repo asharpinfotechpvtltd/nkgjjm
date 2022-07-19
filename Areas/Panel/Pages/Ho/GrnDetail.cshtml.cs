@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 
@@ -15,17 +16,17 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
 
         }
         [BindProperty]
-        public PoMaster Pomaster { get; set; }
-        [BindProperty]
-        public InwardDocuments document { get; set; }
+        public PoVehicleDetail PoVehicledetail { get; set; }
+     
 
         
-        public List<MaterialReceivedbyPo> materialReceivedbyPos { get; set; }
-        public async Task<IActionResult> OnGet(string challanno)
+        public List<SPMaterialReceivedCorrespondenceToPo> SPMaterialReceivedCorrespondenceToPo { get; set; }
+        public async Task<IActionResult> OnGet(string Pono, string challan)
         {
-            document = await _context.TblInwardDocuments.SingleOrDefaultAsync(e => e.challanno == challanno);
-            materialReceivedbyPos = await _context.TblMaterialReceivedbyPo.Where(e => e.Challan_Invoicenumber == challanno).ToListAsync();
-            Pomaster = await _context.TblPoMaster.SingleOrDefaultAsync(c => c.Challan_Invoicenumber == challanno);
+            var po = new SqlParameter("@PONo", Pono);
+            var chln = new SqlParameter("@Challannumber", challan);
+            SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PONo,@Challannumber",po,chln).ToListAsync();
+            PoVehicledetail = await _context.TblPoVehicleDetail.SingleOrDefaultAsync(c => c.ChallanNumber == challan);
 
 
             

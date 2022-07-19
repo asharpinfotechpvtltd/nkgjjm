@@ -12,7 +12,7 @@
     <!-- END: Account Menu -->
 </div>
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
-     Indent List
+    Indent List
 </h2>
 
 @*<div id="horizontal-form" class="p-5">
@@ -55,15 +55,15 @@
                             <td class="text-center">@item.Username</td>
                             <td class="text-center">@item.Mobile</td>
                             <td class="text-center">@item.Jobworkid</td>
-                            <td class="text-center">@item.Date.ToShortDateString()</td>                           
-                            <td><a asp-page="ViewIndent" asp-route-jobworkid="@item.Jobworkid"> Detail</a></td>
+                            <td class="text-center">@item.Date.ToShortDateString()</td>
+                            <td class="text-center"><a asp-page="ViewIndent" asp-route-jobworkid="@item.Jobworkid"> Detail</a></td>
                         </tr>
                     }
                 </table>
             </div>
 
 
-            
+
         </div>
 
     </form>

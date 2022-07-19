@@ -19,6 +19,7 @@ namespace Nkgjjm.Models
         public DateTime Date { get; set; }
         public double Rate { get; set; }
         public bool IsBomGenerated { get; set; }
+        public bool Iscompleted { get; set; }
 
 
     }

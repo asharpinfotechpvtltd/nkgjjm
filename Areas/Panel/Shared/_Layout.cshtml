@@ -735,8 +735,6 @@
                                 <div class="menu__title"> Item Master </div>
                             </a>
                         </li>
-
-
                     </ul>
                 </li>
                 <li>
@@ -754,12 +752,7 @@
                                 <div class="menu__title"> Warehouse </div>
                             </a>
                         </li>
-                        <li>
-                            <a asp-page="/Warehouseincharge/index" class="side-menu zoom-innn">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Warehouse Incharge </div>
-                            </a>
-                        </li>
+                        
                         <li>
                             <a asp-page="/AssignItemToWarehouse/index" class="side-menu zoom-innn">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
@@ -778,12 +771,7 @@
                         </div>
                     </a>
                     <ul class="">
-                        <li>
-                            <a asp-page="/PO/index" class="side-menu zoom-innn">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Generate PO </div>
-                            </a>
-                        </li>
+
                         <li>
                             <a asp-page="/JobWorkCategory/index" class="side-menu zoom-innn">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
@@ -799,7 +787,6 @@
 
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript:;" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
@@ -813,6 +800,12 @@
                             <a asp-page="/SiteEngineer/IndentMaster" class="side-menu zoom-innn">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
                                 <div class="menu__title"> View Indent </div>
+                            </a>
+                        </li>
+                         <li>
+                            <a asp-page="/SiteEngineer/Closure" class="side-menu zoom-innn">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Closure </div>
                             </a>
                         </li>
                     </ul>
@@ -851,6 +844,12 @@
                     </a>
                     <ul class="">
                         <li>
+                            <a asp-page="/PO/index" class="side-menu zoom-innn">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Generate PO </div>
+                            </a>
+                        </li>
+                        <li>
                             <a asp-page="/Ho/IndentMaster" class="side-menu zoom-innn">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
                                 <div class="menu__title"> View Indent </div>
@@ -859,7 +858,13 @@
                         <li>
                             <a asp-page="/HO/GrnMaster" class="side-menu zoom-innn">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Upload Grn </div>
+                                <div class="menu__title"> Master Grn</div>
+                            </a>
+                        </li> 
+                        <li>
+                            <a asp-page="/HO/ClosureReport" class="side-menu zoom-innn">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Closure</div>
                             </a>
                         </li>
 
@@ -870,6 +875,12 @@
                     <a asp-page="/VillageIncharge/index" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                         <div class="side-menu__title"> Village Incharge</div>
+                    </a>
+                </li>
+                <li>
+                    <a asp-page="/VillageIncharge/WorkProgress" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title"> Update Work Progress</div>
                     </a>
                 </li>
                 <li>

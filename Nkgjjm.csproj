@@ -5,7 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Areas\Panel\Pages\JobWorks\ViewJobWork.cshtml" />
-    <Content Remove="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
@@ -20,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
+    <None Include="Areas\Panel\Pages\SiteEngineer\Closure.cshtml" />
     <None Include="wwwroot\dist\.DS_Store" />
     <None Include="wwwroot\dist\css\.DS_Store" />
     <None Include="wwwroot\dist\fonts\.DS_Store" />
@@ -59,7 +58,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Panel\Pages\JobWorks\ViewJobWork.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,10 +73,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Panel\Pages\VillageIncharge\Closure.cshtml" />
   </ItemGroup>
 
 </Project>

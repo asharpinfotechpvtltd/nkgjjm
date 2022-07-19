@@ -16,7 +16,7 @@
 </h2>
 <form method="post" asp-page-handler="Receiveditem" enctype="multipart/form-data">
 
-    @if (Model.Pomaster != null && Model.Pomaster.Count > 0)
+    @if (Model.Grmmaster != null && Model.Grmmaster.Count > 0)
     {
 
         <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
@@ -32,24 +32,25 @@
                             Date
                         </th>
                         <th class="text-center whitespace-nowrap">
-                            Buyer
+                            Challan/Invoice Copy
                         </th>
                         <th class="text-center whitespace-nowrap">
                             Supplier
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                            View
                         </th>
-                         <th class="text-center whitespace-nowrap">
-                            Action
-                        </th>
+                        
                     </tr>
-                    @foreach (var item in Model.Pomaster)
+                    @foreach (var item in Model.Grmmaster)
                     {
 
                         <tr>
-                            <td class="text-center">@item.Pono</td>
-                            <td class="text-center">@item.date</td>
-                            <td class="text-center">@item.Buyer</td>
-                            <td class="text-center">@item.Supplier</td>
-                            <td class="text-center"><a asp-page="GrnDetail" asp-route-challanno="@item.Challan_Invoicenumber">@item.Challan_Invoicenumber</a></td>
+                            <td class="text-center">@item.PONO</td>
+                            <td class="text-center">@item.DATE</td>
+                            <td class="text-center">@item.ChallanNumber</td>
+                            <td class="text-center">@item.CompanyName</td>
+                            <td class="text-center"><a asp-page="GrnDetail" asp-route-Pono="@item.PONO" asp-route-challan="@item.ChallanNumber"  style="color:blue;">View</a></td>
 
                         </tr>
                     }
@@ -59,10 +60,7 @@
         </div>
        
         
-        <div class="sm:pl-5 mt-1 mb-5">
-            <input type="submit" value="Submit" id="add" class="btn btn-primary" />
-            <!-- END: Data List -->
-        </div>
+       
         <input type="hidden" name="jobworkdesc">
 
     }

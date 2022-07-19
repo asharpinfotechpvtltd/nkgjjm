@@ -8798,8 +8798,8 @@ select {
 
 .table td {
     border-bottom-width: 1px;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
     padding-top: 4px;
     padding-bottom: 4px;
 }

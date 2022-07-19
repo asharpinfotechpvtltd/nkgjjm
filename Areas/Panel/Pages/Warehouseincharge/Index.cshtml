@@ -19,7 +19,7 @@
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-1">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Purchase Order</a>
+        
 
         <div class="hidden md:block mx-auto text-slate-500">Total @Model.TotalPo Po(s)</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
@@ -78,12 +78,10 @@
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3" asp-page="Edit" asp-route-id="@item.Pono"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                 
-                                
-                                
-
                             </div>
                         </td>
                     </tr>
+                    i++;
                 }
             </tbody>
         </table>

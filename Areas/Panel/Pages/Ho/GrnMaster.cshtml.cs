@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
+using Nkgjjm.StoredProcedure;
 
 namespace Nkgjjm.Areas.Panel.Pages.Ho
 {
@@ -13,11 +14,11 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
             _context = context;
         }
 
-        public List<PoMaster> Pomaster { get; set; }
+        public List<SpGrnMaster> Grmmaster { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
-            Pomaster = await  _context.TblPoMaster.ToListAsync();
+            Grmmaster = await  _context.SpGrnMaster.FromSqlRaw("SpGrnMaster").ToListAsync();
             return Page();
         }
     }

@@ -22,7 +22,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         public string InwardDocument { get; set; }
 
         [BindProperty]
-        public PoMaster Pomaster { get; set; }
+        public PoVehicleDetail PoVehicleDetail { get; set; }
        
         public DetailsModel(ApplicationDbContext context, IWebHostEnvironment Env)
         {
@@ -36,7 +36,8 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         {
             Ponumber = Pono;
             var po = new SqlParameter("@PoId", Pono);
-            SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId", po).ToListAsync(); 
+            var challan = new SqlParameter("@Challannumber", DBNull.Value);
+            SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId,@Challannumber", po,challan).ToListAsync(); 
             return Page();
         }
         [BindProperty]
@@ -46,19 +47,10 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
             Upload u = new Upload(Environmet);
             GetUserDate date = new GetUserDate();
             InwardDocument = u.UploadImage(UploadDoc, "InwardDocument");
-            InwardDocuments documents = new InwardDocuments()
-            {
-                Filename = InwardDocument,
-                Pono = Ponumber,
-                Date = date.ReturnDate()
-            };
-            await _context.TblInwardDocuments.AddAsync(documents);            
-            await _context.SaveChangesAsync();
-
-            Pomaster.Buyer = "NKG";
-            Pomaster.Pono = Ponumber;
-            await _context.TblPoMaster.AddAsync(Pomaster);
-            await _context.SaveChangesAsync();
+            PoVehicleDetail.PoNo = Ponumber;
+            PoVehicleDetail.SupportedDocument = InwardDocument;
+            await _context.TblPoVehicleDetail.AddAsync(PoVehicleDetail);
+            
 
             string Receiveditem = Request.Form["jobworkdesc"];
             DataTable dt = JsonConvert.DeserializeObject<DataTable>(Receiveditem);
@@ -68,18 +60,20 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
                 {
                     Int64 Productid =Convert.ToInt64(dt.Rows[i][0].ToString());
                     string Qty = Convert.ToString(dt.Rows[i][1]);
+                    double Challanqty = Convert.ToDouble(dt.Rows[i][2]);
                     MaterialReceivedbyPo received = new MaterialReceivedbyPo()
                     {
                         ItemId=Productid,                        
                         RcvdQty = Convert.ToDouble(Qty),
                         PoNo=Ponumber,
-                        Date=date.ReturnDate()
+                        Challanqty=Challanqty,
+                        Challan_Invoicenumber= PoVehicleDetail.ChallanNumber
                     };
                     await _context.TblMaterialReceivedbyPo.AddAsync(received);
                     await _context.SaveChangesAsync();
                 }
             }
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }

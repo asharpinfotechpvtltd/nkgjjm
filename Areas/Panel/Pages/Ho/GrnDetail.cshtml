@@ -14,92 +14,115 @@
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
     Item Received
 </h2>
-<form method="post" asp-page-handler="Receiveditem" enctype="multipart/form-data">
-    <div id="horizontal-form" class="p-5">
-        <div class="preview">
-            <div class="form-inline">
+<div class="intro-y box mt-5 pb-5">
+    <form method="post" asp-page-handler="Receiveditem" enctype="multipart/form-data">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
 
-                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Po Id </strong></label>
-                <input type="text" name="Ponumber" class="form-control" asp-for="Pomaster.Pono" readonly id="searchtext" style="background-color:wheat;" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Po Id </strong></label>
+                    <input type="text" name="Ponumber" class="form-control" asp-for="@Model.PoVehicledetail.PoNo" readonly id="searchtext" />
 
-            </div>
-            <div class="form-inline mt-5">
+                </div>
+                <div class="form-inline mt-5">
 
-                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice number</strong></label>
-                <input type="text" asp-for="Pomaster.Challan_Invoicenumber" class="form-control" id="searchtext" style="background-color:wheat;" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice number</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.ChallanNumber" id="searchtext" />
 
-            </div>
-            <div class="form-inline mt-5">
+                </div>
+                <div class="form-inline mt-5">
 
-                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice Date</strong></label>
-                <input type="date" asp-for="Pomaster.Challan_InvoiceDate" class="form-control" id="searchtext" style="background-color:wheat;" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice Date</strong></label>
+                    <input type="date" asp-for="@Model.PoVehicledetail.Challan_InvoiceDate" readonly class="form-control" id="searchtext" />
 
-            </div>
-            <div class="form-inline mt-5">
+                </div>
+                <div class="form-inline mt-5">
 
-                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Vehicle Number</strong></label>
-                <input type="text" asp-for="Pomaster.VehicleNumber" class="form-control" id="searchtext" style="background-color:wheat;" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Vehicle Number</strong></label>
+                    <input type="text" asp-for="@Model.PoVehicledetail.VehicleNumber" readonly class="form-control" id="searchtext" />
 
-            </div>
-            <div class="form-inline mt-5">
+                </div>
+                <div class="form-inline mt-5">
 
-                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>LR/Bilty No</strong></label>
-                <input type="text" class="form-control" asp-for="Pomaster.LR_BiltyNo" id="searchtext" style="background-color:wheat;" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>LR/Bilty No</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.LR_BiltyNo" id="searchtext" />
 
-            </div>
-            <div class="form-inline mt-5">
+                </div>
+                <div class="form-inline mt-5">
 
-                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transporter Name</strong></label>
-                <input type="text" class="form-control" asp-for="Pomaster.TransporterName" id="searchtext" style="background-color:wheat;" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transporter Name</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.TransporterName" id="searchtext" />
 
+                </div>
+                <div class="form-inline mt-5">
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>LR/Bilty No</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.LR_BiltyNo" id="searchtext" />
+
+                </div>
+                <div class="form-inline mt-5">
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transporter Name</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.TransporterName" id="searchtext" />
+
+                </div>
             </div>
         </div>
-    </div>
-    @if (Model.Pomaster != null)
-    {
+        @if (Model.PoVehicledetail != null)
+        {
 
-        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
-            <!-- BEGIN: Data List -->
-            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                <table class="table table-report" id="orders">
-                    <tr>
-                        <th class="text-center whitespace-nowrap">
-                            Item Code
-                        </th>
-                       
-                        <th class="text-center whitespace-nowrap">
-                            Physical/Rcvd Qty
-                        </th>
-                        
-                    </tr>
-                    @foreach (var item in Model.materialReceivedbyPos)
-                    {                      
+            <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+                <!-- BEGIN: Data List -->
+                <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                    <table class="table table-report" id="orders">
                         <tr>
-                            <td class="text-center">@item.ItemId</td>
-                            
-                            <td class="text-center">@item.RcvdQty</td>
-                            
+                            <th class="text-center whitespace-nowrap">
+                                Item Code
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+                                Item Name
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Challan Qty
+                            </th>
+
+
+                            <th class="text-center whitespace-nowrap">
+                                Physical/Rcvd Qty
+                            </th>
+
                         </tr>
-                    }
-                </table>
+                        @foreach (var item in Model.SPMaterialReceivedCorrespondenceToPo)
+                        {
+                            <tr>
+                                <td class="text-center">@item.ItemCode</td>
+                                <td class="text-center">@item.ItemName</td>
+                                <td class="text-center">@item.Qty</td>
+                                <td class="text-center">@item.TotalReceived</td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+
             </div>
 
-        </div>
-        <div>
-            <div>
-                <a href="/Challan/@Model.document.Filename" target="_blank">View Document</a>
+            <div class="p-5">
+                <a href="/InwardDocument/@Model.PoVehicledetail.SupportedDocument" style="color:blue;" target="_blank">View Document</a>
             </div>
-        </div>
 
 
-        <div class="sm:pl-5 mt-1 mb-5">
-            <input type="submit" value="Submit" id="add" class="btn btn-primary" />
-            <!-- END: Data List -->
-        </div>
-        <input type="hidden" name="jobworkdesc">
 
-    }
-</form>
+            <div class="sm:pl-5 mt-1 mb-5">
+                <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+                <!-- END: Data List -->
+            </div>
+            <input type="hidden" name="jobworkdesc">
+
+        }
+    </form>
+</div>
 <!-- BEGIN: Delete Confirmation Modal -->
 @section Scripts {
     <script>

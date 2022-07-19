@@ -20,7 +20,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         IWebHostEnvironment Environmet;
         
         public string InwardDocument { get; set; }
-        public PoMaster pomaster { get; set; }
+        public PoVehicleDetail pomaster { get; set; }
        
         public DetailsModel(ApplicationDbContext context, IWebHostEnvironment Env)
         {
@@ -33,7 +33,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         public async Task<IActionResult> OnGetAsync(string Pono)
         {
             Ponumber = Pono;
-            pomaster = await _context.TblPoMaster.FirstOrDefaultAsync(e => e.Pono == Pono);
+            pomaster = await _context.TblPoVehicleDetail.FirstOrDefaultAsync(e => e.PoNo == Pono);
             var po = new SqlParameter("@PoId", Pono);
             SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId", po).ToListAsync(); 
             return Page();
@@ -66,8 +66,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
                     {
                         ItemId=Productid,                        
                         RcvdQty= Convert.ToDouble(Qty),
-                        PoNo=Ponumber,
-                        Date=date.ReturnDate(),
+                        PoNo=Ponumber,                       
                         Challan_Invoicenumber= Invoicenumber
 
                     };

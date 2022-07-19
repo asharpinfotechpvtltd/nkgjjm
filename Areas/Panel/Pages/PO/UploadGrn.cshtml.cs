@@ -28,14 +28,14 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         }
         public async Task<IActionResult> OnPost(string PoNo)
         {
-            Upload u = new Upload(Environmet);            
-            UploadgrnName = u.UploadImage(Uploadgrn, "Grn");
-            var grn = await Context.TblPoMaster.SingleOrDefaultAsync(e => e.Pono == PoNo);
-            if(grn != null)
-            {
-                grn.Grn = UploadgrnName;
-            }
-            await Context.SaveChangesAsync();
+            //Upload u = new Upload(Environmet);            
+            //UploadgrnName = u.UploadImage(Uploadgrn, "Grn");
+            //var grn = await Context.TblPoMaster.SingleOrDefaultAsync(e => e.Pono == PoNo);
+            //if(grn != null)
+            //{
+            //    grn.Grn = UploadgrnName;
+            //}
+            //await Context.SaveChangesAsync();
             return Page();
         }
     }
