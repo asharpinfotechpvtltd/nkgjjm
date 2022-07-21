@@ -13,5 +13,6 @@
         public string JobWorkDesc { get; set; }
         public DateTime Date { get; set; }
         public string WorkorderId { get; set; }
+        public bool Iscompleted { get; set; }
     }
 }

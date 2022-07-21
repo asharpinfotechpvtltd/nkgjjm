@@ -39,7 +39,7 @@
 
                     <th class="text-center whitespace-nowrap">
                         S.No.
-                        </th>
+                    </th>
                     <th class="text-center whitespace-nowrap">
                         PO. No.
                     </th>
@@ -52,38 +52,39 @@
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.PoMaster[0].CompanyName)
                     </th>
-                   
-                      <th class="text-center whitespace-nowrap">Action</th>
+
+                  @*  <th class="text-center whitespace-nowrap">Action</th>*@
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.PoMaster)
                 {
                     <tr>
-                        <td>@i</td>
+                        <td class="text-center">@i</td>
                         <td style="color:blue;" class="text-center">
                             @item.Pono
                         </td>
                         <td class="text-center">
                             @item.Date.ToShortDateString()
                         </td>
-                       <td class="text-center">
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Buyer)
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.CompanyName)
                         </td>
-                       
-                        <td class="table-report__action w-56">
+
+                        @*<td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a class="flex items-center mr-3" asp-page="Edit" asp-route-id="@item.Pono"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                
-                                
-                                
+                                <a class="flex items-center mr-3" asp-page="Edit" asp-route-PoNo="@item.Pono"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+
+
+
 
                             </div>
-                        </td>
+                        </td>*@
                     </tr>
+                    i++;
                 }
             </tbody>
         </table>

@@ -25,13 +25,17 @@ namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
             id = Id;
             Districts = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
             var Inchargeid = new SqlParameter("@id", Id);
+            HttpContext.Session.SetString("id", Convert.ToString(Id));
             AssigedVillage = await _context.SPAssignedVillageToVI.FromSqlRaw("SPAssignedVillageToVI @id", Inchargeid).ToListAsync();
             return Page();
         }
         public async Task<IActionResult> OnPost()
         {
-           await _context.TblVillageWithVillageIncharge.AddAsync(incharge);
+            await _context.TblVillageWithVillageIncharge.AddAsync(incharge);
             await _context.SaveChangesAsync();
+            int Id = Convert.ToInt32(HttpContext.Session.GetString("id"));
+            var Inchargeid = new SqlParameter("@id", Id);
+            AssigedVillage = await _context.SPAssignedVillageToVI.FromSqlRaw("SPAssignedVillageToVI @id", Inchargeid).ToListAsync();
             return Page();
         }
     }

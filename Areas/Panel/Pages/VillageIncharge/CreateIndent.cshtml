@@ -36,18 +36,18 @@
                     <tr>
                         <th class="text-center whitespace-nowrap">
                             Item Id
-                        </th> 
+                        </th>
                         <th class="text-center whitespace-nowrap">
                             Item Name
                         </th>
                         <th class="text-center whitespace-nowrap">
-                           Bom Qty
+                            Bom Qty
                         </th>
 
                         <th class="text-center whitespace-nowrap">
                             Picked Qty
                         </th>
-                          <th class="text-center whitespace-nowrap">
+                        <th class="text-center whitespace-nowrap">
                             Balance Qty
                         </th>
                         <th>Requirement</th>
@@ -63,7 +63,7 @@
                             <td class="text-center">@item.Qty</td>
                             <td class="text-center">@item.Pickedqty</td>
                             <td class="text-center" style="background-color:yellow;">@BalanceQty</td>
-                            <td class="text-center"><input type="text" id="asssigned" class="form-control asssigned" /></td>
+                            <td class="text-center"><input type="text" id="asssigned" class="form-control demand" /></td>
                         </tr>
                     }
                 </table>
@@ -81,20 +81,38 @@
 
 @section Scripts {
     <script>
-      $("#add").click(function() {
+        $("#add").click(function() {
             var indentdesc = new Array();
             $('#orders tr').each(function(i, row) {
                 var ItemId = $(this).closest('tr').find("td").eq(0).html();
-                var Jobworkid = $("#searchtext").val();                
+                var Jobworkid = $("#searchtext").val();
                 var Demand = $(this).closest('tr').find("td:eq(5) input").val();
                 var indent = {};
                 indent.ItemCode = ItemId;
-                indent.Jobworkid = Jobworkid;                
+                indent.Jobworkid = Jobworkid;
                 indent.Demand = Demand;
                 indentdesc.push(indent);
             });
             document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
         });
-        </script>
+
+
+        $(document).ready(function() {
+            // code to read selected table row cell data (values).
+            $(document).on('blur', '#orders .demand', function() {
+                var currentRow = $(this).closest("tr");
+                var BomQty = parseInt(currentRow.find("td").eq(2).html());
+                var Demand = parseInt(currentRow.find("td:eq(5) input").val());
+                if (BomQty < Demand) {
+                    alert("Invalid Qty");
+                    return;
+                }
+              
+
+
+            })
+        });
+
+    </script>
 
 }

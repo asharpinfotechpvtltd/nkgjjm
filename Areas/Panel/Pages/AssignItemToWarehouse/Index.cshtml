@@ -21,7 +21,7 @@
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add Item To Warehouse</a>
 
-        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 5 of 5 entries</div>
+        <div class="hidden md:block mx-auto text-slate-500">Showing @Model.TotalCount entries</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
@@ -45,10 +45,8 @@
                         @Html.DisplayNameFor(model => model.ItemToWarehouse[0].Qty)
                     </th>
 
-                    <th class="text-center whitespace-nowrap">
-                        @Html.DisplayNameFor(model => model.ItemToWarehouse[0].Date)
-                    </th>
-                    <th class="text-center whitespace-nowrap">ACTION</th>
+                   
+                    <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,9 +65,7 @@
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Qty)
                         </td>
-                        <td class="text-center">
-                            @item.Date.ToShortDateString()
-                        </td>
+                       
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3" href="javascript:;"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="check-square" data-lucide="check-square" class="lucide lucide-check-square w-4 h-4 mr-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg> Edit </a>

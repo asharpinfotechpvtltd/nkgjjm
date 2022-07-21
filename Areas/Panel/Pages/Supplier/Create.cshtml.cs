@@ -37,7 +37,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
 
             _context.TblSupplier.Add(Suppliers);
             await _context.SaveChangesAsync();
-
+            
             return RedirectToPage("./Index");
         }
     }

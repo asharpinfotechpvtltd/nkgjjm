@@ -41,6 +41,10 @@
                         S.No.
                     </th>
                     <th class="text-center whitespace-nowrap">
+                        Item Code
+
+                    </th>
+                    <th class="text-center whitespace-nowrap">
                         Item Name
 
                     </th>
@@ -76,6 +80,9 @@
                     <tr class="intro-x">
                         <td class="text-center">
                             @i
+                        </td>
+                        <td class="text-center">
+                            @item.ItemCode
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.ItemName)

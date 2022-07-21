@@ -4,71 +4,76 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>Suppliers</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Suppliers.CompanyName" class="control-label"></label>
-                <input asp-for="Suppliers.CompanyName" class="form-control" />
-                <span asp-validation-for="Suppliers.CompanyName" class="text-danger"></span>
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Supplier/Index">Supplier</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Supplier</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Add Supplier
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label class="form-label sm:w-20">Company Name</label>
+                    <input asp-for="Suppliers.CompanyName" class="form-control" required />
+                    <span asp-validation-for="Suppliers.CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label  class="form-label sm:w-20">Contact PersonName</label>
+                    <input asp-for="Suppliers.ContactPersonName" class="form-control" required />
+                    <span asp-validation-for="Suppliers.ContactPersonName" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label class="form-label sm:w-20">Contact No</label>
+                    <input asp-for="Suppliers.ContactNo" class="form-control" required/>
+                    <span asp-validation-for="Suppliers.ContactNo" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="Suppliers.Email" class="form-label sm:w-20"></label>
+                    <input asp-for="Suppliers.Email" class="form-control" required/>
+                    <span asp-validation-for="Suppliers.Email" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label class="form-label sm:w-20">State Code</label>
+                    <input asp-for="Suppliers.StateCode" class="form-control" required/>
+                    <span asp-validation-for="Suppliers.StateCode" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label class="form-label sm:w-20">Gst No.</label>
+                    <input asp-for="Suppliers.GstNo" maxlength="15" class="form-control" required/>
+                    <span asp-validation-for="Suppliers.GstNo" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="Suppliers.Address" class="form-label sm:w-20"></label>
+                    <input asp-for="Suppliers.Address" class="form-control" required />
+                    <span asp-validation-for="Suppliers.Address" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label  class="form-label sm:w-20">Pan No.</label>
+                    <input asp-for="Suppliers.Panno" maxlength="10" class="form-control" required/>
+                    <span asp-validation-for="Suppliers.Panno" class="text-danger"></span>
+                </div>
+              
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.ContactPersonName" class="control-label"></label>
-                <input asp-for="Suppliers.ContactPersonName" class="form-control" />
-                <span asp-validation-for="Suppliers.ContactPersonName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.ContactNo" class="control-label"></label>
-                <input asp-for="Suppliers.ContactNo" class="form-control" />
-                <span asp-validation-for="Suppliers.ContactNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.Email" class="control-label"></label>
-                <input asp-for="Suppliers.Email" class="form-control" />
-                <span asp-validation-for="Suppliers.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.StateCode" class="control-label"></label>
-                <input asp-for="Suppliers.StateCode" class="form-control" />
-                <span asp-validation-for="Suppliers.StateCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.GstNo" class="control-label"></label>
-                <input asp-for="Suppliers.GstNo" class="form-control" />
-                <span asp-validation-for="Suppliers.GstNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.Address" class="control-label"></label>
-                <input asp-for="Suppliers.Address" class="form-control" />
-                <span asp-validation-for="Suppliers.Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.Panno" class="control-label"></label>
-                <input asp-for="Suppliers.Panno" class="form-control" />
-                <span asp-validation-for="Suppliers.Panno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Suppliers.AddedDate" class="control-label"></label>
-                <input asp-for="Suppliers.AddedDate" class="form-control" />
-                <span asp-validation-for="Suppliers.AddedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

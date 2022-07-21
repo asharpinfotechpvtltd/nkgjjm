@@ -12,5 +12,6 @@ namespace Nkgjjm.Models
         public bool SiteInchargeStatus { get; set; }
         public bool Hostatus { get; set; }
         public string VillageInchargeEmail { get; set; }
+        public int WareHouseid { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignItemToWarehouse
     public class IndexModel : PageModel
     {
         private readonly Nkgjjm.Models.ApplicationDbContext _context;
-
+        public int TotalCount { get; set; }
         public IndexModel(Nkgjjm.Models.ApplicationDbContext context)
         {
             _context = context;
@@ -26,6 +26,8 @@ namespace Nkgjjm.Areas.Panel.Pages.AssignItemToWarehouse
             if (_context.TblItemToWarehouse != null)
             {
                 ItemToWarehouse = await _context.SPItemInWareHouse.FromSqlRaw("SPItemInWareHouse").ToListAsync();
+                TotalCount = await _context.TblItemToWarehouse.CountAsync();
+
             }
             
         }

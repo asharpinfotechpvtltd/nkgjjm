@@ -32,20 +32,26 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 
         public List<SPMaterialReceivedCorrespondenceToPo> SPMaterialReceivedCorrespondenceToPo { get; set; } = default!; 
         public string Ponumber { get; set; }
+        public int Warehouseid { get; set; }
         public async Task<IActionResult> OnGetAsync(string Pono)
         {
+            WarehouseIncharges WarehouseIncharge = await _context.TblWarehouseIncharge.SingleOrDefaultAsync(e => e.Emailid == "karan@gmail.com");
+            if (WarehouseIncharge != null)
+            {
+                 Warehouseid = WarehouseIncharge.WareHouseid;
+            }
             Ponumber = Pono;
             var po = new SqlParameter("@PoId", Pono);
             var challan = new SqlParameter("@Challannumber", DBNull.Value);
-            SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId,@Challannumber", po,challan).ToListAsync(); 
+            var Whid = new SqlParameter("@Warehouseid", Warehouseid);
+            SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId,@Challannumber,@Warehouseid", po,challan,Whid).ToListAsync(); 
             return Page();
         }
         [BindProperty]
         public IFormFile UploadDoc { get; set; }
-        public async Task<IActionResult> OnPostReceiveditem(string Ponumber)
+        public async Task<IActionResult> OnPostReceiveditem(string Ponumber,int warehousename)
         {
-            Upload u = new Upload(Environmet);
-            GetUserDate date = new GetUserDate();
+            Upload u = new Upload(Environmet);           
             InwardDocument = u.UploadImage(UploadDoc, "InwardDocument");
             PoVehicleDetail.PoNo = Ponumber;
             PoVehicleDetail.SupportedDocument = InwardDocument;
@@ -67,7 +73,8 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
                         RcvdQty = Convert.ToDouble(Qty),
                         PoNo=Ponumber,
                         Challanqty=Challanqty,
-                        Challan_Invoicenumber= PoVehicleDetail.ChallanNumber
+                        Challan_Invoicenumber= PoVehicleDetail.ChallanNumber,
+                        Warehouse=warehousename
                     };
                     await _context.TblMaterialReceivedbyPo.AddAsync(received);
                     await _context.SaveChangesAsync();

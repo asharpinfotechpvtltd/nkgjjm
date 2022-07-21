@@ -15,11 +15,15 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         {
             _context = context;
         }
-        public async Task<IActionResult> OnGet(string jobworkid)
+
+        public int IndentMasterid { get; set; }
+        public async Task<IActionResult> OnGet(string jobworkid,int IndentMasterId)
         {
             var search = new SqlParameter("@JobWorkId", jobworkid);
-            SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId", search).ToListAsync();
+            var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
+            SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId,@IndentMasterId", search,IndentMaster).ToListAsync();
             searching = jobworkid;
+            IndentMasterid = IndentMasterId;
             return Page();
         }
 

@@ -247,8 +247,6 @@ D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win-arm\native\Micros
 D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win-arm\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
-D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win-arm64\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
 D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
@@ -274,3 +272,4 @@ D:\Websites\JJM\Website\Nkgjjm\obj\Release\net6.0\refint\Nkgjjm.dll
 D:\Websites\JJM\Website\Nkgjjm\obj\Release\net6.0\Nkgjjm.pdb
 D:\Websites\JJM\Website\Nkgjjm\obj\Release\net6.0\Nkgjjm.genruntimeconfig.cache
 D:\Websites\JJM\Website\Nkgjjm\obj\Release\net6.0\ref\Nkgjjm.dll
+D:\Websites\JJM\Website\Nkgjjm\bin\Release\net6.0\libman.json

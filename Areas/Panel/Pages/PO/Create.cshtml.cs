@@ -26,15 +26,22 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         public List<SelectListItem> Supplier { get; set; }
         [BindProperty]
         public List<SelectListItem> ItemMasters { get; set; }
+        [BindProperty]
+        public List<SelectListItem> Warehouse { get; set; }
         public List<ItemMaster> ItemList { get; set; }
+        public List<Warehouse> WarehouseList { get; set; }
         public string JobWorkid { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
+
            
             ItemList = await _context.TblItemMaster.ToListAsync();
+            WarehouseList = await _context.TblWarehouse.ToListAsync();
             Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();            
-            ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();           
+            ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();
+            Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
+           
             return Page();
         }
         public async Task<IActionResult> OnPost(string PoNumber,int suppliername)
@@ -60,18 +67,20 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
                     Int64 Productid =Convert.ToInt64(dt.Rows[i][0].ToString());
                     double Qty = Convert.ToDouble(dt.Rows[i][1]);
                     double Price = Convert.ToDouble(dt.Rows[i][2]);                     
+                    string Warehuose = Convert.ToString(dt.Rows[i][3]);                     
                     Pochild child = new Pochild()
                     {
                         Pono = PoNumber,
                         Itemid = Productid,
                         Qty=Qty,
-                        Price=Price
+                        Price=Price,
+                        WarehouseName= Warehuose
                     };
                     await _context.TblPoChild.AddAsync(child);
                     await _context.SaveChangesAsync();
                 }
             }
-            return Page();
+            return RedirectToPage("Create");
         }
     }
 }

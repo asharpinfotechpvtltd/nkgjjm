@@ -12,7 +12,7 @@
     <!-- END: Account Menu -->
 </div>
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
-     Indent Requisition- Warehouse
+    Indent Requisition- Warehouse
 </h2>
 
 <div id="horizontal-form" class="p-5">
@@ -22,6 +22,14 @@
 
                 <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job id </strong></label>
                 <input type="text" name="searchtext" class="form-control" readonly id="searchtext" value="@Model.searching" style="background-color:wheat;" />
+
+            </div>
+        </div>
+        <div class="preview">
+            <div class="form-inline mt-5">
+
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Indent Master id </strong></label>
+                <input type="text" name="IndentMasterid" class="form-control" readonly id="searchtext" value="@Model.IndentMasterid" style="background-color:wheat;" />
 
             </div>
         </div>
@@ -47,7 +55,7 @@
             <div class="form-inline mt-5">
 
                 <input type="submit" value="Submit" class="btn btn-primary" />
-                
+
 
             </div>
         </div>
@@ -69,7 +77,7 @@
                             Item Name
                         </th>
                         <th class="text-center whitespace-nowrap">
-                          Bom  Qty
+                            Bom  Qty
                         </th>
 
                         <th class="text-center whitespace-nowrap">
@@ -81,7 +89,9 @@
                         <th class="text-center whitespace-nowrap">
                             Demand
                         </th>
-
+                        <th class="text-center whitespace-nowrap">
+                            Status
+                        </th>
                     </tr>
                     @foreach (var item in Model.SPMaterialIssuance)
                     {
@@ -96,6 +106,10 @@
                             <td class="text-center">@item.Pickedqty</td>
                             <td class="text-center">@BalanceQty</td>
                             <td class="text-center">@item.Demand</td>
+                            <td class="text-center">
+                                <input type="button" value="Approve" id="Approve" class="btn btn-primary Approve" />
+                            </td>
+
 
                         </tr>
                     }
@@ -107,4 +121,38 @@
         </div>
 
     </form>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '#orders .Approve', function() {
+                var jobid = '@Model.searching';
+                var IndentMasterid = '@Model.IndentMasterid';
+                var currentRow = $(this).closest("tr");
+                var Itemid = currentRow.find("td").eq(0).html();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/Indent",
+                    data: { jobid: jobid, IndentMasterid: IndentMasterid, Itemid: Itemid },
+                    contentType: "application/json",
+                    dataType: "text",
+                    async: true,
+                    success: function(response) {
+                        alert("Updated");
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+
+
+
+                });
+            });
+        });
+    </script>
+
 }

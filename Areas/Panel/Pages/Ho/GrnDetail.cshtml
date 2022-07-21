@@ -23,20 +23,20 @@
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Po Id </strong></label>
                     <input type="text" name="Ponumber" class="form-control" asp-for="@Model.PoVehicledetail.PoNo" readonly id="searchtext" />
 
-                </div>
-                <div class="form-inline mt-5">
+                    @* </div>
+                    <div class="form-inline mt-5">*@
 
-                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice number</strong></label>
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Chln/ Inv number</strong></label>
                     <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.ChallanNumber" id="searchtext" />
 
                 </div>
                 <div class="form-inline mt-5">
 
-                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice Date</strong></label>
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Chln/ Inv. Date</strong></label>
                     <input type="date" asp-for="@Model.PoVehicledetail.Challan_InvoiceDate" readonly class="form-control" id="searchtext" />
 
-                </div>
-                <div class="form-inline mt-5">
+                    @* </div>
+                    <div class="form-inline mt-5">*@
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Vehicle Number</strong></label>
                     <input type="text" asp-for="@Model.PoVehicledetail.VehicleNumber" readonly class="form-control" id="searchtext" />
@@ -47,8 +47,8 @@
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>LR/Bilty No</strong></label>
                     <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.LR_BiltyNo" id="searchtext" />
 
-                </div>
-                <div class="form-inline mt-5">
+                    @*</div>
+                    <div class="form-inline mt-5">*@
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transporter Name</strong></label>
                     <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.TransporterName" id="searchtext" />
@@ -56,16 +56,11 @@
                 </div>
                 <div class="form-inline mt-5">
 
-                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>LR/Bilty No</strong></label>
-                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.LR_BiltyNo" id="searchtext" />
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Warehouse Id</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.warehouse_id" name="warehouse" id="warehouse" />
 
                 </div>
-                <div class="form-inline mt-5">
 
-                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transporter Name</strong></label>
-                    <input type="text" class="form-control" readonly asp-for="@Model.PoVehicledetail.TransporterName" id="searchtext" />
-
-                </div>
             </div>
         </div>
         @if (Model.PoVehicledetail != null)
@@ -111,7 +106,29 @@
             <div class="p-5">
                 <a href="/InwardDocument/@Model.PoVehicledetail.SupportedDocument" style="color:blue;" target="_blank">View Document</a>
             </div>
+            <div id="horizontal-form" class="p-5">
+                <div class="preview">
+                    <div class="form-inline">
 
+                        <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Po Id </strong></label>
+                        <select name="status" class="form-control" id="ddlstatus">
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+
+                    </div>
+                    <div class="form-inline mt-5" style="visibility:hidden;" id="transactionno">
+
+                        <label for="horizontal-form-1" class="form-label sm:w-20"  ><strong>Transaction No</strong></label>
+                        <input type="text" class="form-control"  asp-for="@Model.PoVehicledetail.ChallanNumber" id="txttransactionno" />
+                    </div>
+                    <div class="form-inline mt-5" style="visibility:hidden;" id="reason">
+                        <label for="horizontal-form-1" class="form-label sm:w-20"  ><strong>Reason</strong></label>
+                        <input type="text" class="form-control" id="txtreason" />
+
+                    </div>
+                </div>
+            </div>
 
 
             <div class="sm:pl-5 mt-1 mb-5">
@@ -130,10 +147,11 @@
             var indentdesc = new Array();
             $('#orders tr').each(function(i, row) {
                 var ItemId = $(this).closest('tr').find("td").eq(0).html();
-                var Receivedqty = $(this).closest('tr').find("td:eq(5) input").val();
+                var Receivedqty = $(this).closest('tr').find("td").eq(3).html();
                 var po = {};
-                po.Particular = ItemId;
+                po.ItemId = ItemId;
                 po.Receivedqty = Receivedqty;
+
                 indentdesc.push(po);
             });
             document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
@@ -153,6 +171,21 @@
                 currentRow.find("td:eq(7)").html(Balanceqty);
 
             });
+        });
+
+        $("#ddlstatus").change(function() {
+            if ($("#ddlstatus").val() == "Approved") {
+                $("#transactionno").show();
+                $("#txttransactionno").show();
+                $("#reason").hide();
+                $("#txtreason").hide();
+            }
+            else if ($("#ddlstatus").val() == "Rejected") {
+                $("#reason").show();
+                $("#txtreason").show();
+                $("#transactionno").hide();
+                $("#txttransactionno").hide();
+            }
         });
     </script>
 

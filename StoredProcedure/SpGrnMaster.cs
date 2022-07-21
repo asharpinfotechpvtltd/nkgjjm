@@ -6,5 +6,9 @@
         public DateTime DATE { get; set; }
         public string ChallanNumber { get; set; }
         public string CompanyName { get; set; }
+        public string WarehouseName { get; set; }
+        public int WarehouseId { get; set; }        
+        public string PersonName { get; set; }
+        public string District { get; set; }
     }
 }

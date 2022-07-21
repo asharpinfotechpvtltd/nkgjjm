@@ -16,7 +16,7 @@
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
     Create PO
 </h2>
-<div class="intro-y box mt-5">
+<div class="intro-y box mt-5 mb-5">
     <form method="post">
         <div id="horizontal-form" class="p-5">
             <div class="preview">
@@ -48,7 +48,7 @@
                             Particular
                         </th>
                         <th class="text-center whitespace-nowrap">
-                            HSN Code
+                            HSN
                         </th>
                         <th class="text-center whitespace-nowrap">
                             Qty
@@ -61,6 +61,9 @@
                         </th>
                         <th class="text-center whitespace-nowrap">
                             Amount
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Warehouse
                         </th>
                         <th>Action</th>
                     </tr>
@@ -77,6 +80,7 @@
                         <td><input type="text" class="form-control product_unit" id="product_unit_1" name='product_unit[]' for="1" readonly /></td>
                         <td><input class="form-control product_price" type='text' data-type="product_price" id='product_price_1' name='product_price[]' for="1" /></td>
                         <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' readonly /></td>
+                        <td><select class="form-control warehouse" asp-items="@Model.Warehouse" id='Warehouse' name='warehouse[]' for='1'><option>Select Warehouse</option></select></td>
                         <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
                     </tr>
                 </table>
@@ -99,16 +103,29 @@
         $('#add').click(function() {
             rowCount++;
 
-            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemcode"></select></td><td><input type="text" class="form-control product_itemname" id="product_itemname" readonly name="product_itemname[]" /></td><td><input class="form-control product_hsn" type="text" data-type="product_hsn" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control product_unit" readonly id="product_unit_1" name="product_unit[]" for="1"/></td><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_1" name="product_price[]" for="1" /></td> <td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" readonly/> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemcode"></select></td><td><input type="text" class="form-control product_itemname" id="product_itemname" readonly name="product_itemname[]" /></td><td><input class="form-control product_hsn" type="text" data-type="product_hsn" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control product_unit" readonly id="product_unit_1" name="product_unit[]" for="1"/></td><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_1" name="product_price[]" for="1" /></td> <td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" readonly /></td><td><select class="form-control warehouse" id="Warehouse" for="1"><option>Select Warehouse</option></select></td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
 
             var tags = @Html.Raw(Json.Serialize(Model.ItemList));
+
             var items = '';
             items += "<option>Select</option>";
             $.each(tags, function(i, ingredient) {
                 items += '<option value=' + tags[i].itemCode + '>' + tags[i].itemCode + '</option>';
             });
 
+
+
+
+
+            var warehouse = @Html.Raw(Json.Serialize(Model.WarehouseList));
+            var warehouseitem = '';
+            warehouseitem += "<option>Select Warehouse</option>";
+            $.each(warehouse, function(i, ingredient) {
+                warehouseitem += '<option value=' + warehouse[i].id + '>' + warehouse[i].warehouseName + '</option>';
+                console.log(warehouse);
+            });
             $("#orders tr:last").find('.product_itemcode').html(items);
+            $("#orders tr:last").find('.warehouse').html(warehouseitem);
         });
 
         $(document).on('click', '.btn_remove', function() {
@@ -122,8 +139,8 @@
                 var currentRow = $(this).closest("tr");
                 var Qty = currentRow.find("td:eq(3) input").val();
                 var Rate = currentRow.find("td:eq(5) input").val();
-                var total =parseInt(Qty * Rate);
-               
+                var total = parseInt(Qty * Rate);
+
                 currentRow.find("td:eq(6) input").val(total);
             })
         });
@@ -137,10 +154,12 @@
                 var Productid = $(this).closest('tr').find("td:eq(0) select").val();
                 var Qty = $(this).closest('tr').find("td:eq(3) input").val();
                 var Price = $(this).closest('tr').find("td:eq(5) input").val();
+                var Warehouse = $(this).closest('tr').find("td:eq(7) select").val();
                 var Delivery = {};
                 Delivery.Productid = Productid;
                 Delivery.Qty = Qty;
                 Delivery.price = Price;
+                Delivery.Warehuose = Warehouse;
                 jobworkdesc.push(Delivery);
             });
             document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
@@ -175,6 +194,13 @@
         });
 
 
+
+
+        $(document).ready(function() {
+            $('#purchaseorderno').keyup(function() {
+                $(this).val($(this).val().toUpperCase());
+            });
+        });
 
 
 

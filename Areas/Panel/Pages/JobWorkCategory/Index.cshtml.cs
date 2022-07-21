@@ -18,6 +18,7 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorkCategory
             _context = context;
         }
 
+        public int TotalCount { get; set; }
         public IList<JobWorkcategories> JobWorkcategories { get;set; } = default!;
 
         public async Task OnGetAsync()
@@ -25,6 +26,7 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorkCategory
             if (_context.TblJobWorkCategory != null)
             {
                 JobWorkcategories = await _context.TblJobWorkCategory.ToListAsync();
+                TotalCount = await _context.TblJobWorkCategory.CountAsync();
             }
         }
     }

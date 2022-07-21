@@ -19,12 +19,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
         }
 
         public IList<Suppliers> Suppliers { get;set; } = default!;
+        public int TotalCount { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.TblSupplier != null)
             {
                 Suppliers = await _context.TblSupplier.ToListAsync();
+                TotalCount = await _context.TblSupplier.CountAsync();
             }
         }
     }

@@ -39,7 +39,7 @@
                     <th class="text-center whitespace-nowrap">S.no.</th>
                     <th class="text-center whitespace-nowrap">Warehouse Name</th>
                     <th class="text-center whitespace-nowrap">District</th>
-                    <th class="text-center whitespace-nowrap">Action</th>
+                    <th class="text-center whitespace-nowrap">View Stock</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,8 +58,8 @@
 
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                <a class="flex items-center mr-3" asp-page="Stock" asp-route-id="@item.id"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Stock </a>
+                                
                             </div>
                         </td>
                     </tr>

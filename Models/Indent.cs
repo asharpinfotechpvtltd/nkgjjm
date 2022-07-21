@@ -9,6 +9,7 @@ namespace Nkgjjm.Models
         public string Jobworkid { get; set; }
         public string Status { get; set; }
         public Int64 ItemCode { get; set; }
+        public Int64 IndentMasterid { get; set; }
         public double Demand { get; set; }
     }
 }

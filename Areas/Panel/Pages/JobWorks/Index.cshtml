@@ -20,7 +20,7 @@
 <div class="grid grid-cols-12 gap-6 mt-1">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Job Work</a>
-        
+
         <div class="hidden md:block mx-auto text-slate-500">Showing @Model.TotalJobWork JobWork(s)</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
@@ -55,6 +55,9 @@
                     <th class="text-center whitespace-nowrap">
                         @Html.DisplayNameFor(model => model.JobWork[0].Date)
                     </th>
+                    <th class="text-center whitespace-nowrap">
+                        Status
+                    </th>
                     <th class="text-center whitespace-nowrap">Action</th>
                 </tr>
             </thead>
@@ -84,11 +87,33 @@
                         <td class="text-center">
                                 @item.Date.ToString().Remove(10,9)
                         </td>
+                            @if (item.Iscompleted == true)
+                            {
+                            <td class="text-center">
+                                Completed
+                            </td>
+                            }
+                            else
+                            {
+                            <td class="text-center">
+                                Pending
+                            </td>
+                            }
                         <td class="table-report__action w-56">
-                            <div class="flex justify-center items-center">                                
-                                <a class="flex items-center mr-3" asp-page="GenerateBom" asp-route-id="@item.WorkorderId"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="plus" data-lucide="plus" class="lucide lucide-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Bom</a>
-                                <a class="flex items-center mr-3" asp-page="ViewBom" asp-route-id="@item.WorkorderId">View</a>
-                                
+                            <div class="flex justify-center items-center">
+                                    @if (item.Iscompleted == false)
+                                    {
+                                        <a class="flex items-center mr-3" asp-page="GenerateBom" asp-route-id="@item.WorkorderId"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="plus" data-lucide="plus" class="lucide lucide-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Bom</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="flex items-center mr-3" asp-page="Report" asp-route-id="@item.WorkorderId"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="plus" data-lucide="plus" class="lucide lucide-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Report</a>
+                                    }
+                                    @if (item.Iscompleted == false)
+                                    {
+                                        <a class="flex items-center mr-3" asp-page="ViewBom" asp-route-id="@item.WorkorderId">View</a>
+                                    }
+
                             </div>
                         </td>
                     </tr>

@@ -1,63 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Nkgjjm.Classes;
 using Nkgjjm.Models;
 
 namespace Nkgjjm.Areas.Panel.Pages.PO
 {
     public class EditModel : PageModel
     {
-        private readonly Nkgjjm.Models.ApplicationDbContext _context;
-
-        public EditModel(Nkgjjm.Models.ApplicationDbContext context)
+        ApplicationDbContext _context;
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        public List<SelectListItem> Supplier { get; set; }
         [BindProperty]
-        public List<Pochild> Pochild { get; set; } = default!;
+        public List<SelectListItem> ItemMasters { get; set; }
+        [BindProperty]
+        public List<SelectListItem> Warehouse { get; set; }
+        public List<ItemMaster> ItemList { get; set; }
+        public List<Warehouse> WarehouseList { get; set; }
+        public string JobWorkid { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGet(string PoNo)
         {
-            
 
-            var pochild =  await _context.TblPoChild.Where(m => m.Pono == id).ToListAsync();
-            
-           
+
+            ItemList = await _context.TblItemMaster.ToListAsync();
+            WarehouseList = await _context.TblWarehouse.ToListAsync();
+            Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
+            ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();
+            Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.WarehouseName }).ToListAsync();
+
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPost(string PoNumber, int suppliername)
         {
-            if (!ModelState.IsValid)
+            GetUserDate date = new GetUserDate();
+            PoMaster pomaster = new PoMaster()
             {
-                return Page();
-            }
+                Buyer = "Nkg Infrastructure",
+                date = date.ReturnDate(),
+                Pono = PoNumber,
+                Supplier = suppliername
 
-            _context.Attach(Pochild).State = EntityState.Modified;
+            };
+            await _context.TblPoMaster.AddAsync(pomaster);
+            await _context.SaveChangesAsync();
 
-            try
+            string Po = Request.Form["jobworkdesc"];
+            DataTable dt = JsonConvert.DeserializeObject<DataTable>(Po);
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                await _context.SaveChangesAsync();
+                if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
+                {
+                    Int64 Productid = Convert.ToInt64(dt.Rows[i][0].ToString());
+                    double Qty = Convert.ToDouble(dt.Rows[i][1]);
+                    double Price = Convert.ToDouble(dt.Rows[i][2]);
+                    string Warehuose = Convert.ToString(dt.Rows[i][3]);
+                    Pochild child = new Pochild()
+                    {
+                        Pono = PoNumber,
+                        Itemid = Productid,
+                        Qty = Qty,
+                        Price = Price,
+                        WarehouseName = Warehuose
+                    };
+                    await _context.TblPoChild.AddAsync(child);
+                    await _context.SaveChangesAsync();
+                }
             }
-            catch (DbUpdateConcurrencyException)
-            {
-               
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool PochildExists(int id)
-        {
-          return (_context.TblPoChild?.Any(e => e.Id == id)).GetValueOrDefault();
+            return RedirectToPage("Create");
         }
     }
 }

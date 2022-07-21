@@ -37,14 +37,15 @@
                         <th class="text-center whitespace-nowrap">
                             Jobworkid
                         </th>
+                         <th class="text-center whitespace-nowrap">
+                            Indent Master
+                        </th>
                         <th class="text-center whitespace-nowrap">
                             Village Incharge Name
                         </th>
                         <th class="text-center whitespace-nowrap">
                             Mobile
                         </th>
-                        
-
                         <th class="text-center whitespace-nowrap">
                             Date
                         </th>
@@ -54,13 +55,14 @@
                     {
                         <tr>
                              <td class="text-center">@item.Jobworkid</td>
+                             <td class="text-center">@item.id</td>
                             <td class="text-center">@item.Username</td>
                             <td class="text-center">@item.Mobile</td>
                            
                             <td class="text-center">@item.Date.ToShortDateString()</td>                           
                             <td class="text-center">
                                 
-                                <a class="flex items-center mr-3" asp-page="ViewIndent" asp-route-jobworkid="@item.Jobworkid"> <i data-lucide="View" class="w-4 h-4 mr-1"></i> View </a>
+                                <a class="flex items-center" asp-page="ViewIndent" asp-route-jobworkid="@item.Jobworkid" asp-route-IndentMasterId="@item.id"> <i data-lucide="View" class="w-4 h-4 mr-1"></i> View </a>
                             
                             </td>
                         </tr>

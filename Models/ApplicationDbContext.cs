@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -54,6 +53,8 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SPIndentMasterForWarehouseIncharge>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpGrnMaster>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpHoClosure>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpUpdateQty>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpWarehouseStocklog>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -118,6 +119,8 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPIndentMasterForWarehouseIncharge> SPIndentMasterForWarehouseIncharge { get; set; }
         public virtual DbSet<SpGrnMaster> SpGrnMaster { get; set; }
         public virtual DbSet<SpHoClosure> SpHoClosure { get; set; }
+        public virtual DbSet<SpUpdateQty> SpUpdateQty { get; set; }
+        public virtual DbSet<SpWarehouseStocklog> SpWarehouseStocklog { get; set; }
         
 
         

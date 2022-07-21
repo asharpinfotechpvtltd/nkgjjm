@@ -4,7 +4,7 @@ namespace Nkgjjm.Models
 {
     public class ItemMaster
     {
-        [Key]
+        
         public int ItemId { get; set; }
         public string ItemName { get; set; }
         public int UnitType { get; set; }
@@ -15,6 +15,7 @@ namespace Nkgjjm.Models
         public double CGst { get; set; }
         public double SGst { get; set; }
         public double IGst { get; set; }
+        [Key]
         public Int64 ItemCode { get; set; }
         public double? OpeningStock { get; set; }
     }

@@ -13,7 +13,9 @@
             <div class="preview">
                 <div class="form-inline">
                     <label for="horizontal-form-1" class="form-label sm:w-20">Job Work id</label>
-                    <input type="text" name="Jobworkid" class="form-control" />
+                    <select asp-items="@Model.JobWorkid" name="Jobworkid" class="form-control">
+                        <option>Select JobWork</option>
+                    </select>
 
                 </div>
                 <div class="form-inline mt-5">

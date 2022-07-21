@@ -25,14 +25,11 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
         [BindProperty]
         public List<SelectListItem> UnitList { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Int64 id)
         {
-            if (id == null || _context.TblItemMaster == null)
-            {
-                return NotFound();
-            }
+            
 
-            var itemmaster =  await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemId == id);
+            var itemmaster =  await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemCode == id);
             UnitList = await _context.TblUnits.Select(u => new SelectListItem { Text = u.UnitName, Value = u.UnitId.ToString() }).ToListAsync();
             if (itemmaster == null)
             {
@@ -59,7 +56,7 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemMasterExists(ItemMaster.ItemId))
+                if (!ItemMasterExists(ItemMaster.ItemCode))
                 {
                     return NotFound();
                 }
@@ -72,9 +69,9 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
             return RedirectToPage("./Index");
         }
 
-        private bool ItemMasterExists(int id)
+        private bool ItemMasterExists(Int64 id)
         {
-          return (_context.TblItemMaster?.Any(e => e.ItemId == id)).GetValueOrDefault();
+          return (_context.TblItemMaster?.Any(e => e.ItemCode == id)).GetValueOrDefault();
         }
     }
 }
