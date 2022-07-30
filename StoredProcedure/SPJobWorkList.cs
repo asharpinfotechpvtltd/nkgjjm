@@ -9,10 +9,10 @@
         public Int64 VillageCode { get; set; }
         public string CompanyName { get; set; }
         public string ContractorName { get; set; }
-        public string JobWorkcategory { get; set; }
-        public string JobWorkDesc { get; set; }
-        public DateTime Date { get; set; }
+        public string JobWorkcategory { get; set; }       
+        public string Date { get; set; }
         public string WorkorderId { get; set; }
         public bool Iscompleted { get; set; }
+        public bool IsBomGenerated { get; set; }
     }
 }

@@ -1,0 +1,72 @@
+﻿@page
+@model Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge.IndentStatusModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Village Incharge</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Pending Indent List- Village Incharge 
+</h2>
+
+@*<div id="horizontal-form" class="p-5">
+    <div class="preview">
+        <div class="form-inline">
+            <form method="post" asp-page-handler="Search">
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job id </strong></label>
+                <input type="text" name="searchtext" id="searchtext" style="background-color:wheat;" />
+            </form>
+        </div>
+    </div>
+</div>*@
+@if (Model.SpGetIndentChallan != null && Model.SpGetIndentChallan.Count > 0)
+{
+    <form method="post" asp-page-handler="CreateIndent">
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Jobworkid
+                        </th>
+                         <th class="text-center whitespace-nowrap">
+                            Indent Master Id
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Download Challan
+                        </th>
+                        
+                        <th class="text-center whitespace-nowrap">Upload Challan</th>
+                    </tr>
+                    @foreach (var item in Model.SpGetIndentChallan)
+                    {
+                        <tr>
+                             <td class="text-center">@item.Jobworkid</td>
+                             <td class="text-center">@item.IndentMasterId</td>
+                                                       
+                            <td class="text-center">                                
+                                <a class="items-center" style="color:blue;" target="_blank" href="/Challan/@item.Hofile">  View </a>                            
+                            </td>
+                            <td class="text-center">                                
+                                <a class="items-center" style="color:blue;" asp-page="UploadChallan" asp-route-jobworkid="@item.Jobworkid" asp-route-IndentMasterId="@item.IndentMasterId"> Upload Challan </a>                            
+                            </td>
+                            
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
+            
+        </div>
+
+    </form>
+}

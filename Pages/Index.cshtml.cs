@@ -27,13 +27,28 @@ namespace Nkgjjm.Pages
             User Admins = await Context.TblUser.FirstOrDefaultAsync(uname => uname.Email == Admin.Email && uname.Password == Admin.Password && uname.Status==true);
             if (Admins != null)
             {
-                HttpContext.Session.SetString("Login", Admin.Email);
-                return RedirectToPage("/Index", new { area = "panel" });
+                if (Admins.Designation == 1)
+                {
+                    HttpContext.Session.SetString("Login", Admins.Id.ToString());
+                    return RedirectToPage("/Index", new { area = "Headoffice" });
+                }
+                else if(Admins.Designation==2)
+                {
+                    HttpContext.Session.SetString("Login", Admins.Id.ToString());
+                    return RedirectToPage("/Index", new { area = "VillageIncharge" });
+                }
+                else if (Admins.Designation == 3)
+                {
+                    HttpContext.Session.SetString("Login", Admins.Id.ToString());
+                    return RedirectToPage("/Index", new { area = "WareHouseIncharge" });
+                }
+                return Redirect("Index");
             }
             else
             {
                 return Redirect("Index");
             }
+           
         }
     }
 }

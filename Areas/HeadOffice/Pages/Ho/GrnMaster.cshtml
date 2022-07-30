@@ -1,0 +1,120 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Ho.GrnMasterModel
+@{
+    int i = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Approval Pending Report</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Approval Pending Report
+</h2>
+<form method="post" asp-page-handler="Receiveditem" enctype="multipart/form-data">
+
+    @if (Model.Grmmaster != null && Model.Grmmaster.Count > 0)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            S.No.
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            PO No
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Date
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Challan/Invoice No
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Supplier
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                            Warehouse Name
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                            Person Name
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                           District
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                            View
+                        </th>
+                        
+                    </tr>
+                    @foreach (var item in Model.Grmmaster)
+                    {
+
+                        <tr>
+                            <td class="text-center">@i</td>
+                            <td class="text-center">@item.PONO</td>
+                            <td class="text-center">@item.DATE.ToShortDateString()</td>
+                            <td class="text-center">@item.ChallanNumber</td>
+                            <td class="text-center">@item.CompanyName</td>
+                            <td class="text-center">@item.WarehouseName</td>
+                            <td class="text-center">@item.UserId</td>
+                            <td class="text-center">@item.District</td>
+                            <td class="text-center"><a asp-page="GrnDetail" asp-route-Pono="@item.PONO" asp-route-warehouseid="@item.WarehouseId" asp-route-challan="@item.ChallanNumber"  style="color:blue;">View</a></td>
+
+                        </tr>
+                        i++;
+                    }
+                </table>
+            </div>
+
+        </div>
+       
+        
+       
+        <input type="hidden" name="jobworkdesc">
+
+    }
+</form>
+<!-- BEGIN: Delete Confirmation Modal -->
+@section Scripts {
+    <script>
+        $("#add").click(function() {
+            var indentdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+                var ItemId = $(this).closest('tr').find("td").eq(0).html();
+                var Receivedqty = $(this).closest('tr').find("td:eq(4) input").val();
+                var po = {};
+                po.Particular = ItemId;
+                po.Receivedqty = Receivedqty;
+                indentdesc.push(po);
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
+        });
+
+
+        $(document).ready(function() {
+
+            $(document).on('input', '#orders .Physicalqty', function() {
+                var currentRow = $(this).closest("tr");
+                var ActualQty = currentRow.find("td:eq(2) input").val();
+                var Rcvdqty = currentRow.find("td:eq(5) input").val();
+                var invoiceqty = currentRow.find("td:eq(4) input").val();
+                
+                var Balanceqty = parseFloat(ActualQty - Rcvdqty);
+                var shorter = parseFloat(invoiceqty - Rcvdqty);
+                currentRow.find("td:eq(6)").html(shorter);
+                currentRow.find("td:eq(7)").html(Balanceqty);
+
+            });
+        });
+    </script>
+
+}

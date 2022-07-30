@@ -13,5 +13,6 @@ namespace Nkgjjm.Models
         public string LR_BiltyNo { get; set; }
         public string TransporterName { get; set; }
         public string SupportedDocument { get; set; }
+        public int Warehouseid { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace Nkgjjm.Api
         [HttpPut("{id}")]
         public async Task<IActionResult> PutItemMaster(int id, ItemMaster itemMaster)
         {
-            if (id != itemMaster.ItemId)
+            if (id != itemMaster.ItemCode)
             {
                 return BadRequest();
             }
@@ -74,7 +74,7 @@ namespace Nkgjjm.Api
             _context.TblItemMaster.Add(itemMaster);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItemMaster", new { id = itemMaster.ItemId }, itemMaster);
+            return CreatedAtAction("GetItemMaster", new { id = itemMaster.ItemCode }, itemMaster);
         }
 
         // DELETE: api/ItemMasters/5
@@ -97,9 +97,9 @@ namespace Nkgjjm.Api
             return NoContent();
         }
 
-        private bool ItemMasterExists(int id)
+        private bool ItemMasterExists(Int64 id)
         {
-            return (_context.TblItemMaster?.Any(e => e.ItemId == id)).GetValueOrDefault();
+            return (_context.TblItemMaster?.Any(e => e.ItemCode == id)).GetValueOrDefault();
         }
     }
 }

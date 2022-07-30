@@ -1,0 +1,217 @@
+﻿
+<html lang="en" class="light">
+<!-- BEGIN: Head -->
+<head>
+    <meta charset="utf-8">
+    <link href="~/dist/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>NKG-PRIMUS</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="~/dist/css/app.css" />
+    
+    <!-- END: CSS Assets-->
+</head>
+<!-- END: Head -->
+<body class="py-5">
+    <!-- BEGIN: Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        <div class="mobile-menu-bar">
+            <a href="" class="flex mr-auto">
+                <img alt="NKG-PRIMUS" class="w-40" src="~/dist/images/NKGPrimus.png" style="background-color:white;">
+            </a>
+            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+        </div>
+        <div class="scrollable">
+            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+            <ul class="scrollable__content py-2">
+
+                <li>
+                    <a href="/panel/index" class="menu">
+                        <div class="menu__icon"> <i data-lucide="hard-drive"></i> </div>
+                        <div class="menu__title"> Dashboard </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="menu__title"> Location Master <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/District/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> District </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Blocks/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Block </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/GP/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title">GramPanchayat </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Village/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title">Village </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
+                        <div class="menu__title">  Warehouse <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/Warehouses/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Warehouse</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/AssignItemToWarehouse/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Assign Item To Warehouse  </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
+                        <div class="menu__title">  Jobwork <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/JobWorkCategory/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> JobWork Category</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/JobWorks/index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> JobWorks </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                
+                
+
+
+
+                <li>
+                    <a asp-page="/VillageIncharge/index" class="menu">
+                        <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
+                        <div class="menu__title"> Village Incharge </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-page="/VillageIncharge/WorkProgress" class="menu">
+                        <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
+                        <div class="menu__title"> Update Work Progress </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-page="/VillageIncharge/CreateIndent" class="menu">
+                        <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
+                        <div class="menu__title"> Indent </div>
+                    </a>
+                </li>
+
+               
+
+               
+
+                <li>
+                    <a asp-page="/VillageIncharge/IndentStatus" class="menu">
+                        <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
+                        <div class="menu__title"> Indent Status </div>
+                    </a>
+                </li>
+               
+
+
+
+            </ul>
+        </div>
+    </div>
+    <!-- END: Mobile Menu -->
+    <div class="flex mt-[4.7rem] md:mt-0">
+        <!-- BEGIN: Side Menu -->
+        <nav class="side-nav">
+            <a href="" class="intro-x flex items-center pl-5 pt-4">
+                <img alt="NKG Primus" class="w-40" src="~/dist/images/NKGPrimus.png" />
+                <span class="hidden xl:block text-white text-lg ml-3">  </span>
+            </a>
+            <div class="side-nav__devider my-6"></div>
+           
+            <ul>
+                <li>
+                    <a href="/panel/index" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                        <div class="side-menu__title">
+                            Dashboard
+                        </div>
+                    </a>
+                </li>                
+                <li>
+                    <a asp-page="/IndentMaster" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title"> Indent</div>
+                    </a>
+                </li>  
+                <li>
+                    <a asp-page="/UploadGrn" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title"> Upload Grn</div>
+                    </a>
+                </li>               
+                
+                <li>
+                    <a asp-page="/Index" asp-page-handler="Logout" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="message-square"></i> </div>
+                        <div class="side-menu__title"> Signout </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- END: Side Menu -->
+        <!-- BEGIN: Content -->
+        <div class="content">
+            <!-- BEGIN: Top Bar -->
+            @RenderBody()
+
+            <!-- END: Content -->
+        </div>
+    </div>
+
+
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+    <script src="~/dist/js/app.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <!-- END: JS Assets-->
+    @RenderSection("Scripts",required:false);
+</body>
+</html>

@@ -6,6 +6,6 @@
         public string ItemName { get; set; }
         public double Qty { get; set; }
         public double TotalReceived { get; set; }
-        public int? Warehouse { get; set; }
+        public string WarehouseName { get; set; }
     }
 }

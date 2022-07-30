@@ -1,0 +1,162 @@
+﻿@page
+@model Nkgjjm.Areas.HeadOffice.Pages.JobWorks.EditBomModel
+@{
+    int rowCount = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit BOM</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Edit BOM
+</h2>
+<form method="post">
+    <div id="horizontal-form" class="p-5">
+        <div class="preview">
+            <div class="form-inline">
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong> JobWork ID</strong></label>
+                <input type="text" value="@Model.JobWorkid" name="JobWorkId" readonly style="background-color:wheat;" />
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-12 gap-6 mt-0">
+        <!-- BEGIN: Data List -->
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+            <table class="table table-report" id="orders">
+
+                <tr>
+                    <th class="text-center whitespace-nowrap">
+                        Job Description
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Item Name
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Qty
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Deviation
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Final Qty
+                    </th>
+
+                    <th class="text-center whitespace-nowrap">Action</th>
+                </tr>
+
+
+                @foreach (var bomitem in Model.ListBom)
+                {
+
+                    <tr id="row+@rowCount">
+                        <td><select asp-items="Model.JobDescriptionList" class="form-control jobworkdesclist" id="product_jobworklist"></select></td>
+                        <td><select asp-items="Model.ItemMasters" asp-for="@bomitem.ItemCode" class="form-control product_itemname" id="product_itemname"></select></td>
+                        <td><input class="form-control quantity" type='number' value="@bomitem.Qty" id='quantity_1' name='quantity[]' for="1" /></td>
+                        <td><input class="form-control Deviation" type="text" value="@bomitem.Deviation" id='Deviation_1' name='Deviation[]' style="Background-color:lemonchiffon" /></td>
+                        <td><input type="text" class="form-control finalqty" value="@bomitem.Qty" id='finalqty_1' name='finalqty[]' for="1" readonly style="Background-color:chartreuse" /></td>
+                        @if (rowCount == 1)
+                        {
+                            <td>
+                                <button type="button" name="add" id="add" class="btn btn-success circle">+</button>
+                                <button type="button" name="remove" id="@rowCount" class="btn btn-danger btn_remove1 cicle">-</button>
+                            </td>
+                            rowCount++;
+                        }
+                        else
+                        {
+                            <td><button type="button" name="remove" id="@rowCount" class="btn btn-danger btn_remove1 cicle">-</button></td>
+                            rowCount++;
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+    <div class="sm:pl-5 mt-1 mb-5">
+        <input type="submit" value="Submit" id="Save" class="btn btn-primary" />
+        <!-- END: Data List -->
+    </div>
+    <input type="hidden" name="jobworkdesc" />
+</form>
+<!-- BEGIN: Delete Confirmation Modal -->
+@section Scripts {
+
+
+    <script>
+
+        $('#add').click(function() {
+            var rowid = @rowCount+1;
+
+            $('#orders').append('<tr id="row' + rowid + '"><td><select class="form-control jobworkdesclist" id="jobworkdesclist" name="jobworkdesclist[]"></select></td><td><select class="form-control product_itemname" id="product_itemname" name="product_itemname[]"></select></td><td><input class="form-control qty" type="number" id="qty_1" name="qty[]" for="1" /></td><td><input type="text" class="form-control Deviation" id="deviation_1" name="deviation[]" for="1" style="Background-color:lemonchiffon" /></td><td><input type="text" class="form-control finalqty" id="finalqty_' + rowid + '"  name="finalqty[]" for="' + rowid + '" style="Background-color:chartreuse"/></td><td><button type="button" name="remove" id="' + rowid + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+
+            var tags = @Html.Raw(Json.Serialize(Model.ItemList));
+            var items = '';
+            $.each(tags, function(i, ingredient) {
+                items += '<option value=' + tags[i].itemCode + '>' + tags[i].itemName + '</option>';
+            });
+
+            var JobWorkdesc = @Html.Raw(Json.Serialize(Model.JobDescription));
+            var jobworkdesclist = '';
+            $.each(JobWorkdesc, function(i, ingredient) {
+                console.log(JobWorkdesc);
+                jobworkdesclist += '<option value=' + JobWorkdesc[i].jobWorkid + '>' + JobWorkdesc[i].particular + '</option>';
+            });
+
+            $("#orders tr:last").find('.product_itemname').html(items);
+            $("#orders tr:last").find('.jobworkdesclist').html(jobworkdesclist);
+        });
+
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr('id');
+            
+            $('#row' + button_id + '').remove();
+        });
+        $("#orders").on("click", ".btn_remove1", function() {            
+            $(this).closest("tr").remove();
+        });
+
+
+
+        $("#Save").click(function() {
+           var jobworkdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+
+                var Particular = $(this).closest('tr').find("td:eq(1) select").val();
+                var Deviation = $(this).closest('tr').find("td:eq(3) input").val();
+                var Final = $(this).closest('tr').find("td:eq(4) input").val();
+                var Delivery = {};
+                Delivery.Particular = Particular;
+                Delivery.Deviation = Deviation;
+                Delivery.Final = Final;
+                jobworkdesc.push(Delivery);
+
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
+            
+        });
+
+        $(document).ready(function() {
+            // code to read selected table row cell data (values).
+            $(document).on('input', '#orders .Deviation', function() {
+                var currentRow = $(this).closest("tr");
+                var Qty = parseInt(currentRow.find("td:eq(2) input").val());
+                var Deviation = parseInt(currentRow.find("td:eq(3) input").val());
+                var total = parseInt(Qty + Deviation);
+                currentRow.find("td:eq(4) input").val(total);
+
+
+            })
+        });
+
+
+    </script>
+        }
+
+

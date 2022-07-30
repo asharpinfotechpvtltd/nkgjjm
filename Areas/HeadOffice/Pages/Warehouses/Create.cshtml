@@ -1,0 +1,183 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Warehouses.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Warehouses/Index">WareHouse</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Warehouse</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Add Warehouse
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">District</label>
+                    <select id="ddldistname" type="text" asp-for="Warehouse.District" asp-items="Model.District" class="form-control">
+                        <option>Select District</option>
+                    </select>
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Block</label>
+                    <select id="ddlblock" type="text" asp-for="Warehouse.Block" class="form-control">
+                        <option>Select Block</option>
+                    </select>
+
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Gram Panchayat</label>
+                    <select id="ddlGramPanchyaat" type="text" asp-for="Warehouse.Grampanchayaat" class="form-control">
+                        <option>Select GramPanchayat</option>
+                    </select>
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Village</label>
+                    <select id="ddlvillage" type="text" asp-for="Warehouse.VillageCode" class="form-control">
+                        <option>Select Village</option>
+                    </select>
+
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Warehouse Name</label>
+                    <input type="text" asp-for="Warehouse.WarehouseName" class="form-control" />
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report orders" id="orders">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Item Code
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Qty
+                        </th>
+
+                    </tr>
+                    @foreach (var item in @Model.ItemMasterList)
+                    {
+                        <tr>
+                            <td>
+                                <input type="text" value="@item.ItemCode" class="form-control product_itemcode" />
+
+                            </td>
+                            <td>
+                                <input type="text" value="@item.ItemName" class="form-control" />
+
+                            </td>
+
+
+                            <td><input class="form-control quantity" value="0" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="sm:ml-20 sm:pl-5 mt-5">
+            <button class="btn btn-primary" id="Addwrh">Add Warehouse</button>
+        </div>
+        <input type="hidden" name="jobworkdesc" />
+    </form>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/CustomJs/Block.js"></script>
+        <script>
+            $("#ddlblock").change(function() {
+                $("#ddlGramPanchyaat").empty();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/GpByBlock",
+                    data: { id: $("#ddlblock").val() },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    success: function(response) {
+                        console.log(response);
+                        $("#ddlGramPanchyaat").prepend("<option value='' selected='selected'>Select Gram Panchaayat</option>");
+                        $.each(response, function(i, item) {
+                            var html = '';
+                            html += "<option value=" + item.id + ">" + item.gramPanchayat + "</option>";
+                            $("#ddlGramPanchyaat").append(html);
+
+                        })
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+                });
+            });
+
+            $("#ddlGramPanchyaat").change(function() {
+                $("#ddlvillage").empty();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/Villages",
+                    data: { id: $("#ddlGramPanchyaat").val() },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    success: function(response) {
+                        console.log(response);
+                        $("#ddlvillage").prepend("<option value='' selected='selected'>Select Village</option>");
+                        $.each(response, function(i, item) {
+                            var html = '';
+                            html += "<option value=" + item.villageCode + ">" + item.village + "</option>";
+                            $("#ddlvillage").append(html);
+
+                        })
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+                });
+            });
+
+            $("#Addwrh").click(function() {
+                var jobworkdesc = new Array();
+                $('#orders tr').each(function(i, row) {
+                    var Particular = $(this).closest('tr').find("td:eq(0) input").val();
+                    var Qty = $(this).closest('tr').find("td:eq(2) input").val();                    
+                    var Delivery = {};
+                    Delivery.Particular = Particular;
+                    Delivery.Qty = Qty;                   
+                    jobworkdesc.push(Delivery);
+                });
+                document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
+
+            });
+
+        </script>
+    }
+    }

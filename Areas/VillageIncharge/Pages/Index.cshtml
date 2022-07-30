@@ -1,0 +1,327 @@
+﻿@page
+@model Nkgjjm.Areas.VillageIncharge.Pages.IndexModel
+@{
+
+}
+
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12 2xl:col-span-9">
+        <div class="grid grid-cols-12 gap-6">
+            <!-- BEGIN: General Report -->
+            <div class="col-span-12 mt-0">
+                <div class="intro-y flex items-center h-10">
+                    <h2 class="text-lg font-medium truncate mr-5">
+                        General Report
+                    </h2>
+
+                </div>
+                <div class="grid grid-cols-12 gap-6 mt-5">
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/PO/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="edit" class="report-box__icon text-primary"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalPo</div>
+                                    <div class="text-base text-slate-300 mt-1">Active Po's</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/Jobworks/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="credit-card" class="report-box__icon text-pending"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalJobOrders</div>
+                                    <div class="text-base text-slate-500 mt-1">Job Orders</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/Ho/IndentMaster">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="file-minus" class="report-box__icon text-warning"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.Totalindent</div>
+                                    <div class="text-base text-slate-500 mt-1">Pending Indents</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/warehouses/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="box" class="report-box__icon text-success"></i>
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.Totalwarehouse</div>
+                                    <div class="text-base text-slate-500 mt-1">Total Warehouses</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/users/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="users" class="report-box__icon text-success"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalActiveUser</div>
+                                    <div class="text-base text-slate-500 mt-1">Active Users</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/Jobworks/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="activity" class="report-box__icon text-success"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalActiveSite</div>
+                                    <div class="text-base text-slate-500 mt-1">Active Sites</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/Jobworks/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="box-select" class="report-box__icon text-success"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalUnderProcess</div>
+                                    <div class="text-base text-slate-500 mt-1">Under Process</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                        <a asp-page="/Jobworks/Index">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-lucide="thumbs-up" class="report-box__icon text-success"></i>
+
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalCompletedSite</div>
+                                    <div class="text-base text-slate-500 mt-1">Completed</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-3">
+        <div class="2xl:border-l -mb-10 pb-10">
+            <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
+                <!-- BEGIN: Transactions -->
+                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-0 2xl:mt-6" style="margin-top:0.6rem;">
+                    <div class="intro-x flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Go To
+                        </h2>
+                    </div>
+                    <div class="mt-4">
+                        <div class="intro-y">
+                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                <div class="flex">
+                                    <i data-lucide="arrow-big-right" class="report-box__icon text-success"></i>
+                                </div>
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">District</div>
+
+                                </div>
+                                <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">@Model.TotalDistrict</div>
+                            </div>
+                        </div>
+                        <div class="intro-y">
+                            <a href="/panel/Blocks">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="flex">
+                                        <i data-lucide="arrow-big-right" class="report-box__icon text-success"></i>
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">Block</div>
+
+                                    </div>
+                                    <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">@Model.TotalBlock</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="intro-y">
+                            <a href="/panel/gp">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="flex">
+                                        <i data-lucide="arrow-big-right" class="report-box__icon text-success"></i>
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">Grampanchayat</div>
+
+                                    </div>
+                                    <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">@Model.TotalGp</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="intro-y">
+                            <a href="/panel/Village">
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div class="flex">
+                                        <i data-lucide="arrow-big-right" class="report-box__icon text-success"></i>
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">Village</div>
+                                    </div>
+                                    <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">@Model.TotalVillage</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12 2xl:col-span-12">
+        <div class="grid grid-cols-12 gap-6">
+            <!-- BEGIN: General Report -->
+            <div class="col-span-12 mt-0">
+                <div class="intro-y flex items-center h-10">
+                    <br />
+                    <h2 class="text-lg font-medium truncate mr-5">Users</h2>
+
+                </div>
+                <div class="grid grid-cols-12 gap-6 mt-5">
+
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="users" data-lucide="users" class="lucide lucide-users report-box__icon text-success"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalUser</div>
+                                <div class="text-base text-slate-500 mt-1">Total Users</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="user-check" data-lucide="user-check" class="lucide lucide-users report-box__icon text-success"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalActiveUser</div>
+                                <div class="text-base text-slate-500 mt-1">Active Users</div>
+                            </div>
+                        </div>
+                    </div><div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                        <div class="report-box zoom-in">
+                            <div class="box p-5">
+                                <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="user-x" data-lucide="user-x" class="lucide lucide-users report-box__icon text-success"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+
+                                </div>
+                                <div class="text-3xl font-medium leading-8 mt-6">@Model.TotalInactiveUser</div>
+                                <div class="text-base text-slate-500 mt-1">Non Active Users</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-span-12 mt-6">
+
+    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+        <table class="table table-report sm:mt-2">
+            <thead>
+                <tr>
+
+                    <th class="text-center whitespace-nowrap">Id</th>
+                    <th class="text-center whitespace-nowrap">District</th>
+                    <th class="text-center whitespace-nowrap">Block</th>
+                    <th class="text-center whitespace-nowrap">GramPanchayat</th>
+                    <th class="text-center whitespace-nowrap">Village</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TotalCount)
+                {
+
+                    <tr class="intro-x">
+                        <td class="text-center">@item.id</td>
+                        <td class="text-center">
+                            <a href="#" class="font-medium whitespace-nowrap">@item.District</a>
+
+                        </td>
+                        <td class="text-center">@item.TotalBlock</td>
+                        <td class="text-center">
+                            @item.TotalGp
+                        </td>
+                        <td class="text-center">
+                            @item.TotalVillage
+                        </td>
+                    </tr>
+                }
+                <tr class="intro-x" style="font-weight:bold; font-size:large;">
+                    <td class="text-center">Total Count</td>
+                    <td class="text-center">
+                        @Model.TotalDistrict
+                    </td>
+                    <td class="text-center">@Model.TotalBlock</td>
+                    <td class="text-center">
+                        @Model.TotalGp
+                    </td>
+                    <td class="text-center">
+                        @Model.TotalVillage
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

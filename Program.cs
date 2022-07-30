@@ -1,19 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Nkgjjm.Models;
-using Nkgjjm.Api;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy(name: MyAllowSpecificOrigins,
-//                      builder =>
-//                      {
-//                          builder.WithOrigins("https://qdee.ca");
-//                      });
-//});
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSession(options =>
@@ -24,7 +15,6 @@ builder.Services.AddSession(options =>
 builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("NkgjjmConnectionString")));
-builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -50,9 +40,5 @@ app.UseMvcWithDefaultRoute();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-
-
-
 
 app.Run();

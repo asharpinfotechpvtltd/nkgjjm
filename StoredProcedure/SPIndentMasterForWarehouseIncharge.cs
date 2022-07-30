@@ -7,5 +7,8 @@
         public string Jobworkid { get; set; }
         public DateTime Date { get; set; }
         public int id { get; set; }
+        public int WareHouseid { get; set; }
+        public string WarehouseInchargeStatus { get; set; }
+        public string Hostatus { get; set; }
     }
 }

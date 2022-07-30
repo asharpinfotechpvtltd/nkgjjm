@@ -1,0 +1,126 @@
+﻿@page
+@model Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge.CreateIndentModel
+@{
+}
+<link media="screen" rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.css" />
+<link media="screen" rel="stylesheet" href='https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.css' />
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create Indent</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Raise Indent Request
+</h2>
+
+<div id="horizontal-form" class="p-5">
+    <div class="preview">
+        <div class="form-inline">
+            <form method="post" asp-page-handler="Search">
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job Work id </strong></label>
+                <input type="text" name="searchtext" id="searchtext" value="@Model.searching" style="background-color:wheat;" />
+            </form>
+        </div>
+    </div>
+</div>
+@if (Model.SPMaterialIssuance != null && Model.SPMaterialIssuance.Count > 0)
+{
+    <form method="post" asp-page-handler="CreateIndent">
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Id
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Bom Qty
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Picked Qty
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Balance Qty
+                        </th>
+                        <th>Requirement</th>
+                    </tr>
+                    @foreach (var item in Model.SPMaterialIssuance)
+                    {
+                        double TotalQty = item.Qty;
+                        double Pickedqty = item.Pickedqty;
+                        double BalanceQty = TotalQty - Pickedqty;
+                        <tr>
+                            <td class="text-center">@item.RawMaterialId</td>
+                            <td class="text-center">@item.ItemName</td>
+                            <td class="text-center">@item.Qty</td>
+                            <td class="text-center">@item.Pickedqty</td>
+                            <td class="text-center" style="background-color:yellow;">@BalanceQty</td>
+                            <td class="text-center"><input type="text" id="asssigned" class="form-control demand" /></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
+            <div class="sm:pl-5 mt-1 mb-5">
+                <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+                <!-- END: Data List -->
+            </div>
+        </div>
+        <input type="hidden" name="jobworkdesc">
+    </form>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.js"></script>
+    @if (ViewData["Message"] != null)
+    {
+        <script type="text/javascript">
+
+            swal("success", 'Indent Created', "success");
+
+        </script>
+    }
+    <script>
+        $("#add").click(function() {
+            var indentdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+                var ItemId = $(this).closest('tr').find("td").eq(0).html();
+                var Jobworkid = $("#searchtext").val();
+                var Demand = $(this).closest('tr').find("td:eq(5) input").val();
+                var indent = {};
+                indent.ItemCode = ItemId;
+                indent.Jobworkid = Jobworkid;
+                indent.Demand = Demand;
+                indentdesc.push(indent);
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
+        });
+
+
+        $(document).ready(function() {
+            // code to read selected table row cell data (values).
+            $(document).on('blur', '#orders .demand', function() {
+                var currentRow = $(this).closest("tr");
+                var BomQty = parseInt(currentRow.find("td").eq(2).html());
+                var Demand = parseInt(currentRow.find("td:eq(5) input").val());
+                if (BomQty < Demand) {
+                    alert("Invalid Qty");
+                    return;
+                }
+            })
+        });
+
+    </script>
+
+}

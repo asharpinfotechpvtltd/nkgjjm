@@ -1,0 +1,103 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Village.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Village/Index">Village</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Village</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Add Village
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
+                    <select id="ddldistname" type="text" asp-for="Villages.District" asp-items="Model.Districts" class="form-control">
+                        <option>Select District Name</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Block Name</label>
+                    <select id="ddlblock" asp-for="Villages.Block" class="form-control">
+                        <option>Select Block</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Gram Panchyaat</label>
+                    <select id="ddlGramPanchyaat" asp-for="Villages.GramPanchayat" class="form-control">
+                        <option>Select GramPanchayat</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Village Name</label>
+                    <input type="text" id="txtgrampanchyaat" asp-for="Villages.Village" class="form-control" />
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Village Code</label>
+                    <input type="text" id="txtvillagecode" asp-for="Villages.VillageCode" class="form-control" />
+                </div>
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <button class="btn btn-primary">Add Village</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+       <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/CustomJs/Block.js"></script>
+    <script>
+        $("#ddlblock").change(function() {            
+            $("#ddlGramPanchyaat").empty();
+            $.ajax({
+                type: "GET",
+                url: "/api/GpByBlock",
+                data: { id: $("#ddlblock").val() },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                success: function(response) {
+                    console.log(response);
+                    $("#ddlGramPanchyaat").prepend("<option value='' selected='selected'>Select Gram Panchaayat</option>");
+                    $.each(response, function(i, item) {
+                        var html = '';
+                        html += "<option value=" + item.id + ">" + item.gramPanchayat + "</option>";
+                        $("#ddlGramPanchyaat").append(html);
+
+                    })
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+
+
+
+
+    </script>
+    }

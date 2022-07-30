@@ -1,0 +1,91 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Users.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/gp/Index">Users</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Users</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Add Users
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Username</label>
+                    <input asp-for="User.Username" class="form-control" />
+                    <span asp-validation-for="User.Username" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="User.Email" class="form-label sm:w-20"></label>
+                    <input asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="User.Mobile" class="form-label sm:w-20"></label>
+                    <input asp-for="User.Mobile" class="form-control" />
+                    <span asp-validation-for="User.Mobile" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="User.Address" class="form-label sm:w-20"></label>
+                    <input asp-for="User.Address" class="form-control" />
+                    <span asp-validation-for="User.Address" class="text-danger"></span>
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="User.Designation" class="form-label sm:w-20"></label>
+                    <select asp-items="@Model.Designation" name="Designation" class="form-control">
+                        <option>Select Designation</option>
+                    </select>
+                    
+                </div>
+                <div class="form-inline mt-5">
+                    <label asp-for="User.Password" class="form-label sm:w-20"></label>
+                    <input asp-for="User.Password" class="form-control" id="pwd" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
+                </div>
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+
+        <script>
+
+            $(document).ready(function() {
+                $("#pwd").val(makeid());
+            });
+
+            function makeid() {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for (var i = 0; i < 8; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }
+
+            console.log(makeid());
+        </script>
+    }
+    }

@@ -1,0 +1,200 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.Warehouseincharge.ViewIndentModel
+@{
+}
+<link media="screen" rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.css" />
+<link media="screen" rel="stylesheet" href='https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.css' />
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">View Indent Requisition- Warehouse</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Indent Requisition- Warehouse
+</h2>
+
+<div id="horizontal-form" class="p-5">
+    <form method="post" asp-page-handler="Search">
+        <div class="preview">
+            <div class="form-inline">
+
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job id </strong></label>
+                <input type="text" name="searchtext" class="form-control" readonly id="searchtext" value="@Model.searching" style="background-color:wheat;" />
+
+            </div>
+        </div>
+        <div class="preview">
+            <div class="form-inline mt-5">
+
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Indent Master id </strong></label>
+                <input type="text" name="IndentMasterid" class="form-control" readonly id="searchtext" value="@Model.IndentMasterid" style="background-color:wheat;" />
+
+            </div>
+        </div>
+        <div class="preview">
+            <div class="form-inline mt-5">
+
+                <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Status </strong></label>
+                <select name="status" class="form-control" id="searchtext">
+                    <option>
+                        Select
+                    </option>
+                    <option value="Approve">
+                        Approve
+                    </option>
+                    <option value="Reject">
+                        Reject
+                    </option>
+                    <option value="Partial Approved">
+                        Partial Approved
+                    </option>
+                </select>
+
+            </div>
+        </div>
+        <div class="preview">
+            <div class="form-inline mt-5">
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
+
+
+            </div>
+        </div>
+    </form>
+</div>
+@if (Model.SPMaterialIssuance != null && Model.SPMaterialIssuance.Count > 0)
+{
+    <form method="post" asp-page-handler="CreateIndent">
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Id
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Bom  Qty
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Picked Qty
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Balance
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Demand
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            In Stock
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Status
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.SPMaterialIssuance)
+                    {
+                        
+                        if (item.Demand > item.Instock)
+                        {
+                            <tr style="background-color:#FFCCCB">
+
+                                <td class="text-center" style="background-color:#FFCCCB">@item.RawMaterialId</td>
+                                <td class="text-center" style="background-color:#FFCCCB">@item.ItemName</td>
+                                <td class="text-center" style="background-color:#FFCCCB">@item.BomQty</td>
+                                <td class="text-center" style="background-color:#FFCCCB">@item.Pickedqty</td>
+                                <td class="text-center" style="background-color:#FFCCCB">@item.BalanceQty</td>
+                                <td class="text-center" style="background-color:#FFCCCB">@item.Demand</td>
+                                <td class="text-center" style="background-color:#FFCCCB">@item.Instock</td>
+
+                                <td class="text-center" style="background-color:#FFCCCB">
+                                    N/A
+                                </td>
+
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+
+                                <td class="text-center">@item.RawMaterialId</td>
+                                <td class="text-center">@item.ItemName</td>
+                                <td class="text-center">@item.BomQty</td>
+                                <td class="text-center">@item.Pickedqty</td>
+                                <td class="text-center">@item.BalanceQty</td>
+                                <td class="text-center">@item.Demand</td>
+                                <td class="text-center">@item.Instock</td>
+
+                                <td class="text-center">
+                                    <input type="button" value="Approve" id="Approve" class="btn btn-primary Approve" />
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+
+
+
+        </div>
+
+    </form>
+}
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.js"></script>
+    @if (ViewData["Message"] != null)
+    {
+        <script type="text/javascript">
+
+            swal("success", 'Indent Status Updated', "success");
+
+        </script>
+    }
+
+
+
+
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '#orders .Approve', function() {
+                var jobid = '@Model.searching';
+                var IndentMasterid = '@Model.IndentMasterid';
+                var currentRow = $(this).closest("tr");
+                var Itemid = currentRow.find("td").eq(0).html();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/Indent",
+                    data: { jobid: jobid, IndentMasterid: IndentMasterid, Itemid: Itemid },
+                    contentType: "application/json",
+                    dataType: "text",
+                    async: true,
+                    success: function(response) {
+                        alert("Updated");
+                        var status = currentRow.find(".Approve").prop('disabled', true);
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+
+
+
+                });
+            });
+        });
+    </script>
+
+}

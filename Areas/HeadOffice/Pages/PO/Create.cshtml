@@ -1,0 +1,227 @@
+﻿@page
+@model Nkgjjm.Areas.Panel.Pages.PO.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<link media="screen" rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.css" />
+<link media="screen" rel="stylesheet" href='https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.css' />
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/PO/Index">PO</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create PO</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Create PO
+</h2>
+<div class="intro-y box mt-5 mb-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">Supplier Name</label>
+                    <select id="ddldistname" name="suppliername" asp-items="Model.Supplier" type="text" class="form-control">
+                        <option>Select Supplier</option>
+                    </select>
+                </div>
+
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Purchase Order No</label>
+                    <input type="text" id="purchaseorderno" name="PoNumber" class="form-control" />
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report orders" id="orders">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Id
+                        </th>
+
+
+                        <th class="text-center whitespace-nowrap">
+                            Qty
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Unit
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Warehouse
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <select asp-items="@Model.ItemMasters" class="form-control product_itemcode" id="product_itemcode_1">
+                                <option>Select</option>
+                            </select>
+                        </td>
+
+
+                        <td><input class="form-control quantity" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
+                        <td><input type="text" class="form-control product_unit" id="product_unit_1" name='product_unit[]' for="1" readonly /></td>
+
+                        <td><select class="form-control warehouse" asp-items="@Model.Warehouse" id='Warehouse' name='warehouse[]' for='1'><option>Select Warehouse</option></select></td>
+                        <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="sm:pl-5 mt-1 mb-5">
+            <input type="submit" value="Submit" id="Createpo" class="btn btn-primary" />
+            <!-- END: Data List -->
+        </div>
+        <input type="hidden" name="jobworkdesc" />
+    </form>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.js"></script>
+    @if (ViewData["Message"] != null)
+    {
+        <script type="text/javascript">
+
+            swal("success", 'Po Created', "success");
+
+        </script>
+    }
+    <script>
+        var rowCount = 1;
+        $('#add').click(function() {
+            rowCount++;
+
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemcode"></select></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control product_unit" readonly id="product_unit_1" name="product_unit[]" for="1"/></td><td><select class="form-control warehouse" id="Warehouse" for="1"><option>Select Warehouse</option></select></td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+
+            var tags = @Html.Raw(Json.Serialize(Model.ItemList));
+
+            var items = '';
+            items += "<option>Select</option>";
+            $.each(tags, function(i, ingredient) {
+                items += '<option value=' + tags[i].itemCode + '>' + tags[i].itemCode + '-' + tags[i].itemName + '</option>';
+            });
+            var warehouse = @Html.Raw(Json.Serialize(Model.WarehouseList));
+            var warehouseitem = '';
+            warehouseitem += "<option>Select Warehouse</option>";
+            $.each(warehouse, function(i, ingredient) {
+                warehouseitem += '<option value=' + warehouse[i].id + '>' + warehouse[i].warehouseName + '</option>';
+                console.log(warehouse);
+            });
+            $("#orders tr:last").find('.product_itemcode').html(items);
+            $("#orders tr:last").find('.warehouse').html(warehouseitem);
+        });
+
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr('id');
+            $('#row' + button_id + '').remove();
+        });
+
+
+
+
+
+
+        $("#Createpo").click(function(e) {
+            var jobworkdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+                var Productid = $(this).closest('tr').find("td:eq(0) select").val();
+                var Qty = $(this).closest('tr').find("td:eq(1) input").val();
+                var Warehouse = $(this).closest('tr').find("td:eq(3) select").val();
+                var Delivery = {};
+                Delivery.Productid = Productid;
+                Delivery.Qty = Qty;
+                Delivery.Warehuose = Warehouse;
+                jobworkdesc.push(Delivery);
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
+        });
+
+        $(document).ready(function() {
+
+            $(document).on('change', '#orders .product_itemcode', function() {
+                var currentRow = $(this).closest("tr");
+                var Productid = currentRow.find("td:eq(0) select").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/ItemMasters",
+                    data: { Productid: Productid },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    success: function(response) {
+
+                        currentRow.find("td:eq(2) input").val(response[0]["unitName"]);
+
+
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+                });
+            });
+        });
+
+
+
+
+        $(document).ready(function() {
+            $('#purchaseorderno').keyup(function() {
+                $(this).val($(this).val().toUpperCase());
+            });
+        });
+
+        $("#purchaseorderno").blur(function() {
+            $.ajax({
+                type: "GET",
+                url: "/api/PoCheck",
+                data: { Po: $("#purchaseorderno").val() },
+                contentType: "application/json",
+                dataType: "text",
+                async: true,
+                success: function(response) {
+                    if (response == "NA") {
+                        $("#Createpo").hide();
+                        
+                        alert('Po No Already Exist');
+                        
+                    }
+                    else {
+                        $("#Createpo").show();
+                    }
+
+
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+
+
+
+
+
+
+    </script>
+
+
+}
+

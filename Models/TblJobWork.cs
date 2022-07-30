@@ -12,14 +12,12 @@ namespace Nkgjjm.Models
         public int Block { get; set; }
         public int GramPanchaayat { get; set; }
         public Int64 VillageCode { get; set; }
-        public int ContractorId { get; set; }
-        public string JobWorkDesc { get; set; }
-        public int JobWorkCategory { get; set; }
-        public string Unit { get; set; }        
-        public DateTime Date { get; set; }
-        public double Rate { get; set; }
+        public int ContractorId { get; set; }        
+        public int JobWorkCategory { get; set; }        
+        public string Date { get; set; }       
         public bool IsBomGenerated { get; set; }
         public bool Iscompleted { get; set; }
+        public int Warehouseid { get; set; }
 
 
     }

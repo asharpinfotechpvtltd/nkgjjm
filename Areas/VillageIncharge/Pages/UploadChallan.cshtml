@@ -1,0 +1,48 @@
+﻿@page
+@model Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge.UploadChallanModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/ItemsMaster/Index">ItemsMaster</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Upload Challan</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Upload Challan
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post"  enctype="multipart/form-data">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label class="form-label sm:w-20">job Id</label>
+                    <input asp-for="@Model.jobid" readonly class="form-control" />
+                    
+                </div>
+                <div class="form-inline mt-5">
+                    <label class="form-label sm:w-20">Indent Masterid</label>
+                    <input asp-for="@Model.IndentMasterid" readonly class="form-control" />                    
+                </div>
+                <div class="form-inline mt-5">
+                    <label class="form-label sm:w-20">Upload Challan</label>
+                     <input type="file" class="form-control" name="challan" />
+                </div>
+                
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

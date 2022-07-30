@@ -55,6 +55,20 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SpHoClosure>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpUpdateQty>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpWarehouseStocklog>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPCreateIndent>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpIndentMasterForSiteEngineer>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPStockBook>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpGetIndentChallan>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpSearchWarehouseStock>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpUserList>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpIndentPendingReport>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpItemBasedOnBom>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpReportByAll>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPValidateByHo>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpInwardReport>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpOutwardReport>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpFreezedReport>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpReturnedFreshStock>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -67,7 +81,7 @@ namespace Nkgjjm.Models
         public virtual DbSet<GramPanchayats> TblGramPanchayat { get; set; }
         public virtual DbSet<Villages> TblVillageCode { get; set; }
         public virtual DbSet<Districts> TblDistrict { get; set; }
-        public virtual DbSet<VillageIncharges> TblVillageIncharge { get; set; }
+        public virtual DbSet<VillageIncharges> TblVillageInchargeForWareHouse { get; set; }
         public virtual DbSet<WarehouseIncharges> TblWarehouseIncharge { get; set; }
         public virtual DbSet<JobWorkcategories> TblJobWorkCategory { get; set; }
         public virtual DbSet<JobWork> TblJobWork { get; set; }
@@ -89,6 +103,9 @@ namespace Nkgjjm.Models
         public virtual DbSet<Challan> TblChallan { get; set; }
         public virtual DbSet<PoVehicleDetail> TblPoVehicleDetail { get; set; }
         public virtual DbSet<Closure> TblClosure { get; set; }
+        public virtual DbSet<IndentChallan> TblIndentChallan { get; set; }
+        public virtual DbSet<StockPassbook> TblStockPassbook { get; set; }
+     
 
 
 
@@ -101,8 +118,7 @@ namespace Nkgjjm.Models
         public virtual DbSet<SPVillageIncharge> SPVillageIncharge { get; set; }
         public virtual DbSet<SPWarehouseList> SPWarehouseList { get; set; }
         public virtual DbSet<SPJobWorkList> SPJobWorkList { get; set; }
-        public virtual DbSet<SPItemInWareHouse> SPItemInWareHouse { get; set; }
-        
+        public virtual DbSet<SPItemInWareHouse> SPItemInWareHouse { get; set; }        
         public virtual DbSet<SPMaterialIssuance> SPMaterialIssuance { get; set; }
         public virtual DbSet<SPItemList> SPItemList { get; set; }
         public virtual DbSet<SPTotalCount> SPTotalCount { get; set; }
@@ -121,9 +137,21 @@ namespace Nkgjjm.Models
         public virtual DbSet<SpHoClosure> SpHoClosure { get; set; }
         public virtual DbSet<SpUpdateQty> SpUpdateQty { get; set; }
         public virtual DbSet<SpWarehouseStocklog> SpWarehouseStocklog { get; set; }
-        
+        public virtual DbSet<SPCreateIndent> SPCreateIndent { get; set; }
+        public virtual DbSet<SpIndentMasterForSiteEngineer> SpIndentMasterForSiteEngineer { get; set; }
+        public virtual DbSet<SPStockBook> SPStockBook { get; set; }
+        public virtual DbSet<SpGetIndentChallan> SpGetIndentChallan { get; set; }
+        public virtual DbSet<SpSearchWarehouseStock> SpSearchWarehouseStock { get; set; }
+        public virtual DbSet<SpUserList> SpUserList { get; set; }
+        public virtual DbSet<SpIndentPendingReport> SpIndentPendingReport { get; set; }
+        public virtual DbSet<SpItemBasedOnBom> SpItemBasedOnBom { get; set; }
+        public virtual DbSet<SpReportByAll> SpReportByAll { get; set; }
+        public virtual DbSet<SPValidateByHo> SPValidateByHo { get; set; }
+        public virtual DbSet<SpInwardReport> SpInwardReport { get; set; }
+        public virtual DbSet<SpOutwardReport> SpOutwardReport { get; set; }
+        public virtual DbSet<SpFreezedReport> SpFreezedReport { get; set; }
+        public virtual DbSet<SpReturnedFreshStock> SpReturnedFreshStock { get; set; }
 
-        
         #endregion
 
 
