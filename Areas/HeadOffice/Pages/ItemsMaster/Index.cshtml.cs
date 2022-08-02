@@ -25,18 +25,32 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 
         public async Task OnGetAsync()
         {
-            if (_context.TblItemMaster != null)
+            try
             {
-                var parameter = new SqlParameter("@Searchtext", DBNull.Value);
-                ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext",parameter).ToListAsync();
-                TotalItem= await _context.TblItemMaster.CountAsync();
+                if (_context.TblItemMaster != null)
+                {
+                    var parameter = new SqlParameter("@Searchtext", DBNull.Value);
+                    ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
+                    TotalItem = await _context.TblItemMaster.CountAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
         }
         public async Task<IActionResult> OnPost(string ItemName)
-        {            
-            var parameter = new SqlParameter("@Searchtext", ItemName);
-            ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
-            TotalItem = await _context.TblItemMaster.Where(i => i.ItemName == ItemName).CountAsync();
+        {
+            try
+            {
+                var parameter = new SqlParameter("@Searchtext", ItemName);
+                ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
+                TotalItem = await _context.TblItemMaster.Where(i => i.ItemName == ItemName).CountAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

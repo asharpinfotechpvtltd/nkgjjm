@@ -62,21 +62,7 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages
             TotalUser = await _context.TblUser.CountAsync();
             TotalInactiveUser = await _context.TblUser.Where(u=>u.Status==false).CountAsync();
             int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
-            //if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
-            //{
-            //    DateTime timeUtc = System.DateTime.UtcNow;
-            //    TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
-            //    DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cstZone);
-            //    string date = cstTime.ToString("dd-MM-yyyy");
-            //    string time = cstTime.ToString("HH:mm");
-            //    string logedin = HttpContext.Session.GetString("Login");
-
-            //    
-            //}
-            //else
-            //{
-            //    return RedirectToPage("./AdminLogin");
-            //}
+            
             return Page();
 
 

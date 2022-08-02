@@ -59,6 +59,9 @@
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Warehouse Id</strong></label>
                     <input type="text" class="form-control" readonly asp-for="@Model.warehouse_id" name="warehouse" id="warehouse" />
 
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Warehouse Name</strong></label>
+                    <input type="text" class="form-control" readonly asp-for="@Model.WarehouseName" name="warehouse" id="warehouseName" />
+
                 </div>
 
             </div>
@@ -109,23 +112,32 @@
             <div id="horizontal-form" class="p-5">
                 <div class="preview">
                     <div class="form-inline">
-
                         <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Po Id </strong></label>
                         <select name="status" class="form-control" id="ddlstatus">
+                            <option value="Select">Select</option>
                             <option value="Approved">Approved</option>
                             <option value="Rejected">Rejected</option>
                         </select>
-
                     </div>
-                    <div class="form-inline mt-5" style="visibility:hidden;" id="transactionno">
-
-                        <label for="horizontal-form-1" class="form-label sm:w-20"  ><strong>Transaction No</strong></label>
-                        <input type="text" class="form-control"  asp-for="@Model.PoVehicledetail.ChallanNumber" id="txttransactionno" />
+                </div>
+            </div>
+            <div id="horizontal-form" class="p-5 transactionno">
+                <div class="preview">
+                    <div class="form-inline">
+                        <div class="form-inline mt-5" >
+                            <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transaction No</strong></label>
+                            <input type="text" class="form-control" id="txttransactionno"  name="txttransactionno"/>
+                        </div>
                     </div>
-                    <div class="form-inline mt-5" style="visibility:hidden;" id="reason">
-                        <label for="horizontal-form-1" class="form-label sm:w-20"  ><strong>Reason</strong></label>
-                        <input type="text" class="form-control" id="txtreason" />
-
+                </div>
+            </div>
+            <div id="horizontal-form" class="p-5 reason">
+                <div class="preview">
+                    <div class="form-inline">
+                        <div class="form-inline mt-5" >
+                            <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Reason</strong></label>
+                            <input type="text" class="form-control" id="txtreason" name="txtreason" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,15 +187,15 @@
 
         $("#ddlstatus").change(function() {
             if ($("#ddlstatus").val() == "Approved") {
-                $("#transactionno").show();
+                $(".transactionno").show();
                 $("#txttransactionno").show();
-                $("#reason").hide();
+                $(".reason").hide();
                 $("#txtreason").hide();
             }
             else if ($("#ddlstatus").val() == "Rejected") {
-                $("#reason").show();
+                $(".reason").show();
                 $("#txtreason").show();
-                $("#transactionno").hide();
+                $(".transactionno").hide();
                 $("#txttransactionno").hide();
             }
         });

@@ -30,11 +30,18 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
        
         public async Task<IActionResult> OnGet()
         {
-            District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
-            Contractor = await _context.TblContractor.Select(a => new SelectListItem { Text = a.ContractorName, Value = a.ContractorId.ToString() }).ToListAsync();
-            JobWorkCategory = await _context.TblJobWorkCategory.Select(a => new SelectListItem { Text = a.JobWorkcategory, Value = a.Id.ToString() }).ToListAsync();
-            Warehouse = await _context.TblWarehouse.Select(a => new SelectListItem { Text = a.WarehouseName, Value = a.Id.ToString() }).ToListAsync();
-            return Page();
+            try
+            {
+                District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+                Contractor = await _context.TblContractor.Select(a => new SelectListItem { Text = a.ContractorName, Value = a.ContractorId.ToString() }).ToListAsync();
+                JobWorkCategory = await _context.TblJobWorkCategory.Select(a => new SelectListItem { Text = a.JobWorkcategory, Value = a.Id.ToString() }).ToListAsync();
+                Warehouse = await _context.TblWarehouse.Select(a => new SelectListItem { Text = a.WarehouseName, Value = a.Id.ToString() }).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
+                return Page();
         }
 
         [BindProperty]
@@ -44,27 +51,33 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            JobWork.Date = date.ReturnDateTime();
-            await _context.TblJobWork.AddAsync(JobWork);
-            string jobworkJSON = Request.Form["jobworkdesc"];
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
-
-            for (int i = 0; i < dt.Rows.Count; i++)
+            try
             {
-                if (!string.IsNullOrEmpty(dt.Rows[i][2].ToString()))
-                {
-                    string Particular = dt.Rows[i][0].ToString();
-                    string Unit = Convert.ToString(dt.Rows[i][1]);
-                    double Rate =Convert.ToDouble(dt.Rows[i][2].ToString());
-                    JobDescription desc = new JobDescription();
-                    desc.Unit = Unit;
-                    desc.Particular = Particular;
-                    desc.Rate = Rate;
-                    desc.JobWorkid = JobWork.WorkorderId;
-                    await _context.TblJobDescription.AddAsync(desc);
-                    await _context.SaveChangesAsync();
+                JobWork.Date = date.ReturnDateTime();
+                await _context.TblJobWork.AddAsync(JobWork);
+                string jobworkJSON = Request.Form["jobworkdesc"];
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (!string.IsNullOrEmpty(dt.Rows[i][2].ToString()))
+                    {
+                        string Particular = dt.Rows[i][0].ToString();
+                        string Unit = Convert.ToString(dt.Rows[i][1]);
+                        double Rate = Convert.ToDouble(dt.Rows[i][2].ToString());
+                        JobDescription desc = new JobDescription();
+                        desc.Unit = Unit;
+                        desc.Particular = Particular;
+                        desc.Rate = Rate;
+                        desc.JobWorkid = JobWork.WorkorderId;
+                        await _context.TblJobDescription.AddAsync(desc);
+                        await _context.SaveChangesAsync();
+
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
             }
             return RedirectToPage("./Index");
         }

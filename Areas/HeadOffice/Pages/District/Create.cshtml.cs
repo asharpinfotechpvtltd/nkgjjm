@@ -30,13 +30,20 @@ namespace Nkgjjm.Areas.Panel.Pages.District
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblDistrict == null || Districts == null)
+            try
             {
-                return Page();
-            }
+                if (!ModelState.IsValid || _context.TblDistrict == null || Districts == null)
+                {
+                    return Page();
+                }
 
-            _context.TblDistrict.Add(Districts);
-            await _context.SaveChangesAsync();
+                _context.TblDistrict.Add(Districts);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             return RedirectToPage("./Index");
         }

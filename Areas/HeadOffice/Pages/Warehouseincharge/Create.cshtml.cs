@@ -37,9 +37,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          
-            _context.TblWarehouseIncharge.Add(WarehouseIncharges);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.TblWarehouseIncharge.Add(WarehouseIncharges);
+                await _context.SaveChangesAsync();
+            } catch(Exception ex)
+            {
+
+            }
 
             return Page();
         }

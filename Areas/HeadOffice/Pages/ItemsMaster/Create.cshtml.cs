@@ -33,9 +33,11 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync(string Desc)
+        public async Task<IActionResult> OnPostAsync(string? Desc)
         {
-            var param = new SqlParameter[] {
+            try
+            {
+                var param = new SqlParameter[] {
                         new SqlParameter() {
                             ParameterName = "@ItemName",
                             SqlDbType =  System.Data.SqlDbType.NVarChar,
@@ -69,24 +71,29 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
                             SqlDbType =  System.Data.SqlDbType.BigInt,
                             Direction = System.Data.ParameterDirection.Output
                         } };
-            await _context.Database.ExecuteSqlRawAsync("SPAddItem @ItemName,@UnitType,@AddedDate,@Description,@LastId out", param);
-            string Itemcode = Convert.ToString(param[4].Value);
+                await _context.Database.ExecuteSqlRawAsync("SPAddItem @ItemName,@UnitType,@AddedDate,@Description,@LastId out", param);
+                string Itemcode = Convert.ToString(param[4].Value);
 
-            var warehouselist = await _context.TblWarehouse.ToListAsync();
-            if (warehouselist != null)
-            {
-                foreach (var item in warehouselist)
+                var warehouselist = await _context.TblWarehouse.ToListAsync();
+                if (warehouselist != null)
                 {
-                    ItemToWarehouse warehouse = new ItemToWarehouse()
+                    foreach (var item in warehouselist)
                     {
-                        Date = date.ReturnDate(),
-                        ItemId = Convert.ToInt64(Itemcode),
-                        Qty = 0,
-                        WarehouseId = item.Id
-                    };
-                    await _context.TblItemToWarehouse.AddAsync(warehouse);
-                    await _context.SaveChangesAsync();
+                        ItemToWarehouse warehouse = new ItemToWarehouse()
+                        {
+                            Date = date.ReturnDate(),
+                            ItemId = Convert.ToInt64(Itemcode),
+                            Qty = 0,
+                            WarehouseId = item.Id
+                        };
+                        await _context.TblItemToWarehouse.AddAsync(warehouse);
+                        await _context.SaveChangesAsync();
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+
             }
 
 

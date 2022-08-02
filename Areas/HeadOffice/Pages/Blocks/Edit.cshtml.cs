@@ -26,17 +26,24 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblBlock == null)
+            try
             {
-                return NotFound();
+                if (id == null || _context.TblBlock == null)
+                {
+                    return NotFound();
+                }
+                District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+                var distblock = await _context.TblBlock.FirstOrDefaultAsync(m => m.Id == id);
+                if (distblock == null)
+                {
+                    return NotFound();
+                }
+                DistBlock = distblock;
             }
-            District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
-            var distblock =  await _context.TblBlock.FirstOrDefaultAsync(m => m.Id == id);
-            if (distblock == null)
+            catch(Exception ex)
             {
-                return NotFound();
+
             }
-            DistBlock = distblock;
             return Page();
         }
 

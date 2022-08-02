@@ -18,7 +18,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
 
         public async Task<IActionResult> OnGet()
         {
-            Grmmaster = await  _context.SpGrnMaster.FromSqlRaw("SpGrnMaster").ToListAsync();
+            try
+            {
+                Grmmaster = await _context.SpGrnMaster.FromSqlRaw("SpGrnMaster").ToListAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

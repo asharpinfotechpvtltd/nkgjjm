@@ -31,13 +31,20 @@ namespace Nkgjjm.Areas.Panel.Pages.Contractor
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.TblContractor == null || Contractors == null)
+            try
             {
-                return Page();
+                if (!ModelState.IsValid || _context.TblContractor == null || Contractors == null)
+                {
+                    return Page();
+                }
+                Contractors.AddedDate = date.ReturnDate();
+                _context.TblContractor.Add(Contractors);
+                await _context.SaveChangesAsync();
             }
-            Contractors.AddedDate = date.ReturnDate();
-            _context.TblContractor.Add(Contractors);
-            await _context.SaveChangesAsync();
+            catch(Exception ex)
+            {
+
+            }
             return RedirectToPage("./Index");
         }
     }

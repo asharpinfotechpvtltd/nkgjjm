@@ -28,31 +28,41 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
         public List<SPCreateIndent> SPMaterialIssuance { get; set; }
         public async Task<IActionResult> OnPostSearch(string searchtext)
         {
-            int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
-            var search = new SqlParameter("@JobWorkId", searchtext);
-            SPMaterialIssuance = await _context.SPCreateIndent.FromSqlRaw("SPCreateIndent @JobWorkId", search).ToListAsync();
-            searching = searchtext;
-            HttpContext.Session.SetString("Jobworkid", searchtext);
-            VillageIncharges incharges = await _context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == Userid);
-            int warehouseid = incharges.WarehouseId;
-            
-            HttpContext.Session.SetString("Warehouseid", warehouseid.ToString());
-            HttpContext.Session.SetString("Userid", Userid.ToString());
+            try
+            {
+                int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
+                var search = new SqlParameter("@JobWorkId", searchtext);
+                SPMaterialIssuance = await _context.SPCreateIndent.FromSqlRaw("SPCreateIndent @JobWorkId", search).ToListAsync();
+                searching = searchtext;
+                HttpContext.Session.SetString("Jobworkid", searchtext);
+                VillageIncharges incharges = await _context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == Userid);
+                if (incharges != null)
+                {
+                    int warehouseid = incharges.WarehouseId;
+                    HttpContext.Session.SetString("Warehouseid", warehouseid.ToString());
+                    HttpContext.Session.SetString("Userid", Userid.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
         public async Task<IActionResult> OnPostCreateIndent()
         {
-            GetUserDate date = new GetUserDate();
-            string ViId = HttpContext.Session.GetString("Login");
-            int warehouseid = Convert.ToInt32(HttpContext.Session.GetString("Warehouseid"));
-            
-            string jobworkJSON = Request.Form["jobworkdesc"];
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
-            string Jobworkid = HttpContext.Session.GetString("Jobworkid");
-            if (dt.Rows.Count > 0)
+            try
             {
-                
-                var param = new SqlParameter[] {
+                GetUserDate date = new GetUserDate();
+                string ViId = HttpContext.Session.GetString("Login");
+                int warehouseid = Convert.ToInt32(HttpContext.Session.GetString("Warehouseid"));
+                string jobworkJSON = Request.Form["jobworkdesc"];
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
+                string Jobworkid = HttpContext.Session.GetString("Jobworkid");
+                if (dt.Rows.Count > 0)
+                {
+
+                    var param = new SqlParameter[] {
                         new SqlParameter() {
                             ParameterName = "@Jobworkid",
                             SqlDbType =  System.Data.SqlDbType.VarChar,
@@ -85,28 +95,33 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
                             Size=100,
                             Direction = System.Data.ParameterDirection.Output
                         } };
-                await _context.Database.ExecuteSqlRawAsync("SPIndentMaster @Jobworkid,@VillageInchargeEmail,@WareHouseid,@Date,@IndentMasterId out", param);
-                string IndentMasterid = Convert.ToString(param[4].Value);
+                    await _context.Database.ExecuteSqlRawAsync("SPIndentMaster @Jobworkid,@VillageInchargeEmail,@WareHouseid,@Date,@IndentMasterId out", param);
+                    string IndentMasterid = Convert.ToString(param[4].Value);
 
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    if (!string.IsNullOrEmpty(dt.Rows[i][2].ToString()))
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        Indent issuance = new Indent()
+                        if (!string.IsNullOrEmpty(dt.Rows[i][2].ToString()))
                         {
-                            ItemCode = Convert.ToInt64(dt.Rows[i][1]),
-                            Jobworkid = Convert.ToString(dt.Rows[i][0]),
-                            Demand = Convert.ToDouble(dt.Rows[i][2]),
-                            Status = "Pending",
-                            IndentMasterid=Convert.ToInt64(IndentMasterid)
+                            Indent issuance = new Indent()
+                            {
+                                ItemCode = Convert.ToInt64(dt.Rows[i][1]),
+                                Jobworkid = Convert.ToString(dt.Rows[i][0]),
+                                Demand = Convert.ToDouble(dt.Rows[i][2]),
+                                Status = "Pending",
+                                IndentMasterid = Convert.ToInt64(IndentMasterid)
 
-                        };
-                        await _context.TblIndent.AddAsync(issuance);
-                        await _context.SaveChangesAsync();
+                            };
+                            await _context.TblIndent.AddAsync(issuance);
+                            await _context.SaveChangesAsync();
+                        }
                     }
                 }
+                ViewData["Message"] = "Indent Created";
             }
-            ViewData["Message"] = "Indent Created";
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

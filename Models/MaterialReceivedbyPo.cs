@@ -11,6 +11,9 @@ namespace Nkgjjm.Models
         public double RcvdQty { get; set; }
         public double Challanqty { get; set; }
         public string Challan_Invoicenumber { get; set; }
+        public string Status { get; set; }
+        public string? TransactionId { get; set; }
+        public string? Reason { get; set; }
         public int Warehouse { get; set; }
 
 

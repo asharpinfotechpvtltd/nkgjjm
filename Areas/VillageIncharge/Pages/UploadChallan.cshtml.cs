@@ -40,16 +40,23 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
 
         public async Task<IActionResult> OnPost(string jobid, int IndentMasterid)
         {
-            Upload u = new Upload(Environmet);
-            challanName = u.UploadImage(challan, "Challan");
-            IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == jobid);
-            var indentchallan = await _context.TblIndentChallan.FirstOrDefaultAsync(e => e.Jobworkid == jobid && e.IndentMasterId == IndentMasterid);
-            if (indentchallan != null) 
+            try
             {
-                indentchallan.VillageinchargeFile = challanName;
-            } 
-            await _context.SaveChangesAsync();            
-            ViewData["Message"] = "Challan Updated";
+                Upload u = new Upload(Environmet);
+                challanName = u.UploadImage(challan, "Challan");
+                IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == jobid);
+                var indentchallan = await _context.TblIndentChallan.FirstOrDefaultAsync(e => e.Jobworkid == jobid && e.IndentMasterId == IndentMasterid);
+                if (indentchallan != null)
+                {
+                    indentchallan.VillageinchargeFile = challanName;
+                }
+                await _context.SaveChangesAsync();
+                ViewData["Message"] = "Challan Updated";
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             return Page();
         }

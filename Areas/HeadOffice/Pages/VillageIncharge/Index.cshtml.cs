@@ -23,9 +23,15 @@ namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
 
         public async Task OnGetAsync()
         {
-            if (_context.TblVillageCode != null)
+            try
             {
-                VillageIncharge = await _context.SPVillageIncharge.FromSqlRaw("SPVillageIncharge").ToListAsync();
+                if (_context.TblVillageCode != null)
+                {
+                    VillageIncharge = await _context.SPVillageIncharge.FromSqlRaw("SPVillageIncharge").ToListAsync();
+                }
+            } catch(Exception ex)
+            {
+
             }
         }
     }

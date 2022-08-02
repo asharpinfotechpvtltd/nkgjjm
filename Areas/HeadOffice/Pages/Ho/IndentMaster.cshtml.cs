@@ -18,7 +18,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public List<SPIndentMaster> IndentMaster { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            IndentMaster =await _context.SPIndentMaster.FromSqlRaw("SpGetIndentforHo").ToListAsync();
+            try
+            {
+                IndentMaster = await _context.SPIndentMaster.FromSqlRaw("SpGetIndentforHo").ToListAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

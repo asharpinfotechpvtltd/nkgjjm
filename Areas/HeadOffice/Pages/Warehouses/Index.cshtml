@@ -37,11 +37,13 @@
             <thead style="background: navy; color: white;">
                 <tr>
                     <th class="text-center whitespace-nowrap">S.no.</th>
+                    <th class="text-center whitespace-nowrap">W/H Id</th>
                     <th class="text-center whitespace-nowrap">Warehouse Name</th>
                     <th class="text-center whitespace-nowrap">District</th>
                     <th class="text-center whitespace-nowrap">Block</th>
                     <th class="text-center whitespace-nowrap">Grampanchyat</th>
                     <th class="text-center whitespace-nowrap">Village</th>
+                    <th class="text-center whitespace-nowrap">Assign W/H Incharge</th>
                     
                 </tr>
             </thead>
@@ -54,6 +56,9 @@
                             @i
                         </td>
                         <td class="text-center">
+                            @item.id
+                        </td>
+                        <td class="text-center">
                             @item.WarehouseName
 
                         </td>
@@ -61,6 +66,7 @@
                         <td class="text-center">@item.Block</td>
                         <td class="text-center">@item.Grampanchayat</td>
                         <td class="text-center">@item.Village</td>
+                        <td class="text-center"><a asp-page="/Warehouseincharge/Create" style="color:blue;">Assign</a> </td>
 
                         
                     </tr>

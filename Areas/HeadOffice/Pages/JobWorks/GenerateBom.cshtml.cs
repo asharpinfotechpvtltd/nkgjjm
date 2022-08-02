@@ -30,42 +30,55 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
 
         public async Task<IActionResult> OnGet(string id)
         {
-            JobWorkid = id;
-            ItemList = await _context.TblItemMaster.ToListAsync();            
-            ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
-            JobDescriptionList = await _context.TblJobDescription.Where(j => j.JobWorkid == JobWorkid).Select(a => new SelectListItem { Text = a.Particular, Value = a.id.ToString() }).ToListAsync();
-            JobDescription = await _context.TblJobDescription.Where(j => j.JobWorkid == JobWorkid).ToListAsync();
+            try
+            {
+                JobWorkid = id;
+                ItemList = await _context.TblItemMaster.ToListAsync();
+                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
+                JobDescriptionList = await _context.TblJobDescription.Where(j => j.JobWorkid == JobWorkid).Select(a => new SelectListItem { Text = a.Particular, Value = a.id.ToString() }).ToListAsync();
+                JobDescription = await _context.TblJobDescription.Where(j => j.JobWorkid == JobWorkid).ToListAsync();
+            }
+            catch(Exception ex)
+            {
 
+            }
             return Page();
         }
         public async Task<IActionResult> OnPost(string JobWorkId)
         {
-            Bom.JobWorkId = JobWorkId;
-            GetUserDate date = new GetUserDate();
-            var jobwork = await _context.TblJobWork.FirstOrDefaultAsync(e => e.WorkorderId == JobWorkId);
-            if(JobWorkId!=null)
+            try
             {
-                jobwork.IsBomGenerated = true;
-            }
-            string jobworkJSON = Request.Form["jobworkdesc"];
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
+                Bom.JobWorkId = JobWorkId;
+                GetUserDate date = new GetUserDate();
+                var jobwork = await _context.TblJobWork.FirstOrDefaultAsync(e => e.WorkorderId == JobWorkId);
+                if (JobWorkId != null)
                 {
-                    string Productid = dt.Rows[i][0].ToString();
-                    string Qty = Convert.ToString(dt.Rows[i][1]);
-                    Bom desc = new Bom()
-                    {
-                        AssignedDate= date.ReturnDate(),
-                        JobWorkId=JobWorkId,
-                        RawMaterialId=Convert.ToInt64(Productid),
-                        Qty=Convert.ToDouble(Qty)
-                     };
-                    await _context.TblBom.AddAsync(desc);
-                    await _context.SaveChangesAsync();
+                    jobwork.IsBomGenerated = true;
                 }
-            }      
+                string jobworkJSON = Request.Form["jobworkdesc"];
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
+                    {
+                        string Productid = dt.Rows[i][0].ToString();
+                        string Qty = Convert.ToString(dt.Rows[i][1]);
+                        Bom desc = new Bom()
+                        {
+                            AssignedDate = date.ReturnDate(),
+                            JobWorkId = JobWorkId,
+                            RawMaterialId = Convert.ToInt64(Productid),
+                            Qty = Convert.ToDouble(Qty)
+                        };
+                        await _context.TblBom.AddAsync(desc);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            } 
+            catch(Exception ex)
+            {
+
+            }
             return Redirect("Index");
         }
     }

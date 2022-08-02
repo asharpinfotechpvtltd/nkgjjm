@@ -25,20 +25,34 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
 
         public async Task OnGetAsync()
         {
-            if (_context.TblGramPanchayat != null)
+            try
             {
-                var gp = new SqlParameter("@Gp", DBNull.Value);
-                GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock @Gp", gp).ToListAsync();
-                GpCount = await _context.TblGramPanchayat.CountAsync();
+                if (_context.TblGramPanchayat != null)
+                {
+                    var gp = new SqlParameter("@Gp", DBNull.Value);
+                    GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock @Gp", gp).ToListAsync();
+                    GpCount = await _context.TblGramPanchayat.CountAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
         }
         public async Task OnPostAsync(string Gp)
         {
-            if (_context.TblGramPanchayat != null)
+            try
             {
-                var gp = new SqlParameter("@Gp", Gp);
-                GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock @Gp", gp).ToListAsync();
-                GpCount =  GramPanchayats.Count;
+                if (_context.TblGramPanchayat != null)
+                {
+                    var gp = new SqlParameter("@Gp", Gp);
+                    GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock @Gp", gp).ToListAsync();
+                    GpCount = GramPanchayats.Count;
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
         }
     }

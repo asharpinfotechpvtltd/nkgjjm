@@ -35,10 +35,16 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          
+            try
+            {
 
-          await  _context.TblBlock.AddAsync(DistBlock);
-            await _context.SaveChangesAsync();
+                await _context.TblBlock.AddAsync(DistBlock);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             return RedirectToPage("./Index");
         }

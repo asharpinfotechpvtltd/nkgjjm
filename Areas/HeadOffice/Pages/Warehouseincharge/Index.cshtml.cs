@@ -24,10 +24,16 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 
         public async Task OnGetAsync()
         {
-            if (_context.TblPoChild != null)
+            try
             {
-                PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
-                TotalPo = await _context.TblPoMaster.CountAsync();
+                if (_context.TblPoChild != null)
+                {
+                    PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
+                    TotalPo = await _context.TblPoMaster.CountAsync();
+                }
+            }catch(Exception ex)
+            {
+
             }
         }
     }

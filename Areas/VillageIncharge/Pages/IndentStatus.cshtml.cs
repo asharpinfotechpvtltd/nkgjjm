@@ -18,10 +18,17 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
         public List<SpGetIndentChallan> SpGetIndentChallan { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            string Email = HttpContext.Session.GetString("Login");
-            var vlgemail = new SqlParameter("@VillageInchargeEmail", Email);
-            SpGetIndentChallan = await _context.SpGetIndentChallan.FromSqlRaw("SpGetIndentChallan @VillageInchargeEmail", vlgemail).ToListAsync();
-            return Page();
+            try
+            {
+                string Email = HttpContext.Session.GetString("Login");
+                var vlgemail = new SqlParameter("@VillageInchargeEmail", Email);
+                SpGetIndentChallan = await _context.SpGetIndentChallan.FromSqlRaw("SpGetIndentChallan @VillageInchargeEmail", vlgemail).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                
+            }
+                return Page();
         }
     }
 }

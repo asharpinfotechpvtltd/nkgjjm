@@ -27,20 +27,27 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
         }
         public async Task<IActionResult> OnPost(string Jobworkid, List<IFormFile> siteimage)
         {
-            GetUserDate date = new GetUserDate();
-            Upload u = new Upload(Environmet);
-            foreach (var formFile in siteimage)
+            try
             {
-                challanName = u.UploadImage(formFile, "SiteImage");
-                Closure c = new Closure()
+                GetUserDate date = new GetUserDate();
+                Upload u = new Upload(Environmet);
+                foreach (var formFile in siteimage)
                 {
-                    Image = challanName,
-                    Jobworkid = Jobworkid,
-                    Date = date.ReturnDate(),
-                    Submittedby = "Village Incharge"
-                };
-                await Context.TblClosure.AddAsync(c);
-                await Context.SaveChangesAsync();
+                    challanName = u.UploadImage(formFile, "SiteImage");
+                    Closure c = new Closure()
+                    {
+                        Image = challanName,
+                        Jobworkid = Jobworkid,
+                        Date = date.ReturnDate(),
+                        Submittedby = "Village Incharge"
+                    };
+                    await Context.TblClosure.AddAsync(c);
+                    await Context.SaveChangesAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
 
             return Page();

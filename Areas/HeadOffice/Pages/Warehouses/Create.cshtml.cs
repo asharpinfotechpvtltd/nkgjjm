@@ -27,9 +27,17 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
         public List<ItemMaster> ItemMasterList { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            ItemMasterList = await _context.TblItemMaster.ToListAsync();
-            ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString() + "-" + a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
-            District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+            try
+            {
+                ItemMasterList = await _context.TblItemMaster.ToListAsync();
+                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString() + "-" + a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
+                District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
 
@@ -40,11 +48,10 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            GetUserDate date = new GetUserDate();
-
-
-
-            var param = new SqlParameter[] {
+            try
+            {
+                GetUserDate date = new GetUserDate();
+                var param = new SqlParameter[] {
                         new SqlParameter() {
                             ParameterName = "@District",
                             SqlDbType =  System.Data.SqlDbType.Int,
@@ -84,27 +91,32 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
                             Size=100,
                             Direction = System.Data.ParameterDirection.Output
                         } };
-            await _context.Database.ExecuteSqlRawAsync("SpAddWareHouse @District,@Block,@Grampanchayat,@VillageCode,@WarehouseName,@WarehouseId out", param);
-            string warehouseName = Convert.ToString(param[5].Value);
-            string jobworkJSON = Request.Form["jobworkdesc"];
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (!string.IsNullOrEmpty(dt.Rows[i][0].ToString()))
+                await _context.Database.ExecuteSqlRawAsync("SpAddWareHouse @District,@Block,@Grampanchayat,@VillageCode,@WarehouseName,@WarehouseId out", param);
+                string warehouseName = Convert.ToString(param[5].Value);
+                string jobworkJSON = Request.Form["jobworkdesc"];
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    Int64 ItemCode = Convert.ToInt64(dt.Rows[i][0]);
-                    double OpeningStock = Convert.ToInt64(dt.Rows[i][1]);
-                    ItemToWarehouse warehouse = new ItemToWarehouse()
+                    if (!string.IsNullOrEmpty(dt.Rows[i][0].ToString()))
                     {
-                        ItemId = ItemCode,
-                        WarehouseId = Convert.ToInt32(warehouseName),
-                        Qty = OpeningStock,
-                        Date = date.ReturnDate()
+                        Int64 ItemCode = Convert.ToInt64(dt.Rows[i][0]);
+                        double OpeningStock = Convert.ToInt64(dt.Rows[i][1]);
+                        ItemToWarehouse warehouse = new ItemToWarehouse()
+                        {
+                            ItemId = ItemCode,
+                            WarehouseId = Convert.ToInt32(warehouseName),
+                            Qty = OpeningStock,
+                            Date = date.ReturnDate()
 
-                    };
-                    await _context.TblItemToWarehouse.AddAsync(warehouse);
-                    await _context.SaveChangesAsync();
+                        };
+                        await _context.TblItemToWarehouse.AddAsync(warehouse);
+                        await _context.SaveChangesAsync();
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+
             }
             return RedirectToPage("./Index");
         }

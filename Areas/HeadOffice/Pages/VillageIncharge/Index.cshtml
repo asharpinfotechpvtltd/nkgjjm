@@ -57,7 +57,6 @@
                         
                         <td class="text-center">
                             @item.Username
-
                         </td>
                          <td class="text-center">
                             @item.Mobile
@@ -67,23 +66,19 @@
                             @item.Email
 
                         </td>
-                         
-                       
-                        
                          <td class="text-center">
                             @item.WarehouseName
 
                         </td>
                         <td class="text-center">
-                            @item.Userid
+                            @item.WhInchName
 
                         </td>
 
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3" asp-page="AssignVillageToVI" asp-route-id="@item.Id"> <i data-lucide="check" class="w-4 h-4 mr-1"></i> Assign Village </a>
-                                <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                               
                             </div>
                         </td>
                     </tr>

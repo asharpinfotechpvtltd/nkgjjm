@@ -29,35 +29,35 @@
                
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice number</strong></label>
-                    <input type="text" asp-for="PoVehicleDetail.ChallanNumber" class="form-control" id="searchtext" style="background-color:wheat;" />
+                    <input type="text" asp-for="PoVehicleDetail.ChallanNumber" class="form-control" required id="searchtext" style="background-color:wheat;" />
 
                 </div>
                 <div class="form-inline mt-5">
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Challan/ Invoice Date</strong></label>
-                    <input type="date" asp-for="PoVehicleDetail.Challan_InvoiceDate" class="form-control" id="searchtext" style="background-color:wheat;" />
+                    <input type="date" asp-for="PoVehicleDetail.Challan_InvoiceDate" class="form-control" required id="searchtext" style="background-color:wheat;" />
 
               
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Vehicle Number</strong></label>
-                    <input type="text" asp-for="PoVehicleDetail.VehicleNumber" class="form-control" id="searchtext" style="background-color:wheat;" />
+                    <input type="text" asp-for="PoVehicleDetail.VehicleNumber" class="form-control" required id="searchtext" style="background-color:wheat;" />
 
                 </div>
                 <div class="form-inline mt-5">
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>LR/Bilty No</strong></label>
-                    <input type="text" class="form-control" asp-for="PoVehicleDetail.LR_BiltyNo" id="searchtext" style="background-color:wheat;" />
+                    <input type="text" class="form-control" asp-for="PoVehicleDetail.LR_BiltyNo" required id="searchtext" style="background-color:wheat;" />
 
              
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transporter Name</strong></label>
-                    <input type="text" class="form-control" asp-for="PoVehicleDetail.TransporterName" id="searchtext" style="background-color:wheat;" />
+                    <input type="text" class="form-control" asp-for="PoVehicleDetail.TransporterName" required id="searchtext" style="background-color:wheat;" />
 
                 </div>
                 <div class="form-inline mt-5">
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Warehouse Id</strong></label>
-                    <input type="text" class="form-control" name="warehousename" value="@Model.Warehouseid" readonly id="searchtext" style="background-color:wheat;" />
+                    <input type="text" class="form-control" name="warehousename" value="@Model.Warehouseid" readonly id="searchtext" style="background-color:lightgrey;" />
 
                 </div>
             </div>
@@ -144,8 +144,8 @@
             var indentdesc = new Array();
             $('#orders tr').each(function(i, row) {
                 var ItemId = $(this).closest('tr').find("td").eq(0).html();
-                var Receivedqty = $(this).closest('tr').find("td:eq(5) input").val();
-                var Challanqty = $(this).closest('tr').find("td:eq(4) input").val();
+                var Receivedqty = $(this).closest('tr').find("td:eq(4) input").val();
+                var Challanqty = $(this).closest('tr').find("td:eq(3) input").val();
                 var po = {};
                 po.Particular = ItemId;
                 po.Receivedqty = Receivedqty;

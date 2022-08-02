@@ -20,10 +20,17 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         public WarehouseIncharges Wi { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            //Wi = await _context.TblWarehouseIncharge.SingleOrDefaultAsync(e => e.Emailid == "karan@gmail.com");
-            var Warehouseid = new SqlParameter("@Warehouseid", Wi.WareHouseid);
+            try
+            {
+                //Wi = await _context.TblWarehouseIncharge.SingleOrDefaultAsync(e => e.Emailid == "karan@gmail.com");
+                var Warehouseid = new SqlParameter("@Warehouseid", Wi.WareHouseid);
 
-            IndentMaster =await _context.SPIndentMasterForWarehouseIncharge.FromSqlRaw("SPIndentMasterForWarehouseIncharge @Warehouseid", Warehouseid).ToListAsync();
+                IndentMaster = await _context.SPIndentMasterForWarehouseIncharge.FromSqlRaw("SPIndentMasterForWarehouseIncharge @Warehouseid", Warehouseid).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
             return Page();
         }
     }

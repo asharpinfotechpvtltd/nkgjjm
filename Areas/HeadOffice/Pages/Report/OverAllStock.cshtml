@@ -65,7 +65,10 @@
                                 Item Name
                             </th>
                             <th class="text-center whitespace-nowrap">
-                                Opening Stock
+                                UOM
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Opn. Stock
                             </th>
                             <th class="text-center whitespace-nowrap" style="text-decoration: underline; color:blue;">
                                 <a asp-page="/Report/Inward">
@@ -84,11 +87,11 @@
                             </th>
                             <th class="text-center whitespace-nowrap" style="text-decoration: underline; color:blue;">
                                 <a asp-page="/Report/Returned">
-                                    Returned Fresh Stock
+                                    Rtn Fresh Stock
                                 </a>
                             </th>
                             <th class="text-center whitespace-nowrap">
-                                Closing Balance
+                                Cl. Balance
                             </th>
 
 
@@ -106,6 +109,9 @@
 
                                 <td class="text-left">
                                     @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.UnitName)
                                 </td>
                                 <td class="text-center" style="color:blueviolet;">
                                     @Html.DisplayFor(modelItem => item.OpeningStock)

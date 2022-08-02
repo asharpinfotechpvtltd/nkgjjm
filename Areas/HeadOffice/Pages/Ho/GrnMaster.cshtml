@@ -44,9 +44,9 @@
                         <th class="text-center whitespace-nowrap">
                             Warehouse Name
                         </th> 
-                        <th class="text-center whitespace-nowrap">
+                        @*<th class="text-center whitespace-nowrap">
                             Person Name
-                        </th> 
+                        </th> *@
                         <th class="text-center whitespace-nowrap">
                            District
                         </th> 
@@ -65,7 +65,7 @@
                             <td class="text-center">@item.ChallanNumber</td>
                             <td class="text-center">@item.CompanyName</td>
                             <td class="text-center">@item.WarehouseName</td>
-                            <td class="text-center">@item.UserId</td>
+                            @*<td class="text-center">@item.UserId</td>*@
                             <td class="text-center">@item.District</td>
                             <td class="text-center"><a asp-page="GrnDetail" asp-route-Pono="@item.PONO" asp-route-warehouseid="@item.WarehouseId" asp-route-challan="@item.ChallanNumber"  style="color:blue;">View</a></td>
 

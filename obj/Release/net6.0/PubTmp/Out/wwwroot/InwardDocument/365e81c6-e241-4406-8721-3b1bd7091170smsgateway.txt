@@ -1,0 +1,10 @@
+http://sms.medianest.net.in/api/pushsms.php?user=t5somil&key=0103sMh06MMsFzWa3FKw&sender=BRINSU&mobile=9599929953&text=123456 is your one time password (OTP) for Bright insurance. Team [ Bright Insurance ]&entityid=1201159194587537978&templateid=1207164129379678290
+
+
+
+
+
+http://sms.medianest.net.in/api/pushsms.php?user=Dear {#var#}, Thank you for placing order at RPTeam.in, your order id {#var#} for {#var#} on (#date) is confirmed. Please pay Rs. {#var#} after service. For any query Reach us at 9717715433 or visit www.rpteam.in. Team [ RP TEAM ]
+
+
+http://sms.medianest.net.in/api/pushsms.php?user=" + UserName + "&key=" + Key + "&sender=" + Sender + "&mobile=" + number + "&text=" + Text + "&entityid=" + entityid + "&templateid=1207164194945775269

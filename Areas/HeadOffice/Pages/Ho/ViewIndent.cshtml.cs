@@ -30,13 +30,21 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public int W_hid { get; set; }
         public async Task<IActionResult> OnGet(string jobworkid, int IndentMasterId, int WarehouseId)
         {
-            W_hid = WarehouseId;
-            var search = new SqlParameter("@JobWorkId", jobworkid);
-            var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
-            var Whid = new SqlParameter("@WarehouseId", WarehouseId);
-            SPValidateByHo = await _context.SPValidateByHo.FromSqlRaw("SPValidateByHo @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
-            searching = jobworkid;
-            IndentMasterid = IndentMasterId;
+           
+            try
+            {
+                W_hid = WarehouseId;
+                var search = new SqlParameter("@JobWorkId", jobworkid);
+                var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
+                var Whid = new SqlParameter("@WarehouseId", WarehouseId);
+                SPValidateByHo = await _context.SPValidateByHo.FromSqlRaw("SPValidateByHo @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
+                searching = jobworkid;
+                IndentMasterid = IndentMasterId;
+            }
+            catch(Exception ex)
+            {
+
+            }
             
             return Page();
         }
@@ -47,37 +55,39 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
 
         public async Task<IActionResult> OnPostSearch(string searchtext, string status, int IndentMasterid,int Whid)
         {
-            Upload u = new Upload(Environmet);
-            challanName = u.UploadImage(challan, "Challan");
-            IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
-            IndentChallan Hochallan = new IndentChallan()
+            try
             {
-                Hofile = challanName,
-                IndentMasterId = IndentMasterid,
-                Jobworkid = searchtext
-
-            };
-            await _context.TblIndentChallan.AddAsync(Hochallan);
-            if (warehousestatus != null)
-            {
-                warehousestatus.WarehouseInchargeStatus = status;
-                await _context.SaveChangesAsync();
-            }
-
-            GetUserDate date = new GetUserDate();
-            string ViId = HttpContext.Session.GetString("Login");
-            int warehouseid = Convert.ToInt32(HttpContext.Session.GetString("Warehouseid"));
-
-            string jobworkJSON = Request.Form["indent"];
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
-            string Jobworkid = HttpContext.Session.GetString("Jobworkid");
-            if (dt.Rows.Count > 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
+                Upload u = new Upload(Environmet);
+                challanName = u.UploadImage(challan, "Challan");
+                IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
+                IndentChallan Hochallan = new IndentChallan()
                 {
-                    if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
+                    Hofile = challanName,
+                    IndentMasterId = IndentMasterid,
+                    Jobworkid = searchtext
+
+                };
+                await _context.TblIndentChallan.AddAsync(Hochallan);
+                if (warehousestatus != null)
+                {
+                    warehousestatus.WarehouseInchargeStatus = status;
+                    await _context.SaveChangesAsync();
+                }
+
+                GetUserDate date = new GetUserDate();
+                string ViId = HttpContext.Session.GetString("Login");
+                int warehouseid = Convert.ToInt32(HttpContext.Session.GetString("Warehouseid"));
+
+                string jobworkJSON = Request.Form["indent"];
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jobworkJSON);
+                string Jobworkid = HttpContext.Session.GetString("Jobworkid");
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        var param = new SqlParameter[] {
+                        if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
+                        {
+                            var param = new SqlParameter[] {
                         new SqlParameter() {
                             ParameterName = "@WarehouseId",
                             SqlDbType =  System.Data.SqlDbType.NVarChar,
@@ -125,18 +135,20 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
                             Value = searchtext
                         } };
 
-                        await _context.Database.ExecuteSqlRawAsync("SpUpdateQtyInIndent @WareHouseid,@ItemCode,@Qty,@Date,@Status,@IndentMasterId,@Jobworkid", param);
+                            await _context.Database.ExecuteSqlRawAsync("SpUpdateQtyInIndent @WareHouseid,@ItemCode,@Qty,@Date,@Status,@IndentMasterId,@Jobworkid", param);
 
 
 
 
+                        }
                     }
                 }
             }
+            catch (Exception ex) { }
 
 
             ViewData["Message"] = "Indent Status Updated";
-            return Page();
+            return RedirectToPage("~/IndentMaster");
         }
     }
 }

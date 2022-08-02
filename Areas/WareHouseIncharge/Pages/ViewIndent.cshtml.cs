@@ -20,27 +20,41 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages.Warehouseincharge
         public int Wh_Id { get; set; }
         public async Task<IActionResult> OnGet(string jobworkid,int IndentMasterId,int WarehouseId)
         {
-            Wh_Id = WarehouseId;
-            var search = new SqlParameter("@JobWorkId", jobworkid);
-            var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
-            var Whid = new SqlParameter("@WarehouseId", WarehouseId);
-            SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId,@IndentMasterId,@WarehouseId", search,IndentMaster,Whid).ToListAsync();
-            searching = jobworkid;
-            IndentMasterid = IndentMasterId;
+            try
+            {
+                Wh_Id = WarehouseId;
+                var search = new SqlParameter("@JobWorkId", jobworkid);
+                var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
+                var Whid = new SqlParameter("@WarehouseId", WarehouseId);
+                SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
+                searching = jobworkid;
+                IndentMasterid = IndentMasterId;
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
 
         public List<SPMaterialIssuance> SPMaterialIssuance { get; set; }
         public async Task<IActionResult> OnPostSearch(string searchtext,string status)
         {
-            IndentMaster warehousestatus =await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
-            if(warehousestatus!=null)
+            try
             {
-                warehousestatus.WarehouseInchargeStatus = status;
-                await _context.SaveChangesAsync();
-               
+                IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
+                if (warehousestatus != null)
+                {
+                    warehousestatus.WarehouseInchargeStatus = status;
+                    await _context.SaveChangesAsync();
+
+                }
+                ViewData["Message"] = "Indent Status Updated";
             }
-            ViewData["Message"] = "Indent Status Updated";
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

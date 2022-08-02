@@ -126,30 +126,7 @@
 
                     </ul>
                 </li>
-
-                <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
-                        <div class="menu__title">   Warehouse Incharge <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a asp-page="/Warehouseincharge/IndentMaster" class="menu">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> View Indent</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-page="/Warehouseincharge/Index" class="menu">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Upload Grn </div>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li>
+                   <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
                         <div class="menu__title">     Head Office <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
@@ -182,6 +159,29 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
+                        <div class="menu__title">   Warehouse Incharge <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a asp-page="/Warehouseincharge/IndentMaster" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> View Indent</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Warehouseincharge/Index" class="menu">
+                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="menu__title"> Upload Grn </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+             
 
 
 
@@ -236,7 +236,12 @@
                         <div class="menu__title"> Contractor </div>
                     </a>
                 </li>
-
+                 <li>
+                    <a asp-page="/Warehouseincharge/create" class="menu">
+                        <div class="menu__icon"> <i data-lucide="message-square"></i> </div>
+                        <div class="menu__title"> Warehouse Incharge </div>
+                    </a>
+                </li> 
                 <li>
                     <a asp-page="/Supplier/index" class="menu">
                         <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
@@ -263,18 +268,20 @@
                             </a>
                         </li>
                         <li>
-                            <a asp-page="/Panel/Report/StockReport" class="menu">
+                            <a asp-page="/Report/OverAllStock" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
                                 <div class="menu__title"> Stock </div>
                             </a>
                         </li>
-                        
-                        
-
                     </ul>
                 </li>
 
-
+                 <li>
+                    <a asp-page="/Index" asp-page-handler="Logout" class="menu">
+                        <div class="menu__icon"> <i data-lucide="message-square"></i> </div>
+                        <div class="menu__title"> Signout </div>
+                    </a>
+                </li>
 
             </ul>
         </div>

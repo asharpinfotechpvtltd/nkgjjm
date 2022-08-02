@@ -32,8 +32,15 @@ namespace Nkgjjm.Areas.Panel.Pages.District
         }
         public async Task<IActionResult> OnPost(string districtname)
         {
-            Districts = await _context.TblDistrict.Where(d=>d.District== districtname).ToListAsync();
-            TotalCount = Districts.Count;
+            try
+            {
+                Districts = await _context.TblDistrict.Where(d => d.District == districtname).ToListAsync();
+                TotalCount = Districts.Count;
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

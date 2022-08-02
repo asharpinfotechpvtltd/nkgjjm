@@ -30,20 +30,26 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         public int BlockId { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblGramPanchayat == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblGramPanchayat == null)
+                {
+                    return NotFound();
+                }
 
-            DistrictList = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
-            var grampanchayats =  await _context.TblGramPanchayat.FirstOrDefaultAsync(m => m.Id == id);
-            if (grampanchayats == null)
-            {
-                return NotFound();
+                DistrictList = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+                var grampanchayats = await _context.TblGramPanchayat.FirstOrDefaultAsync(m => m.Id == id);
+                if (grampanchayats == null)
+                {
+                    return NotFound();
+                }
+                GramPanchayats = grampanchayats;
+                BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
             }
-            GramPanchayats = grampanchayats;
-            BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
-            
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
 

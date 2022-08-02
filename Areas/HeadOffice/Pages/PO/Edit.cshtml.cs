@@ -33,50 +33,61 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         public async Task<IActionResult> OnGet(string PoNo)
         {
 
+            try
+            {
+                ItemList = await _context.TblItemMaster.ToListAsync();
+                WarehouseList = await _context.TblWarehouse.ToListAsync();
+                Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
+                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();
+                Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.WarehouseName }).ToListAsync();
+            }
+            catch(Exception ex)
+            {
 
-            ItemList = await _context.TblItemMaster.ToListAsync();
-            WarehouseList = await _context.TblWarehouse.ToListAsync();
-            Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
-            ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();
-            Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.WarehouseName }).ToListAsync();
-
+            }
             return Page();
         }
         public async Task<IActionResult> OnPost(string PoNumber, int suppliername)
         {
-            GetUserDate date = new GetUserDate();
-            PoMaster pomaster = new PoMaster()
+            try
             {
-                Buyer = "Nkg Infrastructure",
-                date = date.ReturnDate(),
-                Pono = PoNumber,
-                Supplier = suppliername
-
-            };
-            await _context.TblPoMaster.AddAsync(pomaster);
-            await _context.SaveChangesAsync();
-
-            string Po = Request.Form["jobworkdesc"];
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(Po);
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
+                GetUserDate date = new GetUserDate();
+                PoMaster pomaster = new PoMaster()
                 {
-                    Int64 Productid = Convert.ToInt64(dt.Rows[i][0].ToString());
-                    double Qty = Convert.ToDouble(dt.Rows[i][1]);
-                    double Price = Convert.ToDouble(dt.Rows[i][2]);
-                    string Warehuose = Convert.ToString(dt.Rows[i][3]);
-                    Pochild child = new Pochild()
+                    Buyer = "Nkg Infrastructure",
+                    date = date.ReturnDate(),
+                    Pono = PoNumber,
+                    Supplier = suppliername
+
+                };
+                await _context.TblPoMaster.AddAsync(pomaster);
+                await _context.SaveChangesAsync();
+
+                string Po = Request.Form["jobworkdesc"];
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(Po);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (!string.IsNullOrEmpty(dt.Rows[i][1].ToString()))
                     {
-                        Pono = PoNumber,
-                        Itemid = Productid,
-                        Qty = Qty,
-                        
-                        WarehouseName = Warehuose
-                    };
-                    await _context.TblPoChild.AddAsync(child);
-                    await _context.SaveChangesAsync();
+                        Int64 Productid = Convert.ToInt64(dt.Rows[i][0].ToString());
+                        double Qty = Convert.ToDouble(dt.Rows[i][1]);
+                        double Price = Convert.ToDouble(dt.Rows[i][2]);
+                        string Warehuose = Convert.ToString(dt.Rows[i][3]);
+                        Pochild child = new Pochild()
+                        {
+                            Pono = PoNumber,
+                            Itemid = Productid,
+                            Qty = Qty,
+
+                            WarehouseName = Warehuose
+                        };
+                        await _context.TblPoChild.AddAsync(child);
+                        await _context.SaveChangesAsync();
+                    }
                 }
+            } catch(Exception)
+            {
+
             }
             return RedirectToPage("Create");
         }

@@ -31,14 +31,20 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            GetUserDate date = new GetUserDate();
-          if (!ModelState.IsValid || _context.TblSupplier == null || Suppliers == null)
+            try
             {
-                return Page();
+                GetUserDate date = new GetUserDate();
+                if (!ModelState.IsValid || _context.TblSupplier == null || Suppliers == null)
+                {
+                    return Page();
+                }
+                Suppliers.AddedDate = date.ReturnDate();
+                _context.TblSupplier.Add(Suppliers);
+                await _context.SaveChangesAsync();
+            } catch(Exception ex)
+            {
+
             }
-            Suppliers.AddedDate = date.ReturnDate();
-            _context.TblSupplier.Add(Suppliers);
-            await _context.SaveChangesAsync();
             
             return RedirectToPage("./Index");
         }

@@ -25,11 +25,17 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
 
         public async Task OnGetAsync()
         {
-            if (_context.TblWarehouse != null)
+            try
             {
-                var warehouse = new SqlParameter("@warehouse", DBNull.Value);
-                WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList @warehouse", warehouse).ToListAsync();
-                WarehouseCount = await _context.TblWarehouse.CountAsync();
+                if (_context.TblWarehouse != null)
+                {
+                    var warehouse = new SqlParameter("@warehouse", DBNull.Value);
+                    WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList @warehouse", warehouse).ToListAsync();
+                    WarehouseCount = await _context.TblWarehouse.CountAsync();
+                }
+            } catch(Exception ex)
+            {
+
             }
         }
         public async Task OnPostAsync(string warehouse)

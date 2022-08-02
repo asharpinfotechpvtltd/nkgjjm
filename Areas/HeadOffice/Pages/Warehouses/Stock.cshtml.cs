@@ -17,8 +17,15 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
         public List<SpWarehouseStocklog> Warehouselog { get; set; }
         public async Task<IActionResult> OnGet(int id)
         {
-            var warehouseid = new SqlParameter("@warehouseid", id);
-            Warehouselog =await _context.SpWarehouseStocklog.FromSqlRaw("SpWarehouseStocklog @warehouseid", warehouseid).ToListAsync();
+            try
+            {
+                var warehouseid = new SqlParameter("@warehouseid", id);
+                Warehouselog = await _context.SpWarehouseStocklog.FromSqlRaw("SpWarehouseStocklog @warehouseid", warehouseid).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
             return Page();
         }
     }

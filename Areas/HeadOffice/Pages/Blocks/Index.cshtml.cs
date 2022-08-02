@@ -27,18 +27,32 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
 
         public async Task OnGetAsync()
         {
-            if (_context.TblBlock != null)
+            try
             {
-                var block = new SqlParameter("@Block", DBNull.Value);
-                BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block",block).ToListAsync();
-                BlockCount = await _context.TblBlock.CountAsync();
+                if (_context.TblBlock != null)
+                {
+                    var block = new SqlParameter("@Block", DBNull.Value);
+                    BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
+                    BlockCount = await _context.TblBlock.CountAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
         }
         public async Task<IActionResult> OnPost(string BlockName)
         {
-            var block = new SqlParameter("@Block", BlockName);
-            BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
-            BlockCount = BlockList.Count;
+            try
+            {
+                var block = new SqlParameter("@Block", BlockName);
+                BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
+                BlockCount = BlockList.Count;
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }

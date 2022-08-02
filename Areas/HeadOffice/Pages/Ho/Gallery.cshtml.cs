@@ -15,7 +15,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public List<Closure> Closure { get; set; }
         public async Task<IActionResult> OnGet(string id)
         {
-            Closure = await _context.TblClosure.Where(e => e.Jobworkid == id).ToListAsync();
+            try
+            {
+                Closure = await _context.TblClosure.Where(e => e.Jobworkid == id).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Page();
         }
     }
