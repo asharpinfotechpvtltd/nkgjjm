@@ -21,13 +21,21 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
         public List<SelectListItem> Designation { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            Designation = await _context.TblDesignation.Select(d => new SelectListItem { Text = d.DesignationName, Value = d.Id.ToString() }).ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                Designation = await _context.TblDesignation.Select(d => new SelectListItem { Text = d.DesignationName, Value = d.Id.ToString() }).ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
+
         }
 
         [BindProperty]
         public User User { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(int Designation)

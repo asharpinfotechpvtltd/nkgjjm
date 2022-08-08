@@ -24,18 +24,25 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblSupplier == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblSupplier == null)
+                {
+                    return NotFound();
+                }
 
-            var suppliers =  await _context.TblSupplier.FirstOrDefaultAsync(m => m.Id == id);
-            if (suppliers == null)
-            {
-                return NotFound();
+                var suppliers = await _context.TblSupplier.FirstOrDefaultAsync(m => m.Id == id);
+                if (suppliers == null)
+                {
+                    return NotFound();
+                }
+                Suppliers = suppliers;
+                return Page();
             }
-            Suppliers = suppliers;
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -70,7 +77,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
 
         private bool SuppliersExists(int id)
         {
-          return (_context.TblSupplier?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TblSupplier?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

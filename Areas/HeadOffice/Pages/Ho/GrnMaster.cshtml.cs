@@ -18,15 +18,22 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
 
         public async Task<IActionResult> OnGet()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                Grmmaster = await _context.SpGrnMaster.FromSqlRaw("SpGrnMaster").ToListAsync();
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    Grmmaster = await _context.SpGrnMaster.FromSqlRaw("SpGrnMaster").ToListAsync();
+                }
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
             }
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
     }
 }

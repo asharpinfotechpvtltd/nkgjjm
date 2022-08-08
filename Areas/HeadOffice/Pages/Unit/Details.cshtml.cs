@@ -18,25 +18,32 @@ namespace Nkgjjm.Areas.Panel.Pages.Unit
             _context = context;
         }
 
-      public Units Units { get; set; } = default!; 
+        public Units Units { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblUnits == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblUnits == null)
+                {
+                    return NotFound();
+                }
 
-            var units = await _context.TblUnits.FirstOrDefaultAsync(m => m.UnitId == id);
-            if (units == null)
-            {
-                return NotFound();
+                var units = await _context.TblUnits.FirstOrDefaultAsync(m => m.UnitId == id);
+                if (units == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    Units = units;
+                }
+                return Page();
             }
-            else 
+            else
             {
-                Units = units;
+                return Redirect("~/Index");
             }
-            return Page();
         }
     }
 }

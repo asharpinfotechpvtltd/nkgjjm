@@ -18,15 +18,23 @@ namespace Nkgjjm.Areas.Panel.Pages.Unit
             _context = context;
         }
 
-        public IList<Units> Units { get;set; } = default!;
+        public IList<Units> Units { get; set; } = default!;
         public int TotalUnits { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblUnits != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                TotalUnits = await _context.TblUnits.CountAsync();
-                Units = await _context.TblUnits.ToListAsync();
+                if (_context.TblUnits != null)
+                {
+                    TotalUnits = await _context.TblUnits.CountAsync();
+                    Units = await _context.TblUnits.ToListAsync();
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
         public async Task<IActionResult> OnPost(string Unitname)

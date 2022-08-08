@@ -19,16 +19,25 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages.Warehouseincharge
             _context = context;
         }
 
-        public IList<SPPoList> PoMaster { get;set; } = default!;
+        public IList<SPPoList> PoMaster { get; set; } = default!;
         public int TotalPo { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblPoChild != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
-                TotalPo = await _context.TblPoMaster.CountAsync();
+                if (_context.TblPoChild != null)
+                {
+                    PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
+                    TotalPo = await _context.TblPoMaster.CountAsync();
+                }
+                return Page();
             }
+            else
+            {
+                return Redirect("~/Index");
+            }
+
         }
     }
 }

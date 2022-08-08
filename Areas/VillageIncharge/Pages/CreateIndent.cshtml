@@ -20,9 +20,12 @@
 <div id="horizontal-form" class="p-5">
     <div class="preview">
         <div class="form-inline">
-            <form method="post" asp-page-handler="Search">
+            <form method="get" asp-page-handler="Search">
                 <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Job Work id </strong></label>
-                <input type="text" name="searchtext" id="searchtext" value="@Model.searching" style="background-color:wheat;" />
+                <select name="searchtext" id="searchtext" asp-for="@Model.searching" asp-items="@Model.JobWorklist">
+                    <option>Select Job Work</option>
+                </select>
+                <input type="submit" value="Search" name="Search" class="btn btn-primary" />
             </form>
         </div>
     </div>
@@ -56,15 +59,13 @@
                     </tr>
                     @foreach (var item in Model.SPMaterialIssuance)
                     {
-                        double TotalQty = item.Qty;
-                        double Pickedqty = item.Pickedqty;
-                        double BalanceQty = TotalQty - Pickedqty;
+                        
                         <tr>
                             <td class="text-center">@item.RawMaterialId</td>
                             <td class="text-center">@item.ItemName</td>
                             <td class="text-center">@item.Qty</td>
                             <td class="text-center">@item.Pickedqty</td>
-                            <td class="text-center" style="background-color:yellow;">@BalanceQty</td>
+                            <td class="text-center" style="background-color:yellow;">@item.Balance</td>
                             <td class="text-center"><input type="text" id="asssigned" class="form-control demand" /></td>
                         </tr>
                     }
@@ -112,7 +113,7 @@
             // code to read selected table row cell data (values).
             $(document).on('blur', '#orders .demand', function() {
                 var currentRow = $(this).closest("tr");
-                var BomQty = parseInt(currentRow.find("td").eq(2).html());
+                var BomQty = parseInt(currentRow.find("td").eq(4).html());
                 var Demand = parseInt(currentRow.find("td:eq(5) input").val());
                 if (BomQty < Demand) {
                     alert("Invalid Qty");

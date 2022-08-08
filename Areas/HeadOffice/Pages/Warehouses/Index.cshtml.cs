@@ -20,22 +20,32 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
             _context = context;
         }
 
-        public IList<SPWarehouseList> WarehouseList { get;set; } = default!;
+        public IList<SPWarehouseList> WarehouseList { get; set; } = default!;
         public int WarehouseCount { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                if (_context.TblWarehouse != null)
+                try
                 {
-                    var warehouse = new SqlParameter("@warehouse", DBNull.Value);
-                    WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList @warehouse", warehouse).ToListAsync();
-                    WarehouseCount = await _context.TblWarehouse.CountAsync();
+                    if (_context.TblWarehouse != null)
+                    {
+                        var warehouse = new SqlParameter("@warehouse", DBNull.Value);
+                        WarehouseList = await _context.SPWarehouseList.FromSqlRaw("SPWarehouseList @warehouse", warehouse).ToListAsync();
+                        WarehouseCount = await _context.TblWarehouse.CountAsync();
+                    }
+                    
                 }
-            } catch(Exception ex)
-            {
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
         public async Task OnPostAsync(string warehouse)

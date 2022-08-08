@@ -24,14 +24,22 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
             Environmet = Env;
         }
         public string jobid { get; set; }
-       
+
         public int IndentMasterid { get; set; }
-        public void OnGet(string jobworkid, int IndentMasterId)
+        public IActionResult OnGet(string jobworkid, int IndentMasterId)
         {
-            jobid = jobworkid;
-            IndentMasterid = IndentMasterId;
-           
-            
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                jobid = jobworkid;
+                IndentMasterid = IndentMasterId;
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
+
+
         }
 
 
@@ -53,7 +61,7 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
                 await _context.SaveChangesAsync();
                 ViewData["Message"] = "Challan Updated";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

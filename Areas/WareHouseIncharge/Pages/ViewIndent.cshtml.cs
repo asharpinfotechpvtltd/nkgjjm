@@ -18,27 +18,34 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages.Warehouseincharge
 
         public int IndentMasterid { get; set; }
         public int Wh_Id { get; set; }
-        public async Task<IActionResult> OnGet(string jobworkid,int IndentMasterId,int WarehouseId)
+        public async Task<IActionResult> OnGet(string jobworkid, int IndentMasterId, int WarehouseId)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                Wh_Id = WarehouseId;
-                var search = new SqlParameter("@JobWorkId", jobworkid);
-                var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
-                var Whid = new SqlParameter("@WarehouseId", WarehouseId);
-                SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
-                searching = jobworkid;
-                IndentMasterid = IndentMasterId;
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    Wh_Id = WarehouseId;
+                    var search = new SqlParameter("@JobWorkId", jobworkid);
+                    var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
+                    var Whid = new SqlParameter("@WarehouseId", WarehouseId);
+                    SPMaterialIssuance = await _context.SPMaterialIssuance.FromSqlRaw("SPMaterialIssuance @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
+                    searching = jobworkid;
+                    IndentMasterid = IndentMasterId;
+                }
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
             }
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         public List<SPMaterialIssuance> SPMaterialIssuance { get; set; }
-        public async Task<IActionResult> OnPostSearch(string searchtext,string status)
+        public async Task<IActionResult> OnPostSearch(string searchtext, string status)
         {
             try
             {
@@ -51,7 +58,7 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages.Warehouseincharge
                 }
                 ViewData["Message"] = "Indent Status Updated";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

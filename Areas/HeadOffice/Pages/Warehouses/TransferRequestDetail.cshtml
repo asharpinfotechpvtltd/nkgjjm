@@ -1,0 +1,106 @@
+﻿@page
+@model Nkgjjm.Areas.HeadOffice.Pages.Warehouses.TransferRequestDetailModel
+@{
+int i = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Stock Reservation</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Stock Reservation
+</h2>
+<div class="intro-y box mt-5 pb-5">
+    <form method="post" asp-page-handler="Uploadchallan" enctype="multipart/form-data" >
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20" style="font-weight:bolder;">Master Id</label>
+                    <input type="text" class="form-control w-56 box pr-10" name="masterid" readonly asp-for="@Model.TransferMasterId" placeholder="Search...">
+
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">Upload Challan</label>
+                    <input type="file" class="form-control w-56 box pr-10" name="challan" />
+
+                </div>
+                <div class="form-inline mt-5">
+                    <input type="submit" value="Submit" id="add" name="submit" class="btn btn-primary w-56 pr-10" />
+                    <!-- END: Data List -->
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    @if (Model.SpWarehouseTransferChildForHo != null)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" style="background-color:#DEDEDE">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center whitespace-nowrap">
+                                S.No.
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+                                Item Code
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Item Name
+                            </th>
+
+                           
+                            <th class="text-center whitespace-nowrap">
+
+                                Transfer Qty
+
+                            </th>
+                            
+                            
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SpWarehouseTransferChildForHo)
+                        {
+
+                            <tr>
+                                <td class="text-center">@i</td>
+                                <td class="text-center">
+                                    @item.Itemcode
+                                </td>
+
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+
+                                <td class="text-center" style="color:blue;">
+                                    @Html.DisplayFor(modelItem => item.TransferQty)
+                                </td>
+                                
+
+                               
+                            </tr>
+
+
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    }
+
+</div>

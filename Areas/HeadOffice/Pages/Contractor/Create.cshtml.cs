@@ -21,7 +21,14 @@ namespace Nkgjjm.Areas.Panel.Pages.Contractor
 
         public IActionResult OnGet()
         {
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
@@ -41,7 +48,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Contractor
                 _context.TblContractor.Add(Contractors);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
 
             }

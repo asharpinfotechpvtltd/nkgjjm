@@ -22,21 +22,28 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorkCategory
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblJobWorkCategory == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblJobWorkCategory == null)
+                {
+                    return NotFound();
+                }
 
-            var jobworkcategories = await _context.TblJobWorkCategory.FirstOrDefaultAsync(m => m.Id == id);
-            if (jobworkcategories == null)
-            {
-                return NotFound();
+                var jobworkcategories = await _context.TblJobWorkCategory.FirstOrDefaultAsync(m => m.Id == id);
+                if (jobworkcategories == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    JobWorkcategories = jobworkcategories;
+                }
+                return Page();
             }
-            else 
+            else
             {
-                JobWorkcategories = jobworkcategories;
+                return Redirect("~/Index");
             }
-            return Page();
         }
     }
 }

@@ -19,26 +19,33 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         }
 
         [BindProperty]
-      public Pochild Pochild { get; set; } = default!;
+        public Pochild Pochild { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblPoChild == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblPoChild == null)
+                {
+                    return NotFound();
+                }
 
-            var pochild = await _context.TblPoChild.FirstOrDefaultAsync(m => m.Id == id);
+                var pochild = await _context.TblPoChild.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (pochild == null)
-            {
-                return NotFound();
+                if (pochild == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    Pochild = pochild;
+                }
+                return Page();
             }
-            else 
+            else
             {
-                Pochild = pochild;
+                return Redirect("~/Index");
             }
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)

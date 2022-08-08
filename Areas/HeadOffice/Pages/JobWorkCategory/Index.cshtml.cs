@@ -19,14 +19,22 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorkCategory
         }
 
         public int TotalCount { get; set; }
-        public IList<JobWorkcategories> JobWorkcategories { get;set; } = default!;
+        public IList<JobWorkcategories> JobWorkcategories { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblJobWorkCategory != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                JobWorkcategories = await _context.TblJobWorkCategory.ToListAsync();
-                TotalCount = await _context.TblJobWorkCategory.CountAsync();
+                if (_context.TblJobWorkCategory != null)
+                {
+                    JobWorkcategories = await _context.TblJobWorkCategory.ToListAsync();
+                    TotalCount = await _context.TblJobWorkCategory.CountAsync();
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
     }

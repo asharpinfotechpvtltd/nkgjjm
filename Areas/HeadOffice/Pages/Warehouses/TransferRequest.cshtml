@@ -1,0 +1,86 @@
+﻿@page
+@model Nkgjjm.Areas.HeadOffice.Pages.Warehouses.TransferRequestModel
+@{
+    int i = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Transfer Request List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+   Transfer Request List
+</h2>
+<div class="intro-y box mt-5 pb-5">
+  
+
+    @if (Model.SpWareHouseTransferPendingListForHo != null)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" style="background-color:#DEDEDE">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center whitespace-nowrap">
+                                S.No.
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+                               Transfer Id
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Warehouse Name
+                            </th>                            
+                           
+                            <th class="text-center whitespace-nowrap">
+                                View
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SpWareHouseTransferPendingListForHo)
+                        {
+
+                            <tr>
+                                <td class="text-center">@i</td>
+                                <td class="text-center">
+                                    @item.TransferMasterId
+                                </td>
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Warehousename)
+                                </td>
+                                
+                                <td class="text-center" style="color:green; font-weight:bold;">
+                                    <a asp-page="TransferRequestDetail" asp-route-masterId="@item.TransferMasterId">View</a>
+                                </td>
+
+                            </tr>
+
+
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    }
+
+</div>

@@ -4,6 +4,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Areas\WareHouseIncharge\Pages\WarehouseStockReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
@@ -16,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\WareHouseIncharge\Pages\WarehouseStockReport.cshtml" />
     <None Include="wwwroot\dist\.DS_Store" />
     <None Include="wwwroot\dist\css\.DS_Store" />
     <None Include="wwwroot\dist\fonts\.DS_Store" />
@@ -45,6 +49,7 @@
     <Folder Include="wwwroot\Grn\" />
     <Folder Include="wwwroot\InwardDocument\" />
     <Folder Include="wwwroot\Challan\" />
+    <Folder Include="wwwroot\TransferChallan\" />
     <Folder Include="wwwroot\SiteImage\" />
   </ItemGroup>
 

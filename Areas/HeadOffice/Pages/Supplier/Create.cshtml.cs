@@ -21,12 +21,19 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
 
         public IActionResult OnGet()
         {
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
         public Suppliers Suppliers { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -41,11 +48,12 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
                 Suppliers.AddedDate = date.ReturnDate();
                 _context.TblSupplier.Add(Suppliers);
                 await _context.SaveChangesAsync();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }
-            
+
             return RedirectToPage("./Index");
         }
     }

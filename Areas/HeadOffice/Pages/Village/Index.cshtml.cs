@@ -20,26 +20,35 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
             _context = context;
         }
 
-        public IList<SPVillageList> VillageList { get;set; } = default!;
+        public IList<SPVillageList> VillageList { get; set; } = default!;
         public int TotalVillageCount { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblVillageCode != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                var village = new SqlParameter("@Village", DBNull.Value);
-                VillageList = await _context.SPVillageList.FromSqlRaw("SPVillageList @Village",village).ToListAsync();
-                TotalVillageCount = await _context.TblVillageCode.CountAsync();
+                if (_context.TblVillageCode != null)
+                {
+                    var village = new SqlParameter("@Village", DBNull.Value);
+                    VillageList = await _context.SPVillageList.FromSqlRaw("SPVillageList @Village", village).ToListAsync();
+                    TotalVillageCount = await _context.TblVillageCode.CountAsync();
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
-        public async Task OnPostAsync(string Village)
+    
+    public async Task OnPostAsync(string Village)
+    {
+        if (_context.TblVillageCode != null)
         {
-            if (_context.TblVillageCode != null)
-            {
-                var village = new SqlParameter("@Village", Village);
-                VillageList = await _context.SPVillageList.FromSqlRaw("SPVillageList @Village", village).ToListAsync();
-                TotalVillageCount = VillageList.Count;
-            }
+            var village = new SqlParameter("@Village", Village);
+            VillageList = await _context.SPVillageList.FromSqlRaw("SPVillageList @Village", village).ToListAsync();
+            TotalVillageCount = VillageList.Count;
         }
     }
+}
 }

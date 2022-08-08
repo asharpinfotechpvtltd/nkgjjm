@@ -36,6 +36,7 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
+                    <th>S.No.</th>
                     <th>
                         Company Name
                     </th>
@@ -69,6 +70,9 @@
                 {
                     <tr class="intro-x">
                        <td class="text-center text-wrap">
+                            @i
+                        </td>
+                        <td class="text-center text-wrap">
                             @Html.DisplayFor(modelItem => item.CompanyName)
                         </td>
                         <td class="text-center">
@@ -95,6 +99,8 @@
                         </td>
                         
                     </tr>
+                    i++;
+                    
                 }
             </tbody>
         </table>

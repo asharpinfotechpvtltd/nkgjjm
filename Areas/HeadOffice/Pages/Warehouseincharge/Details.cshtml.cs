@@ -35,17 +35,19 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         public int Warehouseid { get; set; }
         public async Task<IActionResult> OnGetAsync(string Pono)
         {
-            //WarehouseIncharges WarehouseIncharge = await _context.TblWarehouseIncharge.SingleOrDefaultAsync(e => e.Emailid == "karan@gmail.com");
-            //if (WarehouseIncharge != null)
-            //{
-            //    Warehouseid = WarehouseIncharge.WareHouseid;
-            //}
-            //Ponumber = Pono;
-            var po = new SqlParameter("@PoId", Pono);
-            var challan = new SqlParameter("@Challannumber", DBNull.Value);
-            var Whid = new SqlParameter("@Warehouseid", Warehouseid);
-            SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId,@Challannumber,@Warehouseid", po, challan, Whid).ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+
+                var po = new SqlParameter("@PoId", Pono);
+                var challan = new SqlParameter("@Challannumber", DBNull.Value);
+                var Whid = new SqlParameter("@Warehouseid", Warehouseid);
+                SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId,@Challannumber,@Warehouseid", po, challan, Whid).ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
         [BindProperty]
         public IFormFile UploadDoc { get; set; }

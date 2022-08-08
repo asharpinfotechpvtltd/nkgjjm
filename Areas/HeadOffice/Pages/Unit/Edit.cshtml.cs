@@ -24,18 +24,25 @@ namespace Nkgjjm.Areas.Panel.Pages.Unit
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblUnits == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblUnits == null)
+                {
+                    return NotFound();
+                }
 
-            var units =  await _context.TblUnits.FirstOrDefaultAsync(m => m.UnitId == id);
-            if (units == null)
-            {
-                return NotFound();
+                var units = await _context.TblUnits.FirstOrDefaultAsync(m => m.UnitId == id);
+                if (units == null)
+                {
+                    return NotFound();
+                }
+                Units = units;
+                return Page();
             }
-            Units = units;
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -70,7 +77,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Unit
 
         private bool UnitsExists(int id)
         {
-          return (_context.TblUnits?.Any(e => e.UnitId == id)).GetValueOrDefault();
+            return (_context.TblUnits?.Any(e => e.UnitId == id)).GetValueOrDefault();
         }
     }
 }

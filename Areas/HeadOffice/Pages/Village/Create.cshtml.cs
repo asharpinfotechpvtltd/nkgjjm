@@ -19,22 +19,30 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
             _context = context;
         }
 
-        public List<SelectListItem> Districts { get; set; } 
+        public List<SelectListItem> Districts { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
-            Districts = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+
+                Districts = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
         public Villages Villages { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblVillageCode == null || Villages == null)
+            if (!ModelState.IsValid || _context.TblVillageCode == null || Villages == null)
             {
                 return Page();
             }

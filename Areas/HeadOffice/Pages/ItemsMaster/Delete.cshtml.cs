@@ -19,26 +19,33 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
         }
 
         [BindProperty]
-      public ItemMaster ItemMaster { get; set; } = default!;
+        public ItemMaster ItemMaster { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblItemMaster == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblItemMaster == null)
+                {
+                    return NotFound();
+                }
 
-            var itemmaster = await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemCode == id);
+                var itemmaster = await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemCode == id);
 
-            if (itemmaster == null)
-            {
-                return NotFound();
+                if (itemmaster == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    ItemMaster = itemmaster;
+                }
+                return Page();
             }
-            else 
+            else
             {
-                ItemMaster = itemmaster;
+                return Redirect("~/Index");
             }
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)

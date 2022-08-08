@@ -20,7 +20,14 @@ namespace Nkgjjm.Areas.Panel.Pages.District
 
         public IActionResult OnGet()
         {
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
@@ -40,7 +47,7 @@ namespace Nkgjjm.Areas.Panel.Pages.District
                 _context.TblDistrict.Add(Districts);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
 
             }

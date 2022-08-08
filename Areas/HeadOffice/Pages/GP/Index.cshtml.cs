@@ -23,20 +23,28 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         public IList<SPGramPanchyatByBlock> GramPanchayats { get; set; } = default!;
         public int GpCount { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                if (_context.TblGramPanchayat != null)
+                try
                 {
-                    var gp = new SqlParameter("@Gp", DBNull.Value);
-                    GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock @Gp", gp).ToListAsync();
-                    GpCount = await _context.TblGramPanchayat.CountAsync();
+                    if (_context.TblGramPanchayat != null)
+                    {
+                        var gp = new SqlParameter("@Gp", DBNull.Value);
+                        GramPanchayats = await _context.SPGramPanchyatByBlock.FromSqlRaw("SPGramPanchyatByBlock @Gp", gp).ToListAsync();
+                        GpCount = await _context.TblGramPanchayat.CountAsync();
+                    }
                 }
-            }
-            catch(Exception ex)
-            {
+                catch (Exception)
+                {
 
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
         public async Task OnPostAsync(string Gp)
@@ -50,7 +58,7 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
                     GpCount = GramPanchayats.Count;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

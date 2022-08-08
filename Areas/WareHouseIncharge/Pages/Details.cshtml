@@ -24,7 +24,7 @@
                 <div class="form-inline">
 
                     <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Po Id </strong></label>
-                    <input type="text" name="Ponumber" class="form-control" value="@Model.Ponumber" readonly id="searchtext" style="background-color:wheat;" />
+                    <input type="text" name="Ponumber" class="form-control" value="@Model.Ponumber" readonly id="searchtext" style="background-color:lightgrey;" />
 
                
 
@@ -102,12 +102,12 @@
                             <tr>
                                 <td class="text-center">@item.ItemCode</td>
                                 <td class="text-center">@item.ItemName</td>
-                                <td class="text-center"><input type="text" class="form-control Receivedqty" readonly value="@item.Qty" /></td>
+                                <td class="text-center"><input type="text" class="form-control text-center Receivedqty" readonly value="@item.Qty" /></td>
                                 @*<td class="text-center">@item.TotalReceived</td>*@
-                                <td class="text-center"><input type="text" class="form-control Challanqty" /></td>
-                                <td class="text-center"><input type="text" class="form-control Physicalqty" /></td>
-                                <td class="text-center"><input type="text" class="form-control Short" /></td>
-                                <td class="text-center"><input type="text" class="form-control Balanceqty" /></td>
+                                <td class="text-center"><input type="text" class="form-control text-center Challanqty" /></td>
+                                <td class="text-center"><input type="text" class="form-control text-center Physicalqty" /></td>
+                                <td class="text-center"><input type="text" class="form-control text-center Short" readonly/></td>
+                                <td class="text-center"><input type="text" class="form-control text-center Balanceqty" /></td>
 
 
                             </tr>
@@ -161,12 +161,12 @@
             $(document).on('input', '#orders .Physicalqty', function() {
                 var currentRow = $(this).closest("tr");
                 var ActualQty = currentRow.find("td:eq(2) input").val();
-                var Rcvdqty = currentRow.find("td:eq(5) input").val();
-                var invoiceqty = currentRow.find("td:eq(4) input").val();
+                var Rcvdqty = currentRow.find("td:eq(4) input").val();
+                var invoiceqty = currentRow.find("td:eq(3) input").val();
                 var Balanceqty = parseFloat(ActualQty - Rcvdqty);
                 var shorter = parseFloat(invoiceqty - Rcvdqty);
-                currentRow.find("td:eq(6)").html(shorter);
-                currentRow.find("td:eq(7)").html(Balanceqty);
+                currentRow.find("td:eq(5) input").val(shorter);
+                currentRow.find("td:eq(6)").html(Balanceqty);
 
             });
         });

@@ -17,8 +17,15 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public List<SpHoClosure> SpHoClosure { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            SpHoClosure =await _context.SpHoClosure.FromSqlRaw("SpHoClosure").ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                SpHoClosure = await _context.SpHoClosure.FromSqlRaw("SpHoClosure").ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
     }
 }

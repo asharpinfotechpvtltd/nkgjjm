@@ -30,27 +30,34 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
         public int BlockId { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                if (id == null || _context.TblGramPanchayat == null)
+                try
                 {
-                    return NotFound();
-                }
+                    if (id == null || _context.TblGramPanchayat == null)
+                    {
+                        return NotFound();
+                    }
 
-                DistrictList = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
-                var grampanchayats = await _context.TblGramPanchayat.FirstOrDefaultAsync(m => m.Id == id);
-                if (grampanchayats == null)
-                {
-                    return NotFound();
+                    DistrictList = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+                    var grampanchayats = await _context.TblGramPanchayat.FirstOrDefaultAsync(m => m.Id == id);
+                    if (grampanchayats == null)
+                    {
+                        return NotFound();
+                    }
+                    GramPanchayats = grampanchayats;
+                    BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
                 }
-                GramPanchayats = grampanchayats;
-                BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
+                catch (Exception)
+                {
+
+                }
+                return Page();
             }
-            catch(Exception ex)
+            else
             {
-
+                return Redirect("~/Index");
             }
-            return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -85,7 +92,7 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
 
         private bool GramPanchayatsExists(int id)
         {
-          return (_context.TblGramPanchayat?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TblGramPanchayat?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

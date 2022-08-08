@@ -18,15 +18,23 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
             _context = context;
         }
 
-        public IList<Suppliers> Suppliers { get;set; } = default!;
+        public IList<Suppliers> Suppliers { get; set; } = default!;
         public int TotalCount { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblSupplier != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                Suppliers = await _context.TblSupplier.ToListAsync();
-                TotalCount = await _context.TblSupplier.CountAsync();
+                if (_context.TblSupplier != null)
+                {
+                    Suppliers = await _context.TblSupplier.ToListAsync();
+                    TotalCount = await _context.TblSupplier.CountAsync();
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
     }

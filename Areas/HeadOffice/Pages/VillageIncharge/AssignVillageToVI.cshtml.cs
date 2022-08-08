@@ -22,16 +22,23 @@ namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
         public int id { get; set; }
         public async Task<IActionResult> OnGet(int Id)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                id = Id;
-                Districts = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
-                var Inchargeid = new SqlParameter("@id", Id);
-                HttpContext.Session.SetString("id", Convert.ToString(Id));
-                AssigedVillage = await _context.SPAssignedVillageToVI.FromSqlRaw("SPAssignedVillageToVI @id", Inchargeid).ToListAsync();
-            }
-            catch(Exception ex) { }
+                try
+                {
+                    id = Id;
+                    Districts = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+                    var Inchargeid = new SqlParameter("@id", Id);
+                    HttpContext.Session.SetString("id", Convert.ToString(Id));
+                    AssigedVillage = await _context.SPAssignedVillageToVI.FromSqlRaw("SPAssignedVillageToVI @id", Inchargeid).ToListAsync();
+                }
+                catch (Exception ex) { }
                 return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
         public async Task<IActionResult> OnPost()
         {

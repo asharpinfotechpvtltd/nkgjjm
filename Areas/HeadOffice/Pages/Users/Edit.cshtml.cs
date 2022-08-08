@@ -24,18 +24,25 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblUser == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblUser == null)
+                {
+                    return NotFound();
+                }
 
-            var user =  await _context.TblUser.FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
+                var user = await _context.TblUser.FirstOrDefaultAsync(m => m.Id == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                User = user;
+                return Page();
             }
-            User = user;
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -70,7 +77,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
 
         private bool UserExists(int id)
         {
-          return (_context.TblUser?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TblUser?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

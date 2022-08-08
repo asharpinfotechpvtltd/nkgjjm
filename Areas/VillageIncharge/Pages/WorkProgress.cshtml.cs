@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Classes;
 using Nkgjjm.Models;
 
@@ -20,10 +23,33 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
         }
         [BindProperty]
         public string po { get; set; }
-        public IActionResult OnGet(string PoNo)
+        public List<SelectListItem> JobWorklist { get; set; }
+        public async Task<IActionResult> OnGet(string Search, string searchtext)
         {
-            po = PoNo;
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                int id = Convert.ToInt32(HttpContext.Session.GetString("Login"));
+                if (string.IsNullOrEmpty(Search))
+                {
+                    var Warehouseid = await Context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == id);
+                    if (Warehouseid == null)
+                    {
+                        return Page();
+                    }
+                    else
+                    {
+                        int W_hid = Warehouseid.WarehouseId;
+                        JobWorklist = await Context.TblJobWork.Select(j => new SelectListItem { Text = j.WorkorderId, Value = j.WorkorderId }).ToListAsync();
+                        return Page();
+                    }
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
+
         }
         public async Task<IActionResult> OnPost(string Jobworkid, List<IFormFile> siteimage)
         {
@@ -45,7 +71,7 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
                     await Context.SaveChangesAsync();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

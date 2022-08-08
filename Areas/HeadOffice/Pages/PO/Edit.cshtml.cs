@@ -32,20 +32,27 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
 
         public async Task<IActionResult> OnGet(string PoNo)
         {
-
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                ItemList = await _context.TblItemMaster.ToListAsync();
-                WarehouseList = await _context.TblWarehouse.ToListAsync();
-                Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
-                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();
-                Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.WarehouseName }).ToListAsync();
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    ItemList = await _context.TblItemMaster.ToListAsync();
+                    WarehouseList = await _context.TblWarehouse.ToListAsync();
+                    Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
+                    ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString(), Value = a.ItemCode.ToString() }).ToListAsync();
+                    Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.WarehouseName }).ToListAsync();
+                }
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
             }
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
+
         }
         public async Task<IActionResult> OnPost(string PoNumber, int suppliername)
         {
@@ -85,7 +92,8 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
                         await _context.SaveChangesAsync();
                     }
                 }
-            } catch(Exception)
+            }
+            catch (Exception)
             {
 
             }

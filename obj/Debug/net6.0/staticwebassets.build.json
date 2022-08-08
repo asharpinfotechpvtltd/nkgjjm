@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KI+ZdpT58J68qcaSbM5WhJUVhf0q6DouuEW+CrrIyVQ=",
+  "Hash": "vVwg8Tdvct5Nvq9L1fUdIfLvO7jOVDghvJlPcfISUpw=",
   "Source": "Nkgjjm",
   "BasePath": "_content/Nkgjjm",
   "Mode": "Default",
@@ -6696,6 +6696,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\SiteImage\\eda01952-a657-4be4-9ae2-f2d79569ac07WhatsApp Image 2021-06-27 at 3.18.52 PM.jpeg"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\TransferChallan\\04f03e3f-74da-43eb-9707-f25095030a7dCSEIT174427.pdf",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "TransferChallan/04f03e3f-74da-43eb-9707-f25095030a7dCSEIT174427.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\TransferChallan\\04f03e3f-74da-43eb-9707-f25095030a7dCSEIT174427.pdf"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\TransferChallan\\1138d873-c82c-4dc8-aaa9-652ee1318f34CSEIT174416.pdf",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "TransferChallan/1138d873-c82c-4dc8-aaa9-652ee1318f34CSEIT174416.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\TransferChallan\\1138d873-c82c-4dc8-aaa9-652ee1318f34CSEIT174416.pdf"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\TransferChallan\\32b4166f-29a2-467a-9e8a-1ae8472dd60aCSEIT174427.pdf",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "TransferChallan/32b4166f-29a2-467a-9e8a-1ae8472dd60aCSEIT174427.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\TransferChallan\\32b4166f-29a2-467a-9e8a-1ae8472dd60aCSEIT174427.pdf"
     }
   ]
 }

@@ -30,30 +30,36 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public int W_hid { get; set; }
         public async Task<IActionResult> OnGet(string jobworkid, int IndentMasterId, int WarehouseId)
         {
-           
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                W_hid = WarehouseId;
-                var search = new SqlParameter("@JobWorkId", jobworkid);
-                var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
-                var Whid = new SqlParameter("@WarehouseId", WarehouseId);
-                SPValidateByHo = await _context.SPValidateByHo.FromSqlRaw("SPValidateByHo @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
-                searching = jobworkid;
-                IndentMasterid = IndentMasterId;
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    W_hid = WarehouseId;
+                    var search = new SqlParameter("@JobWorkId", jobworkid);
+                    var IndentMaster = new SqlParameter("@IndentMasterId", IndentMasterId);
+                    var Whid = new SqlParameter("@WarehouseId", WarehouseId);
+                    SPValidateByHo = await _context.SPValidateByHo.FromSqlRaw("SPValidateByHo @JobWorkId,@IndentMasterId,@WarehouseId", search, IndentMaster, Whid).ToListAsync();
+                    searching = jobworkid;
+                    IndentMasterid = IndentMasterId;
+                }
+                catch (Exception ex)
+                {
 
+                }
+
+                return Page();
             }
-            
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         public List<SPValidateByHo> SPValidateByHo { get; set; }
 
 
 
-        public async Task<IActionResult> OnPostSearch(string searchtext, string status, int IndentMasterid,int Whid)
+        public async Task<IActionResult> OnPostSearch(string searchtext, string status, int IndentMasterid, int Whid)
         {
             try
             {

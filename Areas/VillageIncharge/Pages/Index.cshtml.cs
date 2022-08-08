@@ -46,7 +46,9 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages
         }
         public async Task<IActionResult> OnGet()
         {
-            Totalwarehouse = _context.TblWarehouse.Count();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                Totalwarehouse = _context.TblWarehouse.Count();
             TotalDistrict = _context.TblDistrict.Count();
             TotalBlock = _context.TblBlock.Count();
             TotalGp = _context.TblGramPanchayat.Count();
@@ -64,6 +66,11 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages
             string ViId = HttpContext.Session.GetString("Login");
             
             return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
 
 
         }

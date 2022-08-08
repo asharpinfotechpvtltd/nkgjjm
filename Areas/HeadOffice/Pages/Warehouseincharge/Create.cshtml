@@ -16,21 +16,21 @@
             <div class="preview">
                 <div class="form-inline">
                     <label for="horizontal-form-1" class="form-label sm:w-20">WareHouse Name</label>
-                    <select asp-for="WarehouseIncharges.WareHouseid" asp-items="Model.WareHouseNames" class="form-control">
+                    <select asp-for="WarehouseIncharges.WareHouseid" asp-items="Model.WareHouseNames" id="WareHouseNames" class="form-control">
                         <option>Select WareHouse Name</option>
                     </select>
                     <span asp-validation-for="WarehouseIncharges.WareHouseid" class="text-danger"></span>
                 </div>
                 <div class="form-inline mt-5">
                     <label for="horizontal-form-2" class="form-label sm:w-20">Name</label>
-                    <select asp-items="@Model.UserList" asp-for="WarehouseIncharges.UserId" class="form-control">
+                    <select asp-items="@Model.UserList" asp-for="WarehouseIncharges.UserId" id="warehouseInchargeName" class="form-control">
                         <option>Select WareHouse Incharge Name</option>
                     </select>
                     
                 </div>
                 
                 <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Create" id="Add" class="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -38,6 +38,44 @@
 </div>
 @section Scripts {
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            $("#Add").click(function(e) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/CheckWarehouseIncharge",
+                    data: { WareHouseId: $("#WareHouseNames").val(), WarehouseInchargeId: $("#warehouseInchargeName").val() },
+                    contentType: "application/json",
+                    dataType: "text",
+                    async: true,
+                    success: function(response) {
+                        console.log(response);
+                        if (response == "AR") {
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error...',
+                                text: 'WareHouse Incharge Already Exist To Warehouse'
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success...',
+                                text: 'Village Incharge Added'
+                            })
+                        }
+                        
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+                });
+                e.preventDefault();
+            })
+
+        </script>
     }
     }

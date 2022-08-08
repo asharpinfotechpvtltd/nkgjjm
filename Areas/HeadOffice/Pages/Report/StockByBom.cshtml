@@ -1,0 +1,171 @@
+﻿@page
+@model Nkgjjm.Areas.HeadOffice.Pages.Report.StockByBomModel
+@{
+    int i = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Stock Based On Jobwork</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Stock Based On Jobwork
+</h2>
+<div class="intro-y box mt-5 pb-5">
+   @* <form method="get" asp-page-handler="Search">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20" style="font-weight:bolder;">Start Date</label>
+                    <input type="date" class="form-control w-56 box pr-10" name="startdate" asp-for="@Model.YearStartdate" placeholder="Search...">
+
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">End Date</label>
+                    <input type="date" class="form-control w-56 box pr-10" name="enddate" asp-for="@Model.YearEnddate" placeholder="Search...">
+
+                </div>
+                <div class="form-inline mt-5">
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">Warehouse</label>
+                    <select type="text" class="form-control w-56 box pr-10" asp-items="@Model.WarehouseList" asp-for="@Model.warehouse">
+                        <option value="0">Select</option>
+                    </select>
+
+
+                    <input type="submit" value="Search" id="add" name="submit" class="btn btn-primary w-56 pr-10" />
+                    <!-- END: Data List -->
+                </div>
+
+            </div>
+        </div>
+    </form>*@
+
+    @if (Model.SPStockByBom != null)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" style="background-color:#DEDEDE">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center whitespace-nowrap">
+                                S.No.
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+                                Item Code
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Item Name
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+
+                                Opening Stock
+
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+
+                                Bom Qty
+
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+
+                                Picked Qty
+
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+
+                                Freeze
+
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+
+                                Balance To Issue
+
+                            </th>
+                           
+
+
+                            <th class="text-center whitespace-nowrap">
+                                Closing Stock
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Short Excess
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SPStockByBom)
+                        {
+
+                            <tr>
+                                <td class="text-center">@i</td>
+                                <td class="text-center">
+                                    @item.RawMaterialId
+                                </td>
+
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+
+                                <td class="text-center" style="color:blue;">
+                                    @Html.DisplayFor(modelItem => item.OpeningStock)
+                                </td>
+                                <td class="text-center" style="color:green;">
+                                    @Html.DisplayFor(modelItem => item.BomQty)
+                                </td> 
+                                <td class="text-center" style="color:red;">
+                                    @Html.DisplayFor(modelItem => item.MaterialPickedqty)
+                                </td>
+                                <td class="text-center" style="color:cadetblue;">
+                                    @Html.DisplayFor(modelItem => item.Freeze)
+                                </td> 
+                                <td class="text-center" style="color:yellowgreen;">
+                                    @Html.DisplayFor(modelItem => item.BalanceToIssue)
+                                </td>
+                                <td class="text-center" style="color:coral;">
+                                    @Html.DisplayFor(modelItem => item.ClosingStock)
+                                </td>
+                                @if (item.ShortExcess == "Shorter")
+                                {
+                                    <td class="text-center" style="color:red;">
+                                        @Html.DisplayFor(modelItem => item.ShortExcess)
+                                    </td>
+                                }
+                                else if (item.ShortExcess == "Excess")
+                                {
+                                    <td class="text-center" style="color:green;">
+                                        @Html.DisplayFor(modelItem => item.ShortExcess)
+                                    </td>
+                                }
+
+
+                            </tr>
+
+
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    }
+
+</div>

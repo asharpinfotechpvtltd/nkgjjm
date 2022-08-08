@@ -25,20 +25,29 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
 
         public List<SPBlockByDistrict> BlockList { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                if (_context.TblBlock != null)
+                try
                 {
-                    var block = new SqlParameter("@Block", DBNull.Value);
-                    BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
-                    BlockCount = await _context.TblBlock.CountAsync();
+                    if (_context.TblBlock != null)
+                    {
+                        var block = new SqlParameter("@Block", DBNull.Value);
+                        BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
+                        BlockCount = await _context.TblBlock.CountAsync();
+                        
+                    }
                 }
-            }
-            catch(Exception ex)
-            {
+                catch (Exception)
+                {
 
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
         public async Task<IActionResult> OnPost(string BlockName)
@@ -49,7 +58,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
                 BlockList = await _context.SPBlockByDistrict.FromSqlRaw("SPBlockByDistrict @Block", block).ToListAsync();
                 BlockCount = BlockList.Count;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
 
             }

@@ -21,18 +21,25 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
 
         public async Task<IActionResult> OnGet()
         {
-            WareHouseNames = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
-            UserList = await _context.TblUser.Where(d=>d.Designation==3).Select(w => new SelectListItem { Text = w.Username, Value = w.Id.ToString() }).ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                WareHouseNames = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
+                UserList = await _context.TblUser.Where(d => d.Designation == 3).Select(w => new SelectListItem { Text = w.Username, Value = w.Id.ToString() }).ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
         public WarehouseIncharges WarehouseIncharges { get; set; } = default!;
         [BindProperty]
-       
+
         public List<SelectListItem> WareHouseNames { get; set; }
         public List<SelectListItem> UserList { get; set; }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -41,7 +48,8 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
             {
                 _context.TblWarehouseIncharge.Add(WarehouseIncharges);
                 await _context.SaveChangesAsync();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }

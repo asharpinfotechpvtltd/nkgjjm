@@ -11,7 +11,7 @@
     <title>NKG-PRIMUS</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="~/dist/css/app.css" />
-    
+
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
@@ -66,7 +66,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
 
                 <li>
                     <a href="javascript:;" class="menu">
@@ -112,11 +112,6 @@
                     </ul>
                 </li>
 
-                
-                
-
-
-
                 <li>
                     <a asp-page="/VillageIncharge/index" class="menu">
                         <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
@@ -138,17 +133,19 @@
                     </a>
                 </li>
 
-               
-
-               
-
                 <li>
                     <a asp-page="/VillageIncharge/IndentStatus" class="menu">
                         <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
                         <div class="menu__title"> Indent Status </div>
                     </a>
                 </li>
-               
+                <li>
+                    <a asp-page="/VillageIncharge/AllJobWork" class="menu">
+                        <div class="menu__icon"> <i data-lucide="calendar"></i> </div>
+                        <div class="menu__title"> All Job Work </div>
+                    </a>
+                </li>
+
 
 
 
@@ -164,7 +161,7 @@
                 <span class="hidden xl:block text-white text-lg ml-3">  </span>
             </a>
             <div class="side-nav__devider my-6"></div>
-           
+
             <ul>
                 <li>
                     <a href="/panel/index" class="side-menu zoom-innn">
@@ -173,20 +170,29 @@
                             Dashboard
                         </div>
                     </a>
-                </li>                
+                </li>
                 <li>
                     <a asp-page="/IndentMaster" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                         <div class="side-menu__title"> Indent</div>
                     </a>
-                </li>  
+                </li>
                 <li>
                     <a asp-page="/UploadGrn" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                         <div class="side-menu__title"> Upload Grn</div>
                     </a>
-                </li>               
+                </li>
+
+                 <li>
+                    <a asp-page="/VillageIncharge/AllJobWork" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title"> All Job Works </div>
+                    </a>
+                </li>
+
                 
+
                 <li>
                     <a asp-page="/Index" asp-page-handler="Logout" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="message-square"></i> </div>
@@ -209,7 +215,7 @@
     @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
     <script src="~/dist/js/app.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <!-- END: JS Assets-->
     @RenderSection("Scripts",required:false);

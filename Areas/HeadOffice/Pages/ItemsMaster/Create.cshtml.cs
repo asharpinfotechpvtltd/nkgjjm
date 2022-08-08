@@ -23,8 +23,15 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 
         public async Task<IActionResult> OnGet()
         {
-            Units = await _context.TblUnits.Select(u => new SelectListItem { Value = u.UnitId.ToString(), Text = u.UnitName }).ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                Units = await _context.TblUnits.Select(u => new SelectListItem { Value = u.UnitId.ToString(), Text = u.UnitName }).ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
         GetUserDate date = new GetUserDate();
         [BindProperty]
@@ -91,7 +98,7 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

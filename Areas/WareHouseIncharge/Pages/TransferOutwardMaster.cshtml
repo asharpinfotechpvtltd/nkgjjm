@@ -1,0 +1,74 @@
+﻿@page
+@model Nkgjjm.Areas.WareHouseIncharge.Pages.TransferOutwardMasterModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pending Transfer OutWard List</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Pending Transfer OutWard List- Warehouse
+</h2>
+
+
+@if (Model.SpWareHouseTransferPendingListForWareHouse != null && Model.SpWareHouseTransferPendingListForWareHouse.Count > 0)
+{
+    
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" id="orders">
+
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Transfer Master Id
+                        </th>
+                         <th class="text-center whitespace-nowrap">
+                            To WareHouse
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            From WareHouse
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Status
+                        </th> 
+                        <th class="text-center whitespace-nowrap">
+                           Ho Status
+                        </th>
+                        
+                        <th class="text-center whitespace-nowrap">Action</th>
+                    </tr>
+                    @foreach (var item in Model.SpWareHouseTransferPendingListForWareHouse)
+                    {
+                        <tr>
+                             <td class="text-center">@item.TransferMasterId</td>
+                             <td class="text-center">@item.ToWareHouse</td>
+                             <td class="text-center">@item.FromWareHouse</td>
+                             <td class="text-center">@item.FromWareHouseStatus</td>
+                             <td class="text-center">@item.HoStatus</td>
+                                                      @if(item.Challan!=null)
+                                                       {
+                           
+                                                       
+                            <td class="text-center">                                
+                                <a class="items-center" style="color:blue;" asp-page="UpdateTransferStatus" asp-route-TransferMasterId="@item.TransferMasterId"> Update Status </a>                            
+                            </td>
+                                                       }
+                                                       
+                            
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
+            
+        </div>
+
+  
+}

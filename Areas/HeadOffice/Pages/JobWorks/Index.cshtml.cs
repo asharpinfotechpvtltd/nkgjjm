@@ -23,12 +23,20 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
 
         [BindProperty]
         public int TotalJobWork { get; set; }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblJobWork != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                JobWork = await _context.SPJobWorkList.FromSqlRaw("SPJobWorkList").ToListAsync();
-                TotalJobWork = await _context.TblJobWork.CountAsync();
+                if (_context.TblJobWork != null)
+                {
+                    JobWork = await _context.SPJobWorkList.FromSqlRaw("SPJobWorkList").ToListAsync();
+                    TotalJobWork = await _context.TblJobWork.CountAsync();
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
     }

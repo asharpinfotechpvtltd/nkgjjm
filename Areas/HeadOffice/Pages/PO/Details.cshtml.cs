@@ -18,33 +18,41 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
     {
         private readonly Nkgjjm.Models.ApplicationDbContext _context;
         IWebHostEnvironment Environmet;
-        
+
         public string InwardDocument { get; set; }
         public PoVehicleDetail pomaster { get; set; }
-       
+
         public DetailsModel(ApplicationDbContext context, IWebHostEnvironment Env)
         {
             _context = context;
             Environmet = Env;
         }
 
-        public List<SPMaterialReceivedCorrespondenceToPo> SPMaterialReceivedCorrespondenceToPo { get; set; } = default!; 
+        public List<SPMaterialReceivedCorrespondenceToPo> SPMaterialReceivedCorrespondenceToPo { get; set; } = default!;
         public string Ponumber { get; set; }
         public async Task<IActionResult> OnGetAsync(string Pono)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                Ponumber = Pono;
-                pomaster = await _context.TblPoVehicleDetail.FirstOrDefaultAsync(e => e.PoNo == Pono);
-                var po = new SqlParameter("@PoId", Pono);
-                SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId", po).ToListAsync();
-            }
-            catch (Exception) { }
+
+                try
+                {
+                    Ponumber = Pono;
+                    pomaster = await _context.TblPoVehicleDetail.FirstOrDefaultAsync(e => e.PoNo == Pono);
+                    var po = new SqlParameter("@PoId", Pono);
+                    SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PoId", po).ToListAsync();
+                }
+                catch (Exception) { }
                 return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
         [BindProperty]
         public IFormFile UploadDoc { get; set; }
-        public async Task<IActionResult> OnPostReceiveditem(string Ponumber,string Invoicenumber)
+        public async Task<IActionResult> OnPostReceiveditem(string Ponumber, string Invoicenumber)
         {
             try
             {
@@ -80,7 +88,8 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
                         await _context.SaveChangesAsync();
                     }
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }

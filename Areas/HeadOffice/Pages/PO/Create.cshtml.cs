@@ -22,7 +22,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
         {
             _context = context;
         }
-     
+
         public List<SelectListItem> Supplier { get; set; }
         [BindProperty]
         public List<SelectListItem> ItemMasters { get; set; }
@@ -34,23 +34,28 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
 
         public async Task<IActionResult> OnGet()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
+                try
+                {
+                    ItemList = await _context.TblItemMaster.ToListAsync();
+                    WarehouseList = await _context.TblWarehouse.ToListAsync();
+                    Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
+                    ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString() + "-" + a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
+                    Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
+                }
+                catch (Exception ex)
+                {
 
-
-                ItemList = await _context.TblItemMaster.ToListAsync();
-                WarehouseList = await _context.TblWarehouse.ToListAsync();
-                Supplier = await _context.TblSupplier.Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() }).ToListAsync();
-                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString() + "-" + a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
-                Warehouse = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
+                }
+                return Page();
             }
-            catch(Exception ex)
+            else
             {
-
+                return Redirect("~/Index");
             }
-            return Page();
         }
-        public async Task<IActionResult> OnPost(string PoNumber,int suppliername)
+        public async Task<IActionResult> OnPost(string PoNumber, int suppliername)
         {
             try
             {
@@ -87,7 +92,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
                     }
                 }
             }
-             catch(Exception)
+            catch (Exception)
             { }
             ViewData["Message"] = string.Format("Po Created");
             return Page();

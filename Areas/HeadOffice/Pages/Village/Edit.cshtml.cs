@@ -27,21 +27,28 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
 
         public async Task<IActionResult> OnGetAsync(Int64? id)
         {
-            if (id == null || _context.TblVillageCode == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblVillageCode == null)
+                {
+                    return NotFound();
+                }
 
-            var villages =  await _context.TblVillageCode.FirstOrDefaultAsync(m => m.VillageCode == id);
-            District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
-            Block = await _context.TblBlock.Select(d => new SelectListItem { Text = d.Block, Value = d.Id.ToString() }).ToListAsync();
-            Grampanchayat = await _context.TblGramPanchayat.Select(d => new SelectListItem { Text = d.GramPanchayat, Value = d.Id.ToString() }).ToListAsync();
-            if (villages == null)
-            {
-                return NotFound();
+                var villages = await _context.TblVillageCode.FirstOrDefaultAsync(m => m.VillageCode == id);
+                District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+                Block = await _context.TblBlock.Select(d => new SelectListItem { Text = d.Block, Value = d.Id.ToString() }).ToListAsync();
+                Grampanchayat = await _context.TblGramPanchayat.Select(d => new SelectListItem { Text = d.GramPanchayat, Value = d.Id.ToString() }).ToListAsync();
+                if (villages == null)
+                {
+                    return NotFound();
+                }
+                Villages = villages;
+                return Page();
             }
-            Villages = villages;
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -76,7 +83,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Village
 
         private bool VillagesExists(int id)
         {
-          return (_context.TblVillageCode?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TblVillageCode?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

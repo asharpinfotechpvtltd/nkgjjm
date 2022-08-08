@@ -15,15 +15,22 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public List<Closure> Closure { get; set; }
         public async Task<IActionResult> OnGet(string id)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                Closure = await _context.TblClosure.Where(e => e.Jobworkid == id).ToListAsync();
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    Closure = await _context.TblClosure.Where(e => e.Jobworkid == id).ToListAsync();
+                }
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
             }
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
     }
 }

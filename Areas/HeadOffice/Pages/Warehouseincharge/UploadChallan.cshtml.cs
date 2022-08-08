@@ -23,8 +23,15 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
         public string po { get; set; }
         public IActionResult OnGet(string PoNo)
         {
-            po = PoNo;
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                po = PoNo;
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
         public async Task<IActionResult> OnPost(string PoNo)
         {
@@ -40,7 +47,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouseincharge
                 await Context.TblChallan.AddAsync(c);
                 await Context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

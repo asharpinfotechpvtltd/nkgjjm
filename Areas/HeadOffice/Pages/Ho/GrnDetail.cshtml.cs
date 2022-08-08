@@ -23,33 +23,40 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public PoVehicleDetail PoVehicledetail { get; set; }
         public int warehouse_id { get; set; }
         public string WarehouseName { get; set; }
-     
 
-        
+
+
         public List<SPMaterialReceivedCorrespondenceToPo> SPMaterialReceivedCorrespondenceToPo { get; set; }
-        public async Task<IActionResult> OnGet(string Pono, string challan,int warehouseid)
+        public async Task<IActionResult> OnGet(string Pono, string challan, int warehouseid)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                var po = new SqlParameter("@PONo", Pono);
-                var chln = new SqlParameter("@Challannumber", challan);
-                var whid = new SqlParameter("@Warehouseid", warehouseid);
-                warehouse_id = warehouseid;
-                SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PONo,@Challannumber,@Warehouseid", po, chln, whid).ToListAsync();
-                PoVehicledetail = await _context.TblPoVehicleDetail.FirstOrDefaultAsync(c => c.PoNo == Pono && c.ChallanNumber == challan);
-                var Whname = await _context.TblWarehouse.FirstOrDefaultAsync(e => e.Id == warehouseid);
-                WarehouseName = Whname.WarehouseName;
+                try
+                {
+                    var po = new SqlParameter("@PONo", Pono);
+                    var chln = new SqlParameter("@Challannumber", challan);
+                    var whid = new SqlParameter("@Warehouseid", warehouseid);
+                    warehouse_id = warehouseid;
+                    SPMaterialReceivedCorrespondenceToPo = await _context.SPMaterialReceivedCorrespondenceToPo.FromSqlRaw("SPMaterialReceivedCorrespondenceToPo @PONo,@Challannumber,@Warehouseid", po, chln, whid).ToListAsync();
+                    PoVehicledetail = await _context.TblPoVehicleDetail.FirstOrDefaultAsync(c => c.PoNo == Pono && c.ChallanNumber == challan);
+                    var Whname = await _context.TblWarehouse.FirstOrDefaultAsync(e => e.Id == warehouseid);
+                    WarehouseName = Whname.WarehouseName;
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+                return Page();
             }
-            catch(Exception ex)
+            else
             {
-
+                return Redirect("~/Index");
             }
-
-            
-            return Page();
         }
 
-        public async Task<IActionResult> OnPost(int warehouse,string txttransactionno,string status,string txtreason,string Ponumber)
+        public async Task<IActionResult> OnPost(int warehouse, string txttransactionno, string status, string txtreason, string Ponumber)
         {
             try
             {
@@ -91,16 +98,16 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
                         } };
 
                         await _context.Database.ExecuteSqlRawAsync("SpUpdateQty @Warehouseid,@ItemCode,@Qty,@date", param);
-                        
+
 
 
 
                     }
                 }
-                var postatus =  _context.TblMaterialReceivedbyPo.Where(po => po.PoNo == Ponumber);
-                if(postatus!=null)
+                var postatus = _context.TblMaterialReceivedbyPo.Where(po => po.PoNo == Ponumber);
+                if (postatus != null)
                 {
-                    foreach(var item in postatus)
+                    foreach (var item in postatus)
                     {
                         item.Status = status;
                         item.TransactionId = txttransactionno;
@@ -109,7 +116,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
                 }
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

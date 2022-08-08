@@ -24,15 +24,21 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
 
         public async Task<IActionResult> OnGet()
         {
-            
-            District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
-            
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+
+                District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
         public GramPanchayats GramPanchayats { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -43,7 +49,7 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
                 _context.TblGramPanchayat.Add(GramPanchayats);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception)
             {
 
             }

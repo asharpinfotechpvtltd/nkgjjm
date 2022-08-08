@@ -7,5 +7,6 @@
         public string JobWorkId { get; set; }
         public double Qty { get; set; }
         public double Pickedqty { get; set; }
+        public double Balance { get; set; }
     }
 }

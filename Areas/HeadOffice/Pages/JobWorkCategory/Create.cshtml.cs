@@ -20,17 +20,24 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorkCategory
 
         public IActionResult OnGet()
         {
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
         public JobWorkcategories JobWorkcategories { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblJobWorkCategory == null || JobWorkcategories == null)
+            if (!ModelState.IsValid || _context.TblJobWorkCategory == null || JobWorkcategories == null)
             {
                 return Page();
             }

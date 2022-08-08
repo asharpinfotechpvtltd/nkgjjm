@@ -19,26 +19,33 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
         }
 
         [BindProperty]
-      public User User { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblUser == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblUser == null)
+                {
+                    return NotFound();
+                }
 
-            var user = await _context.TblUser.FirstOrDefaultAsync(m => m.Id == id);
+                var user = await _context.TblUser.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (user == null)
-            {
-                return NotFound();
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    User = user;
+                }
+                return Page();
             }
-            else 
+            else
             {
-                User = user;
+                return Redirect("~/Index");
             }
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)

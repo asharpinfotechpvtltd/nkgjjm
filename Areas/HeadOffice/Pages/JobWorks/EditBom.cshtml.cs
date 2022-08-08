@@ -29,21 +29,28 @@ namespace Nkgjjm.Areas.HeadOffice.Pages.JobWorks
 
         public async Task<IActionResult> OnGet(string id)
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                JobWorkid = id;
-                ItemList = await _context.TblItemMaster.ToListAsync();
-                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
-                JobDescriptionList = await _context.TblJobDescription.Where(e => e.JobWorkid == JobWorkid).Select(a => new SelectListItem { Text = a.Particular, Value = a.id.ToString() }).ToListAsync();
-                JobDescription = await _context.TblJobDescription.Where(j => j.JobWorkid == JobWorkid).ToListAsync();
-                var jobid = new SqlParameter("@JobWorkId", JobWorkid);
-                ListBom = await _context.SPBomDetail.FromSqlRaw("SPBomDetail @JobWorkId", jobid).ToListAsync();
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    JobWorkid = id;
+                    ItemList = await _context.TblItemMaster.ToListAsync();
+                    ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
+                    JobDescriptionList = await _context.TblJobDescription.Where(e => e.JobWorkid == JobWorkid).Select(a => new SelectListItem { Text = a.Particular, Value = a.id.ToString() }).ToListAsync();
+                    JobDescription = await _context.TblJobDescription.Where(j => j.JobWorkid == JobWorkid).ToListAsync();
+                    var jobid = new SqlParameter("@JobWorkId", JobWorkid);
+                    ListBom = await _context.SPBomDetail.FromSqlRaw("SPBomDetail @JobWorkId", jobid).ToListAsync();
+                }
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
             }
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
         public async Task<IActionResult> OnPost(string JobWorkId)
         {
@@ -80,7 +87,7 @@ namespace Nkgjjm.Areas.HeadOffice.Pages.JobWorks
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

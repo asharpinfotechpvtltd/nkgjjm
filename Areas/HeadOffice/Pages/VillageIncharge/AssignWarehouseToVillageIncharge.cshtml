@@ -14,7 +14,7 @@
             <div class="preview">
                 <div class="form-inline">
                     <label for="horizontal-form-1" class="form-label sm:w-20">Village Incharge Name</label>
-                    <select id="horizontal-form-1" type="text" name="VillageInchargeName" asp-items="@Model.VillageInchargeName" class="form-control">
+                    <select id="VillageInchargeName" type="text" name="VillageInchargeName" asp-items="@Model.VillageInchargeName" class="form-control">
                         <option>Select Village Incharge</option>
                     </select>
                 </div>
@@ -26,10 +26,53 @@
                 </div>
 
                 <div class="sm:ml-20 sm:pl-5 mt-5">
-                    <button class="btn btn-primary">Add Warehouse</button>
+                    <button class="btn btn-primary" id="Add">Add Warehouse</button>
                 </div>
             </div>
 
         </div>
     </form>
 </div>
+@section Scripts {
+    @{
+        <script>
+            $("#Add").click(function(e) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/CheckVillageIncharge",
+                    data: { WareHouseId: $("#ddldist").val(), VillageInchargeId: $("#VillageInchargeName").val() },
+                    contentType: "application/json",
+                    dataType: "text",
+                    async: true,
+                    success: function(response) {
+                        console.log(response);
+                        if (response == "AR") {
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error...',
+                                text: 'Village Incharge Already Exist To Warehouse'
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success...',
+                                text: 'Village Incharge Added'
+                            })
+                        }
+                        
+                    },
+                    failure: function(response) {
+                        console.log(response.responseText);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                    }
+                });
+                e.preventDefault();
+            })
+
+        </script>
+    }
+    }

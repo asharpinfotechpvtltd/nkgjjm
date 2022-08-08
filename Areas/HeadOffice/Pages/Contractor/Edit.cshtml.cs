@@ -24,18 +24,26 @@ namespace Nkgjjm.Areas.Panel.Pages.Contractor
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblContractor == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
 
-            var contractors =  await _context.TblContractor.FirstOrDefaultAsync(m => m.ContractorId == id);
-            if (contractors == null)
-            {
-                return NotFound();
+                if (id == null || _context.TblContractor == null)
+                {
+                    return NotFound();
+                }
+
+                var contractors = await _context.TblContractor.FirstOrDefaultAsync(m => m.ContractorId == id);
+                if (contractors == null)
+                {
+                    return NotFound();
+                }
+                Contractors = contractors;
+                return Page();
             }
-            Contractors = contractors;
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -70,7 +78,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Contractor
 
         private bool ContractorsExists(int id)
         {
-          return (_context.TblContractor?.Any(e => e.ContractorId == id)).GetValueOrDefault();
+            return (_context.TblContractor?.Any(e => e.ContractorId == id)).GetValueOrDefault();
         }
     }
 }

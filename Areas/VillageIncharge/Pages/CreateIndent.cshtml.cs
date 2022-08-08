@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -19,36 +20,66 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
             _context = context;
 
         }
-        public IActionResult OnGet()
+        public List<SelectListItem> JobWorklist { get; set; }
+        public async Task<IActionResult> OnGet(string Search, string searchtext)
         {
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                int id = Convert.ToInt32(HttpContext.Session.GetString("Login"));
+                if (string.IsNullOrEmpty(Search))
+                {
 
-            return Page();
+
+                    var Warehouseid = await _context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == id);
+                    if (Warehouseid == null)
+                    {
+                        return Page();
+                    }
+                    else
+                    {
+                        int W_hid = Warehouseid.WarehouseId;
+                        JobWorklist = await _context.TblJobWork.Select(j => new SelectListItem { Text = j.WorkorderId, Value = j.WorkorderId }).ToListAsync();
+                        return Page();
+                    }
+                }
+                else
+                {
+
+                    var search = new SqlParameter("@JobWorkId", searchtext);
+                    SPMaterialIssuance = await _context.SPCreateIndent.FromSqlRaw("SPCreateIndent @JobWorkId", search).ToListAsync();
+                    searching = searchtext;
+                    HttpContext.Session.SetString("Jobworkid", searchtext);
+                    VillageIncharges incharges = await _context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == id);
+                    if (incharges != null)
+                    {
+                        int warehouseid = incharges.WarehouseId;
+                        HttpContext.Session.SetString("Warehouseid", warehouseid.ToString());
+                        HttpContext.Session.SetString("Userid", id.ToString());
+                    }
+
+
+
+                    var Warehouseid = await _context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == id);
+                    if (Warehouseid == null)
+                    {
+                        return Page();
+                    }
+                    else
+                    {
+                        int W_hid = Warehouseid.WarehouseId;
+                        JobWorklist = await _context.TblJobWork.Select(j => new SelectListItem { Text = j.WorkorderId, Value = j.WorkorderId }).ToListAsync();
+                        return Page();
+                    }
+                }
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         public List<SPCreateIndent> SPMaterialIssuance { get; set; }
-        public async Task<IActionResult> OnPostSearch(string searchtext)
-        {
-            try
-            {
-                int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
-                var search = new SqlParameter("@JobWorkId", searchtext);
-                SPMaterialIssuance = await _context.SPCreateIndent.FromSqlRaw("SPCreateIndent @JobWorkId", search).ToListAsync();
-                searching = searchtext;
-                HttpContext.Session.SetString("Jobworkid", searchtext);
-                VillageIncharges incharges = await _context.TblVillageInchargeForWareHouse.FirstOrDefaultAsync(e => e.VillageInchargeId == Userid);
-                if (incharges != null)
-                {
-                    int warehouseid = incharges.WarehouseId;
-                    HttpContext.Session.SetString("Warehouseid", warehouseid.ToString());
-                    HttpContext.Session.SetString("Userid", Userid.ToString());
-                }
-            }
-            catch(Exception ex)
-            {
 
-            }
-            return Page();
-        }
         public async Task<IActionResult> OnPostCreateIndent()
         {
             try
@@ -118,7 +149,7 @@ namespace Nkgjjm.Areas.VillageIncharge.Pages.VillageIncharge
                 }
                 ViewData["Message"] = "Indent Created";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

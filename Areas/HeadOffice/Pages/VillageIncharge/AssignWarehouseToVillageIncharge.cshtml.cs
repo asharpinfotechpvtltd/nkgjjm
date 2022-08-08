@@ -18,16 +18,23 @@ namespace Nkgjjm.Areas.HeadOffice.Pages.VillageIncharge
         public List<SelectListItem> VillageInchargeName { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                WarehouseName = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
-                VillageInchargeName = await _context.TblUser.Where(e => e.Designation == 2).Select(w => new SelectListItem { Text = w.Username, Value = w.Id.ToString() }).ToListAsync();
-            }
-            catch(Exception)
-            {
+                try
+                {
+                    WarehouseName = await _context.TblWarehouse.Select(w => new SelectListItem { Text = w.WarehouseName, Value = w.Id.ToString() }).ToListAsync();
+                    VillageInchargeName = await _context.TblUser.Where(e => e.Designation == 2).Select(w => new SelectListItem { Text = w.Username, Value = w.Id.ToString() }).ToListAsync();
+                }
+                catch (Exception)
+                {
 
-            }
+                }
                 return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
 
         }
 

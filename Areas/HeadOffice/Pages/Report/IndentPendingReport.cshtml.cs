@@ -12,13 +12,20 @@ namespace Nkgjjm.Areas.HeadOffice.Pages.Report
         ApplicationDbContext _context;
         public IndentPendingReportModel(ApplicationDbContext context)
         {
-            _context = context; 
+            _context = context;
 
         }
         public async Task<IActionResult> OnGet()
         {
-            SpIndentPendingReport = await _context.SpIndentPendingReport.FromSqlRaw("SpIndentPendingReport").ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                SpIndentPendingReport = await _context.SpIndentPendingReport.FromSqlRaw("SpIndentPendingReport").ToListAsync();
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
     }
 }

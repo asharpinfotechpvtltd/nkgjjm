@@ -21,8 +21,16 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
 
         public async Task<IActionResult> OnGet()
         {
-            District =await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
@@ -30,7 +38,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
 
         [BindProperty]
         public List<SelectListItem> District { get; set; }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -41,7 +49,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Blocks
                 await _context.TblBlock.AddAsync(DistBlock);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception)
             {
 
             }

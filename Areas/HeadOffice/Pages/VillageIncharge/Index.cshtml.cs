@@ -21,17 +21,27 @@ namespace Nkgjjm.Areas.Panel.Pages.VillageIncharge
 
         public IList<SPVillageIncharge> VillageIncharge { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                if (_context.TblVillageCode != null)
+                try
                 {
-                    VillageIncharge = await _context.SPVillageIncharge.FromSqlRaw("SPVillageIncharge").ToListAsync();
+                    if (_context.TblVillageCode != null)
+                    {
+                        VillageIncharge = await _context.SPVillageIncharge.FromSqlRaw("SPVillageIncharge").ToListAsync();
+                    }
+                   
                 }
-            } catch(Exception ex)
-            {
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
     }

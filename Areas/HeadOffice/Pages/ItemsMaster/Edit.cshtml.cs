@@ -27,16 +27,22 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 
         public async Task<IActionResult> OnGetAsync(Int64 id)
         {
-            
-
-            var itemmaster =  await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemCode == id);
-            UnitList = await _context.TblUnits.Select(u => new SelectListItem { Text = u.UnitName, Value = u.UnitId.ToString() }).ToListAsync();
-            if (itemmaster == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
+
+                var itemmaster = await _context.TblItemMaster.FirstOrDefaultAsync(m => m.ItemCode == id);
+                UnitList = await _context.TblUnits.Select(u => new SelectListItem { Text = u.UnitName, Value = u.UnitId.ToString() }).ToListAsync();
+                if (itemmaster == null)
+                {
+                    return NotFound();
+                }
+                ItemMaster = itemmaster;
+                return Page();
             }
-            ItemMaster = itemmaster;
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -71,7 +77,7 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
 
         private bool ItemMasterExists(Int64 id)
         {
-          return (_context.TblItemMaster?.Any(e => e.ItemCode == id)).GetValueOrDefault();
+            return (_context.TblItemMaster?.Any(e => e.ItemCode == id)).GetValueOrDefault();
         }
     }
 }

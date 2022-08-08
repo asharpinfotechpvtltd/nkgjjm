@@ -1,0 +1,94 @@
+﻿@page
+@model Nkgjjm.Areas.WareHouseIncharge.Pages.UpdateTransferStatusModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update Transfer Status</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Update Transfer Status
+</h2>
+<div class="intro-y box mt-5 pb-5">
+    <form method="post" asp-page-handler="Receiveditem" enctype="multipart/form-data">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Transfer Master Id </strong></label>
+                    <input type="text" name="masterid" class="form-control" value="@Model.WarehouseTransfer.TransferMasterid" readonly id="searchtext" style="background-color:lightgrey;" />
+
+
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Driver Name</strong></label>
+                    <input type="text" asp-for="@Model.WarehouseTransfer.DriverName" class="form-control" required id="searchtext" style="background-color:wheat;" />
+
+                </div>
+                <div class="form-inline mt-5">
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Mobile No</strong></label>
+                    <input type="text" asp-for="@Model.WarehouseTransfer.MobileNo" class="form-control" required id="searchtext" style="background-color:wheat;" />
+
+
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Vehicle Number</strong></label>
+                    <input type="text" asp-for="@Model.WarehouseTransfer.VehicleNo" class="form-control" required id="searchtext" style="background-color:wheat;" />
+
+                </div>
+
+                <div class="form-inline mt-5">
+
+                    <label for="horizontal-form-1" class="form-label sm:w-20"><strong>Bilti No</strong></label>
+                    <input type="text" asp-for="@Model.WarehouseTransfer.BiltyNo" class="form-control" required id="searchtext" style="background-color:wheat;" />
+
+                    <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+
+                </div>
+            </div>
+        </div>
+
+        @if (Model.SpWarehouseTransferChildForHo != null && Model.SpWarehouseTransferChildForHo.Count > 0)
+        {
+
+            <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+                <!-- BEGIN: Data List -->
+                <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                    <table class="table table-report" id="orders">
+
+                        <tr>
+                            <th class="text-center whitespace-nowrap">
+                                Item Code
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Item Name
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+                                Transfer Qty
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.SpWarehouseTransferChildForHo)
+                        {
+
+                            <tr>
+                                <td class="text-center">@item.Itemcode</td>
+                                <td class="text-center">@item.ItemName</td>
+                                <td class="text-center">@item.TransferQty</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+            </div>
+
+
+
+        }
+    </form>
+
+</div>

@@ -20,17 +20,24 @@ namespace Nkgjjm.Areas.Panel.Pages.Unit
 
         public IActionResult OnGet()
         {
-            return Page();
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            {
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]
         public Units Units { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblUnits == null || Units == null)
+            if (!ModelState.IsValid || _context.TblUnits == null || Units == null)
             {
                 return Page();
             }

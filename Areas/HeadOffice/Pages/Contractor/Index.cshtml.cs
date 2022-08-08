@@ -18,14 +18,23 @@ namespace Nkgjjm.Areas.Panel.Pages.Contractor
             _context = context;
         }
 
-        public IList<Contractors> Contractors { get;set; } = default!;
+        public IList<Contractors> Contractors { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblContractor != null)
+            if (!string.IsNullOrEmpty("Login"))
             {
-                Contractors = await _context.TblContractor.ToListAsync();
+                if (_context.TblContractor != null)
+                {
+                    Contractors = await _context.TblContractor.ToListAsync();
+                }
+                return Page();
             }
+            else
+            {
+                return Redirect("~/Index");
+            }
+
         }
     }
 }

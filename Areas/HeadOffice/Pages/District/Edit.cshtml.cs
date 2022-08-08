@@ -24,18 +24,20 @@ namespace Nkgjjm.Areas.Panel.Pages.District
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblDistrict == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
+                var districts = await _context.TblDistrict.FirstOrDefaultAsync(m => m.id == id);
+                if (districts == null)
+                {
+                    return NotFound();
+                }
+                Districts = districts;
+                return Page();
             }
-
-            var districts =  await _context.TblDistrict.FirstOrDefaultAsync(m => m.id == id);
-            if (districts == null)
+            else
             {
-                return NotFound();
+                return Redirect("~/Index");
             }
-            Districts = districts;
-            return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -70,7 +72,7 @@ namespace Nkgjjm.Areas.Panel.Pages.District
 
         private bool DistrictsExists(int id)
         {
-          return (_context.TblDistrict?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.TblDistrict?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }

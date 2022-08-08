@@ -69,6 +69,13 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SpOutwardReport>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpFreezedReport>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpReturnedFreshStock>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPAssignedJobWorkToWareHouse>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPWareHouseStock>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPStockByBom>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPStockReservation>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpWareHouseTransferPendingListForHo>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpWarehouseTransferChildForHo>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpWareHouseTransferPendingListForWareHouse>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -105,6 +112,8 @@ namespace Nkgjjm.Models
         public virtual DbSet<Closure> TblClosure { get; set; }
         public virtual DbSet<IndentChallan> TblIndentChallan { get; set; }
         public virtual DbSet<StockPassbook> TblStockPassbook { get; set; }
+        public virtual DbSet<WarehouseTransfer> TblWarehouseTransfer { get; set; }
+        public virtual DbSet<WarehouseTransferChild> TblWarehouseTransferChild { get; set; }
      
 
 
@@ -151,6 +160,13 @@ namespace Nkgjjm.Models
         public virtual DbSet<SpOutwardReport> SpOutwardReport { get; set; }
         public virtual DbSet<SpFreezedReport> SpFreezedReport { get; set; }
         public virtual DbSet<SpReturnedFreshStock> SpReturnedFreshStock { get; set; }
+        public virtual DbSet<SPAssignedJobWorkToWareHouse> SPAssignedJobWorkToWareHouse { get; set; }
+        public virtual DbSet<SPWareHouseStock> SPWareHouseStock { get; set; }
+        public virtual DbSet<SPStockByBom> SPStockByBom { get; set; }
+        public virtual DbSet<SPStockReservation> SPStockReservation { get; set; }
+        public virtual DbSet<SpWareHouseTransferPendingListForHo> SpWareHouseTransferPendingListForHo { get; set; }
+        public virtual DbSet<SpWarehouseTransferChildForHo> SpWarehouseTransferChildForHo { get; set; }
+        public virtual DbSet<SpWareHouseTransferPendingListForWareHouse> SpWareHouseTransferPendingListForWareHouse { get; set; }
 
         #endregion
 

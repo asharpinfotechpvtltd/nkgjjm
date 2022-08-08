@@ -19,13 +19,21 @@ namespace Nkgjjm.Areas.Panel.Pages.Users
             _context = context;
         }
 
-        public IList<SpUserList> User { get;set; } = default!;
+        public IList<SpUserList> User { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.TblUser != null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                User = await _context.SpUserList.FromSqlRaw("SpUserList").ToListAsync();
+                if (_context.TblUser != null)
+                {
+                    User = await _context.SpUserList.FromSqlRaw("SpUserList").ToListAsync();
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
     }

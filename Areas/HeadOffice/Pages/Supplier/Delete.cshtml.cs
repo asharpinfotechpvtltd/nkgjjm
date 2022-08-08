@@ -19,26 +19,33 @@ namespace Nkgjjm.Areas.Panel.Pages.Supplier
         }
 
         [BindProperty]
-      public Suppliers Suppliers { get; set; } = default!;
+        public Suppliers Suppliers { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblSupplier == null)
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                return NotFound();
-            }
+                if (id == null || _context.TblSupplier == null)
+                {
+                    return NotFound();
+                }
 
-            var suppliers = await _context.TblSupplier.FirstOrDefaultAsync(m => m.Id == id);
+                var suppliers = await _context.TblSupplier.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (suppliers == null)
-            {
-                return NotFound();
+                if (suppliers == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    Suppliers = suppliers;
+                }
+                return Page();
             }
-            else 
+            else
             {
-                Suppliers = suppliers;
+                return Redirect("~/Index");
             }
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)

@@ -20,22 +20,29 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages.Warehouseincharge
         public WarehouseIncharges Wi { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
-                Wi = await _context.TblWarehouseIncharge.FirstOrDefaultAsync(e => e.UserId == Userid);
-                if (Wi != null)
+                try
                 {
-                    var Warehouseid = new SqlParameter("@Warehouseid", Wi.WareHouseid);
+                    int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
+                    Wi = await _context.TblWarehouseIncharge.FirstOrDefaultAsync(e => e.UserId == Userid);
+                    if (Wi != null)
+                    {
+                        var Warehouseid = new SqlParameter("@Warehouseid", Wi.WareHouseid);
 
-                    IndentMaster = await _context.SPIndentMasterForWarehouseIncharge.FromSqlRaw("SPIndentMasterForWarehouseIncharge @Warehouseid", Warehouseid).ToListAsync();
+                        IndentMaster = await _context.SPIndentMasterForWarehouseIncharge.FromSqlRaw("SPIndentMasterForWarehouseIncharge @Warehouseid", Warehouseid).ToListAsync();
+                    }
                 }
-            }
-            catch(Exception ex)
-            {
+                catch (Exception ex)
+                {
 
+                }
+                return Page();
             }
-            return Page();
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
     }
 }

@@ -21,22 +21,33 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
             _context = context;
         }
 
-        public IList<SPItemList> ItemMaster { get;set; } = default!;
+        public IList<SPItemList> ItemMaster { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                if (_context.TblItemMaster != null)
+                try
                 {
-                    var parameter = new SqlParameter("@Searchtext", DBNull.Value);
-                    ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
-                    TotalItem = await _context.TblItemMaster.CountAsync();
-                }
-            }
-            catch(Exception ex)
-            {
+                    if (_context.TblItemMaster != null)
+                    {
+                        var parameter = new SqlParameter("@Searchtext", DBNull.Value);
+                        ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
+                        TotalItem = await _context.TblItemMaster.CountAsync();
+                    }
+                       
+                    
 
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
             }
         }
         public async Task<IActionResult> OnPost(string ItemName)
@@ -47,7 +58,7 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
                 ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
                 TotalItem = await _context.TblItemMaster.Where(i => i.ItemName == ItemName).CountAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

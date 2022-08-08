@@ -27,18 +27,25 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
         public List<ItemMaster> ItemMasterList { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                ItemMasterList = await _context.TblItemMaster.ToListAsync();
-                ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString() + "-" + a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
-                District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
+                try
+                {
+                    ItemMasterList = await _context.TblItemMaster.ToListAsync();
+                    ItemMasters = await _context.TblItemMaster.Select(a => new SelectListItem { Text = a.ItemCode.ToString() + "-" + a.ItemName, Value = a.ItemCode.ToString() }).ToListAsync();
+                    District = await _context.TblDistrict.Select(d => new SelectListItem { Text = d.District, Value = d.id.ToString() }).ToListAsync();
 
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return Page();
             }
-            catch(Exception ex)
+            else
             {
-
+                return Redirect("~/Index");
             }
-            return Page();
         }
 
         [BindProperty]
@@ -114,7 +121,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Warehouses
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

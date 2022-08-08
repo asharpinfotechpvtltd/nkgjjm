@@ -27,21 +27,28 @@ namespace Nkgjjm.Areas.Panel.Pages.JobWorks
         public List<SelectListItem> Contractor { get; set; }
         public List<SelectListItem> JobWorkCategory { get; set; }
         public List<SelectListItem> Warehouse { get; set; }
-       
+
         public async Task<IActionResult> OnGet()
         {
-            try
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
             {
-                District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
-                Contractor = await _context.TblContractor.Select(a => new SelectListItem { Text = a.ContractorName, Value = a.ContractorId.ToString() }).ToListAsync();
-                JobWorkCategory = await _context.TblJobWorkCategory.Select(a => new SelectListItem { Text = a.JobWorkcategory, Value = a.Id.ToString() }).ToListAsync();
-                Warehouse = await _context.TblWarehouse.Select(a => new SelectListItem { Text = a.WarehouseName, Value = a.Id.ToString() }).ToListAsync();
-            }
-            catch(Exception ex)
-            {
+                try
+                {
+                    District = await _context.TblDistrict.Select(a => new SelectListItem { Text = a.District, Value = a.id.ToString() }).ToListAsync();
+                    Contractor = await _context.TblContractor.Select(a => new SelectListItem { Text = a.ContractorName, Value = a.ContractorId.ToString() }).ToListAsync();
+                    JobWorkCategory = await _context.TblJobWorkCategory.Select(a => new SelectListItem { Text = a.JobWorkcategory, Value = a.Id.ToString() }).ToListAsync();
+                    Warehouse = await _context.TblWarehouse.Select(a => new SelectListItem { Text = a.WarehouseName, Value = a.Id.ToString() }).ToListAsync();
+                }
+                catch (Exception ex)
+                {
 
-            }
+                }
                 return Page();
+            }
+            else
+            {
+                return Redirect("~/Index");
+            }
         }
 
         [BindProperty]

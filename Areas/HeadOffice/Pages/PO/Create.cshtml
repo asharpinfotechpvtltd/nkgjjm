@@ -103,7 +103,7 @@
         $('#add').click(function() {
             rowCount++;
 
-            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemcode"></select></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control product_unit" readonly id="product_unit_1" name="product_unit[]" for="1"/></td><td><select class="form-control warehouse" id="Warehouse" for="1"><option>Select Warehouse</option></select></td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+            $('#orders').append('<tr id="row' + rowCount + '"><td><select class="form-control product_itemcode" id="product_itemcode_1"></select></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="number" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/></td><td><input type="text" class="form-control product_unit" readonly id="product_unit_1" name="product_unit[]" for="1"/></td><td><select class="form-control warehouse" id="Warehouse" for="1"><option>Select Warehouse</option></select></td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
 
             var tags = @Html.Raw(Json.Serialize(Model.ItemList));
 
@@ -221,7 +221,7 @@
 
 
     </script>
-    
+
    
 }
 

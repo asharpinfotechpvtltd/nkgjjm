@@ -1,0 +1,108 @@
+﻿@page
+@model Nkgjjm.Areas.WareHouseIncharge.Pages.TransferOutwardModel
+@{
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Warehouses/Index">WareHouse</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Warehouse</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Add Warehouse
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Warehouse Name</label>
+                    <select asp-items="Model.Warehouse" name="Warehouse" class="form-control">
+                        <option>Select Warehouse</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report orders" id="orders">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Item Code
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Stock
+                        </th>
+
+                        <th class="text-center whitespace-nowrap">
+                            Qty
+                        </th>
+
+                    </tr>
+                    @foreach (var item in @Model.SPWareHouseStock)
+                    {
+                        <tr>
+                            <td>
+                                <input type="text" value="@item.ItemCode" class="form-control product_itemcode" readonly />
+
+                            </td>
+                            <td>
+                                <input type="text" value="@item.ItemName" class="form-control" readonly />
+
+                            </td>
+                            <td>
+                                <input type="text" value="@item.closingbalance" class="form-control" readonly />
+
+                            </td>
+
+
+                            <td><input class="form-control quantity" value="0" type='number' id='quantity_1' name='quantity[]' for="1" /></td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="sm:ml-20 sm:pl-5 mt-5 mb-5">
+            <button class="btn btn-primary" type="submit" id="submit">Submit</button>
+        </div>
+        <input type="hidden" name="jobworkdesc" />
+    </form>
+</div>
+@section Scripts{
+
+    <script>
+        $("#submit").click(function(e) {
+            var Whid = '@Model.LoggedInWarehouseid';
+            var ToSend = $("#Warehouse").val();
+            if (Whid == ToSend) {
+                alert("Invalid Warehouse Selected");
+                e.preventDefault();
+            }
+            else {
+                var indentdesc = new Array();
+                $('#orders tr').each(function(i, row) {
+                    var ItemId = $(this).closest('tr').find("td:eq(0) input").val();
+                    var Qty = $(this).closest('tr').find("td:eq(3) input").val();
+                    if (Qty > 0) {
+                        var indent = {};
+                        indent.Itemcode = ItemId;
+                        indent.Qty = Qty;
+                        indentdesc.push(indent);
+                    }
+                });
+                document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(indentdesc);
+            }
+
+
+        });
+    </script>
+}
