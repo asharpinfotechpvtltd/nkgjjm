@@ -1,0 +1,86 @@
+﻿@page
+@model Nkgjjm.Areas.HeadOffice.Pages.PO.PoDetailModel
+@{
+    int i =1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Warehouses/Index">Po</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Po Detail</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Po Detail
+</h2>
+<div class="intro-y box mt-5">
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Po No.</label>
+                    <Input type="text" value="@Model.SPPoMasterDetail.FirstOrDefault().Pono" readonly style="color:grey" class="form-control" />
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Date</label>
+                    <Input type="text" value="@Model.SPPoMasterDetail.FirstOrDefault().Date.ToString().Remove(10,9)" readonly style="color:grey" class="form-control" />
+
+                </div>
+
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Supplier Name</label>
+                    <input type="text" asp-for="@Model.SPPoMasterDetail.FirstOrDefault().CompanyName" readonly style="color:grey" class="form-control" />
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="grid grid-cols-12 gap-6 mt-0">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report orders" id="orders">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            Item Code
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Item Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Qty
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Unit Name
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Warehouse Name
+                        </th>
+
+                    </tr>
+                    @foreach (var item in @Model.SPPoDetail)
+                    {
+                        <tr>
+                            <td>
+                                <input type="text" value="@item.Itemid" readonly style="color:gray" class="form-control text-center" />
+
+                            </td>
+                            <td>
+                                <input type="text" value="@item.ItemName" readonly style="color:gray" class="form-control text-center" />
+
+                            </td>
+
+
+                            <td><input class="form-control text-center" type="text" value="@item.Qty" readonly style="color:gray" /></td>
+                            <td><input class="form-control text-center" type="text" value="@item.UnitName" readonly style="color:gray" /></td>
+                            <td><input class="form-control text-center" type="text" value="@item.WarehouseName" readonly style="color:gray" /></td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        
+    </form>
+</div>

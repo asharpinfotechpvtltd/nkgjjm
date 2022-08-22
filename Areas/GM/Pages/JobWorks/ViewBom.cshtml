@@ -1,0 +1,155 @@
+﻿@page
+@model Nkgjjm.Areas.GM.Pages.JobWorks.ViewBomModel
+@{
+    
+}
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            View Bom
+        </h2>
+    </div>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+               
+                <div class="grid grid-cols-12 gap-6 mt-3">
+                    <!-- BEGIN: Data List -->
+                    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                        <table class="table table-report" id="orders">
+
+                            <tr>
+                                <th class="text-center whitespace-nowrap">
+                                    Particulars
+                                </th>
+                                <th class="text-center whitespace-nowrap">
+                                    Unit
+                                </th>
+                                <th class="text-center whitespace-nowrap">
+                                    Quantity
+                                </th>
+
+                                
+                            </tr>
+
+
+                            @foreach (var item in Model.Bom)
+                            {
+
+                                <tr>
+                                    <td><select class="form-control product_price" data-type="product_price" id='product_price_1' name='product_price[]' for="1" asp-items="@Model.ItemMaster" asp-for="@item.ItemCode"></select></td> <!-- purchase_cost -->
+                                    <td><input class="form-control quantity" type='text' id='quantity_1' name='quantity[]' for="1" value="@item.UnitName" /></td>
+                                    <td><input class="form-control total_cost" type='text' id='total_cost_1' name='total_cost[]' for='1' value="@item.Qty" /></td>
+                                    
+
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <input style="visibility:hidden;" type="submit" value="Create" id="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="jobworkdesc" />
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/CustomJs/Block.js"></script>
+
+    <script>
+        $("#ddlblock").change(function() {
+            $("#ddlGramPanchyaat").empty();
+            $.ajax({
+                type: "GET",
+                url: "/api/GpByBlock",
+                data: { id: $("#ddlblock").val() },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                success: function(response) {
+                    $("#ddlGramPanchyaat").prepend("<option value='' selected='selected'>Select Gram Panchaayat</option>");
+                    $.each(response, function(i, item) {
+                        var html = '';
+                        html += "<option value=" + item.id + ">" + item.gramPanchayat + "</option>";
+                        $("#ddlGramPanchyaat").append(html);
+
+                    })
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+
+        $("#ddlGramPanchyaat").change(function() {
+            $("#ddlvillage").empty();
+            $.ajax({
+                type: "GET",
+                url: "/api/villages",
+                data: { id: $("#ddlGramPanchyaat").val() },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                success: function(response) {
+                    console.log(response);
+                    $("#ddlvillage").prepend("<option value='' selected='selected'>Select Village</option>");
+                    $.each(response, function(i, item) {
+                        var html = '';
+                        html += "<option value=" + item.villageCode + ">" + item.village + "</option>";
+                        $("#ddlvillage").append(html);
+
+                    })
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+        var rowCount = 1;
+        $('#add').click(function() {
+            rowCount++;
+            $('#orders').append('<tr id="row' + rowCount + '"><td><input class="form-control product_price" type="text" data-type="product_price" id="product_price_' + rowCount + '" name="product_price[]" for="' + rowCount + '"/></td><input class="form-control" type="hidden" data-type="product_id" id="product_id_' + rowCount + '" name="product_id[]" for="' + rowCount + '"/><td><input class="form-control quantity" type="text" class="quantity" id="quantity_' + rowCount + '" name="quantity[]" for="' + rowCount + '"/> </td><td><input class="form-control total_cost" type="text" id="total_cost_' + rowCount + '" name="total_cost[]"  for="' + rowCount + '" /> </td><td><button type="button" name="remove" id="' + rowCount + '" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+
+        });
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr('id');
+            $('#row' + button_id + '').remove();
+        });
+        $("#Save").click(function() {
+            var jobworkdesc = new Array();
+            $('#orders tr').each(function(i, row) {
+
+                var Particular = $(this).closest('tr').find("td:eq(0) input").val();
+                var Unit = $(this).closest('tr').find("td:eq(1) input").val();
+                var rate = $(this).closest('tr').find("td:eq(2) input").val();
+                var Delivery = {};
+                Delivery.Particular = Particular;
+                Delivery.Unit = Unit;
+                Delivery.rate = rate;
+                jobworkdesc.push(Delivery);
+
+            });
+            document.getElementsByName("jobworkdesc")[0].value = JSON.stringify(jobworkdesc);
+        });
+
+
+
+    </script>
+    }

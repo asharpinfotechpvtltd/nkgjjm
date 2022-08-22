@@ -1,0 +1,289 @@
+﻿@page "{handler?}"
+@model Nkgjjm.Areas.HeadOffice.Pages.Report.ReportOnReceivingModel
+@{
+    int i = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Report On Receiving</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    Report On Receiving
+</h2>
+<div class="intro-y box mt-1 pb-5">
+    <form method="get" asp-page-handler="Search">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20" style="font-weight:bolder;">Start Date</label>
+                    <input type="date" class="form-control w-56 box pr-10" name="startdate" asp-for="@Model.YearStartdate" placeholder="Search...">
+
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">End Date</label>
+                    <input type="date" class="form-control w-56 box pr-10" name="enddate" asp-for="@Model.YearEnddate" placeholder="Search...">
+
+                </div>
+                <div class="form-inline mt-5 mr-3">
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">Po No</label>
+                    <select type="text" class="form-control w-56 box pr-10" name="PoList" asp-items="@Model.PoLists">
+                        <option value="0">Select</option>
+                    </select>
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">Supplier </label>
+                    <select type="text" class="form-control w-56 box pr-10" name="SupplierList" asp-items="@Model.SupplierLists">
+                        <option value="0">Select</option>
+                    </select>
+
+
+                    <input type="submit" value="Search" id="add" class="btn btn-primary w-56 pr-10 ml-3" />
+                    <!-- END: Data List -->
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <div class="intro-y box mt-1 pb-5">
+        <div id="horizontal-form" class="p-5">
+            <input type="button" id="btnExport" value="Export" onclick="exportReportToExcel(this)" class="btn btn-primary" />
+
+        </div>
+    </div>
+
+    @if (Model.SPReportOnReceiving != null)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" style="background-color:#DEDEDE">
+                    <thead>
+                        <tr>
+                            <th class="text-center whitespace-nowrap">
+                                S.No.
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                PO No.
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Date
+                            </th> 
+                            
+                            <th class="text-center whitespace-nowrap">
+                                Item Code
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Item Name
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Challan Number
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Supplier Name
+                            </th>
+                            <th class="text-center whitespace-nowrap" >
+                                
+                                    Warehouse Name
+                                
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                
+                                    District
+                                
+                            </th>
+                           
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SPReportOnReceiving)
+                        {
+
+                            <tr>
+                                <td class="text-center">@i</td>
+                                <td class="text-center">
+                                    @item.PONO
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.DATE)
+                                </td>
+                                <td class="text-center" style="color:red;">
+                                    @Html.DisplayFor(modelItem => item.itemid)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                               
+                                <td class="text-center" style="color:blueviolet;">
+                                    @Html.DisplayFor(modelItem => item.ChallanNumber)
+                                </td>
+                                <td class="text-center" style="color:blue;">
+                                    @Html.DisplayFor(modelItem => item.SupplierName)
+                                </td>
+                               
+                                <td class="text-center" style="color:aqua;">
+                                    @Html.DisplayFor(modelItem => item.WarehouseName)
+                                </td>
+                                <td class="text-center" style="color:coral;">
+                                    @Html.DisplayFor(modelItem => item.District)
+                                </td>
+                                
+
+                            </tr>
+
+
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    }
+
+</div>
+
+
+
+@*<div class="grid grid-cols-12 gap-6 mt-1">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+    <div class="hidden md:block mx-auto text-slate-500">Total  Po(s)</div>
+    <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+    <div class="w-56 relative text-slate-500">
+    <form method="post">
+    <div id="horizontal-form" class="p-5">
+    <div class="preview">
+    <div class="form-inline">
+    <label for="horizontal-form-1" class="form-label sm:w-20">Start Date</label>
+    <input type="date" class="form-control w-56 box pr-10" name="startdate" placeholder="Search...">
+    </div>
+
+    <div class="form-inline mt-5">
+    <label for="horizontal-form-2" class="form-label sm:w-20">End Date</label>
+    <input type="date" class="form-control w-56 box pr-10" name="enddate" placeholder="Search...">
+    </div>
+    <div class="form-inline mt-5">
+    <label for="horizontal-form-2" class="form-label sm:w-20">Warehouse</label>
+    <select type="text" class="form-control w-56 box pr-10" asp-items="@Model.WarehouseList" name="warehouse">
+    <option>Select</option>
+    </select>
+    </div>
+    </div>
+    </div>
+    <div class="sm:pl-5 mt-1 mb-5">
+    <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+    <!-- END: Data List -->
+    </div>
+
+
+
+
+
+
+
+
+
+    </form>
+    </div>
+    </div>
+    </div>
+    <!-- BEGIN: Data List -->
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+    <table class="table table-report">
+    <thead>
+    <tr>
+
+    <th class="text-center whitespace-nowrap">
+    S.No.
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Date
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Item Code
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Item Name
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Warehouse Name
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Inward
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Outward
+    </th>
+    <th class="text-center whitespace-nowrap">
+    Balance
+    </th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.SpSearchWarehouseStock)
+    {
+    <tr>
+    <td class="text-center">@i</td>
+    <td class="text-center">
+    @item.DATE.ToShortDateString()
+    </td>
+    <td class="text-center">
+    @item.ItemCode
+    </td>
+    <td class="text-center">
+    @Html.DisplayFor(modelItem => item.ItemName)
+    </td>
+    <td class="text-center">
+    @Html.DisplayFor(modelItem => item.WarehouseName)
+    </td>
+    <td class="text-center">
+    @Html.DisplayFor(modelItem => item.Inward)
+    </td>
+    <td class="text-center">
+    @Html.DisplayFor(modelItem => item.Outward)
+    </td>
+    <td class="text-center">
+    @Html.DisplayFor(modelItem => item.Balance)
+    </td>
+
+
+
+    </tr>
+    i++;
+    }
+    </tbody>
+    </table>
+    </div>
+    <!-- END: Data List -->
+    </div>*@
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script>
+        function exportReportToExcel() {
+            let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+            TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+                name: `export.xlsx`, // fileName you could use any name
+                sheet: {
+                    name: 'Sheet 1' // sheetName
+                }
+            });
+        }
+    </script>
+
+    }
+

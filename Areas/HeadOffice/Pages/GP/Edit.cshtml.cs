@@ -46,7 +46,7 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
                         return NotFound();
                     }
                     GramPanchayats = grampanchayats;
-                    BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
+                   // BlockList = await _context.TblBlock.Select(b => new SelectListItem { Text = b.Block, Value = b.Id.ToString() }).ToListAsync();
                 }
                 catch (Exception)
                 {
@@ -70,6 +70,7 @@ namespace Nkgjjm.Areas.Panel.Pages.GP
             }
 
             _context.Attach(GramPanchayats).State = EntityState.Modified;
+            
 
             try
             {

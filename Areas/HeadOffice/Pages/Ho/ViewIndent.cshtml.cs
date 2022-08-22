@@ -14,7 +14,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
     {
         ApplicationDbContext _context;
         public string searching { get; set; }
-        IWebHostEnvironment Environmet;
+        IWebHostEnvironment Environment;
         [BindProperty]
         public IFormFile challan { get; set; }
         public string challanName { get; set; }
@@ -23,7 +23,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         public ViewIndentModel(ApplicationDbContext context, IWebHostEnvironment Env)
         {
             _context = context;
-            Environmet = Env;
+            Environment = Env;
         }
 
         public int IndentMasterid { get; set; }
@@ -56,14 +56,11 @@ namespace Nkgjjm.Areas.Panel.Pages.Ho
         }
 
         public List<SPValidateByHo> SPValidateByHo { get; set; }
-
-
-
         public async Task<IActionResult> OnPostSearch(string searchtext, string status, int IndentMasterid, int Whid)
         {
             try
             {
-                Upload u = new Upload(Environmet);
+                Upload u = new Upload(Environment);
                 challanName = u.UploadImage(challan, "Challan");
                 IndentMaster warehousestatus = await _context.TblIndentMaster.FirstOrDefaultAsync(e => e.Jobworkid == searchtext);
                 IndentChallan Hochallan = new IndentChallan()

@@ -12,7 +12,7 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages
             _context = context;
         }
 
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
 
             return Page();

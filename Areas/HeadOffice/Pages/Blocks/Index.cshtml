@@ -17,6 +17,7 @@
 <h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
     Block List
 </h2>
+
 <div class="grid grid-cols-12 gap-6 mt-1">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a class="btn btn-primary shadow-md mr-2" asp-page="Create">Add New Block</a>
@@ -32,8 +33,8 @@
         </div>
     </div>
     <!-- BEGIN: Data List -->
-    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <table class="table table-report">
+    <div class="intro-y col-span-12 tableFixHead">
+        <table class="table">
             <thead>
                 <tr>
                     <th class="text-center whitespace-nowrap">S.No.</th>
@@ -103,12 +104,12 @@
 
     <script>
 
-        $(document).on("click", "#Delete", function() {
+        $(document).on("click", "#Delete", function () {
             var Sid = $(this).data('id');
             $("#dataid").val(Sid);
         });
 
-        $("#mdlDelete").on('click', function(e) {
+        $("#mdlDelete").on('click', function (e) {
             var id = $("#dataid").val();
 
             $.ajax({
@@ -116,7 +117,7 @@
                 url: "/api/DistBlocks?id=" + id,
                 dataType: "text",
                 async: true,
-                success: function(response) {
+                success: function (response) {
                     var data = response;
                     if (data === "Deleted") {
                         $("#delete-confirmation-modal").hide();
@@ -143,10 +144,10 @@
 
                     }
                 },
-                failure: function(response) {
+                failure: function (response) {
                     console.log("error");
                 },
-                error: function(response) {
+                error: function (response) {
                     alert("error");
 
                 },

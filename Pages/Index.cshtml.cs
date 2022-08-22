@@ -42,6 +42,16 @@ namespace Nkgjjm.Pages
                     HttpContext.Session.SetString("Login", Admins.Id.ToString());
                     return RedirectToPage("/Index", new { area = "WareHouseIncharge" });
                 }
+                else if (Admins.Designation == 4)
+                {
+                    HttpContext.Session.SetString("Login", Admins.Id.ToString());
+                    return RedirectToPage("/Index", new { area = "GM" });
+                }
+                else if (Admins.Designation == 5)
+                {
+                    HttpContext.Session.SetString("Login", Admins.Id.ToString());
+                    return RedirectToPage("/Index", new { area = "Director" });
+                }
                 return Redirect("Index");
             }
             else

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @model Nkgjjm.Areas.Panel.Pages.PO.IndexModel
 
 @{
@@ -24,8 +24,8 @@
         <div class="hidden md:block mx-auto text-slate-500">Total @Model.TotalPo Po(s)</div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <form method="post">
-                    <input type="text" class="form-control w-56 box pr-10" name="districtname" placeholder="Search...">
+                <form method="get" asp-page-handler="Search">
+                    <input type="text" class="form-control w-56 box pr-10" name="PoNo" placeholder="Search...">
                     <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
                 </form>
             </div>
@@ -62,7 +62,9 @@
                     <tr>
                         <td class="text-center">@i</td>
                         <td style="color:blue;" class="text-center">
+                            <a asp-page="/Po/PoDetail" asp-route-PoNo="@item.Pono">
                             @item.Pono
+                            </a>
                         </td>
                         <td class="text-center">
                             @item.Date.ToShortDateString()

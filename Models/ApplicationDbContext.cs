@@ -76,6 +76,13 @@ namespace Nkgjjm.Models
             modelBuilder.Entity<SpWareHouseTransferPendingListForHo>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpWarehouseTransferChildForHo>().HasNoKey().ToView(null);
             modelBuilder.Entity<SpWareHouseTransferPendingListForWareHouse>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPPoSearch>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SpWareHouseStockReport>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPPoDetail>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPPoMasterDetail>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPWareHouseVillageIncharge>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPWareHouseDamgedStock>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SPReportOnReceiving>().HasNoKey().ToView(null);
         }
 
         public virtual DbSet<Contractors> TblContractor { get; set; }
@@ -167,6 +174,13 @@ namespace Nkgjjm.Models
         public virtual DbSet<SpWareHouseTransferPendingListForHo> SpWareHouseTransferPendingListForHo { get; set; }
         public virtual DbSet<SpWarehouseTransferChildForHo> SpWarehouseTransferChildForHo { get; set; }
         public virtual DbSet<SpWareHouseTransferPendingListForWareHouse> SpWareHouseTransferPendingListForWareHouse { get; set; }
+        public virtual DbSet<SPPoSearch> SPPoSearch { get; set; }
+        public virtual DbSet<SpWareHouseStockReport> SpWareHouseStockReport { get; set; }
+        public virtual DbSet<SPPoDetail> SPPoDetail { get; set; }
+        public virtual DbSet<SPPoMasterDetail> SPPoMasterDetail { get; set; }
+        public virtual DbSet<SPWareHouseVillageIncharge> SPWareHouseVillageIncharge { get; set; }
+        public virtual DbSet<SPWareHouseDamgedStock> SPWareHouseDamgedStock { get; set; }
+        public virtual DbSet<SPReportOnReceiving> SPReportOnReceiving { get; set; }
 
         #endregion
 

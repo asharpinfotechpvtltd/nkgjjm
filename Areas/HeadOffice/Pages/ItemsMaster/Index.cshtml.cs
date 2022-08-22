@@ -56,7 +56,7 @@ namespace Nkgjjm.Areas.Panel.Pages.ItemsMaster
             {
                 var parameter = new SqlParameter("@Searchtext", ItemName);
                 ItemMaster = await _context.SPItemList.FromSqlRaw("SPItemList @Searchtext", parameter).ToListAsync();
-                TotalItem = await _context.TblItemMaster.Where(i => i.ItemName == ItemName).CountAsync();
+                TotalItem = ItemMaster.Count;
             }
             catch (Exception ex)
             {

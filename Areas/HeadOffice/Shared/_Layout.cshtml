@@ -20,7 +20,7 @@
     <div class="mobile-menu md:hidden">
         <div class="mobile-menu-bar">
             <a href="" class="flex mr-auto">
-                <img alt="NKG-PRIMUS" class="w-40" src="~/dist/images/NKGPrimus.png" style="background-color:white;">
+                <img alt="NKG-PRIMUS" class="w-40" src="~/dist/images/NKGPrimus.png" />
             </a>
             <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
         </div>
@@ -101,12 +101,12 @@
                             </a>
                         </li>
                         
-                        <li>
+                       @* <li>
                             <a asp-page="/Warehouses/TransferRequest" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
                                 <div class="menu__title"> Transfer Request</div>
                             </a>
-                        </li>
+                        </li>*@
                         
 
                     </ul>
@@ -280,6 +280,18 @@
                                 <div class="menu__title"> Stock </div>
                             </a>
                         </li>
+                        <li>
+                            <a asp-page="/Report/IndentPendingReport" class="menu">
+                                <div class="menu__icon"> <i data-lucide="credit-card"></i> </div>
+                                <div class="menu__title">Indent Pending</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Report/ItemBasedOnBom" class="menu">
+                                <div class="menu__icon"> <i data-lucide="credit-card"></i> </div>
+                                <div class="menu__title">Bom Based Item</div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -302,12 +314,12 @@
                 <span class="hidden xl:block text-white text-lg ml-3">  </span>
             </a>
             <div class="side-nav__devider my-6"></div>
-            <ul>
-                @* @await Component.InvokeAsync("Menu")*@
-            </ul>
+            @*<ul>
+                 @await Component.InvokeAsync("Menu")
+            </ul>*@
             <ul>
                 <li>
-                    <a asp-page="/Headoffice/index" class="side-menu zoom-innn">
+                    <a href="/HeadOffice/Index" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                         <div class="side-menu__title">
                             Dashboard
@@ -549,6 +561,12 @@
                                 <div class="side-menu__title">Bom Based Item</div>
                             </a>
                         </li>
+                        <li>
+                            <a asp-page="/Report/ReportOnReceiving" class="side-menu zoom-innn">
+                                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
+                                <div class="side-menu__title">Report On Receiving</div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -576,6 +594,6 @@
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <!-- END: JS Assets-->
-    @RenderSection("Scripts",required:false);
+    @RenderSection("Scripts",required:false)
 </body>
 </html>

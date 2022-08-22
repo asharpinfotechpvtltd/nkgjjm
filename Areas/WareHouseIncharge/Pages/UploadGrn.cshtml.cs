@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
@@ -24,19 +25,30 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages.Warehouseincharge
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
+            try
             {
-                if (_context.TblPoChild != null)
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("Login")))
                 {
-                    PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList").ToListAsync();
-                    TotalPo = await _context.TblPoMaster.CountAsync();
+                    int userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
+                    var Assignedwhid = _context.TblWarehouseIncharge.Where(u => u.UserId == userid);
+                    if (_context.TblPoChild != null)
+                    {
+                        var whid = new SqlParameter("@Warehouseid", Assignedwhid.FirstOrDefault().WareHouseid);
+                        PoMaster = await _context.SPPoList.FromSqlRaw("SPPoList @Warehouseid", whid).ToListAsync();
+                        TotalPo = PoMaster.Count;
+                    }
+                    return Page();
                 }
-                return Page();
+                else
+                {
+                    return Redirect("~/Index");
+                }
             }
-            else
+            catch(Exception )
             {
-                return Redirect("~/Index");
+
             }
+            return Page();
 
         }
     }

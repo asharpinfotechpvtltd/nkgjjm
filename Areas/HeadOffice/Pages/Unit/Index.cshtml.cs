@@ -40,7 +40,7 @@ namespace Nkgjjm.Areas.Panel.Pages.Unit
         public async Task<IActionResult> OnPost(string Unitname)
         {
             Units = await _context.TblUnits.Where(u => u.UnitName == Unitname).ToListAsync();
-            TotalUnits = await _context.TblUnits.CountAsync();
+            TotalUnits = Units.Count;
             return Page();
         }
     }

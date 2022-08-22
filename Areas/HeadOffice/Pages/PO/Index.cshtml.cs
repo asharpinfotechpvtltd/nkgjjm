@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Nkgjjm.Models;
 using Nkgjjm.StoredProcedure;
@@ -37,6 +38,14 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
             {
                 return Redirect("~/Index");
             }
+        }
+        public IList<SPPoSearch> SpPoSearch { get; set; }
+        public async Task<IActionResult> OnGetSearch(string PoNo)
+        {
+            var Po = new SqlParameter("@PoNo", PoNo);
+            SpPoSearch = await _context.SPPoSearch.FromSqlRaw("SPPoSearch @PoNo", Po).ToListAsync();
+
+            return Page();
         }
     }
 }

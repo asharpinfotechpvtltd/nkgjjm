@@ -21,6 +21,7 @@
         <div id="horizontal-form" class="p-5">
             <div class="preview">
                 <div class="form-inline">
+                    <input type="hidden" asp-for="GramPanchayats.Id" />
                     <label for="horizontal-form-1" class="form-label sm:w-20">District</label>
                     <select id="ddldistname" type="text" asp-for="GramPanchayats.District" asp-items="Model.DistrictList" class="form-control">
                         <option>District Name</option>
@@ -57,7 +58,7 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/CustomJs/Block.js"></script>
+@*    <script src="~/CustomJs/Block.js"></script>*@
     <script src="~/CustomJs/CheckGP.js"></script>
     <script>
         $(document).ready(function() {

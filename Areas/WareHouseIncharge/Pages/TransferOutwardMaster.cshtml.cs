@@ -13,14 +13,19 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages
 
         public TransferOutwardMasterModel(ApplicationDbContext context)
         {
-            _context = context;                
+            _context = context;
         }
+        public WarehouseIncharges Wi { get; set; }
         public List<SpWareHouseTransferPendingListForWareHouse> SpWareHouseTransferPendingListForWareHouse { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            int Warehouseid = 10;
-            var Whid = new SqlParameter("@Fromwarehouseid", Warehouseid);
-            SpWareHouseTransferPendingListForWareHouse = await _context.SpWareHouseTransferPendingListForWareHouse.FromSqlRaw("SpWareHouseTransferPendingListForWareHouse @Fromwarehouseid",Whid).ToListAsync();
+            int Userid = Convert.ToInt32(HttpContext.Session.GetString("Login"));
+            Wi = await _context.TblWarehouseIncharge.FirstOrDefaultAsync(e => e.UserId == Userid);
+            if (Wi != null)
+            {
+                var Whid = new SqlParameter("@Fromwarehouseid", Wi.WareHouseid);
+                SpWareHouseTransferPendingListForWareHouse = await _context.SpWareHouseTransferPendingListForWareHouse.FromSqlRaw("SpWareHouseTransferPendingListForWareHouse @Fromwarehouseid", Whid).ToListAsync();
+            }
             return Page();
         }
     }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vVwg8Tdvct5Nvq9L1fUdIfLvO7jOVDghvJlPcfISUpw=",
+  "Hash": "IfCa5Vxf3k5BzmlDgJ6kOGjxDdcDlCpsTH2XqMKQa/U=",
   "Source": "Nkgjjm",
   "BasePath": "_content/Nkgjjm",
   "Mode": "Default",
@@ -542,6 +542,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\CustomJs\\Gp.js"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\CustomJs\\table2excel.js",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "CustomJs/table2excel.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\CustomJs\\table2excel.js"
     },
     {
       "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\dist\\.DS_Store",
@@ -1936,6 +1953,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\InwardDocument\\9331c377-0160-427f-845f-146a60180c54vishnu-and-krishna_5f2e7a4c5bdbd.jpg"
+    },
+    {
+      "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\InwardDocument\\9de266d2-08fe-4dc3-a4c4-52195cbfd19fWhatsApp Image 2021-06-27 at 3.18.52 PM.jpeg",
+      "SourceId": "Nkgjjm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\",
+      "BasePath": "_content/Nkgjjm",
+      "RelativePath": "InwardDocument/9de266d2-08fe-4dc3-a4c4-52195cbfd19fWhatsApp Image 2021-06-27 at 3.18.52 PM.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\InwardDocument\\9de266d2-08fe-4dc3-a4c4-52195cbfd19fWhatsApp Image 2021-06-27 at 3.18.52 PM.jpeg"
     },
     {
       "Identity": "D:\\Websites\\JJM\\Website\\Nkgjjm\\wwwroot\\InwardDocument\\a57542ab-bf5e-45b5-beeb-4b1270099ae9WhatsApp Image 2022-06-13 at 3.09.54 PM.jpeg",

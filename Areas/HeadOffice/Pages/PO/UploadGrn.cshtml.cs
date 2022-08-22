@@ -26,7 +26,7 @@ namespace Nkgjjm.Areas.Panel.Pages.PO
             po = PoNo;
             return Page();
         }
-        public async Task<IActionResult> OnPost(string PoNo)
+        public IActionResult OnPost(string PoNo)
         {
             //Upload u = new Upload(Environmet);            
             //UploadgrnName = u.UploadImage(Uploadgrn, "Grn");

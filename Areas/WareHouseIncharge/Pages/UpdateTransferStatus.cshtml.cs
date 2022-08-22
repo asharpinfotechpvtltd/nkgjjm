@@ -20,16 +20,16 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages
         public List<SpWarehouseTransferChildForHo> SpWarehouseTransferChildForHo { get; set; }
         public async Task<IActionResult> OnGet(int TransferMasterId)
         {
-            WarehouseTransfer = await _context.TblWarehouseTransfer.FirstOrDefaultAsync(e=>e.TransferMasterid==TransferMasterId);
+            WarehouseTransfer = await _context.TblWarehouseTransfer.FirstOrDefaultAsync(e => e.TransferMasterid == TransferMasterId);
             var Masterid = new SqlParameter("@TransferMasterid", TransferMasterId);
-            SpWarehouseTransferChildForHo = await _context.SpWarehouseTransferChildForHo.FromSqlRaw("SpWarehouseTransferChildForHo @TransferMasterid",Masterid).ToListAsync();
+            SpWarehouseTransferChildForHo = await _context.SpWarehouseTransferChildForHo.FromSqlRaw("SpWarehouseTransferChildForHo @TransferMasterid", Masterid).ToListAsync();
             return Page();
 
         }
         public async Task<IActionResult> OnPost(int masterid)
         {
-            var status = await _context.TblWarehouseTransfer.FirstOrDefaultAsync(e=>e.TransferMasterid==masterid);
-            if(status!=null)
+            var status = await _context.TblWarehouseTransfer.FirstOrDefaultAsync(e => e.TransferMasterid == masterid);
+            if (status != null)
             {
                 status.BiltyNo = WarehouseTransfer.BiltyNo;
                 status.DriverName = WarehouseTransfer.DriverName;
@@ -37,7 +37,7 @@ namespace Nkgjjm.Areas.WareHouseIncharge.Pages
                 status.VehicleNo = WarehouseTransfer.VehicleNo;
                 status.FromWareHouseStatus = "Approved";
             }
-          await  _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return RedirectToPage("TransferOutwardMaster");
         }
     }

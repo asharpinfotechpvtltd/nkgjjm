@@ -29,7 +29,7 @@
             <ul class="scrollable__content py-2">
 
                 <li>
-                    <a href="/panel/index" class="menu">
+                    <a href="/WarehouseIncharge/index" class="menu">
                         <div class="menu__icon"> <i data-lucide="hard-drive"></i> </div>
                         <div class="menu__title"> Dashboard </div>
                     </a>
@@ -80,12 +80,12 @@
                                 <div class="menu__title"> Warehouse</div>
                             </a>
                         </li>
-                        <li>
+                      @*  <li>
                             <a asp-page="/AssignItemToWarehouse/index" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
                                 <div class="menu__title"> Assign Item To Warehouse  </div>
                             </a>
-                        </li>
+                        </li>*@
 
                     </ul>
                 </li>
@@ -164,7 +164,7 @@
 
             <ul>
                 <li>
-                    <a href="/panel/index" class="side-menu zoom-innn">
+                    <a href="/WarehouseIncharge/index" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                         <div class="side-menu__title">
                             Dashboard
@@ -185,11 +185,24 @@
                 </li>
 
                  <li>
-                    <a asp-page="/VillageIncharge/AllJobWork" class="side-menu zoom-innn">
+                    <a asp-page="/AllJobWork" class="side-menu zoom-innn">
                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                         <div class="side-menu__title"> All Job Works </div>
                     </a>
                 </li>
+                <li>
+                    <a asp-page="/WareHouseDamagedStock" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title"> Damaged Stock</div>
+                    </a>
+                </li>
+                 <li>
+                    <a asp-page="/WareHouseIncharge/VillageInchargeList" class="side-menu zoom-innn">
+                        <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                        <div class="side-menu__title"> Village Incharge List </div>
+                    </a>
+                </li> 
+              
 
                 
 

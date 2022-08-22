@@ -1,0 +1,270 @@
+﻿@page
+@model Nkgjjm.Areas.Director.Pages.Report.OverAllStockModel
+@{
+    int i = 1;
+}
+<div class="top-bar">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">WareHouse Stock</li>
+        </ol>
+    </nav>
+    <!-- END: Account Menu -->
+</div>
+<h2 class="intro-y text-lg font-medium mt-0" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+    WareHouse Stock
+</h2>
+<div class="intro-y box mt-5 pb-5">
+    <form method="get">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20" style="font-weight:bolder;">Start Date</label>
+                    <input type="date" class="form-control w-56 box pr-10" name="startdate" asp-for="@Model.YearStartdate" placeholder="Search...">
+
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">End Date</label>
+                    <input type="date" class="form-control w-56 box pr-10" name="enddate" asp-for="@Model.YearEnddate" placeholder="Search...">
+
+                </div>
+                <div class="form-inline mt-5">
+
+                    <label for="horizontal-form-2" class="form-label sm:w-20" style="font-weight:bolder;">Warehouse</label>
+                    <select type="text" class="form-control w-56 box pr-10" asp-items="@Model.WarehouseList" asp-for="@Model.warehouse">
+                        <option value="0">Select</option>
+                    </select>
+
+
+                    <input type="submit" value="Search" id="add" name="submit" class="btn btn-primary w-56 pr-10" />
+                    <!-- END: Data List -->
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    @if (Model.SpReportByAll != null)
+    {
+
+        <div class="grid grid-cols-12 gap-6 mt-0" style="overflow-x:auto;">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report" style="background-color:#DEDEDE">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center whitespace-nowrap">
+                                S.No.
+                            </th>
+
+                            <th class="text-center whitespace-nowrap">
+                                Item Code
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Item Name
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                UOM
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Opn. Stock
+                            </th>
+                            <th class="text-center whitespace-nowrap" style="text-decoration: underline; color:blue;">
+                                <a asp-page="/Report/Inward">
+                                    Inward
+                                </a>
+                            </th>
+                            <th class="text-center whitespace-nowrap" style="text-decoration: underline; color:blue;">
+                                <a asp-page="/Report/outWard">
+                                    Outward
+                                </a>
+                            </th>
+                            <th class="text-center whitespace-nowrap" style="text-decoration: underline; color:blue;">
+                                <a asp-page="/Report/Freeze">
+                                    Freezed
+                                </a>
+                            </th>
+                            <th class="text-center whitespace-nowrap" style="text-decoration: underline; color:blue;">
+                                <a asp-page="/Report/Returned">
+                                    Rtn Fresh Stock
+                                </a>
+                            </th>
+                            <th class="text-center whitespace-nowrap">
+                                Cl. Balance
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SpReportByAll)
+                        {
+
+                            <tr>
+                                <td class="text-center">@i</td>
+                                <td class="text-center">
+                                    @item.ItemCode
+                                </td>
+
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.UnitName)
+                                </td>
+                                <td class="text-center" style="color:blueviolet;">
+                                    @Html.DisplayFor(modelItem => item.OpeningStock)
+                                </td>
+                                <td class="text-center" style="color:blue;">
+                                    @Html.DisplayFor(modelItem => item.inward)
+                                </td>
+                                <td class="text-center" style="color:red;">
+                                    @Html.DisplayFor(modelItem => item.Outward)
+                                </td>
+                               <td class="text-center" style="color:aqua;">
+                                    @Html.DisplayFor(modelItem => item.Freeze)
+                                </td>
+                                <td class="text-center" style="color:coral;">
+                                    @Html.DisplayFor(modelItem => item.ReturnedFreshStock)
+                                </td>
+                                <td class="text-center" style="color:green; font-weight:bold;">
+                                    @Html.DisplayFor(modelItem => item.closingbalance)
+                                </td>
+
+                            </tr>
+
+
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    }
+
+</div>
+
+
+
+@*<div class="grid grid-cols-12 gap-6 mt-1">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+        <div class="hidden md:block mx-auto text-slate-500">Total  Po(s)</div>
+        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+            <div class="w-56 relative text-slate-500">
+                <form method="post">
+                    <div id="horizontal-form" class="p-5">
+                        <div class="preview">
+                            <div class="form-inline">
+                                <label for="horizontal-form-1" class="form-label sm:w-20">Start Date</label>
+                                <input type="date" class="form-control w-56 box pr-10" name="startdate" placeholder="Search...">
+                            </div>
+
+                            <div class="form-inline mt-5">
+                                <label for="horizontal-form-2" class="form-label sm:w-20">End Date</label>
+                                <input type="date" class="form-control w-56 box pr-10" name="enddate" placeholder="Search...">
+                            </div>
+                            <div class="form-inline mt-5">
+                                <label for="horizontal-form-2" class="form-label sm:w-20">Warehouse</label>
+                                <select type="text" class="form-control w-56 box pr-10" asp-items="@Model.WarehouseList" name="warehouse">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:pl-5 mt-1 mb-5">
+                        <input type="submit" value="Submit" id="add" class="btn btn-primary" />
+                        <!-- END: Data List -->
+                    </div>
+
+
+
+
+
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN: Data List -->
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report">
+            <thead>
+                <tr>
+
+                    <th class="text-center whitespace-nowrap">
+                        S.No.
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Date
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Item Code
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Item Name
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Warehouse Name
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Inward
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Outward
+                    </th>
+                    <th class="text-center whitespace-nowrap">
+                        Balance
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SpSearchWarehouseStock)
+                {
+                    <tr>
+                        <td class="text-center">@i</td>
+                        <td class="text-center">
+                            @item.DATE.ToShortDateString()
+                        </td>
+                        <td class="text-center">
+                            @item.ItemCode
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.ItemName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.WarehouseName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Inward)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Outward)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Balance)
+                        </td>
+
+
+
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- END: Data List -->
+</div>*@

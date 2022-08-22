@@ -1,0 +1,163 @@
+﻿@page
+@model Nkgjjm.Areas.GM.Pages.VillageIncharge.AssignVillageToVIModel
+
+@{
+    int i = 1;
+}
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+        <h2 class="font-medium text-base mr-auto">
+            Add Village Incharge
+        </h2>
+    </div>
+    <form method="post">
+        <div id="horizontal-form" class="p-5">
+            <div class="preview">
+                <div class="form-inline">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">Village Incharge Id</label>
+                    <input type="text" class="form-control" readonly value="@Model.id" asp-for="incharge.VillageInchargeId" />
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-1" class="form-label sm:w-20">District Name</label>
+                    <select id="ddldistname" type="text" asp-items="Model.Districts" class="form-control">
+                        <option>Select District Name</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Block Name</label>
+                    <select id="ddlblock" class="form-control">
+                        <option>Select Block</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Gram Panchaayat</label>
+                    <select id="ddlGramPanchyaat" class="form-control">
+                        <option>Select GramPanchayat</option>
+                    </select>
+                </div>
+                <div class="form-inline mt-5">
+                    <label for="horizontal-form-2" class="form-label sm:w-20">Village Name</label>
+                    <select id="ddlvillage" asp-for="incharge.VillageCode" class="form-control">
+                        <option>Select Village</option>
+                    </select>
+                </div>
+                <div class="sm:ml-20 sm:pl-5 mt-5">
+                    <button class="btn btn-primary" type="submit">Add Village Incharge</button>
+                </div>
+            </div>
+        </div>
+        <h2 class="intro-y text-lg font-medium mt-5" style="background-color:#02B9B5; text-align:center; font-weight:bolder; color:white;">
+            Already Assigned Village
+        </h2>
+        <div class="grid grid-cols-12 gap-6 mt-3">
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">
+                            S.No.
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Village
+                        </th>
+                        <th class="text-center whitespace-nowrap">
+                            Village Code
+                        </th>
+
+                       
+                    </tr>
+
+                    @foreach (var item in Model.AssigedVillage)
+                    {
+
+                        <tr class="intro-x">
+                            <td class="text-center">
+                                @i
+                            </td>
+
+                            <td class="text-center">
+                                @item.Village
+
+                            </td>
+                            <td class="text-center">
+                                @item.VillageCode
+
+                            </td>                          
+
+                            
+                        </tr>
+                        i++;
+                    }
+
+                </table>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/CustomJs/Block.js"></script>
+    <script>
+        $("#ddlblock").change(function() {
+            $("#ddlGramPanchyaat").empty();
+            $.ajax({
+                type: "GET",
+                url: "/api/GpByBlock",
+                data: { id: $("#ddlblock").val() },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                success: function(response) {
+                    console.log(response);
+                    $("#ddlGramPanchyaat").prepend("<option value='' selected='selected'>Select Gram Panchaayat</option>");
+                    $.each(response, function(i, item) {
+                        var html = '';
+                        html += "<option value=" + item.id + ">" + item.gramPanchayat + "</option>";
+                        $("#ddlGramPanchyaat").append(html);
+
+                    })
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+
+        $("#ddlGramPanchyaat").change(function() {
+            $("#ddlvillage").empty();
+            $.ajax({
+                type: "GET",
+                url: "/api/villages",
+                data: { id: $("#ddlGramPanchyaat").val() },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                success: function(response) {
+                    console.log(response);
+                    $("#ddlvillage").prepend("<option value='' selected='selected'>Select Village</option>");
+                    $.each(response, function(i, item) {
+                        var html = '';
+                        html += "<option value=" + item.villageCode + ">" + item.village + "</option>";
+                        $("#ddlvillage").append(html);
+
+                    })
+                },
+                failure: function(response) {
+                    console.log(response.responseText);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+
+
+
+    </script>
+    }
